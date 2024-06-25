@@ -11,6 +11,9 @@
     }
   
     // Close the zoom on Escape key press
+    /**
+	 * @param {{ key: string; }} event
+	 */
     function handleKeyPress(event) {
       if (event.key === 'Escape') {
         isZoomed = false;

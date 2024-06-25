@@ -18,7 +18,7 @@
 	import { isLogin } from '$lib/stores';
 	import Loading from '$lib/components/Loading.svelte';
 
-	export let data;
+	//export let data;
 	let hover = false;
 	let loading = false;
 
@@ -32,10 +32,10 @@
 	let isVisN = false;
 </script>
 
-<Loading spinning={loading} />
+<!-- <Loading spinning={loading} /> -->
 
 <div class="bg">
-	{#if data.path != '/' && winsize > 600}
+	<!-- {#if data.path != '/' && winsize > 600}
 		<div class="nav">
 			<nav class="nnav">
 				<a class="petimg2" href="/home" style="background-image: url('{pet}');" />
@@ -68,7 +68,6 @@
 				</div>
 				<a href="/home#events">Events</a>
 				<a href="/workshops">Workshops</a>
-				<!-- <a href="/proshows">Proshows</a> -->
 				<a href="/sponsors">Sponsors</a>
 				<a href="/accomodation">Accomodation</a>
 				<a href="/schedule">Schedule</a>
@@ -157,16 +156,16 @@
 				>
 					<a href="/home#contact">Contact Us</a>
 				</li>
-				<!-- <li
+				<li
 					on:click={() => {
 						isVisN = false;
 					}}
 				>
 					<a href="/reachus">Reach Us</a>
-				</li> -->
+				</li>
 			</ul>
 		</nav>
-	{/if}
+	{/if} -->
 	<div class="parent">
 		<!-- <div class="sidebar">
 			<div class="sb-content">
@@ -186,10 +185,10 @@
 					<a href="insta"><Icon data={twitter} scale={1.6} /></a>
 				</div>
 			</div>
-		</div> -->
+		</div>  -->
 		<div class="main">
 			<slot />
-			{#if data.path != '/' && data.path != '/events/technical' && data.path != '/events/cultural' && winsize > 600}
+			<!-- {#if data.path != '/' && data.path != '/events/technical' && data.path != '/events/cultural' && winsize > 600}
 				<footer style="padding-top:4em;">
 					<div class="address">
 						<a
@@ -254,12 +253,12 @@
 						</div>
 					</div>
 				</footer>
-			{/if}
+			{/if} -->
 		</div>
 	</div>
 </div>
 
-<style>
+<!-- <style>
 	.email{
 		margin-left: 10em;
 	}
@@ -409,7 +408,6 @@
 		height: 100%;
 		position: fixed;
 		top: 0;
-		/* display: flex; */
 		display: none;
 		flex-direction: column;
 		z-index: 4;
@@ -424,7 +422,6 @@
 	}
 	.petimg2 {
 		aspect-ratio: 0.55;
-		/* background-image: url("https://petrichor.events/static/media/logo_red.7a86e334.png"); */
 		background-position: center;
 		background-size: contain;
 		background-repeat: no-repeat;
@@ -438,7 +435,6 @@
 		display: flex;
 		flex-direction: column;
 		text-align: center;
-		/* opacity: 0.5; */
 	}
 	.dn {
 		position: fixed;
@@ -457,47 +453,12 @@
 		width: 100vw;
 	}
 	.main {
-		/* margin-left: 4em; */
 		z-index: 2;
 		width: 100vw;
 	}
 	.parent {
 		background-image: url();
 	}
-	/* @media (max-width: 600px) {
-    nav {
-        display: block;
-      align-items: center;
-      height: auto;
-      overflow: hidden;
-    }
-
-    nav > a {
-      width: auto;
-      margin-bottom: 0.5em;
-    }
-
-    nav > div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .more {
-      position: static;
-      background-color: transparent;
-      backdrop-filter: none;
-      width: auto;
-      padding: 0;
-      border-radius: 0;
-    }
-
-    .more > a {
-      display: block;
-      margin-top: 0.5em;
-      text-align: center;
-    }
-  } */
   @media (max-width: 600px){
 	.address{
 		margin-left: 0em;
@@ -510,4 +471,4 @@
 		margin: 0.5em;
 	}
   }
-</style>
+</style> -->
