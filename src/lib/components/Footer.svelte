@@ -6,6 +6,25 @@
     }
 </script>
 
+<footer>
+    <div class='title'>{data.title}</div>
+
+    <div class='footer-links'>
+        <div class="footer-social">
+            {#each data.links as link}
+                <a href={link.url} aria-label={link.linkText}>
+                    <img src={link.linkIcon} alt={link.linkText} />
+                    <span class="text">{link.linkText}</span>
+                </a>
+            {/each}
+        </div>
+        <a class='footer-back-to-top' href="#top" on:click={scrollToTop}>
+            <img src={data.btpIcon} alt=''/>
+            Back To The Top
+        </a>
+    </div>
+</footer>
+
 <style>
     footer {
         background-color: #000;
@@ -47,13 +66,12 @@
     }
 
     .footer-social a:hover {
-        color: #27bcda;
+        color: #ff0080;
     }
 
     img {
         width: 38px;
         height: 38px;
-        color: #fff;
         display: inline;
     } 
 
@@ -74,7 +92,11 @@
     }
 
     .footer-back-to-top:hover {
-        color: #27bcda;
+        filter: invert(64%) sepia(20%) saturate(3560%) hue-rotate(318deg) brightness(102%) contrast(101%);
+    }
+
+    .footer-back-to-top img {
+        padding-right: 10px;
     }
 
     @media (max-width: 768px) {
@@ -99,22 +121,3 @@
         }
     }
 </style>
-
-<footer>
-    <div class='title'>{data.title}</div>
-
-    <div class='footer-links'>
-        <div class="footer-social">
-            {#each data.links as link}
-                <a href={link.url} aria-label={link.linkText}>
-                    <img src={link.linkIcon} alt={link.linkText} />
-                    <span class="text">{link.linkText}</span>
-                </a>
-            {/each}
-        </div>
-        <a class='footer-back-to-top' href="#top" on:click={scrollToTop}>
-            <img src={data.btpIcon} alt='bb'/>
-            Back To The Top
-        </a>
-    </div>
-</footer>
