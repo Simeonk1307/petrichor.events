@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { data } from "$lib/types";
+	import { onMount } from "svelte";
 
     export let data: data;
 
@@ -15,13 +16,11 @@
         <div class="footer-social">
             {#each data.links as link}
                 <a href={link.url} aria-label={link.linkText}>
-                    <img src={link.linkIcon} alt={link.linkText} />
-                    <span class="text">{link.linkText}</span>
+                    {link.linkText}
                 </a>
             {/each}
         </div>
         <a class='footer-back-to-top' href="#top" on:click={scrollToTop}>
-            <img src={data.btpIcon} alt=''/>
             Back To The Top
         </a>
     </div>
@@ -31,15 +30,15 @@
     footer {
         background-color: #000;
         color: #fff;
-        padding: 20px;
+        padding: 10px 0;
+        margin: 10px 0;
     }
 
     .title {
-        font-size: 3rem;
+        font-size: 1.5rem;
         font-weight: bolder;
         color: #fff;
         padding-left: 20px;
-        margin-bottom: 30px;
     }
 
     .footer-links {
@@ -51,43 +50,30 @@
 
     .footer-social {
         float: left;
-        margin-bottom: 20px;
         display: flex;
-        gap: 1rem;
+        gap: 5px;
     }
 
     .footer-social a {
         color: #cfd2d6;
-        text-decoration: none;
-        font-size: 2rem;
-        font-weight: bolder;
         display: flex;
         align-items: center;
-        padding-left: 10px;
-        padding-right: 10px;
+        margin-top: 5px;
+        padding: 5px 10px;
+        border-right: white solid 0.5px;
     }
 
     .footer-social a:hover {
         color: #ff0080;
     }
 
-    img {
-        width: 38px;
-        height: 38px;
-        display: inline;
-    } 
-
-    .footer-social img {
-        display: none;
-    }
 
     .footer-back-to-top {
         float: right;
         color: #cfd2d6;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 0 20px;
         text-decoration: none;
-        font-size: 1.5rem;
+        font-size: calc(11px + 0.2vw);
         font-weight: bolder;
         display: flex;
         align-items: center;
@@ -97,29 +83,26 @@
         filter: invert(64%) sepia(20%) saturate(3560%) hue-rotate(318deg) brightness(102%) contrast(101%);
     }
 
-    .footer-back-to-top img {
-        padding-right: 10px;
+
+    @media (max-width:700px){
+        .footer-social{
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
         .title {
-            font-size: 2.5rem;
+            font-size: 1rem;
+        }
+        footer{
+            padding: 0;
+            padding-top: 5px;
         }
 
-        .footer-social a {
-            font-size: 1.5rem;
-        }
 
-        .footer-social a .text {
+        /* .footer-back-to-top {
             display: none;
-        }
-
-        .footer-social img {
-            display: inline;
-        }
-
-        .footer-back-to-top {
-            display: none;
-        }
+        } */
     }
 </style>

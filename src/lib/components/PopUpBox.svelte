@@ -58,6 +58,9 @@
 </dialog>
 
 <style>
+    button{
+        color: white;
+    }
     dialog{
         position: absolute;
         z-index: 400;

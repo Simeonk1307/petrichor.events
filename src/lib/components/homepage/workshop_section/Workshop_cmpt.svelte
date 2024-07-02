@@ -6,7 +6,7 @@
   export let img_url;
 </script>
 
-<div class="individualContainer">
+<!-- <div class="individualContainer">
   <div class="inner">
     <div class="image">
       <div class="workshop_image">
@@ -24,9 +24,28 @@
     <div class="outline">
     </div>
   </div>
+</div> -->
+
+<div class="individualContainer">
+  <div class="inner">
+    <div class="image">
+      <img class="image1" alt="logo" src={img_url}>
+      <div class="content">
+        <p class="heading">{workshop_name}</p>
+        <div class="btn">
+            <button type="button" class="info_btn">More Info<Icon data={play} scale={0.9}/></button>
+            <button type="button" class="register_btn">Register</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 </div>
 
 <style>
+    
+    
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -35,14 +54,12 @@
 
   .individualContainer {
     float: left;
-    width: 33.33%;
-    padding: 50px;
-    padding-right: 60px;
-    padding-left: 60px;
+    width: 25.33%;
     box-sizing: border-box;
-    border: 1px solid transparent; 
-    overflow: hidden;
-    position: relative; 
+    border: 1px solid gainsboro; 
+    cursor: pointer; 
+    display: flex;
+    margin: 50px 30px;
   }
 
   .inner {
@@ -50,9 +67,8 @@
     justify-content: space-between;
     box-sizing: border-box;
     height: 100%;
+    width: 100%;
     padding: 1%;
-    /* margin: 1%; */
-    overflow: hidden;
     position: relative;
     border: 1px solid transparent;
   }
@@ -60,35 +76,23 @@
   .image {
     bottom: 0;
     position: relative; 
-    margin-left: 3%;
-    overflow: hidden;
+    /* margin-left: 3%;
     padding-left: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 5%; */
+    left: 30px;
+    top: -30px;
+    width: 100%;
+    z-index: 4;
     border: 1px solid transparent; 
     display: flex;
     flex-direction: column;
     z-index: 2; 
   }
 
-  .workshop_image {
-    overflow: hidden;
-    height: 200px;
-    /* border: 1px solid blue;  */
+  .individualContainer:hover .image1{
+      transform: translateX(5px) translateY(-5px);
   }
 
-  .outline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 90%;
-    width: 90%;
-    z-index: 1; 
-    border: 1.4px solid rgb(252, 252, 250); 
-    box-sizing: border-box; 
-    display: flex;
-    flex-direction: column;
-    clip-path: polygon(0% 0%,4% 0%, 4% 65%, 100% 65%,100% 100%, 0% 100%);
-  }
   .content{
    
     margin-right: 12%;
@@ -134,7 +138,7 @@
 
 .register_btn{
     color: white;
-    width: 40%;
+    width: calc(40%,78);
     font-weight: 700;
     padding: 0.4rem;
     padding-left: 0.9rem;
@@ -145,19 +149,20 @@
 }
   .image1 {
     height: 200px;
+    width: 100%;
+    transition: all 0.25s ease-in-out;
   }
 
   @media screen and (max-width: 1000px) {
     .individualContainer {
-      width: 50%;
+      width: 35%;
       align-self: center;
     }
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 680px) {
     .individualContainer {
-      width: 100%;
-      padding: 5% 8%;
+      width: min(60%, 300px);
     }
   }
 </style>
