@@ -1,16 +1,16 @@
-// const backend_url = 'http://127.0.0.1:8000/'
-const backend_url = 'https://petrichor-backend.vercel.app/'
+const backend_url = 'http://127.0.0.1:8000/'
+// const backend_url = 'https://petrichor-backend.vercel.app/'
 
 export const API = {
-    login: backend_url + 'web/login/',
-    register: backend_url + 'web/register/',
-    logout: backend_url + 'web/logout/',
-    events_apply_paid: backend_url + 'web/events/apply/paid',
-    events_apply_free: backend_url + 'web/events/apply/free',
-    feedback: backend_url + 'web/send_grievance',
-    user: backend_url + "web/user/",
-    whoami: backend_url + "web/whoami/",
-    event: backend_url + "web/event/",
+    login: backend_url + 'api/login/',
+    register: backend_url + 'api/register/',
+    // logout: backend_url + 'web/logout/',
+    events_apply_paid: backend_url + 'api/events/apply/paid',
+    events_apply_free: backend_url + 'api/events/apply/free',
+    feedback: backend_url + 'api/send_grievance',
+    // user: backend_url + "web/user/",
+    whoami: backend_url + "api/auth/",
+    event: backend_url + "api/event/",
     verifyCA: "https://pcap-back-production.up.railway.app/api/events/verify",
     
     hasAddress: backend_url + 'hasaddress/',
@@ -62,13 +62,28 @@ export const deleteToken = () =>{
     }
 }
 
-export async function POST(url: string, body: any) {
+
+/**
+ * 
+ * @param url 
+ * @param body 
+ * @param accesstoken the access token from cookie. 
+ * This is easier as cookie is sent to page.server.ts actions so on can 
+ * easily retrieve the token from there
+ * @returns 
+ */
+export async function POST(url: string, body: any,accesstoken:string | undefined) {
+    
+    
     return await fetch(url, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            'Authorization': (accesstoken != null && accesstoken != undefined) ?
+                     `Bearer ${accesstoken}` : ""
         },
+        mode:'cors',
         body: JSON.stringify(body)
     })
 }

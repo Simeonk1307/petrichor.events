@@ -1,21 +1,4 @@
 <script lang="ts">
-	import Icon from 'svelte-awesome/components/Icon.svelte';
-	import {
-		user,
-		shoppingCart,
-		mapMarker,
-		calendar,
-		instagram,
-		facebook,
-		linkedin,
-		twitter,
-		youtube,
-		alignJustify,
-		remove,
-	} from 'svelte-awesome/icons';
-	import bg from '$lib/assets/dark.jpg';
-	import pet from '$lib/assets/pet.png';
-	import { isLogin } from '$lib/stores';
 	import Loading from '$lib/components/Loading.svelte';
 	import type {data} from '$lib/types'
 	import Footer from '$lib/components/Footer.svelte'
@@ -54,19 +37,41 @@
         ],
         btpIcon:'none'
     }
+	import PopUpBox from '$lib/components/PopUpBox.svelte';
+	import { PopUp } from '$lib/PopUp';
+	import { onMount, setContext } from 'svelte';
 
-	//export let data;
-	let hover = false;
-	let loading = false;
-
-	import { onMount } from 'svelte';
+	$: loading = false;
+	$: PopUpObj = new PopUp("","",false,null) 
+	let slotele:HTMLSlotElement
 
 	let winsize = 3000;
 	onMount(() => {
 		winsize = window.innerWidth;
 	});
 
-	let isVisN = false;
+	function updateLoading(val:boolean){
+		loading = val
+	}
+	
+	/**
+	 * display a popUp Box
+	 * @param title
+	 * @param message
+	 * @param timeOutTime
+     */
+	const displayPopUp=(title:string,message:string,timeOutTime:number,callback:CallableFunction)=>{ 
+		// console.log("cal" + callback)
+		// temporary condition until other modes are made
+        PopUpObj.title = title
+        PopUpObj.message = message
+		PopUpObj.afterEnd= callback;
+        PopUpObj.totalTime = timeOutTime;
+        PopUpObj.isOn = true
+        return
+    }
+	setContext('displayPopUp',displayPopUp)
+	setContext('loading',updateLoading)
 </script>
 
 <!-- <Loading spinning={loading} /> -->
