@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import {
 		user,
@@ -17,6 +17,43 @@
 	import pet from '$lib/assets/pet.png';
 	import { isLogin } from '$lib/stores';
 	import Loading from '$lib/components/Loading.svelte';
+	import type {data} from '$lib/types'
+	import Footer from '$lib/components/Footer.svelte'
+	import Header from '$lib/components/Header.svelte'
+
+	let data: data;
+
+    data = {
+        title: 'Petrichor25',
+        links:[
+            {
+                url: 'https://petrichor.events/',
+                linkText: 'petrichor24',
+                linkIcon: 'none'
+            },
+            {
+                url: 'https://petrichor.events/',
+                linkText: 'petrichor24',
+                linkIcon: 'none'
+            },
+            {
+                url: 'https://petrichor.events/',
+                linkText: 'petrichor24',
+                linkIcon: 'none'
+            },
+            {
+                url: 'https://petrichor.events/',
+                linkText: 'petrichor24',
+                linkIcon: 'none'
+            },
+            {
+                url: 'https://petrichor.events/',
+                linkText: 'petrichor24',
+                linkIcon: 'none'
+            },
+        ],
+        btpIcon:'none'
+    }
 
 	//export let data;
 	let hover = false;
@@ -187,7 +224,9 @@
 			</div>
 		</div>  -->
 		<div class="main">
+			<Header data={data}/>
 			<slot />
+			<Footer data={data}/>
 			<!-- {#if data.path != '/' && data.path != '/events/technical' && data.path != '/events/cultural' && winsize > 600}
 				<footer style="padding-top:4em;">
 					<div class="address">

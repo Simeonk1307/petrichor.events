@@ -1,5 +1,7 @@
-<script>
-    export let data;
+<script lang="ts">
+	import type { data } from "$lib/types";
+
+    export let data: data;
 
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
