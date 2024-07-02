@@ -4,9 +4,9 @@
 
 </script>
 
-<Member2/>
+<!-- <Member2/> -->
 
-<!-- <div>
+<div>
     <h1>HOME PAGE</h1>
-</div> -->
-
+    <a  href="/login">Login</a>
+</div>
