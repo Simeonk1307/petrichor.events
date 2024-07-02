@@ -1,13 +1,12 @@
 <script>
-    import Workshop from "../../lib/components/Workshop/Workshop.svelte";
+    // import Member from "../../lib/components/Workshop/WorkshopCompnt.svelte";
+    import Member2 from "../../lib/components/event/Event.svelte";
+
 </script>
 
-
+<!-- <Member2/> -->
 
 <div>
     <h1>HOME PAGE</h1>
     <a  href="/login">Login</a>
-    <button on:click={()=>{
-        window.open("http://127.0.0.1:8000/auth/login/?redirect=www.google.com&client_pubkey=asdsad")
-    }}>Cauth</button>
 </div>
