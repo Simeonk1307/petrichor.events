@@ -63,14 +63,8 @@ export type informal = {
     registerLink: string | null
 }
 
-// dummy data type by Hemant Pathak, to be done by Geeteshwar
-
-export type data = {
-    title: string,
-    links: {
-        url: string,
-        linkText: string,
-        linkIcon: string
-    }[],
-    btpIcon: string
+export type Link = {
+    url: string;
+    linkText: string;
+    linkIcon?: Record<string, IconData>;
 }

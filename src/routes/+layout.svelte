@@ -3,48 +3,18 @@
 	import PopUpBox from '$lib/components/PopUpBox.svelte';
 	import { PopUp } from '$lib/PopUp';
 	import { onMount, setContext } from 'svelte';
-	import type {data} from '$lib/types'
-	import Footer from '$lib/components/Footer.svelte'
-	import Header from '$lib/components/Header.svelte'
 	import Background from '$lib/components/Background.svelte';
 	import { page } from '$app/stores';
+    
+    import {Header, Footer, BtpBtn} from '$lib/components/ui';
+    // Dummy data in this helper file
+    import {footerLinks, headerLinks} from '$lib/helper';
 
 	export let data;
     let path:string;
 
-	let tmp_data: data;
 
-    tmp_data = {
-        title: 'Petrichor25',
-        links:[
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'About Us',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Event',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Workshop',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Schedule',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Merch',
-                linkIcon: 'none'
-            },
-        ],
-        btpIcon:'none'
-    }
+    const title: string = 'Petrichor25'
 
 
 	$: loading = false;
@@ -88,14 +58,15 @@
 {/if}
 
 {#if path != '/'}
-	<Header data={tmp_data} />
+	<Header title={title} links={headerLinks}/>
 {/if}
 
 <Background path={path}/>
 
 <slot></slot>
 {#if path != '/'}
-    <Footer data={tmp_data}/>
+    <Footer title={title} links={footerLinks}/>
+    <BtpBtn/>
 {/if}
 
 
