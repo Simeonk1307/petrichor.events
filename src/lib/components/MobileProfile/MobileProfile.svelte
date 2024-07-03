@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { profileData } from '$lib/types';
 	import EventCard from './EventCard.svelte';
     import cultural from '$lib/assets/HomePage/cultural.png';
     import technical from '$lib/assets/HomePage/technical.jpeg'
