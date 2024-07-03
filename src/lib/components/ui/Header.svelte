@@ -25,6 +25,15 @@
         }
     }
 
+    function handleClickOutside(event: MouseEvent) {
+        const menuButton = document.querySelector('.menu-icon');
+        const popupMenu = document.querySelector('.popup-menu');
+        if (showMenu && !popupMenu?.contains(event.target as Node) && !menuButton?.contains(event.target as Node)) {
+            showMenu = false;
+            updatePopupMenuPosition();
+        }
+    }
+
     function updatePopupMenuPosition() {
         const menuButton = document.querySelector('.menu-icon');
         if (menuButton) {
@@ -35,8 +44,10 @@
 
     onMount(() => {
         window.addEventListener('scroll', handleScroll);
+        document.addEventListener('click', handleClickOutside);
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            document.removeEventListener('click', handleClickOutside);
         };
     });
 
@@ -166,6 +177,7 @@
         
         .menu-icon {
             display: flex;
+            padding-left: 10px;
             color: #fff;
             justify-content: center;
             transition: filter 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -181,6 +193,7 @@
 
         .account {
             flex: 1;
+            padding-right: 10px;
         }
 
     }
