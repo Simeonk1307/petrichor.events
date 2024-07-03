@@ -50,6 +50,8 @@
     justify-content: space-between;
     box-sizing: border-box;
     height: 100%;
+    max-width: 368.58px;
+    max-height: 489px;
     padding: 1%;
     /* margin: 1%; */
     overflow: hidden;
@@ -82,6 +84,7 @@
     left: 0;
     height: 90%;
     width: 90%;
+    /* max-width: 325px; */
     z-index: 1; 
     border: 1.4px solid rgb(252, 252, 250); 
     box-sizing: border-box; 
@@ -107,7 +110,7 @@
   align-items: center;
   margin-top: 15%;
   padding-top: 2%;
-  /* border: 1px solid green; */
+  border: 1px solid transparent;
   align-items: center;
   /* gap: 10%; */
   padding-right: 9%;
@@ -147,7 +150,7 @@
     height: 200px;
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1025px) {
     .individualContainer {
       width: 50%;
       align-self: center;
