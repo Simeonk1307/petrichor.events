@@ -1,6 +1,5 @@
 
 <script lang="ts">
-  import logo from "$lib/assets/comp.jpg";
   import ardino from '$lib/assets/HomePage/ardino.jpg'
   import technical from '$lib/assets/HomePage/technical.jpeg'
   import cultural from '$lib/assets/HomePage/cultural.png'
@@ -28,14 +27,16 @@
         childs.push(div)
       }
     }
-    window.onmousemove = (e) => {
-      const moveX = (e.clientX - middle[0] ) / 40 | 0
-      const moveY = (e.clientY - middle[1] ) / 40 | 0
+    CardDiv.onmousemove = (e) => {
+      const moveX = (e.clientX - middle[0] ) / 50 | 0
+      const moveY = (e.clientY - middle[1] ) / 50 | 0
+      // console.log(moveX+ " "+moveY)
+      moveX;moveY
       childs.forEach((child,i)=>{
         child.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`
       })
     }
-    window.onmouseleave = (e) => {
+    CardDiv.onmouseleave = (e) => {
       console.log("leave"+CardDiv.className)
       childs.forEach((child,i)=>{
         child.style.transform = `translateX(0px) translateY(0px)`
@@ -75,6 +76,7 @@
       margin-left: 2em;
       display: flex;
       cursor: pointer;
+      z-index: 5; 
     }
     .cards{
       flex:3;

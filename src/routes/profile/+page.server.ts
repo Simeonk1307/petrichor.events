@@ -1,4 +1,4 @@
-import { API, POST } from "$lib"
+import { API, POST, invalidateLogin } from "$lib"
 import { get } from "svelte/store";
 import type { Actions, PageServerLoad } from './$types';
 import { invalidate, user } from "$lib/stores";
@@ -7,6 +7,8 @@ export const load: PageServerLoad  = async ({fetch, cookies}) => {
 
     const accesstoken = cookies.get("session_id")
     let response;
+    // const logged_in = invalidateLogin(accesstoken) // we don't use this here
+    // As this will create 2 req for API.whoami (in case of already loaggedIN). 
     if (accesstoken == undefined || get(invalidate)){
         response = await POST(API.whoami,{
             "getUser":true,

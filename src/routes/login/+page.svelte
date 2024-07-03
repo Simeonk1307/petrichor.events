@@ -2,13 +2,19 @@
 	import { enhance } from "$app/forms";
 	import { goto } from '$app/navigation';
 	import { page } from "$app/stores";
-	import { invalidate } from "$lib/stores";
-	import { getContext } from "svelte";
+	import { invalidate, refreshCount } from "$lib/stores";
+	import { getContext, onMount } from "svelte";
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	// console.log(form)
 	export let data:any;
+
+	onMount(()=>{
+		if (data.logged_in && !$invalidate){ // data.logged_in and invalidate is false
+			goto(`/login${$page.url.search}`)
+		}
+	})
 
 	const displayPopUp:Function = getContext('displayPopUp')
 	const loading:Function = getContext('loading')
@@ -29,8 +35,13 @@
 				const data = result.data
 				// console.log(data)
 				if (data.success){
-					invalidate.set(true)
-					goto('/profile')
+					invalidate.set(false)
+					refreshCount.set(1)
+					if (data.nextpg != null)
+						goto(data.nextpg)
+					else{
+						goto('/profile')
+					}
 				}else{
 					displayPopUp(
 						"Alert",
@@ -114,6 +125,7 @@
 			flex-wrap: wrap;
 		}
 		.form {
+			z-index: 2;
 			width: 50%;
 		}
 		.image {

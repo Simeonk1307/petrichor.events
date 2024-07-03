@@ -1,3 +1,6 @@
+import { get } from "svelte/store"
+import { invalidate, refreshCount } from "./stores"
+
 const backend_url = 'http://127.0.0.1:8000/'
 // const backend_url = 'https://petrichor-backend.vercel.app/'
 
@@ -11,7 +14,8 @@ export const API = {
     // user: backend_url + "web/user/",
     whoami: backend_url + "api/auth/",
     event: backend_url + "api/event/",
-    verifyCA: "https://pcap-back-production.up.railway.app/api/events/verify",
+    // verifyCA: "https://pcap-back-production.up.railway.app/api/events/verify",
+    generateCA: backend_url + 'api/auth/CA/create/',
     
     hasAddress: backend_url + 'hasaddress/',
     addAddress: backend_url + 'address/add/',
@@ -103,4 +107,99 @@ export function titleCase(inputString: string) {
     const titleString = titleSentences.join('. ');
   
     return titleString;
+}
+
+
+export const tmp_data = {
+        title: 'Petrichor25',
+        links:[
+            {
+                url: '#',
+                linkText: 'About Us',
+                linkIcon: 'none'
+            },
+            {
+                url: '#',
+                linkText: 'Event',
+                linkIcon: 'none'
+            },
+            {
+                url: '#',
+                linkText: 'Workshop',
+                linkIcon: 'none'
+            },
+            {
+                url: '#',
+                linkText: 'Schedule',
+                linkIcon: 'none'
+            },
+            {
+                url: '#',
+                linkText: 'Merch',
+                linkIcon: 'none'
+            },
+        ],
+        btpIcon:'none'
+    }
+
+
+export const footer = {
+    title: 'Petrichor25',
+    links:[
+        {
+            url: '#',
+            linkText: 'Facebook',
+            linkIcon: ''
+        },
+        {
+            url: '#',
+            linkText: 'Twitter',
+            linkIcon: ''
+        },
+        {
+            url: '#',
+            linkText: 'Contact',
+            linkIcon: ''
+        }
+    ],
+    btpIcon:'none'
+}
+
+/**
+ * Invalidates Login and returns false if not loggedIn else returns true
+ * @param accesstoken: acccess token from the cookie
+ */
+export async function invalidateLogin(accesstoken:string | undefined | null) {
+    let response = false
+    refreshCount.update((n) => n+1)
+    if (accesstoken === undefined || accesstoken === null){
+        response = false
+        invalidate.set(true)
+    }else if (get(refreshCount) < 6){
+        // @ts-ignore
+        response = true
+    }else{
+        refreshCount.set(1)
+        response  = await POST(API.whoami,{
+            "getUser":false,
+            "getEvents":false
+        },accesstoken)
+        .then(res => res.json())
+        .then((res) => {
+            if (res.status == 200){
+                // invalidate 
+                invalidate.set(false)
+                return true
+            }else{
+                invalidate.set(true)
+                return false
+            }
+        })
+        .catch ((err) => {
+            // console.log(err.toString())
+            invalidate.set(true)
+            return false
+        })
+    }
+    return response
 }

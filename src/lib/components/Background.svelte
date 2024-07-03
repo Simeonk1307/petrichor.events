@@ -21,6 +21,12 @@
     <div class="gradients-container extra">
         <div class="g" id="g4-1"></div>
     </div>
+    {:else if ["/login","/profile","/register"].includes(path)}
+      <div class="gradients-container extra">
+        <div id="g1-3" class="g"></div>
+        <div id="g1-2" class="g"></div>
+        <div id="g1-1" class="g"></div>
+    </div>
     {:else if path.startsWith('/CA')}
         <div class="gradients-container extra">
             <div id="g1-5" class="g"></div>

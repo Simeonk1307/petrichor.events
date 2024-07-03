@@ -215,14 +215,22 @@
 <!-- <div class="blank" /> -->
 
 <style>
+
+	.form-container{
+		height: 100vh;
+		z-index: 5;
+	}
+	select, .hide,.form{
+		z-index: 2;
+	}
+
 	@media (min-width: 501px) {
 		h2 {
-			font-size: 300%;
+			font-size:200%;
 			font-weight: normal;
 			margin: 2% 10%;
 		}
-		select,
-		input {
+		select,input {
 			font-size: 150%;
 			border-radius: 10rem;
 			background-color: #40413e;
@@ -258,7 +266,7 @@
 			color: white;
 		}
 		#Petrichor {
-			color: #910cea;
+			color: #b68cd2;
 			font-weight: 600;
 		}
 		.form-container {
@@ -289,11 +297,6 @@
 		#login {
 			color: mediumslateblue;
 		}
-		.blank {
-			background-color: black;
-			width: 100%;
-			height: 100px;
-		}
 		.hide {
 			display: none;
 		}
@@ -322,7 +325,7 @@
 			margin-left: 20%;
 		}
 	}
-	@media (max-width: 500px) {
+	@media (max-width: 1046px) {
 		h2 {
 			font-size: 300%;
 			font-weight: normal;
@@ -379,11 +382,6 @@
 			color: mediumslateblue;
 			display: inline-block;
 			margin: 2% 0 0 30%;
-		}
-		.blank {
-			background-color: black;
-			width: 100%;
-			height: 100px;
 		}
 		.hide {
 			display: none;

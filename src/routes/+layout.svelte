@@ -8,48 +8,13 @@
 	import Header from '$lib/components/Header.svelte'
 	import Background from '$lib/components/Background.svelte';
 	import { page } from '$app/stores';
+    import { tmp_data, footer } from "$lib/index.js"
 
 	export let data;
     let path:string;
 
-	let tmp_data: data;
-
-    tmp_data = {
-        title: 'Petrichor25',
-        links:[
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'About Us',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Event',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Workshop',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Schedule',
-                linkIcon: 'none'
-            },
-            {
-                url: 'https://petrichor.events/',
-                linkText: 'Merch',
-                linkIcon: 'none'
-            },
-        ],
-        btpIcon:'none'
-    }
-
-
 	$: loading = false;
 	$: PopUpObj = new PopUp("","",false,null) 
-	let slotele:HTMLSlotElement
 
 	let winsize = 3000;
 	onMount(() => {
@@ -95,7 +60,7 @@
 
 <slot></slot>
 {#if path != '/'}
-    <Footer data={tmp_data}/>
+    <Footer data={footer}/>
 {/if}
 
 

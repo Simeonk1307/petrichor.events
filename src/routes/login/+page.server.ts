@@ -1,15 +1,21 @@
-import { API, POST } from "$lib";
+import { API, POST, invalidateLogin } from "$lib";
 import { fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { rss } from "svelte-awesome/icons";
 
-export const load: PageServerLoad = async ({url}) => {
-    const nextpg = url.searchParams.get('nextpg')
-
+export const load: PageServerLoad = async ({url,cookies}) => {
+    let nextpg = url.searchParams.get('to')
     // console.log(nextpg)
+    if (nextpg != null){
+        if (!["/CA/welcome?generate=true","/profile","/CA/profile"].includes(nextpg)){
+            nextpg = null
+        }
+    }
+
+    const accesstoken = cookies.get('session_id')
 	return {
         nextpg : nextpg,
-		logged_in: false
+		logged_in: invalidateLogin(accesstoken)
 	};
 };
 
