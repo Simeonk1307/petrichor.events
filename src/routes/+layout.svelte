@@ -3,14 +3,17 @@
 	import PopUpBox from '$lib/components/PopUpBox.svelte';
 	import { PopUp } from '$lib/PopUp';
 	import { onMount, setContext } from 'svelte';
-	import type { data } from '$lib/types';
-	import Footer from '$lib/components/Footer.svelte';
-	import Header from '$lib/components/Header.svelte';
+	import Footer from '$lib/components/Footer.svelte'
+	import Header from '$lib/components/Header.svelte'
 	import Background from '$lib/components/Background.svelte';
 	import { page } from '$app/stores';
 	import { tmp_data, footer, POST, API, defaultUser } from '$lib/index.js';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
 	import { beforeNavigate } from '$app/navigation';
+    
+    import {Header, Footer, BtpBtn} from '$lib/components/ui';
+    // Dummy data in this helper file
+    import {footerLinks, headerLinks} from '$lib/helper';
 
 	export let data;
 	let path: string;
@@ -118,6 +121,13 @@
 			});
 	}
 
+    const title: string = 'Petrichor25'
+
+
+	$: loading = false;
+	$: PopUpObj = new PopUp("","",false,null) 
+	let slotele:HTMLSlotElement
+
 	let winsize = 3000;
 	onMount(async () => {
 		// console.log("adas")
@@ -165,12 +175,13 @@
 {/if}
 
 {#if path != '/'}
-	<Header data={tmp_data} />
+	<Header title={title} links={headerLinks}/>
 {/if}
 
 <Background {path} />
 
 <slot />
 {#if path != '/'}
-	<Footer data={footer} />
+    <Footer title={title} links={footerLinks}/>
+    <BtpBtn/>
 {/if}
