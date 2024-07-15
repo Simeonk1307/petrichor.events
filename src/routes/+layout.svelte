@@ -3,8 +3,6 @@
 	import PopUpBox from '$lib/components/PopUpBox.svelte';
 	import { PopUp } from '$lib/PopUp';
 	import { onMount, setContext } from 'svelte';
-	import Footer from '$lib/components/Footer.svelte'
-	import Header from '$lib/components/Header.svelte'
 	import Background from '$lib/components/Background.svelte';
 	import { page } from '$app/stores';
 	import { tmp_data, footer, POST, API, defaultUser } from '$lib/index.js';
@@ -22,7 +20,6 @@
 	let PopUpObj = new PopUp('', '', false, null);
 
 	beforeNavigate(async () => {
-		console.log($invalidate)
 		const access_token = $access_token;
 		if (access_token == null || !$loggedIn) {
 			invalidate.set(true);
@@ -31,43 +28,8 @@
 		}
 		if ($invalidate) {
 			console.log('Reloading');
-			await POST(
-				API.whoami,
-				{
-					getUser: true,
-					getEvents: true
-				},
-				access_token ?? ''
-			)
-				.then((res) => res.json())
-				.then((res) => {
-					console.log(res)
-					if (res.status == 200) {
-						// invalidate
-						invalidate.set(false);
-						loggedIn.set(true);
-						console.log(res);
-						user.set({
-							user_data: res.user_data,
-							user_events: res.user_events
-						});
-						sessionStorage.setItem('user', JSON.stringify(user));
-						sessionStorage.setItem('loggedIn', 'true');
-					} else {
-						invalidate.set(true);
-						loggedIn.set(false)
-						sessionStorage.setItem('loggedIn', 'false');
-						sessionStorage.setItem('user',  JSON.stringify(defaultUser));
-					}
-				})
-				.catch((err) => {
-					console.log(err.toString());
-					invalidate.set(true);
-					loggedIn.set(false);
-					sessionStorage.setItem('loggedIn', 'false');
-					sessionStorage.setItem('user',  JSON.stringify(defaultUser));
-				});
-			console.log("o")
+			await whoami(access_token ?? "a")
+			// console.log("o")
 		}
 	});
 
@@ -75,13 +37,14 @@
 		const data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser)
 		user.set(JSON.parse(data));
 		if (data == JSON.stringify(defaultUser) || data == "{}") {
-			await whoami($access_token ?? "") 
+			await whoami($access_token ?? "a") 
 		} else {
 			loggedIn.set(Boolean(sessionStorage.getItem('loggedIn')) ?? false);
 		}
 	}
 
 	async function whoami(accessToken: string) {
+		console.log("Reloading")
 		return await POST(
 			API.whoami,
 			{
@@ -102,7 +65,7 @@
 						user_events: res.user_events
 					});
 					console.log(res)
-					sessionStorage.setItem('user', JSON.stringify(user));
+					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
 					return true;
 				} else {
