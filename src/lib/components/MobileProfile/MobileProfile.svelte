@@ -1,57 +1,18 @@
 <script lang="ts">
 	import EventCard from './EventCard.svelte';
-    import cultural from '$lib/assets/HomePage/cultural.png';
-    import technical from '$lib/assets/HomePage/technical.jpeg'
 
 	export let profileData = {
 		username: 'Username',
 		mobile: 'Phone',
 		college: 'College',
-		graduation: 'Grad'
+		graduation: 8098,
+		events: <any>[],
+		nightEvents: <any>[]
 	};
 
 	let eventDisplay = true;
 
-	let events = [
-		{
-			name: 'Event Name',
-			DateTime: 'Date & Time',
-			Location: 'Location',
-			imgUrl: cultural
-		},
-		{
-			name: 'Event Name',
-			DateTime: 'Date & Time',
-			Location: 'Location',
-			imgUrl: cultural
-		},
-		{
-			name: 'Event Name',
-			DateTime: 'Date & Time',
-			Location: 'Location',
-			imgUrl: cultural
-		},
-	];
-	let nightEvents = [
-		{
-			name: 'Night Name',
-			DateTime: 'Date & Time',
-			Location: 'Location',
-			imgUrl: technical
-		},
-		{
-			name: 'Night Name',
-			DateTime: 'Date & Time',
-			Location: 'Location',
-			imgUrl: technical
-		},
-		{
-			name: 'Night Name',
-			DateTime: 'Date & Time',
-			Location: 'Location',
-			imgUrl: technical
-		},
-	];
+	
 </script>
 
 <div class="main">
@@ -86,11 +47,11 @@
 			>
 		</div>
 		{#if eventDisplay}
-        {#each events as event}
+        {#each profileData.events as event}
 		    <EventCard event={event}/>
         {/each}
         {:else}
-        {#each nightEvents as event}
+        {#each profileData.nightEvents as event}
 		    <EventCard event={event}/>
         {/each}
         {/if}
@@ -99,7 +60,12 @@
 
 <style>
 	.main {
-		margin-top: 7rem;
+		min-height: 110vh;
+		margin-top: 40px;
+		overflow-x: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 	.userData {
 		line-height: 15px;
@@ -122,7 +88,7 @@
 	}
 	.events {
 		display: flex;
-		width: 25rem;
+		width: 100vw;
 		flex-direction: column;
 		align-items: center;
         justify-content: center;
@@ -133,4 +99,12 @@
         border-bottom: 5px solid white;
         font-size: 125%;
     }
+	@media (max-width: 500px){
+		.events{
+			margin: 0%;
+		}
+		.main{
+			font-size: small;
+		}
+	}
 </style>

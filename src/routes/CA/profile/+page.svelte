@@ -1,16 +1,20 @@
-<script>
+<script lang="ts">
 // @ts-nocheck
 
     
     import { goto } from '$app/navigation';
     import hand from '$lib/assets/HomePage/hand.png';
-	import { user, invalidate } from '$lib/stores.js';
-	import { onMount } from 'svelte';
+	import { user, invalidate, loggedIn, access_token } from '$lib/stores.js';
+	import { getContext,onMount } from 'svelte';
     
     export let data;
-
+    const getData:Function = getContext('getData')
     onMount(()=>{
-        if (!data.loggedIn || $invalidate){
+        if (!$loggedIn){
+			getData()
+		}
+        access_token.set(data.accessToken)
+        if (!$loggedIn || $invalidate){
             goto('/login?to=/CA/profile')
         }
     })
@@ -21,8 +25,8 @@
 <div class="container">
     
     <div class="greeting">
-        <h1><p>Hii <span>{$user.username}!</span></p></h1>
-    </div>
+        <h1><p>Hii <span>{$user.user_data.username}!</span></p></h1>
+    </div>  
     <div class="info">
         <div class="content">
             <div class="for_ca">

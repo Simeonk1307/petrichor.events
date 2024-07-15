@@ -1,6 +1,6 @@
 <script>
 	import { page } from "$app/stores";
-	import { invalidate } from "$lib/stores";
+	import { invalidate, loggedIn } from "$lib/stores";
 
     export let data;
     let showMenu = false;
@@ -19,7 +19,7 @@
     <button class="menu-icon" on:click={toggleMenu} aria-label="Toggle menu">
         <img src={data.menuIcon} alt="Menu Icon" />
     </button>
-    <a class="account" href={$invalidate ? `/login/?to=${($page).url.pathname}` : '/profile'}>
+    <a class="account" href={($invalidate || !$loggedIn) ? `/login/?to=${($page).url.pathname}` : '/profile'}>
         <svg width="20px" height="20px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" >
 
             <g id="Shopicon">

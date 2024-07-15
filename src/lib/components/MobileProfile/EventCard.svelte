@@ -37,4 +37,25 @@
 		height: 7rem;
 		background-size: cover;
 	}
+	@media (max-width:500px){
+		.data{
+			font-size: smaller;
+		}
+		.imgPar{
+			width: 9rem;
+		}
+		.img{
+			width: 9rem;
+		}
+		.data{
+			padding: 0 10px;
+		}
+		.data h1{
+			font-size: 20px;
+		}
+		.main{
+			margin: 0 5px;
+			max-width: 95vw;
+		}
+	}
 </style>

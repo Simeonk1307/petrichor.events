@@ -54,6 +54,26 @@ export type MerchItem = {
     size: string
 }
 
+export type UserData = {
+    username: string
+    email: string
+    phone: string
+    stream: string
+    gradYear: number
+    institute: string
+    CACode: string
+    registrations: number
+}
+
+export type Event = {
+    eventId: string
+}
+
+export type User = {
+    user_data : UserData,
+    user_events : Event[]
+}
+
 export type informal = {
     name: string,
     about: string,

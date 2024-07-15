@@ -2,18 +2,21 @@
 	import { enhance } from "$app/forms";
 	import { goto } from '$app/navigation';
 	import { page } from "$app/stores";
-	import { invalidate, refreshCount } from "$lib/stores";
+	import { API, POST } from "$lib";
+	import { access_token, invalidate, loggedIn, user } from "$lib/stores";
 	import { getContext, onMount } from "svelte";
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	// console.log(form)
-	export let data:any;
+	export let data;
 
+	const getData:Function = getContext('getData')
 	onMount(()=>{
-		if (data.logged_in && !$invalidate){ // data.logged_in and invalidate is false
-			goto(`/login${$page.url.search}`)
+		if (!$loggedIn){
+			getData()
 		}
+		access_token.set(data.accessToken)
 	})
 
 	const displayPopUp:Function = getContext('displayPopUp')
@@ -24,6 +27,9 @@
 		// console.log("her")
 		goto(`/login${$page.url.search}`);
 	}
+	const whoami:Function = getContext('whoami')
+	
+
 	$: loginResult = () => {
 		loading( true)
 
@@ -32,11 +38,11 @@
 			loading( false);
 			// console.log(result)
 			if (result.type == "success" && result.data){
-				const data = result.data
-				// console.log(data)
-				if (data.success){
+				const rdata = result.data
+				if (rdata.success && await whoami(rdata.token)){
 					invalidate.set(false)
-					refreshCount.set(1)
+					loggedIn.set(true)
+					console.log($user)
 					if (data.nextpg != null)
 						goto(data.nextpg)
 					else{
@@ -45,7 +51,7 @@
 				}else{
 					displayPopUp(
 						"Alert",
-						data,
+						rdata,
 						4000,
 						afterMessage
 					)

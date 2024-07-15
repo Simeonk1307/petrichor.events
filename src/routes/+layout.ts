@@ -1,5 +1,7 @@
+import { invalidate } from "$lib/stores";
+import { get } from "svelte/store";
+
+
 export const load = async ({ url }) => {
-	return {
-		path: url.pathname
-	};
+	// console.log("ppp")
 };

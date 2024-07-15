@@ -2,29 +2,62 @@
 	import { goto } from '$app/navigation';
 	import { API, POST } from '$lib';
 	import Globe from '$lib/assets/svgs/globe.svg';
-	import { invalidate, user } from '$lib/stores';
+	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
+	import { get } from 'svelte/store';
 
 	export let data;
 
-	onMount(()=>{
+	$: buttonText = "Apply CA"
+	let CAbutton:HTMLButtonElement
 
-		if (data.generate){
-			generateCACode()
+	const getData:Function = getContext('getData')
+	onMount(()=>{
+		if (!$loggedIn){
+			getData()
+		}
+		access_token.set(data.access_token)
+		// console.log($user)
+		if ($loggedIn && !$invalidate){
+			 const user_data = $user['user_data']
+			 if (user_data == undefined){
+				getData()
+				return
+			 }
+			 const CAProfile = user_data.CACode
+			 const registrations = user_data[('registrations')]
+			if (CAProfile == ""){
+				buttonText = "Apply CA"
+			}else if (registrations == -1){
+				CAbutton.disabled = true
+				buttonText = "Applied"
+			}else{
+				buttonText = "CA Profile"
+			}
+		}
+		// console.log(data.generate)
+		if (data.generate != null){
+			open_caProfile()
 		}
 	})
+
+	function handleClick(){
+		if (buttonText == "Apply CA"){
+			generateCACode()
+		}else if (buttonText == "CA Profile"){
+			open_caProfile()
+		}
+	}
 
 	const displayPopUp:Function = getContext("displayPopUp")
 	const loading:Function = getContext("loading")
 
 	function open_caProfile() {
-		if ($invalidate) {
+		if ($invalidate || !$loggedIn) {
 			// not logged In
-			goto('/login?to=/CA/profile');
+			goto('/login?to=/CA/welcome?generate=false');
 		} else {
-			// @ts-ignore
-			if (!$user['user_data']) {
-				// @ts-ignore
+			if (!($user['user_data'] == undefined)) {
 				if ($user['user_data']['CACode'] == '') {
 					displayPopUp(
 						"Message",
@@ -32,7 +65,7 @@
 						2000,
 						()=> {}
 					)
-				}// @ts-ignore
+				}
 				else if ($user['user_data']['registrations'] == -1) {
 					displayPopUp(
 						"message",
@@ -53,24 +86,29 @@
 		// first check in stores.
 		// If not present then
 		// fetch go to generate it.
-		if ($invalidate){
-			goto("/login?to=/CA/welcome?generate=true")
+		if ($invalidate || !$loggedIn){
+			goto("/login?to=/CA/welcome")
 		}else{
 			loading(true)
-			await POST(
-				API.generateCA,
-				{},
-				data.access_token
+			const accesstoken = $access_token
+			// console.log(document.cookie.split(''))
+
+			await POST(API.generateCA,
+				{},(accesstoken == null) ? undefined : accesstoken
 			).then(res => res.json())
 			.then(res => {
 				loading(false)
 				if (res.success){
 					displayPopUp(
 						"Message",
-						"Your application have been sent to the Petrichor team. We will mail you back after our team verifies your CA profile.",
+						// "Your application have been sent to the Petrichor team. We will mail you back after our team verifies your CA profile.",
+						"CA account generated successfully",
 						5000,
-						()=>{}
+						()=>{
+							goto('/CA/profile')
+						}
 					)
+					invalidate.set(true)
 				}else{
 					displayPopUp(
 						"Message",
@@ -105,26 +143,8 @@
 					Be the voice of IITPKD's premier fest and lead your campus in celebrating the spirit of Petrichor.
 				</div>
 				<div class="buton_area">
-					<button type="button" class="ca_portal" on:click={open_caProfile}
-						>CA Profile
-						<svg
-							width="20px"
-							height="20px"
-							viewBox="0 2.5 19 19"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M10 7L15 12L10 17"
-								stroke="gray"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-					</button>
-					<button type="button" class="discover" on:click={generateCACode}
-						>Apply CA
+					<button type="button" class="ca_portal" on:click={handleClick} bind:this={CAbutton}
+						>{buttonText}
 						<svg
 							width="20px"
 							height="20px"
@@ -225,6 +245,11 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+	button:disabled{
+		background-color: rgba(186, 181, 181, 0.518);
+		pointer-events: none;
+    z-index: 5;
 	}
 	button {
 		cursor: pointer;

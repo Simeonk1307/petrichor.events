@@ -36,3 +36,9 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+
+
+### When user data must be invalidated??
+> User hits register button for Events/ workshops.
+> User hits Apply CA button

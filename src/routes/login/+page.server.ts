@@ -1,4 +1,4 @@
-import { API, POST, invalidateLogin } from "$lib";
+import { API, POST } from "$lib";
 import { fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { rss } from "svelte-awesome/icons";
@@ -11,11 +11,12 @@ export const load: PageServerLoad = async ({url,cookies}) => {
             nextpg = null
         }
     }
+    // console.log(nextpg)
 
     const accesstoken = cookies.get('session_id')
 	return {
-        nextpg : nextpg,
-		logged_in: invalidateLogin(accesstoken)
+        "nextpg" : nextpg,
+        "accessToken": (accesstoken == undefined) ? null : accesstoken
 	};
 };
 
@@ -40,17 +41,17 @@ export const actions = {
                     currTime.setSeconds(currTime.getSeconds() + MAX_AGE)
                     cookies.set("session_id",res.token,{
                         secure:true,
-                        httpOnly:true,
+                        // httpOnly:true,
                         maxAge: MAX_AGE,
                         expires:currTime
                     })
+                    return res
                 }else{
                     return fail(400,{...res,"err":res.message})
                 }
             }else{
                 return fail(400,{...res,"err":res.message})
             }
-            return res
         })
         .catch(err => {
             return fail(400,{

@@ -3,14 +3,21 @@
 	import HeroSection from "$lib/components/homepage/HeroSection.svelte";
 	import Event from "$lib/components/homepage/event_section/Event.svelte";
     import Workshop from "$lib/components/homepage/workshop_section/Workshop.svelte";
-	import { onMount } from "svelte";
+	import { access_token, loggedIn } from "$lib/stores";
+	import { getContext, onMount } from "svelte";
 
-    $: pageWidth = 0;
+    export let data;
+    const getData:Function = getContext('getData')
+    let pageWidth = 0;
     onMount(()=>{
+        if (!$loggedIn){
+			getData()
+		}
         pageWidth = window.innerWidth
         window.onresize=()=>{
             pageWidth = window.innerWidth
         }
+        access_token.set(data.accessToken)
     })
 
 

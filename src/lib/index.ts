@@ -1,11 +1,10 @@
-import { get } from "svelte/store"
-import { invalidate, refreshCount } from "./stores"
 
 const backend_url = 'http://127.0.0.1:8000/'
 // const backend_url = 'https://petrichor-backend.vercel.app/'
 
 export const API = {
     login: backend_url + 'api/login/',
+    // login: backend_url + 'api/auth/CA/create/',
     register: backend_url + 'api/register/',
     // logout: backend_url + 'web/logout/',
     events_apply_paid: backend_url + 'api/events/apply/paid',
@@ -16,7 +15,7 @@ export const API = {
     event: backend_url + "api/event/",
     // verifyCA: "https://pcap-back-production.up.railway.app/api/events/verify",
     generateCA: backend_url + 'api/auth/CA/create/',
-    
+
     hasAddress: backend_url + 'hasaddress/',
     addAddress: backend_url + 'address/add/',
     getAddress: backend_url + 'address/get/',
@@ -36,15 +35,15 @@ export const readID = (id: string) => {
 
 export const readToken = () => {
     const cookies = document.cookie.split(';');
-    
+
     for (let i = 0; i < cookies.length; i++) {
         const cookie = cookies[i].trim();
-        
+
         if (cookie.startsWith('token=')) {
             return cookie.substring(6);
         }
     }
-    
+
     return null;
 }
 
@@ -55,12 +54,12 @@ export const setToken = (token: string, expirationDays: number) => {
     const expires = expirationDays ? `expires=${expirationDate.toUTCString()}` : '';
 
     document.cookie = `token=${token}; ${expires}; path=/`;
-   
+
 }
 
-export const deleteToken = () =>{
+export const deleteToken = () => {
     try {
-        document.cookie="token=;expires=Thu, 01 Jan 2000 00:00:01 GMT"
+        document.cookie = "token=;expires=Thu, 01 Jan 2000 00:00:01 GMT"
     } catch (error) {
         console.log(error)
     }
@@ -76,18 +75,18 @@ export const deleteToken = () =>{
  * easily retrieve the token from there
  * @returns 
  */
-export async function POST(url: string, body: any,accesstoken:string | undefined) {
-    
-    
+export async function POST(url: string, body: any, accesstoken: string | undefined) {
+
     return await fetch(url, {
         method: 'POST',
+        // @ts-ignore
         headers: {
-            Accept: 'application/json',
             'Content-type': 'application/json',
             'Authorization': (accesstoken != null && accesstoken != undefined) ?
-                     `Bearer ${accesstoken}` : ""
+                `Bearer ${accesstoken}` : ""
         },
-        mode:'cors',
+        credentials: 'include',
+        mode: 'cors',
         body: JSON.stringify(body)
     })
 }
@@ -97,55 +96,55 @@ export function titleCase(inputString: string) {
     // return inputString
     // Split the input string into an array of sentences
     const sentences = inputString.split('.');
-  
+
     // Capitalize the first word of each sentence
     const titleSentences = sentences.map(sentence => {
         return sentence.charAt(0).toUpperCase() + sentence.slice(1)
     });
-  
+
     // Join the sentences back into a single string
     const titleString = titleSentences.join('. ');
-  
+
     return titleString;
 }
 
 
 export const tmp_data = {
-        title: 'Petrichor25',
-        links:[
-            {
-                url: '#',
-                linkText: 'About Us',
-                linkIcon: 'none'
-            },
-            {
-                url: '#',
-                linkText: 'Event',
-                linkIcon: 'none'
-            },
-            {
-                url: '#',
-                linkText: 'Workshop',
-                linkIcon: 'none'
-            },
-            {
-                url: '#',
-                linkText: 'Schedule',
-                linkIcon: 'none'
-            },
-            {
-                url: '#',
-                linkText: 'Merch',
-                linkIcon: 'none'
-            },
-        ],
-        btpIcon:'none'
-    }
+    title: 'Petrichor25',
+    links: [
+        {
+            url: '#',
+            linkText: 'About Us',
+            linkIcon: 'none'
+        },
+        {
+            url: '#',
+            linkText: 'Event',
+            linkIcon: 'none'
+        },
+        {
+            url: '#',
+            linkText: 'Workshop',
+            linkIcon: 'none'
+        },
+        {
+            url: '#',
+            linkText: 'Schedule',
+            linkIcon: 'none'
+        },
+        {
+            url: '#',
+            linkText: 'Merch',
+            linkIcon: 'none'
+        },
+    ],
+    btpIcon: 'none'
+}
 
 
 export const footer = {
     title: 'Petrichor25',
-    links:[
+    links: [
         {
             url: '#',
             linkText: 'Facebook',
@@ -162,44 +161,9 @@ export const footer = {
             linkIcon: ''
         }
     ],
-    btpIcon:'none'
+    btpIcon: 'none'
 }
 
-/**
- * Invalidates Login and returns false if not loggedIn else returns true
- * @param accesstoken: acccess token from the cookie
- */
-export async function invalidateLogin(accesstoken:string | undefined | null) {
-    let response = false
-    refreshCount.update((n) => n+1)
-    if (accesstoken === undefined || accesstoken === null){
-        response = false
-        invalidate.set(true)
-    }else if (get(refreshCount) < 6){
-        // @ts-ignore
-        response = true
-    }else{
-        refreshCount.set(1)
-        response  = await POST(API.whoami,{
-            "getUser":false,
-            "getEvents":false
-        },accesstoken)
-        .then(res => res.json())
-        .then((res) => {
-            if (res.status == 200){
-                // invalidate 
-                invalidate.set(false)
-                return true
-            }else{
-                invalidate.set(true)
-                return false
-            }
-        })
-        .catch ((err) => {
-            // console.log(err.toString())
-            invalidate.set(true)
-            return false
-        })
-    }
-    return response
-}
+export const defaultUser = {user_data:{email:"",CACode:"",gradYear:0,institute:"",phone:"",registrations:-1,stream:"",username:""},user_events:[]}
+
+
