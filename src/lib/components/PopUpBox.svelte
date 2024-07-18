@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { PopUp } from "$lib/PopUp";
-	import { fade } from "svelte/transition";
 
     let popUpDialog:HTMLDialogElement;
     export let PopUpObj:PopUp;

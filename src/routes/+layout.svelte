@@ -96,10 +96,6 @@
 
     const title: string = 'Petrichor25'
 
-
-	$: loading = false;
-	$: PopUpObj = new PopUp("","",true,null) 
-
 	let winsize = 3000;
 	onMount(async () => {
 		// console.log("adas")
