@@ -18,11 +18,12 @@
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
 	let currentY = 0;
+	console.log("j" + currentY)
 
 	beforeNavigate(async () => {
 		if (window){
 			currentY = window.scrollY
-			// console.log(currentY)
+			console.log(currentY + " o")
 		}
 		const access_token = $access_token;
 		if (access_token == null || !$loggedIn) {
@@ -99,13 +100,16 @@
 	let winsize = 3000;
 	onMount(async () => {
 		// console.log("adas")
+		window.onscroll = (e) => {
+			currentY = window.scrollY
+		}
+		window.onscrollend = (e)=> {
+			currentY = window.scrollY
+		}
+		currentY = window.scrollY	
 		await getData();
 		// console.log($user)
 		winsize = window.innerWidth;
-		window.onscroll = (e) => {
-			currentY = window.scrollY
-			// console.log(currentY)
-		}
 	});
 
 	function updateLoading(val: boolean) {
