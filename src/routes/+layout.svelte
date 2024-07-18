@@ -20,6 +20,10 @@
 	let currentY = 0;
 
 	beforeNavigate(async () => {
+		if (window){
+			currentY = window.scrollY
+			console.log(currentY)
+		}
 		const access_token = $access_token;
 		if (access_token == null || !$loggedIn) {
 			invalidate.set(true);
@@ -94,7 +98,7 @@
 
 
 	$: loading = false;
-	$: PopUpObj = new PopUp("","",false,null) 
+	$: PopUpObj = new PopUp("","",true,null) 
 
 	let winsize = 3000;
 	onMount(async () => {
@@ -103,7 +107,8 @@
 		// console.log($user)
 		winsize = window.innerWidth;
 		window.onscroll = (e) => {
-			currentY = window.scrollY + (window.innerHeight / 2)
+			currentY = window.scrollY
+			console.log(currentY)
 		}
 	});
 

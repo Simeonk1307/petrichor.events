@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { PopUp } from "$lib/PopUp";
+	import { fade } from "svelte/transition";
 
     let popUpDialog:HTMLDialogElement;
     export let PopUpObj:PopUp;
@@ -40,7 +41,7 @@
 </script>
 
 <dialog bind:this={popUpDialog} style="top: {currentY}px;">
-    <div class="popUp Box">
+    <div class="popUp Box" >
         <div class="popUpTitleBox">
             <div class="progressDiv" style="width: {width}%;"/>
             <p>{title}</p>
@@ -63,15 +64,16 @@
         color: white;
     }
     dialog{
-        position: absolute;
+        position: relative;
         z-index: 400;
         width: 100vw;
         height: 100vh;
         display: flex;
         align-items: center;
+        margin: 0 !important;
         justify-content: center;
         background-color: #6161614a;
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
     }
 
     .progressDiv {
