@@ -73,28 +73,28 @@
         transition: all 0.5s ease;
     }
 
-    .progressDiv{
+    .progressDiv {
         width: 0;
-        background-color: #b7a6ef;
+        background-color: #ffcdd2;
         transition: all 0.0000001s ease-in;
         height: 5px;
     }
-    .popUp{
-        color: #e8ddf9;
+    .popUp {
+        color: #ede7f6;
+        display: flex;
         flex-direction: column;
         position: absolute;
         align-items: center;
         height: auto;
         overflow-x: scroll;
         overflow-y: scroll;
-        min-width: 200px ;
-        min-height: 200px;
-        /* padding: 5px;     */
     }
 
-    .popUpTitleBox{
+    .popUpTitleBox {
         width: 100%;
-        background-color: #8662FA;
+        margin: 0 30px;
+        padding-bottom: 5px;
+        background-color: #ef5350;
         flex: 1;
     }
 
@@ -103,30 +103,31 @@
         margin: 0;
         margin-top: 5px;
         text-align: center;
-        font-size: 25px;
+        font-size: 20px;
     }
 
-    .restBox{
+    .restBox {
         flex: 12;
         width: 100%;
-        padding: 5px;
+        padding: 10px;
+        margin: 0 30px;
         display: flex;
         flex-direction: column;
         background-color: black;
     }
 
-    .popUpContentBox{
-        width:100%;
+    .popUpContentBox {
+        width: 100%;
         text-overflow: ellipsis;
         overflow-y: scroll;
         flex: 3;
         /* border-top: solid 1px #212121; */
     }
 
-    .popUpContentBox p{
+    .popUpContentBox p {
         margin: 3px;
         text-align: center;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .Box{

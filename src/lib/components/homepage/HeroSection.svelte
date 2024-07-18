@@ -54,36 +54,38 @@
 		{/if}
 	</div>
 
-	<div class="strip">
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
+	<div class="strip_holder">
+		<div class="strip">
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
 		</div>
 	</div>
 
@@ -141,6 +143,7 @@
 		flex: 3;
 		display: flex;
 		flex-direction: column;
+		gap:2rem;
 		justify-content: center;
 	}
 	.caption {
@@ -156,8 +159,6 @@
 		justify-content: center;
 		align-items: flex-end;
 		justify-content: space-evenly;
-		margin-top: 5rem;
-		margin-right: 10vw;
 	}
 	button {
 		border-radius: 2.5em;
@@ -171,29 +172,35 @@
 		text-align: center;
 		font-weight: 100;
 	}
-	.strip {
-		display: flex;
+	.strip_holder {
+		
 		flex: 2;
-		align-items: center;
-		overflow-x: hidden;
+
 		width: 100vw;
 		max-height: 35px;
+		align-items: center;
+		
+		overflow-x: hidden;
 		margin: 2rem 0;
 		border-top: 2px solid white;
 		border-bottom: 2px solid white;
-		padding-top: 12px;
-		padding-bottom: 12px;
+		padding: 12px 0 ;
 		opacity: 60%;
+		
+	}
+	.strip{
+		display: flex;
+		align-items: center;
+		height: 100%;
+		/* Apply animation to this element */
+		-moz-animation: example1 5s linear infinite;
+		-webkit-animation: example1 5s linear infinite;
+		animation: example1 5s linear infinite;
 	}
 	.strip1 {
 		display: flex;
 		justify-content: center;
 		min-width: max(20%,150px);
-
-		/* Apply animation to this element */
-		-moz-animation: example1 5s linear infinite;
-		-webkit-animation: example1 5s linear infinite;
-		animation: example1 5s linear infinite;
 	}
 
 	.banner {
@@ -205,7 +212,7 @@
 			-moz-transform: translateX(0%);
 		}
 		100% {
-			-moz-transform: translateX(-100%);
+			-moz-transform: translateX(min(-20%,-150px));
 		}
 	}
 	@-webkit-keyframes example1 {
@@ -213,7 +220,7 @@
 			-webkit-transform: translateX(0%);
 		}
 		100% {
-			-webkit-transform: translateX(-100%);
+			-webkit-transform: translateX(min(-20%,-150px));
 		}
 	}
 	@keyframes example1 {
@@ -223,9 +230,9 @@
 			transform: translateX(0%);
 		}
 		100% {
-			-moz-transform: translateX(-100%); /* Firefox bug fix */
-			-webkit-transform: translateX(-100%); /* Firefox bug fix */
-			transform: translateX(-100%);
+			-moz-transform: translateX(min(-20%,-150px)); /* Firefox bug fix */
+			-webkit-transform: translateX(min(-20%,-150px)); /* Firefox bug fix */
+			transform: translateX(min(-20%,-150px));
 		}
 	}
 
@@ -244,7 +251,7 @@
 		.first-block{
 			flex: 7;
 		}
-		.strip{
+		.strip_holder{
 			padding: 8px 0;
 			margin: 1em 0;
 		}

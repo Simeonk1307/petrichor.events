@@ -1,37 +1,19 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
-	import { goto } from '$app/navigation';
-	import { page } from "$app/stores";
-	import { API, POST } from "$lib";
-	import { access_token, invalidate, loggedIn, user } from "$lib/stores";
-	import { getContext, onMount } from "svelte";
+	import { goto } from "$app/navigation";
+	import { getContext } from "svelte";
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	// console.log(form)
-	export let data;
-
-	const getData:Function = getContext('getData')
-	onMount(()=>{
-		if (!$loggedIn){
-			getData()
-		}
-		access_token.set(data.accessToken)
-	})
 
 	const displayPopUp:Function = getContext('displayPopUp')
 	const loading:Function = getContext('loading')
-
-
-	function afterMessage() {
-		// console.log("her")
-		goto(`/login${$page.url.search}`);
-	}
-	const whoami:Function = getContext('whoami')
 	
 
-	$: loginResult = () => {
+	$: changeResult = () => {
 		loading( true)
+
+		
 
 		// @ts-ignore
 		return async ({ result }) => {
@@ -39,21 +21,21 @@
 			// console.log(result)
 			if (result.type == "success" && result.data){
 				const rdata = result.data
-				if (rdata.success && await whoami(rdata.token)){ // this will save all the data to session Storage
-					invalidate.set(false)
-					loggedIn.set(true)
-					// console.log($user)
-					if (data.nextpg != null)
-						goto(data.nextpg)
-					else{
-						goto('/profile')
-					}
+				if (rdata.success){
+					displayPopUp(
+						"Message",
+						"Password Reset Successful",
+						3000,
+						()=>{
+							goto('/login')
+						}
+					)
 				}else{
 					displayPopUp(
 						"Alert",
-						rdata,
+						rdata.message ?? "Some Error encountered",
 						4000,
-						afterMessage
+						()=>{}
 					)
 				}
 			}else{
@@ -61,9 +43,9 @@
 				setTimeout(() => {
 					displayPopUp(
 						"Alert",
-						result.data.err ? result.data.err : "Invalid Credentials",
+						result.data.err ? result.data.err : "Unknown Error. Please contact the administration",
 						2000,
-						afterMessage
+						()=>{}
 					)
 				}, 100);
 			}
@@ -77,41 +59,29 @@
 <div class="form-container">
 	<div class="blank2" />
 	<div class="form image2">
-		<h2>Login to <span id="Petrichor">Petrichor</span></h2>
+		<h2>Change <span id="Petrichor">Password?</span></h2>
 		<form
-			action="?/login"
-			method="POST"
-			use:enhance={loginResult}
-		>
-			<div>
-				<input type="email" name="email" id="email" placeholder="Email" required />
-			</div>
-			<div>
-				<input type="password" id="password" name="password" placeholder="Password" required />
-			</div>
-			<div class="button_holder">
-				<button id="login">Login</button>
-				<a id="register" href="/register">First Time? Register Here</a>
-				<a id="register" href="/forgotpassword">Forgot Password?</a>
-			</div>
-		</form>
+		action="?/change"
+		method="POST"
+		use:enhance={changeResult}
+	>
+		<div>
+			<input type="password" name="password" id="password" placeholder="Password" required />
+		</div>
+		<div>
+			<input type="password" name="confirm_pass" id="confirm_pass" placeholder="Confirm Password" required />
+		</div>
+		<div>
+			<button id="login">Submit</button>
+			<a id="register" href="/login">Go back To Login</a>
+		</div>
+	</form>
 	</div>
 	<div class="image" />
 </div>
 <div class="blank" />
 
 <style>
-	.button_holder{
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		padding-inline-start: 30px;
-		gap: 20px;
-		margin: 20px 0;
-	}
-	#login{
-		margin: 0;
-	}
 	@media (min-width: 501px) {
 		h2 {
 			font-size: 300%;
@@ -153,7 +123,7 @@
 		}
 		#login {
 			font-size: 2rem;
-			/* margin: 2% 5% 2% 20%; */
+			margin: 2% 5% 2% 20%;
 			border-radius: 10rem;
 			padding: 2% 7%;
 			background-color: #232423;

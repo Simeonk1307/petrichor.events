@@ -2,58 +2,38 @@
 	import { enhance } from "$app/forms";
 	import { goto } from '$app/navigation';
 	import { page } from "$app/stores";
-	import { API, POST } from "$lib";
-	import { access_token, invalidate, loggedIn, user } from "$lib/stores";
-	import { getContext, onMount } from "svelte";
+	import { getContext } from "svelte";
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	// console.log(form)
-	export let data;
-
-	const getData:Function = getContext('getData')
-	onMount(()=>{
-		if (!$loggedIn){
-			getData()
-		}
-		access_token.set(data.accessToken)
-	})
+	let message = "We Have sent an email to you. Please continue the process from there"
+	let message_accepted = false
 
 	const displayPopUp:Function = getContext('displayPopUp')
 	const loading:Function = getContext('loading')
 
 
-	function afterMessage() {
-		// console.log("her")
-		goto(`/login${$page.url.search}`);
-	}
 	const whoami:Function = getContext('whoami')
 	
 
-	$: loginResult = () => {
+	$: forgotResult = () => {
 		loading( true)
 
 		// @ts-ignore
 		return async ({ result }) => {
 			loading( false);
 			// console.log(result)
+			message_accepted = false
 			if (result.type == "success" && result.data){
 				const rdata = result.data
-				if (rdata.success && await whoami(rdata.token)){ // this will save all the data to session Storage
-					invalidate.set(false)
-					loggedIn.set(true)
-					// console.log($user)
-					if (data.nextpg != null)
-						goto(data.nextpg)
-					else{
-						goto('/profile')
-					}
+				if (rdata.success){
+					message_accepted = true
 				}else{
 					displayPopUp(
 						"Alert",
-						rdata,
+						rdata.message ?? "Some Error encountered",
 						4000,
-						afterMessage
+						()=>{}
 					)
 				}
 			}else{
@@ -61,9 +41,9 @@
 				setTimeout(() => {
 					displayPopUp(
 						"Alert",
-						result.data.err ? result.data.err : "Invalid Credentials",
+						result.data.err ? result.data.err : "Unknown Error. Please contact the administration",
 						2000,
-						afterMessage
+						()=>{}
 					)
 				}, 100);
 			}
@@ -77,41 +57,32 @@
 <div class="form-container">
 	<div class="blank2" />
 	<div class="form image2">
-		<h2>Login to <span id="Petrichor">Petrichor</span></h2>
+		<h2>Forgot <span id="Petrichor">Password?</span></h2>
+		{#if message_accepted}
+			<div class="message">
+				<p>{message}</p>
+			</div>
+		{:else}
 		<form
-			action="?/login"
-			method="POST"
-			use:enhance={loginResult}
-		>
-			<div>
-				<input type="email" name="email" id="email" placeholder="Email" required />
-			</div>
-			<div>
-				<input type="password" id="password" name="password" placeholder="Password" required />
-			</div>
-			<div class="button_holder">
-				<button id="login">Login</button>
-				<a id="register" href="/register">First Time? Register Here</a>
-				<a id="register" href="/forgotpassword">Forgot Password?</a>
-			</div>
-		</form>
+		action="?/forgot"
+		method="POST"
+		use:enhance={forgotResult}
+	>
+		<div>
+			<input type="email" name="email" id="email" placeholder="Email" required />
+		</div>
+		<div>
+			<button id="login">Submit</button>
+			<a id="register" href="/login">Go back To Login</a>
+		</div>
+	</form>
+		{/if}
 	</div>
 	<div class="image" />
 </div>
 <div class="blank" />
 
 <style>
-	.button_holder{
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		padding-inline-start: 30px;
-		gap: 20px;
-		margin: 20px 0;
-	}
-	#login{
-		margin: 0;
-	}
 	@media (min-width: 501px) {
 		h2 {
 			font-size: 300%;
@@ -151,9 +122,12 @@
 			height: 500px;
 			background-image: url('https://i.pinimg.com/1200x/c2/55/30/c25530ab671a4098de5598e047a9a985.jpg');
 		}
+		.message{
+			padding: 10px 20px;
+		}
 		#login {
 			font-size: 2rem;
-			/* margin: 2% 5% 2% 20%; */
+			margin: 2% 5% 2% 20%;
 			border-radius: 10rem;
 			padding: 2% 7%;
 			background-color: #232423;

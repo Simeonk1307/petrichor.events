@@ -5,7 +5,7 @@
 	import { onMount, setContext } from 'svelte';
 	import Background from '$lib/components/Background.svelte';
 	import { page } from '$app/stores';
-	import { tmp_data, footer, POST, API, defaultUser } from '$lib/index.js';
+	import { POST, API, defaultUser } from '$lib/index.js';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
 	import { beforeNavigate } from '$app/navigation';
     
@@ -26,10 +26,8 @@
 			sessionStorage.setItem('loggedIn', 'false');
 			sessionStorage.setItem('user',  JSON.stringify(defaultUser));
 		}
-		if ($invalidate) {
-			console.log('Reloading');
+		if ($invalidate && $loggedIn) { // if not loggedIn then no need to refesh
 			await whoami(access_token ?? "a")
-			// console.log("o")
 		}
 	});
 
@@ -37,7 +35,15 @@
 		const data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser)
 		user.set(JSON.parse(data));
 		if (data == JSON.stringify(defaultUser) || data == "{}") {
-			await whoami($access_token ?? "a") 
+			if ($access_token == null || $access_token == undefined){
+				// user have not logged In no need for refreshing the data through whoami
+
+				loggedIn.set(false)
+				invalidate.set(true)
+
+			}else{ // user may have logged in
+				await whoami($access_token ?? "a") 
+			}
 		} else {
 			loggedIn.set(Boolean(sessionStorage.getItem('loggedIn')) ?? false);
 		}

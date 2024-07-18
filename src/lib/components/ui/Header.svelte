@@ -98,7 +98,6 @@
         top: 0;
         z-index: 1000;
         padding: 1.2rem 0;
-        padding-right: 3rem;
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -183,6 +182,7 @@
             display: flex;
             padding-left: 10px;
             color: #fff;
+            margin-right: 10px;
             justify-content: center;
             transition: filter 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
         }
@@ -193,6 +193,7 @@
 
         .title {
             flex: 8;
+            padding-left: 2rem;
         }
 
         .account {

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from "$app/stores";
 
     export let path:string;
 </script>
@@ -21,7 +20,7 @@
     <div class="gradients-container extra">
         <div class="g" id="g4-1"></div>
     </div>
-    {:else if ["/login","/profile","/register"].includes(path)}
+    {:else if ["/login","/profile","/register","/forgotpassword"].includes(path) || path.includes('/changepassword/')}
       <div class="gradients-container extra">
         <div id="g1-3" class="g"></div>
         <div id="g1-2" class="g"></div>

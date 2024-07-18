@@ -9,6 +9,7 @@
     import technical from '$lib/assets/HomePage/technical.jpeg'
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
 	import { get } from 'svelte/store';
+	import { defaultUser } from '$lib';
 	export let data;
 	export let form;
 
@@ -33,13 +34,7 @@
 			goto('/login')
 		} else if ($invalidate){
 			location.reload() // this will call before navigation which will in turn call whoami
-		}else{
-			sessionStorage.setItem('user',JSON.stringify({
-				"user_data":user_data,
-				"user_events":user_events
-			}))
-		}
-		console.log(user_data)
+		}// no need to store data in session storage here, whoami is handling it
 	})
 
     let profileData = {
@@ -98,6 +93,10 @@
 			loading(false)
 			// console.log(result)
 			invalidate.set(true)
+			loggedIn.set(false)
+			user.set(defaultUser)
+			access_token.set(null)
+			sessionStorage.clear()
 			goto('/home')
 		}
 	}
@@ -191,7 +190,7 @@
 <style>
 	.container {
 		display: flex;
-		margin-top: 100px;
+		margin-top: 150px;
 		/* flex-direction: row;
 		justify-content: space-around; */
 		height: 100vh;
@@ -217,8 +216,6 @@
 	}
 	.informations {
 		flex-grow: 1;
-		/* background-color: no; */
-		margin: 10px;
 		border-radius: 5%;
 	}
 	.n-email {
@@ -227,8 +224,8 @@
 
 		background-color: #333232;
 		border-radius: 20px;
-		/* margin: 10px;
-		padding-top: 10px; */
+		padding: 10px;
+		/* padding-top: 10px; */
 		line-height: 1em;
 		height: auto;
 		text-align: left;
@@ -264,6 +261,7 @@
 	}
 	.hover-underline {
 		text-decoration: none; /* Set default text decoration to none */
+		font-size: 25px;
 	}
 
 	.hover-underline:hover {

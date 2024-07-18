@@ -142,7 +142,7 @@
 		<form
 		 action="?/register" method="POST" use:enhance={registerResult}>
 			<div>
-				<input type="text" name="username" id="name" placeholder="Name" required />
+				<input type="text" name="username" id="name" placeholder="Name" required maxlength="9"/>
 				<input type="tel" name="phone" id="phone-number" placeholder="Phone No." required />
 			</div>
 			<div class="warning hide" id="phone-warn">Enter a valid 10 digit phone number</div>

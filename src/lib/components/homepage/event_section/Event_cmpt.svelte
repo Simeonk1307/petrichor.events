@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, onMount } from "svelte";
+	import { getContext } from "svelte";
 
     export let event_name='Event';
     export let img_url;
@@ -97,7 +97,7 @@
       min-height: 220px;
       width: 220px;
       z-index: 5;
-      transition: all 0.25s ease;
+      transition: all 0.35s ease;
     }
 
     /* .individualContainer:hover .image{

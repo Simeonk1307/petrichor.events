@@ -61,7 +61,7 @@
 <style>
 	.main {
 		min-height: 110vh;
-		margin-top: 40px;
+		margin-top: 60px;
 		overflow-x: hidden;
 		display: flex;
 		flex-direction: column;
@@ -92,6 +92,7 @@
 		flex-direction: column;
 		align-items: center;
         justify-content: center;
+		text-align: center;
         margin: 1rem;
         margin-top: 3rem;
 	}

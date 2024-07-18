@@ -17,6 +17,11 @@ export const actions = {
         gradyear = 0;
       }
 
+      const username = data.get('username') as string | null
+      if (username?.length ?? 10 > 9){
+        return fail(400,{"err":"Username cannot be greater than 9 characters"})
+      }
+
       const response = await fetch(API.register,{
         method:'POST',
         headers:{

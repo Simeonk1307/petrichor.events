@@ -173,10 +173,6 @@
 		top: -3%;
 		left: 0.3%;
 	}
-	.petr:hover::after {
-	}
-	.petr:hover::before {
-	}
 
 	span {
 		font-size: 30px;

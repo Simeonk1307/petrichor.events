@@ -6,26 +6,6 @@
   export let img_url;
 </script>
 
-<!-- <div class="individualContainer">
-  <div class="inner">
-    <div class="image">
-      <div class="workshop_image">
-        <img class="image1" alt="logo" src={img_url}>
-      </div>
-      <div class="content">
-        <p class="heading">{workshop_name}</p>
-        <div class="btn">
-            <button type="button" class="info_btn">More Info<Icon data={play} scale={0.9}/></button>
-            <button type="button" class="register_btn">Register</button>
-        </div>
-    </div>
-    </div>
-    
-    <div class="outline">
-    </div>
-  </div>
-</div> -->
-
 <div class="individualContainer">
   <div class="inner">
     <div class="image">
