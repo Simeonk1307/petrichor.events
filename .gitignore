@@ -9,4 +9,6 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 script.*
-*package-lock.json
+*.vercel
+package-lock.json
+pnpm-lock.yaml
