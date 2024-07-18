@@ -22,7 +22,7 @@
 	beforeNavigate(async () => {
 		if (window){
 			currentY = window.scrollY
-			console.log(currentY)
+			// console.log(currentY)
 		}
 		const access_token = $access_token;
 		if (access_token == null || !$loggedIn) {
@@ -108,7 +108,7 @@
 		winsize = window.innerWidth;
 		window.onscroll = (e) => {
 			currentY = window.scrollY
-			console.log(currentY)
+			// console.log(currentY)
 		}
 	});
 
