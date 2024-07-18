@@ -14,6 +14,14 @@
 
 	onMount(() => {
 		if (CardDiv) {
+			if (CardDiv) {
+				const bounds = CardDiv.getBoundingClientRect();
+				middle = [];
+				// getting mid point of the whole card Div
+				middle.push(((bounds.left + bounds.right) / 2) | 0);
+				middle.push(((bounds.top + bounds.bottom) / 2) | 0);
+				//
+			}
 			const childrens = CardDiv.children.item(0)?.children;
 			for (let i = 0; i < childrens!.length; i++) {
 				const div = childrens
@@ -37,9 +45,10 @@
 			}
 			const moveX = ((mouseX - middle[0]) / 20) | 0;
 			const moveY = ((mouseY - middle[1]) / 20) | 0;
-
+			// console.log(moveX + " "+moveY)
 			moveX;
 			moveY;
+			if ( Math.abs(moveY) >= 35) return
 			childs.forEach((child, i) => {
 				child.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
 			});
@@ -53,6 +62,7 @@
 			// console.log(moveX+ " "+moveY)
 			moveX;
 			moveY;
+			if ( Math.abs(moveY) >= 35) return
 			childs.forEach((child, i) => {
 				child.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
 			});

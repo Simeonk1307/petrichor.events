@@ -59,23 +59,23 @@ export const footerLinks: Array<Link> = [
 
 export const headerLinks: Array<Link> = [
     {
-        url: 'https://petrichor.events/',
+        url: '#',
         linkText: 'About Us'
     },
     {
-        url: 'https://petrichor.events/',
+        url: '#',
         linkText: 'Event'
     },
     {
-        url: 'https://petrichor.events/',
+        url: '#',
         linkText: 'Workshop'
     },
     {
-        url: 'https://petrichor.events/',
+        url: '#',
         linkText: 'Schedule'
     },
     {
-        url: 'https://petrichor.events/',
+        url: '#',
         linkText: 'Merch'
     }
 ]

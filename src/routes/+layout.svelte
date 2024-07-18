@@ -13,11 +13,11 @@
     // Dummy data in this helper file
     import {footerLinks, headerLinks} from '$lib/helper';
 
-	export let data;
 	let path: string;
 
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
+	let currentY = 0;
 
 	beforeNavigate(async () => {
 		const access_token = $access_token;
@@ -95,14 +95,16 @@
 
 	$: loading = false;
 	$: PopUpObj = new PopUp("","",false,null) 
-	let slotele:HTMLSlotElement
 
 	let winsize = 3000;
 	onMount(async () => {
 		// console.log("adas")
 		await getData();
-		console.log($user)
+		// console.log($user)
 		winsize = window.innerWidth;
+		window.onscroll = (e) => {
+			currentY = window.scrollY + (window.innerHeight / 2)
+		}
 	});
 
 	function updateLoading(val: boolean) {
@@ -140,7 +142,7 @@
 <Loading spinning={loading} />
 
 {#if PopUpObj.isOn}
-	<PopUpBox bind:PopUpObj />
+	<PopUpBox bind:PopUpObj currentY={currentY}/>
 {/if}
 
 {#if path != '/'}

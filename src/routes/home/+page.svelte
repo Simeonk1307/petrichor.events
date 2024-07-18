@@ -37,6 +37,6 @@
     flex-direction: column;
     z-index: 2;
     background-color: transparent;
-    overflow-y: scroll;
+    overflow-x: hidden;
 }
 </style>
