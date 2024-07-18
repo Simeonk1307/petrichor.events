@@ -75,7 +75,6 @@
 </script>
 
 <div class="form-container">
-	<div class="blank2" />
 	<div class="form image2">
 		<h2>Login to <span id="Petrichor">Petrichor</span></h2>
 		<form
@@ -90,24 +89,40 @@
 				<input type="password" id="password" name="password" placeholder="Password" required />
 			</div>
 			<div class="button_holder">
-				<button id="login">Login</button>
-				<a id="register" href="/register">First Time? Register Here</a>
-				<a id="register" href="/forgotpassword">Forgot Password?</a>
+				<div class="button_divs">
+					<button id="login">Login</button>	
+				</div>
+				<div class="links">
+
+					<a id="register" href="/register">First Time? Register Here</a>
+					<a id="register" href="/forgotpassword">Forgot Password?</a>
+				</div>
 			</div>
 		</form>
 	</div>
 	<div class="image" />
 </div>
-<div class="blank" />
 
 <style>
 	.button_holder{
 		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		padding-inline-start: 30px;
+		align-items: flex-start;
+		flex-direction: column;
+		justify-content: center;
 		gap: 20px;
-		margin: 20px 0;
+		margin: 20px 30px;
+	}
+	.button_holder .links{
+		display: flex;
+		gap: 20px;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+	.button_holder .button_divs{
+		width: 55%;	
+		display: flex;
+		justify-content: center;
 	}
 	#login{
 		margin: 0;
@@ -121,7 +136,7 @@
 		input {
 			padding: 2%;
 			margin: 2% 20%;
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			width: 55%;
 			background-color: #40413e;
@@ -165,10 +180,13 @@
 			color: mediumslateblue;
 			display: inline-block;
 		}
-		.blank {
-			background-color: transparent;
-			width: 100%;
-			height: 100px;
+	}
+	@media (max-width: 650px){
+		.form{
+			width: 70%;
+		}
+		.image{
+			width: 30%;
 		}
 	}
 	@media (max-width: 500px) {
@@ -180,7 +198,7 @@
 		input {
 			padding: 2%;
 			margin: 2% 8%;
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			width: 80%;
 			background-color: #40413ebb;
@@ -226,12 +244,7 @@
 		#register {
 			color: mediumslateblue;
 			display: inline-block;
-			margin: 2% 0 0 40%;
-		}
-		.blank {
-			background-color: black;
-			width: 100%;
-			height: 100px;
+			/* margin: 2% 0 0 40%; */
 		}
 		.blank2 {
 			background-color: black;

@@ -136,7 +136,6 @@
 </script>
 
 <div class="form-container">
-	<div class="blank2" />
 	<div class="form image2" on:change={validate}>
 		<h2>Register for <span id="Petrichor">Petrichor</span></h2>
 		<form
@@ -212,7 +211,6 @@
 	</div>
 	<div class="image" />
 </div>
-<!-- <div class="blank" /> -->
 
 <style>
 
@@ -231,7 +229,7 @@
 			margin: 2% 10%;
 		}
 		select,input {
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			background-color: #40413e;
 			border: none;
@@ -335,7 +333,7 @@
 		input {
 			padding: 2%;
 			margin: 2% 6%;
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			width: 85%;
 			background-color: #40413ebb;
@@ -361,7 +359,7 @@
 			width: 100%;
 		}
 		.image2 {
-			height: 1000px;
+			min-height: 110vh;
 			background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
 				url('https://i.pinimg.com/1200x/c2/55/30/c25530ab671a4098de5598e047a9a985.jpg');
 		}

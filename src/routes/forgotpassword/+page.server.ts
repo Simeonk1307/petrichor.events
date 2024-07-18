@@ -1,5 +1,5 @@
 import { API, POST } from "$lib";
-import {  Actions, fail } from "@sveltejs/kit";
+import {  fail, type Actions } from "@sveltejs/kit";
 
 
 export const actions = {

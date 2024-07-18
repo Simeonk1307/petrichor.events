@@ -55,7 +55,6 @@
 </script>
 
 <div class="form-container">
-	<div class="blank2" />
 	<div class="form image2">
 		<h2>Forgot <span id="Petrichor">Password?</span></h2>
 		{#if message_accepted}
@@ -80,7 +79,6 @@
 	</div>
 	<div class="image" />
 </div>
-<div class="blank" />
 
 <style>
 	@media (min-width: 501px) {
@@ -92,7 +90,7 @@
 		input {
 			padding: 2%;
 			margin: 2% 20%;
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			width: 55%;
 			background-color: #40413e;
@@ -125,6 +123,9 @@
 		.message{
 			padding: 10px 20px;
 		}
+		.message p {
+			text-align: center;
+		}
 		#login {
 			font-size: 2rem;
 			margin: 2% 5% 2% 20%;
@@ -154,13 +155,19 @@
 		input {
 			padding: 2%;
 			margin: 2% 8%;
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			width: 80%;
 			background-color: #40413ebb;
 			border: none;
 			color: white;
 		}
+		.message{
+			padding: 10px 20px;
+		}
+		.message p {
+			text-align: center;
+		}	
 		::placeholder {
 			color: white;
 		}

@@ -1,7 +1,4 @@
-import { API, POST } from "$lib"
-import { get } from "svelte/store";
 import type { Actions, PageServerLoad } from './$types';
-import { invalidate, loggedIn, user } from "$lib/stores";
 
 export const load: PageServerLoad  = async ({fetch, cookies}) => {
 
@@ -13,7 +10,7 @@ export const load: PageServerLoad  = async ({fetch, cookies}) => {
 
 export const actions = {
     logout: async ({request,cookies})=> {
-        cookies.delete('session_id')
+        cookies.delete('session_id',{path:'/'})
         return {
             "success":true,
             "message":"Logged out"

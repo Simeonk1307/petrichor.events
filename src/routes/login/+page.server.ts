@@ -1,7 +1,6 @@
 import { API, POST } from "$lib";
-import { fail } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
-import { rss } from "svelte-awesome/icons";
+import type { PageServerLoad } from "./$types";
+import {  fail, type Actions } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({url,cookies}) => {
     let nextpg = url.searchParams.get('to')
@@ -43,7 +42,8 @@ export const actions = {
                         secure:true,
                         // httpOnly:true,
                         maxAge: MAX_AGE,
-                        expires:currTime
+                        expires:currTime,
+                        path:'/'
                     })
                     return res
                 }else{

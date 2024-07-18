@@ -91,7 +91,7 @@
 		input {
 			padding: 2%;
 			margin: 2% 20%;
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			width: 55%;
 			background-color: #40413e;
@@ -150,7 +150,7 @@
 		input {
 			padding: 2%;
 			margin: 2% 8%;
-			font-size: 150%;
+			font-size: 100%;
 			border-radius: 10rem;
 			width: 80%;
 			background-color: #40413ebb;
