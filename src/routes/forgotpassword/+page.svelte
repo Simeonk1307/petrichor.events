@@ -81,6 +81,10 @@
 </div>
 
 <style>
+	.form-container{
+		z-index: 11 !important;
+		position: relative;
+	}
 	@media (min-width: 501px) {
 		h2 {
 			font-size: 300%;
@@ -101,7 +105,7 @@
 			color: white;
 		}
 		#Petrichor {
-			color: #910cea;
+			color: #b58cd1;
 			font-weight: 600;
 		}
 		.form-container {
@@ -127,10 +131,10 @@
 			text-align: center;
 		}
 		#login {
-			font-size: 2rem;
+			font-size: 1.5rem;
 			margin: 2% 5% 2% 20%;
 			border-radius: 10rem;
-			padding: 2% 7%;
+			padding: 2% 5%;
 			background-color: #232423;
 			color: white;
 			font-weight: bold;
@@ -172,11 +176,10 @@
 			color: white;
 		}
 		#Petrichor {
-			color: #910cea;
+			color: #b58cd1;
 			font-weight: 600;
 		}
 		.form-container {
-			padding-top: 10%;
 			width: 100%;
 			height: 100%;
 			display: flex;

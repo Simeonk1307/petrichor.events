@@ -5,11 +5,19 @@
     import Workshop from "$lib/components/homepage/workshop_section/Workshop.svelte";
 	import { access_token, loggedIn } from "$lib/stores";
 	import { getContext, onMount } from "svelte";
+	import { fade } from "svelte/transition";
+
+    let visible = false
+
+
 
     export let data;
     const getData:Function = getContext('getData')
     let pageWidth = 0;
     onMount(()=>{
+        setTimeout(()=>{
+            visible = true
+        },10)
         if (!$loggedIn){
 			getData()
 		}
@@ -23,7 +31,7 @@
 
 </script>
 
-<div class="maincontent">
+<div class="maincontent {visible ? '': "none"}">
     <HeroSection bind:pageWidth={pageWidth}/>
     <AboutSection />
     <Event bind:pageWidth={pageWidth}/>
@@ -35,8 +43,10 @@
 .maincontent{
     display: flex;
     flex-direction: column;
-    z-index: 2;
+    z-index: 11;
+    opacity: 100% ;
     background-color: transparent;
     overflow-x: hidden;
+    transition: 1000ms;
 }
 </style>

@@ -4,7 +4,7 @@
 
 <main>
     <div class="second-block">
-		<div class="title2">About Us</div>
+		<div class="title2 atmos">About Us</div>
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<div class="caption2">
 			Petrichor- the annual techno-cultural fest of IIT Palakkad is back again, and better than
@@ -30,36 +30,42 @@
         height: 100vh;
         width: 100vw;
 		display: flex;
+		z-index: 11;	
 		align-items: center;
-		overflow-x: hidden;
+		overflow: hidden;
 		background-color: transparent;
     }
 	.second-block{
 		flex:1;
+		display: flex;
+		flex-direction: column;
+		margin-left: 3rem;
+		padding-right: 7vw;
+		gap: 20vh;
+		min-width: 50%;
 	}
 	.photo_holder{
 		flex: 1;
 		margin: 50px;
 	}
 	.photo{
-		width: 100%;
-		position: relative;
-		left: 50px;
+		position: relative;	
+		height: 65vh;
+		min-width: 50vw ;
 	}
 	.title2 {
-		font-size: 6vw;
+		font-size: 4.5vw;
 		font-weight: 400;
-		padding-left: 4vw;
 		color: white;
 	}
 	.caption2 {
-		font-size: 16px;
+		font-size: 15px;
+		font-weight: 100;
 		color: white;
-		margin-top: 5rem;
-		line-height: 1.5	;
+		line-height: 1.5;
 		letter-spacing: 0.005cap;
-		padding: 10px 2em;
-		margin-right: calc(5em - 0.1vw);
+		padding: 10px 0;
+		padding-right: 30px;
 	}
 
 	@media (max-width:900px){
@@ -69,24 +75,42 @@
 		.second-block{
 			display: flex;
 			align-items: flex-end;
+			flex-direction: row;
 			flex: 1;
+			width: 100%;
+			margin: 0;
+			gap: unset;
 		}
 		.title2{
 			font-weight: bold;
-			margin-bottom: 1em;
-			font-size: 20px;
-			padding-left: 8px;
+			font-size: 40px;
+			padding: 5px  8px;
 		}
 		.caption2{
 			margin: 0;
-			font-size: calc(14px - 1vw);
+			padding: 5px 10px;
+			font-size: 13px;
+			width: auto;
+			text-align: justify;
 		}
 		.photo_holder{
 			margin: 0;
-			flex: 2;
+			flex: 1;
 		}
 		.photo{
 			left: 0;
+			top: 0;
+			width: 100%;
+			height: unset;
+		}
+	}
+	@media (max-width:400px){
+		.title2{
+			font-size: 25px;
+		}
+		.caption2{
+			padding: 5px;
+			font-size: calc(13px - 0.5vw);
 		}
 	}
 </style>

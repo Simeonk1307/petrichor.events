@@ -7,9 +7,10 @@
 <div class="gradient-bg">
     {#if path == '/home'}
     <div class="gradients-container extra">
-        <div id="g1-3" class="g"></div>
-        <div id="g1-2" class="g"></div>
-        <div id="g1-1" class="g"></div>
+      <div id="g1-3" class="g"></div>
+      <div id="g1-2" class="g"></div>
+      <div id="g1-1" class="g"></div>
+      <div id="g1-7" class="g"></div>
     </div>
     <div class="gradients-container extra">
         <div class="g" id="g2-1"></div>
@@ -18,13 +19,14 @@
         <div class="g" id="g3-1"></div>
     </div>
     <div class="gradients-container extra">
-        <div class="g" id="g4-1"></div>
-    </div>
+      <div class="g" id="g4-1"></div>
+  </div>
     {:else if ["/login","/profile","/register","/forgotpassword"].includes(path) || path.includes('/changepassword/')}
       <div class="gradients-container extra">
-        <div id="g1-3" class="g"></div>
-        <div id="g1-2" class="g"></div>
-        <div id="g1-1" class="g"></div>
+        <div id="g1-3_l" class="g "></div>
+      <div id="g1-2_l" class="g "></div>
+      <div id="g1-1_l" class="g "></div>
+      <div id="g1-7_l" class="g"></div>
     </div>
     {:else if path.startsWith('/CA')}
         <div class="gradients-container extra">
@@ -68,15 +70,44 @@
   /* Section 1 */
   /* Home page */
   #g1-1 {
-    background: radial-gradient(farthest-corner at 10% 5%, rgba(var(--color2), 1) 0, rgba(var(--color2), 0) 40%) no-repeat;
+    background: radial-gradient(farthest-corner at 10% 5%, rgba(var(--color2), 1) 0, rgba(var(--color2), 0) 35%) no-repeat;
   }
   #g1-2 {
-    background: radial-gradient(farthest-corner at 0px 0px, rgba(var(--color1), 0.8)  0%, rgba(var(--color1), 0) 60%) no-repeat;
+    background: radial-gradient(farthest-corner at 0px 0px, rgba(var(--color1), 0.8)  0%, rgba(var(--color1), 0) 45%) no-repeat;
   }
   #g1-3 {
-    background: radial-gradient(farthest-corner at -50% -70%, rgba(var(--color3), 0.8)  0%, rgba(var(--color3), 0) 75%) no-repeat;
-    width: 200vh;
-    height: 200vh;
+    background: radial-gradient(farthest-corner at 0% 10%, rgba(var(--color3), 0.8)  0%, rgba(var(--color3), 0) 75%) no-repeat;
+    width: 125vh;
+    height: 100vh;
+  }
+  #g1-7 {
+    background: radial-gradient(farthest-corner at 0% 52%, rgba(var(--color6), 0.8)  0%, rgba(var(--color6), 0) 45%) no-repeat;
+  }
+  /*  */
+  /* LOGIN pages */
+  #g1-1_l {
+    background: radial-gradient(farthest-corner at 70% 55%, rgba(var(--color2), 1) 0, rgba(var(--color2), 0) 35%) no-repeat;
+    width: 100vh;
+    height: 100vh;  
+    left: 40%;
+  }
+  #g1-2_l {
+    background: radial-gradient(farthest-corner at 50% 50%, rgba(var(--color1), 0.8)  0%, rgba(var(--color1), 0) 45%) no-repeat;
+    width: 100vh;
+    height: 100vh;
+    left: 40%;
+  }
+  #g1-3_l {
+    background: radial-gradient(farthest-corner at 50% 50%, rgba(var(--color3), 0.8)  0%, rgba(var(--color3), 0) 75%) no-repeat;
+    width: 125vh;
+    height: 100vh;
+    left: 40%;
+  }
+  #g1-7_l {
+    background: radial-gradient(farthest-corner at 50% 60%, rgba(var(--color6), 0.8)  0%, rgba(var(--color6), 0) 45%) no-repeat;
+    width: 100vh;
+    height: 120vh;
+    left: 40%;
   }
 /*  */
   /* CAPage */
@@ -101,10 +132,16 @@
     height: 150vh;
   }
   #g3-1 {
-    background: radial-gradient(circle at center, rgba(var(--color4), 0.5) 0, rgba(var(--color4), 0) 50%) no-repeat;
-    left: 15%;
+    background: radial-gradient(farthest-corner at 75% 50%, rgba(var(--color4), 0.5) 0, rgba(var(--color4), 0) 50%) no-repeat;
+    width: 100vw;
     top: 25%;
-    height: 200vh;
+    height: 100vw;
+  }
+  #g4-1 {
+    background: radial-gradient(farthest-corner at 55% 50%, rgba(var(--color4), 0.5) 0, rgba(var(--color4), 0) 50%) no-repeat;
+    width: 100vw;
+    top: 50%;
+    height: 100vw;
   }
 
   @media(max-width:700px){
@@ -114,6 +151,10 @@
     #g1-3{
         width: 100vh;
         height: 100vh;
+        left: -50%;
+    }
+    #g1-2, #g1-1{
+      width: 150vw;
     }
   }
     

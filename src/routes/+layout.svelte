@@ -18,12 +18,10 @@
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
 	let currentY = 0;
-	console.log("j" + currentY)
 
 	beforeNavigate(async () => {
 		if (window){
 			currentY = window.scrollY
-			console.log(currentY + " o")
 		}
 		const access_token = $access_token;
 		if (access_token == null || !$loggedIn) {

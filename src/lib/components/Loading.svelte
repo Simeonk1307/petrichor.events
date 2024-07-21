@@ -15,7 +15,7 @@
     top:0;
     left:0;
     height: 100vw;
-    z-index: 5;
+    z-index: 12;
     opacity: 100%;
     background-color: rgba(0, 0, 0,0.8);
   }

@@ -11,7 +11,7 @@
     export let links: Array<Link> = [];
 
     let showMenu: boolean = false;
-    let popupMenuPosition: { top: number, right: number } = { top: 0, right: 0 };
+    let popupMenuPosition: { top: number, right: number } = { top: 0, right: 20 };
 
     function toggleMenu() {
         showMenu = !showMenu;
@@ -38,7 +38,7 @@
         const menuButton = document.querySelector('.menu-icon');
         if (menuButton) {
             const rect = menuButton.getBoundingClientRect();
-            popupMenuPosition = { top: rect.bottom + 40, right: window.innerWidth - rect.right - 10 };
+            popupMenuPosition = { top: rect.bottom + 5, right: window.innerWidth - rect.right  };
         }
     }
 

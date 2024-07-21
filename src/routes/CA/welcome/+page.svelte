@@ -12,7 +12,11 @@
 	let CAbutton:HTMLButtonElement
 
 	const getData:Function = getContext('getData')
+	let visible = false
 	onMount(()=>{
+		setTimeout(()=>{
+			visible = true
+		},10)
 		if (!$loggedIn){
 			getData()
 		}
@@ -133,7 +137,7 @@
 	}
 </script>
 
-<main>
+<main class="{visible ? '': "none"}">
 	<div class="first-block">
 		<div class="content">
 			<div class="title"><p>CA Petrichor</p></div>
@@ -233,6 +237,7 @@
 		background: transparent;
 		background-color: transparent;
 		/* padding: 5em 0; */
+		transition: 0.5s;
 	}
 	.first-block {
 		width: 100vw;

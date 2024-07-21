@@ -76,7 +76,7 @@
 	});
 </script>
 
-<div class="container" bind:this={CardDiv}>
+<div class="container atmos" bind:this={CardDiv}>
 	<div class="cards">
 		<StackedBoxes event_name="Cultural" img_url={cultural} top={false} left={pageWidth > 600} />
 		<StackedBoxes event_name="Technical" img_url={technical} top={pageWidth > 600} left={false} />
@@ -91,7 +91,7 @@
 		display: flex;
 		flex: 1;
 		font-weight: 100;
-		font-size: 70px;
+		font-size: 50px;
 		align-items: center;
 		justify-content: center;
 		margin: 0;
@@ -110,10 +110,22 @@
 		flex: 3;
 		display: grid;
 		grid-template-columns: auto auto;
-		margin-left: 5vh;
+	}
+
+	@media (max-width: 1000px){
+		h1{
+			margin-right: 2rem;
+			font-size: 40px;
+		}
+		.cards{
+			margin: 0 20px;
+		}
 	}
 
 	@media (max-width: 600px) {
+		.container{
+			margin: 10px 0 !important;
+		}
 		.cards {
 			margin-left: 0;
 			display: flex;
@@ -126,7 +138,12 @@
 	@media (max-width: 900px) {
 		.container {
 			flex-direction: column-reverse;
-			margin: 0;
+			margin: 20px 0;
+			margin-top: 1rem;
+		}
+		h1{
+			font-size: calc(50px - 1vw);
+			margin: 3rem 0;
 		}
 		.cards {
 			flex: 2;

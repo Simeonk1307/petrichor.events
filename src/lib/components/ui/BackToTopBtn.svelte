@@ -40,6 +40,9 @@
         color: #fff;
         border: none;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 50%;
         z-index: 1000;
         transition: background-color 0.3s ease, transform 0.3s ease;

@@ -35,11 +35,11 @@
 
 		// @ts-ignore
 		return async ({ result }) => {
-			loading( false);
 			// console.log(result)
 			if (result.type == "success" && result.data){
 				const rdata = result.data
 				if (rdata.success && await whoami(rdata.token)){ // this will save all the data to session Storage
+					loading( false);
 					invalidate.set(false)
 					loggedIn.set(true)
 					// console.log($user)
@@ -49,6 +49,7 @@
 						goto('/profile')
 					}
 				}else{
+					loading( false);
 					displayPopUp(
 						"Alert",
 						rdata,
@@ -59,6 +60,7 @@
 			}else{
 				// console.log(result)
 				setTimeout(() => {
+					loading( false);
 					displayPopUp(
 						"Alert",
 						result.data.err ? result.data.err : "Invalid Credentials",
@@ -104,6 +106,9 @@
 </div>
 
 <style>
+	*{
+		box-sizing: border-box !important;
+	}
 	.button_holder{
 		display: flex;
 		align-items: flex-start;
@@ -117,7 +122,7 @@
 		gap: 20px;
 		width: 100%;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-evenly;
 	}
 	.button_holder .button_divs{
 		width: 55%;	
@@ -126,6 +131,19 @@
 	}
 	#login{
 		margin: 0;
+	}
+	.form-container{
+		z-index: 11 !important;
+		position: relative;
+	}
+	@media (max-width: 800px){
+		.links{
+			flex-direction: column;
+			align-items: flex-start !important;
+		}
+		.button_divs{
+			justify-content: flex-start !important;
+		}
 	}
 	@media (min-width: 501px) {
 		h2 {
@@ -147,13 +165,15 @@
 			color: white;
 		}
 		#Petrichor {
-			color: #910cea;
+			color: #b58cd1;
 			font-weight: 600;
 		}
 		.form-container {
-			padding-top: 10%;
 			width: 100%;
-			height: 100%;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			z-index: 11;
 			display: flex;
 			flex-wrap: wrap;
 		}
@@ -167,8 +187,7 @@
 			background-image: url('https://i.pinimg.com/1200x/c2/55/30/c25530ab671a4098de5598e047a9a985.jpg');
 		}
 		#login {
-			font-size: 2rem;
-			/* margin: 2% 5% 2% 20%; */
+			font-size: 1.5rem;
 			border-radius: 10rem;
 			padding: 2% 7%;
 			background-color: #232423;
@@ -182,14 +201,9 @@
 		}
 	}
 	@media (max-width: 650px){
-		.form{
-			width: 70%;
-		}
 		.image{
 			width: 30%;
 		}
-	}
-	@media (max-width: 500px) {
 		h2 {
 			font-size: 300%;
 			font-weight: normal;
@@ -213,9 +227,9 @@
 			font-weight: 600;
 		}
 		.form-container {
-			padding-top: 10%;
 			width: 100%;
 			height: 100%;
+			min-height: 640px;
 			display: flex;
 			flex-wrap: wrap;
 			flex-direction: column;
@@ -224,7 +238,8 @@
 			width: 100%;
 		}
 		.image2 {
-			height: 500px;
+			height: 100%;
+			min-height: 640px;
 			background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
 				url('https://i.pinimg.com/1200x/c2/55/30/c25530ab671a4098de5598e047a9a985.jpg');
 		}
@@ -232,8 +247,7 @@
 			display: none;
 		}
 		#login {
-			font-size: 1.5rem;
-			margin: 2% 0% 2% 5%;
+			
 			border-radius: 10rem;
 			padding: 2% 7%;
 			background-color: #232423;
@@ -245,11 +259,6 @@
 			color: mediumslateblue;
 			display: inline-block;
 			/* margin: 2% 0 0 40%; */
-		}
-		.blank2 {
-			background-color: black;
-			width: 100%;
-			height: 100px;
 		}
 	}
 </style>

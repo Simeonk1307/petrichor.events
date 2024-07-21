@@ -2,6 +2,7 @@
 	import Globe from '$lib/assets/svgs/globe.svg';
 	import hand from '$lib/assets/HomePage/hand.png';
 	import { goto } from '$app/navigation';
+	import calculator from 'svelte-awesome/icons/calculator';
 
 	export let pageWidth:number;
 
@@ -21,11 +22,11 @@
 
 </script>
 
-<main>
+<main >
 	<div class="first-block">
 		<div class="content">
 
-			<div class="title"><p>Petrichor</p></div>
+			<div class="title"><p class="atmos">Petrichor</p></div>
 			<div class="content_box">
 
 				<div class="caption">
@@ -47,11 +48,9 @@
 				</div>
 			</div>
 		</div>
-		{#if pageWidth > 700}
 		<div class="imagediv">
 			<img src={hand} alt=""/>
 		</div>
-		{/if}
 	</div>
 
 	<div class="strip_holder">
@@ -98,6 +97,7 @@
 		flex-direction: column;
 		background: transparent;
 		background-color: transparent;
+		z-index: 11 !important;
 		/* padding: 5em 0; */
 	}
     .first-block{
@@ -135,7 +135,7 @@
 		color: white;
 	}
 	.title p {
-		font-size: calc(40px + 1.5vw);
+		font-size: calc(25px + 1.5vw);
 		font-weight: 100;
 		margin: 0;
 	}
@@ -156,6 +156,8 @@
 	}
 	.buton_area{
 		display: flex;
+		width: 80%;
+		max-width: 520px;
 		justify-content: center;
 		align-items: flex-end;
 		justify-content: space-evenly;
@@ -204,7 +206,8 @@
 	}
 
 	.banner {
-		display: inline-block;
+		display: flex;
+		justify-content: center;
 	}
 	/* Move it (define the animation) */
 	@-moz-keyframes example1 {
@@ -237,6 +240,7 @@
 	}
 
 
+
 	@media only screen and (max-width:900px){
 
 		.caption {
@@ -254,6 +258,24 @@
 		.strip_holder{
 			padding: 8px 0;
 			margin: 1em 0;
+		}
+	}
+
+	
+	@media (max-width: 700px){
+		.first-block{
+			flex-direction: column-reverse;
+		}
+		.imagediv img{
+			width: 100vw;
+			height: 50vh;
+		}
+		.title{
+			flex: 1;
+		}
+		.buton_area{
+			width: 100%;
+			max-width: unset;
 		}
 	}
 </style>

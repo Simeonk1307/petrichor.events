@@ -10,7 +10,7 @@ export const actions = {
       const data = await request.formData();
       let gradyear = data.get('gradyear')?.valueOf()
       if (data.get('institype') == 'school'){
-         gradyear = 2024 + (12 - Number(data.get('grade')))
+         gradyear = 2025 + (12 - Number(data.get('grade')))
       }
 
       if (data.get('institype') == 'neither'){

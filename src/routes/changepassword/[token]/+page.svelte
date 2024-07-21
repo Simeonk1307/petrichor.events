@@ -82,6 +82,10 @@
 <div class="blank" />
 
 <style>
+	.form-container{
+		z-index: 11 !important;
+		position: relative;
+	}
 	@media (min-width: 501px) {
 		h2 {
 			font-size: 300%;
@@ -165,7 +169,6 @@
 			font-weight: 600;
 		}
 		.form-container {
-			padding-top: 10%;
 			width: 100%;
 			height: 100%;
 			display: flex;

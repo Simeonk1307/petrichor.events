@@ -34,7 +34,8 @@
 
   .individualContainer {
     float: left;
-    width: 25.33%;
+    width: max(20vw,250px);
+    max-width: 300px;
     box-sizing: border-box;
     border: 1px solid gainsboro; 
     cursor: pointer; 
@@ -131,18 +132,5 @@
     height: 200px;
     width: 100%;
     transition: all 0.25s ease-in-out;
-  }
-
-  @media screen and (max-width: 1000px) {
-    .individualContainer {
-      width: 35%;
-      align-self: center;
-    }
-  }
-
-  @media screen and (max-width: 680px) {
-    .individualContainer {
-      width: min(60%, 300px);
-    }
   }
 </style>

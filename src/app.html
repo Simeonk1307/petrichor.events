@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Petrichor 2024</title>
+		<title>Petrichor 2025</title>
 		<meta charset="utf-8" />
     <!-- <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
@@ -9,11 +9,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <meta name="csrf_token" content="{{ csrf_token() }}">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Krona+One&family=Merriweather&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
 		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
 		%sveltekit.head%
 	</head>
@@ -25,26 +25,32 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 
 <style>
+  *{
+    box-sizing: border-box !important;
+  }
 @font-face {
-		font-family: 'Inter-Regular';
-		src: url('%sveltekit.assets%/Fonts/Inter-Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
-			url('%sveltekit.assets%/Fonts/Inter-Regular.ttf') format('woff2'),             /* Super Modern Browsers */
-			url('%sveltekit.assets%/Fonts/Inter-Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
-			url('%sveltekit.assets%/Fonts/Inter-Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
-			url('%sveltekit.assets%/Fonts/Inter-Regular.ttf') format('svg');               /* Legacy iOS */
+		font-family: 'Atmospheric';
+		src: url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('embedded-opentype'), /* Internet Explorer */
+			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('woff2'),             /* Super Modern Browsers */
+			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('woff'),              /* Pretty Modern Browsers */
+			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('truetype'),          /* Safari, Android, iOS */
+			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('svg');               /* Legacy iOS */
 		font-weight: 200;
 	}
 	:root{
-		--pfont: 'Inter-Regular', sans-serif;
-		--sfont: 'Inter-Regular', sans-serif;
-		--wfont: 'Inter-Regular', sans-serif;
+		--pfont: 'Raleway', sans-serif;
+		--sfont: 'Atmospheric', sans-serif;
+		--wfont: 'Arial', sans-serif;
+	}
+	:root{
     --color-bg1: rgba(108, 0, 162, 0.534);
     --color-bg2: rgba(0, 16, 82, 0.423);
     --color1: 42, 190, 253;
-    --color2: 215,90,249;
+    --color2: 30, 239, 81;
     --color3:200, 0, 255;
     --color4: 184, 3, 255;
     --color5: 2, 255, 192;
+    --color6: 5, 189, 62;
     --color-interactive: 140, 100, 255;
     --circle-size: 60%;
     --blending: hard-light;
@@ -53,6 +59,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		margin: 0 !important;
 		padding: 0 !important;
 		width: 100vw;
+    min-height: 100vh;
     min-width: 100vw;
     max-width: 100vw;   
     overflow-x: hidden  ;
@@ -73,6 +80,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     color: white;
     z-index: 2;
     position: relative;
+    font-family: var(--pfont);
   }
   input{
     z-index: 2;
@@ -82,7 +90,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     position: relative;
     cursor: pointer;
     z-index: 2;
+    font-family: var(--pfont);
   }
+  .none{
+    opacity: 0% !important;
+}
 	.a-unset{
 		color: inherit;
 		text-decoration: unset;
