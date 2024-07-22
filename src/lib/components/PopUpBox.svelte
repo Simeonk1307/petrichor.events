@@ -65,8 +65,8 @@
     dialog{
         position: relative;
         z-index: 400;
-        width: 100vw;
-        height: 100vh;
+        min-width: 100vw;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         margin: 0 !important;

@@ -77,7 +77,7 @@
 </script>
 
 <div class="form-container">
-	<div class="form image2">
+	<div class="form">
 		<h2>Login to <span id="Petrichor">Petrichor</span></h2>
 		<form
 			action="?/login"
@@ -102,7 +102,7 @@
 			</div>
 		</form>
 	</div>
-	<div class="image" />
+	<!-- <div class="image" /> -->
 </div>
 
 <style>
@@ -155,7 +155,7 @@
 			padding: 2%;
 			margin: 2% 20%;
 			font-size: 100%;
-			border-radius: 10rem;
+			border-radius: 10px;
 			width: 55%;
 			background-color: #40413e;
 			border: none;
@@ -213,7 +213,7 @@
 			padding: 2%;
 			margin: 2% 8%;
 			font-size: 100%;
-			border-radius: 10rem;
+			border-radius: 10px;
 			width: 80%;
 			background-color: #40413ebb;
 			border: none;
@@ -249,7 +249,7 @@
 		#login {
 			
 			border-radius: 10rem;
-			padding: 2% 7%;
+			padding:10px 20px ;
 			background-color: #232423;
 			color: white;
 			font-weight: bold;

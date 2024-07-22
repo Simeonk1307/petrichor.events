@@ -58,7 +58,7 @@
 
 <div class="form-container">
 	<div class="blank2" />
-	<div class="form image2">
+	<div class="form">
 		<h2>Change <span id="Petrichor">Password?</span></h2>
 		<form
 		action="?/change"
@@ -77,7 +77,7 @@
 		</div>
 	</form>
 	</div>
-	<div class="image" />
+	<!-- <div class="image" /> -->
 </div>
 <div class="blank" />
 
@@ -85,6 +85,7 @@
 	.form-container{
 		z-index: 11 !important;
 		position: relative;
+		height: 100vh !important;
 	}
 	@media (min-width: 501px) {
 		h2 {
@@ -96,7 +97,7 @@
 			padding: 2%;
 			margin: 2% 20%;
 			font-size: 100%;
-			border-radius: 10rem;
+			border-radius: 10px;
 			width: 55%;
 			background-color: #40413e;
 			border: none;
@@ -128,8 +129,8 @@
 		#login {
 			font-size: 2rem;
 			margin: 2% 5% 2% 20%;
-			border-radius: 10rem;
-			padding: 2% 7%;
+			border-radius: 8rem;
+			padding: 2% 5%;
 			background-color: #232423;
 			color: white;
 			font-weight: bold;
@@ -155,7 +156,7 @@
 			padding: 2%;
 			margin: 2% 8%;
 			font-size: 100%;
-			border-radius: 10rem;
+			border-radius: 10px;
 			width: 80%;
 			background-color: #40413ebb;
 			border: none;

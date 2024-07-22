@@ -55,7 +55,7 @@
 </script>
 
 <div class="form-container">
-	<div class="form image2">
+	<div class="form">
 		<h2>Forgot <span id="Petrichor">Password?</span></h2>
 		{#if message_accepted}
 			<div class="message">
@@ -77,13 +77,14 @@
 	</form>
 		{/if}
 	</div>
-	<div class="image" />
+	<!-- <div class="image" /> -->
 </div>
 
 <style>
 	.form-container{
 		z-index: 11 !important;
 		position: relative;
+		height: 100vh !important;
 	}
 	@media (min-width: 501px) {
 		h2 {
@@ -95,7 +96,7 @@
 			padding: 2%;
 			margin: 2% 20%;
 			font-size: 100%;
-			border-radius: 10rem;
+			border-radius: 10px;
 			width: 55%;
 			background-color: #40413e;
 			border: none;
@@ -133,8 +134,8 @@
 		#login {
 			font-size: 1.5rem;
 			margin: 2% 5% 2% 20%;
-			border-radius: 10rem;
-			padding: 2% 5%;
+			border-radius: 10px;
+			padding:1% 5%;
 			background-color: #232423;
 			color: white;
 			font-weight: bold;
@@ -160,7 +161,7 @@
 			padding: 2%;
 			margin: 2% 8%;
 			font-size: 100%;
-			border-radius: 10rem;
+			border-radius: 10px;
 			width: 80%;
 			background-color: #40413ebb;
 			border: none;

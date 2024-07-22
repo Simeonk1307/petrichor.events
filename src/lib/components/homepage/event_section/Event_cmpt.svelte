@@ -20,7 +20,7 @@
   
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="individualContainer" style="{top ? "top:100px;" :""} {left ? "left:15%;" : ""} " on:click={handleClick}>
+  <div class="individualContainer" style="{top ? "top:40%;" :""} {left ? "left:15%;" : ""} " on:click={handleClick}>
     <div class="inner">
       <div class="image">
         <img class="image1" alt="logo" src={img_url}>
