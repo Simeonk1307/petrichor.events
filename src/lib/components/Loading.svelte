@@ -1,9 +1,10 @@
 <script lang="ts">
   export let spinning: boolean;
+  export let currentY:number;
 </script>
 
 {#if spinning}
-<div class="main">
+<div class="main" style="top: {currentY}px;">
   <div class="spinner" />
 </div>
 {/if}
@@ -14,7 +15,6 @@
     position: absolute;
     top:0;
     left:0;
-    height: 100vw;
     z-index: 12;
     opacity: 100%;
     background-color: rgba(0, 0, 0,0.8);

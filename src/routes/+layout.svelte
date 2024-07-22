@@ -142,7 +142,7 @@
 	$: path = $page.url.pathname;
 </script>
 
-<Loading spinning={loading} />
+<Loading spinning={loading} currentY={currentY}/>
 
 {#if PopUpObj.isOn}
 	<PopUpBox bind:PopUpObj currentY={currentY}/>
