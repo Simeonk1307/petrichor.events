@@ -20,7 +20,7 @@
 		const password:string = form_vals.get('password') as string | null ?? ""
 		const institype:string = form_vals.get('institype') as string | null ?? ""
 		const instiName:string = form_vals.get('college') as string | null ?? ""
-		const gradYear = form_vals.get('gradYear') 
+		const gradYear = form_vals.get('gradyear') 
 		const degree:string = form_vals.get('stream') as string | null ?? ""
 		let valid = false
 		if (username.length > 9 ){
@@ -29,15 +29,17 @@
 			warn_name = "required"
 		}else if (email.length == 0){
 			warn_email = "required"
-		} else if (phone.length != 10){
+		} else if (!/^\d+$/.test(phone)){
+			warn_phone = "Only numbers are allowed"
+		}else if (phone.length != 10){
 			warn_phone = "Must be only 10 character"
 		}else if (password.length < 8){
 			warn_password = "must be atleast 8 characters"
 		}else {
-
 			if (institype == ""){
 				warn_select = "required";
-			}else {
+			}else if (institype != "neither"){
+				console.log(gradYear)
 				if (instiName == ""){
 					warn_init_name = "required";
 				}else if (gradYear?.valueOf() == ""){
@@ -47,6 +49,8 @@
 				}else{
 					valid = true
 				}
+			}else {
+				valid = true
 			}
 			
 		}
@@ -137,7 +141,7 @@
 			</div>
 			<div class="input_box">
 				<label for="phone">Phone</label>
-				<input type="tel" name="phone" id="phone-number" placeholder="Phone No." required />
+				<input type="tel" name="phone" id="phone-number" placeholder="Phone No." maxlength=10 required />
 				{#if warn_phone}
 					<p><strong>{warn_phone}</strong></p>
 				{/if}

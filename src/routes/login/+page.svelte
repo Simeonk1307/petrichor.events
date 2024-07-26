@@ -64,7 +64,7 @@
 					displayPopUp(
 						"Alert",
 						result.data.err ? result.data.err : "Invalid Credentials",
-						2000,
+						4000,
 						afterMessage
 					)
 				}, 100);

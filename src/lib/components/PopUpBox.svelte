@@ -1,6 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { PopUp } from "$lib/PopUp";
+    // import logo from "$lib/assets/logo.png"
+    import logo from "$lib/assets/loopv.mp4"
 
     let popUpDialog:HTMLDialogElement;
     export let PopUpObj:PopUp;
@@ -43,16 +45,18 @@
     <div class="popUp Box" >
         <div class="popUpTitleBox">
             <div class="progressDiv" style="width: {width}%;"/>
-            <p>{title}</p>
-        </div>
+            <!-- <img src={logo} alt="" height="50px" width=" 50px"/> -->
+             <video src={logo} loop muted autoplay height="100px"/>
+            </div>
         <div class="restBox">
+            <!-- <p>{title}</p> -->
             <div class="popUpContentBox">
                 <p>{content}</p>
             </div>
             <div class="buttonDiv">
                 <button on:click={ () => {
                     popUpDialog.close()
-                }} >Ok</button>
+                }} >Dismiss</button>
             </div>
         </div>
     </div>
@@ -61,6 +65,13 @@
 <style>
     button{
         color: white;
+        background-color: #7171714a;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    p{
+        text-align: center;
+        margin: 0;
     }
     dialog{
         position: relative;
@@ -77,7 +88,7 @@
 
     .progressDiv {
         width: 0;
-        background-color: #ffcdd2;
+        background-color: #7e7e7e;
         transition: all 0.0000001s ease-in;
         height: 5px;
     }
@@ -95,8 +106,12 @@
     .popUpTitleBox {
         width: 100%;
         margin: 0 30px;
-        padding-bottom: 5px;
-        background-color: #ef5350;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* background-color: #ef5350; */
+        background-color: black;
         flex: 1;
     }
 
@@ -111,7 +126,7 @@
     .restBox {
         flex: 12;
         width: 100%;
-        padding: 10px;
+        padding-bottom: 20px;
         margin: 0 30px;
         display: flex;
         flex-direction: column;
@@ -123,6 +138,7 @@
         text-overflow: ellipsis;
         overflow-y: scroll;
         flex: 3;
+        margin: 10px 5px;
         /* border-top: solid 1px #212121; */
     }
 
@@ -135,6 +151,8 @@
     .Box{
         max-width: 60%;
         max-height: 80%;
+        min-width: 300px;
+        min-height: 200px ;
     }
 
     .buttonDiv{
