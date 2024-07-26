@@ -16,7 +16,7 @@
 	let path: string;
 
 	let loading = false;
-	let PopUpObj = new PopUp('Message', 'Namaste from Petrichor', true, null);
+	let PopUpObj = new PopUp('', '', false, null);
 	let currentY = 0;
 
 	beforeNavigate(async () => {
