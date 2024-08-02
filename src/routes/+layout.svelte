@@ -93,7 +93,7 @@
 			});
 	}
 
-    const title: string = 'Petrichor25'
+    const title: string = 'Petrichor 25'
 
 	let winsize = 3000;
 	onMount(async () => {

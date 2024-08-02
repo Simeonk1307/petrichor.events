@@ -57,7 +57,7 @@
 </script>
 
 <div class="form-container">
-	<div class="blank2" />
+	<!-- <div class="blank2" /> -->
 	<div class="form">
 		<h2>Change <span id="Petrichor">Password?</span></h2>
 		<form
@@ -79,82 +79,75 @@
 	</div>
 	<!-- <div class="image" /> -->
 </div>
-<div class="blank" />
+<!-- <div class="blank" /> -->
 
 <style>
-	.form-container{
-		z-index: 11 !important;
-		position: relative;
-		height: 100vh !important;
+	* {
+		box-sizing: border-box !important;
 	}
-	@media (min-width: 501px) {
+	#login {
+		margin: 0;
+	}
+	h2 {
+		font-size: 300%;
+		font-weight: normal;
+		/* margin: 5% 5%; */
+	}
+	input {
+		padding: 3%;
+		margin: 2% 0%;
+		font-size: 100%;
+		border-radius: 10px;
+		width: 55%;
+		background-color: #40413e;
+		border: none;
+		color: white;
+	}
+	::placeholder {
+		color: white;
+	}
+	#Petrichor {
+		color: #b58cd1;
+		font-weight: 600;
+	}
+	.form-container {
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		z-index: 11;
+		display: flex;
+		flex-wrap: wrap;
+		margin-left: 10%;
+	}
+	.form {
+		z-index: 2;
+		width: 50%;
+	}
+	#login {
+		font-size: 1.5rem;
+		border-radius: 10rem;
+		padding: 2% 7%;
+		background-color: #232423;
+		color: white;
+		font-weight: bold;
+		border: none;
+	}
+	#register {
+		color: mediumslateblue;
+		display: inline-block;
+	}
+	/* } */
+	@media (max-width: 650px) {
 		h2 {
 			font-size: 300%;
 			font-weight: normal;
-			margin: 5% 20%;
+			margin-top: 20%;
+			margin-right: 10%;
 		}
 		input {
-			padding: 2%;
-			margin: 2% 20%;
-			font-size: 100%;
-			border-radius: 10px;
-			width: 55%;
-			background-color: #40413e;
-			border: none;
-			color: white;
-		}
-		::placeholder {
-			color: white;
-		}
-		#Petrichor {
-			color: #910cea;
-			font-weight: 600;
-		}
-		.form-container {
-			padding-top: 10%;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-wrap: wrap;
-		}
-		.form {
-			z-index: 2;
-			width: 50%;
-		}
-		.image {
-			width: 50%;
-			height: 500px;
-			background-image: url('https://i.pinimg.com/1200x/c2/55/30/c25530ab671a4098de5598e047a9a985.jpg');
-		}
-		#login {
-			font-size: 2rem;
-			margin: 2% 5% 2% 20%;
-			border-radius: 8rem;
-			padding: 2% 5%;
-			background-color: #232423;
-			color: white;
-			font-weight: bold;
-			border: none;
-		}
-		#register {
-			color: mediumslateblue;
-			display: inline-block;
-		}
-		.blank {
-			background-color: transparent;
-			width: 100%;
-			height: 100px;
-		}
-	}
-	@media (max-width: 500px) {
-		h2 {
-			font-size: 300%;
-			font-weight: normal;
-			margin: 20% 15% 5%;
-		}
-		input {
-			padding: 2%;
-			margin: 2% 8%;
+			padding: 3%;
+			margin: 2% 0%;
 			font-size: 100%;
 			border-radius: 10px;
 			width: 80%;
@@ -172,26 +165,18 @@
 		.form-container {
 			width: 100%;
 			height: 100%;
+			min-height: 640px;
 			display: flex;
 			flex-wrap: wrap;
 			flex-direction: column;
+			justify-content: center;
 		}
 		.form {
 			width: 100%;
 		}
-		.image2 {
-			height: 500px;
-			background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-				url('https://i.pinimg.com/1200x/c2/55/30/c25530ab671a4098de5598e047a9a985.jpg');
-		}
-		.image {
-			display: none;
-		}
 		#login {
-			font-size: 1.5rem;
-			margin: 2% 0% 2% 5%;
 			border-radius: 10rem;
-			padding: 2% 7%;
+			padding: 10px 20px;
 			background-color: #232423;
 			color: white;
 			font-weight: bold;
@@ -200,17 +185,7 @@
 		#register {
 			color: mediumslateblue;
 			display: inline-block;
-			margin: 2% 0 0 40%;
-		}
-		.blank {
-			background-color: black;
-			width: 100%;
-			height: 100px;
-		}
-		.blank2 {
-			background-color: black;
-			width: 100%;
-			height: 100px;
+			/* margin: 2% 0 0 40%; */
 		}
 	}
 </style>

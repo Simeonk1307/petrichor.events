@@ -40,7 +40,7 @@
 		display: flex;
 		flex-direction: column;
 		margin-left: 3rem;
-		padding-right: 7vw;
+		padding: 5px;
 		gap: 20vh;
 		min-width: 50%;
 	}
@@ -74,12 +74,14 @@
 		}
 		.second-block{
 			display: flex;
-			align-items: flex-end;
-			flex-direction: row;
+			align-items: center;
 			flex: 1;
 			width: 100%;
 			margin: 0;
 			gap: unset;
+			flex-wrap: wrap;
+			align-content: center;
+			justify-content: center;
 		}
 		.title2{
 			font-weight: bold;

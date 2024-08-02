@@ -33,8 +33,8 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 70px;
-        height: 70px;
+        width: 50px;
+        height: 50px;
         background-color: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(10px);
         color: #fff;

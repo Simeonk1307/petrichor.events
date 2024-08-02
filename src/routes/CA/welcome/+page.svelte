@@ -268,8 +268,9 @@
 		color: white;
 	}
 	.title p {
-		font-size: calc(40px + 1.5vw);
+		font-size: calc(30px + 1.5vw);
 		font-weight: 100;
+		font-family: var(--sfont);
 		margin: 0;
 	}
 	.content_box {
@@ -382,8 +383,11 @@
 	}
 
 	@media only screen and (max-width: 900px) {
+		main{
+			height: unset;
+		}
 		.caption {
-			font-size: 11px;
+			font-size: 14px;
 		}
 		button {
 			padding: 0.5em 1em;
@@ -401,8 +405,11 @@
 		}
 		.infos {
 			flex: 1;
-			font-size: min(3vw, 14px);
+			font-size: min(3.8vw, 14px);
 			margin-top: 1em;
+		}
+		.content{
+			min-height: 100vh;
 		}
 	}
 </style>
