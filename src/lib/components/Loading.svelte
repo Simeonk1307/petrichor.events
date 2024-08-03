@@ -5,7 +5,7 @@
 
 {#if spinning}
 <div class="main" style="top: {currentY}px;">
-  <div class="spinner" />
+		<div class="spinner" />
 </div>
 {/if}
 <style>
@@ -13,14 +13,16 @@
     height: 100vh;
     width: 100vw;
     position: absolute;
-    top:0;
+	pointer-events: none;
     left:0;
-    z-index: 12;
+    z-index: 1001;
     opacity: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
     background-color: rgba(0, 0, 0,0.8);
   }
 	.spinner {
-    margin: 25% 50%;
 		border: 8px solid #f3f3f3;
 		border-top: 8px solid #3498db;
 		border-radius: 50%;

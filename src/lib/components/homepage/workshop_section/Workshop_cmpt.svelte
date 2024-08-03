@@ -34,7 +34,7 @@
 
   .individualContainer {
     float: left;
-    width: max(20vw,250px);
+    min-width: max(20vw,250px);
     max-width: 300px;
     box-sizing: border-box;
     border: 1px solid gainsboro; 
@@ -82,6 +82,7 @@
 .heading{
   margin-top: 5%;
   padding: 2%;
+  pointer-events: none;
   font-size: medium;
   font-weight: bolder;
   
@@ -131,6 +132,7 @@
   .image1 {
     height: 200px;
     width: 100%;
+    pointer-events: none;
     transition: all 0.25s ease-in-out;
   }
 </style>

@@ -2,13 +2,11 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	// import loginCss from "$lib/login.css";
-	import { API, POST } from '$lib';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
 
 	/** @type {import('./$types').ActionData} */
-	export let form;
+	// export let form;
 	// console.log(form)
 	export let data;
 

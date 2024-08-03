@@ -4,7 +4,6 @@
 	import Globe from '$lib/assets/svgs/globe.svg';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
-	import { get } from 'svelte/store';
 
 	export let data;
 
@@ -143,7 +142,7 @@
 			<div class="title"><p>CA Petrichor</p></div>
 			<div class="content_box">
 				<div class="caption">
-					<b>Become a Campus Ambassador for Petrichor</b><br />
+					<h4>Become a Campus Ambassador for Petrichor</h4><br />
 					Be the voice of IITPKD's premier fest and lead your campus in celebrating the spirit of Petrichor.
 				</div>
 				<div class="buton_area">
@@ -248,6 +247,7 @@
 	.content {
 		flex: 1;
 		display: flex;
+		gap: 20px;
 		flex-direction: column;
 		justify-content: center;
 	}
@@ -262,6 +262,7 @@
 	}
 	.title {
 		flex: 2;
+		z-index: 4;
 		padding-left: 4vw;
 		display: flex;
 		align-items: flex-end;
@@ -286,6 +287,9 @@
 		overflow: hidden;
 		text-wrap: wrap;
 		padding-left: 4vw;
+	}
+	.caption h4{
+		margin: 5px 0;
 	}
 	.buton_area {
 		display: flex;
@@ -345,7 +349,7 @@
 		flex-direction: column;
 		border-radius: 1em;
 		padding: 0 1vw;
-
+		z-index: 2;
 		margin-top: 4em;
 	}
 	.infos p {

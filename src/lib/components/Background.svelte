@@ -30,9 +30,9 @@
     </div>
     {:else if path.startsWith('/CA')}
         <div class="gradients-container extra">
-            <div id="g1-5" class="g"></div>
-            <div id="g1-4" class="g"></div>
-            <div id="g1-6" class="g"></div>
+          <div id="g1-4" class="g"></div>
+          <div id="g1-5" class="g"></div>
+          <div id="g1-6" class="g"></div>
         </div>
     {/if}
 </div>
@@ -112,15 +112,19 @@
 /*  */
   /* CAPage */
   #g1-6 {
-    background: radial-gradient(farthest-corner at 90% 5%, rgba(var(--color2), 1) 0, rgba(var(--color2), 0) 40%) no-repeat;
+    background: radial-gradient(circle, rgba(var(--color7), 0.6) 0, rgba(var(--color7), 0) 50%) no-repeat;
+    width: 90vh;
+    height: 90vh;
+    left: 60%;
+    top: -40%;
   }
   #g1-5 {
-    background: radial-gradient(farthest-corner at 100% 0px, rgba(var(--color1), 0.8)  0%, rgba(var(--color1), 0) 40%) no-repeat;
+    background: radial-gradient(farthest-corner at 70% 0, rgba(var(--color3), 0.8)  0%, rgba(var(--color3), 0) 40%) no-repeat;
   }
   #g1-4 {
-    background: radial-gradient(farthest-corner at 50% 15%, rgba(var(--color5), 0.8)  0%, rgba(var(--color5), 0) 60%) no-repeat;
+    background: radial-gradient(farthest-corner at 70% 15%, rgba(var(--color5), 0.8)  0%, rgba(var(--color5), 0) 60%) no-repeat;
     width: 100vw;
-    left: 27%;
+    /* left: 27%; */
     height: 100vh;
   }
   /*  */
@@ -155,6 +159,10 @@
     }
     #g1-2, #g1-1{
       width: 150vw;
+    }
+
+    #g1-6 {
+      left: 20%;
     }
   }
     

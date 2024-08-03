@@ -1,8 +1,16 @@
 <script lang="ts">
 	import EventCard from './EventCard.svelte';
+	import { Icon } from "svelte-awesome";
+	import { powerOff } from "svelte-awesome/icons";
+	import { enhance } from '$app/forms';
+	import { getContext } from 'svelte';
+	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
+	import { defaultUser } from '$lib';
+	import { goto } from '$app/navigation';
 
 	export let profileData = {
 		username: 'Username',
+		email:'email',
 		mobile: 'Phone',
 		college: 'College',
 		graduation: 8098,
@@ -12,12 +20,40 @@
 
 	let eventDisplay = true;
 
+	const loading:Function = getContext('loading')
+	const displayPopUp:Function = getContext('displayPopUp')
+
+	$: logout = () => {
+		loading(true)
+		// @ts-ignore
+		return async ({result}) => {
+			loading(false)
+			// console.log(result)
+			invalidate.set(true)
+			loggedIn.set(false)
+			user.set(defaultUser)
+			access_token.set(null)
+			sessionStorage.clear()
+			goto('/home')
+		}
+	}
 	
 </script>
 
 <div class="main">
 	<div class="userData">
-		<h1 style="margin-bottom: 3rem;">Hi, {profileData.username}</h1>
+		<!-- Name and Email -->
+		<div class="n-email" style="opacity: 0.75;">
+			<div class="name-mail-cont">
+				<h1 style="width: 100%; font-weight: bold; margin-bottom: 10px;">Hi, {profileData.username}</h1>
+				<p style="font-size: smaller; width: 100%; margin-top: 5; margin-bottom: 0;">		
+					{profileData.email}
+				</p>
+			</div>
+			<form action="?/logout" method="POST" use:enhance={logout}>
+				<button class="logout" type="submit"><Icon data={powerOff} scale={1.4}/></button>
+			</form>
+		</div>
 		<div class="phone">
 			<h2>Phone Number</h2>
 			<h3>+91 {profileData.mobile}</h3>
@@ -61,11 +97,10 @@
 <style>
 	.main {
 		min-height: 110vh;
-		margin-top: 60px;
+		margin-top: 80px;
 		overflow-x: hidden;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 	}
 	.userData {
 		line-height: 15px;
@@ -78,6 +113,41 @@
 		justify-content: center;
 		gap: 2rem;
 		border-bottom: 1px solid white;
+	}
+	.n-email {
+		display: flex;
+		align-items: center;
+		border-radius: 20px;
+		padding: 10px 0;
+		margin-right: 1rem;
+		/* padding-top: 10px; */
+		line-height: 1em;
+		height: auto;
+		text-align: left;
+		position: relative;
+		place-items: center;
+	}
+	.logout{
+		position: absolute;
+		text-decoration: none;
+		border-radius: 100em;
+		align-self: flex-start;
+		font-size: smaller;
+		margin-top: 10px;
+		right: 1em;
+		top: 50%;
+		translate: 0 -75%;
+		padding: 1.25em;
+		background-color: #242424;
+		border: 1px solid black;
+		background-color: inherit;
+		border: transparent;
+		color: white;
+		aspect-ratio: 1;
+
+	}
+	.logout:hover {
+		cursor: pointer;
 	}
 	.display {
 		z-index: 2;

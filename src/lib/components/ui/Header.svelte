@@ -11,7 +11,7 @@
     export let links: Array<Link> = [];
 
     let showMenu: boolean = false;
-    let popupMenuPosition: { top: number, right: number } = { top: 0, right: 20 };
+    let popupMenuPosition: { top: number, right: number } = { top: 0, right: 10 };
 
     function toggleMenu() {
         showMenu = !showMenu;
@@ -120,6 +120,7 @@
         color: #fff;
         padding-left: 3rem;
         flex: 1;
+        min-width: 200px;
     }
 
     .menu {
@@ -209,8 +210,8 @@
         background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(10px);
         z-index: 1001;
-        border-radius: 10px;
-        padding: 10px;
+        border-radius: 5px;
+        padding: 0 5px;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease-out, padding 0.3s ease-out;
@@ -218,7 +219,6 @@
 
     .popup-menu.show {
         max-height: 500px;
-        padding: 10px;
     }
 
     .popup-menu.hide {
@@ -238,7 +238,7 @@
         text-transform: uppercase;
         text-align: center;
         padding: 10px 0;
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: #fff;
         font-weight: bolder;
         position: relative;

@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { PopUp } from "$lib/PopUp";
     // import logo from "$lib/assets/logo.png"
-    import logo from "$lib/assets/loopv.mp4"
+    import logo from "$lib/assets/logo.png"
 
     let popUpDialog:HTMLDialogElement;
     export let PopUpObj:PopUp;
@@ -46,7 +46,7 @@
         <div class="popUpTitleBox">
             <div class="progressDiv" style="width: {width}%;"/>
             <!-- <img src={logo} alt="" height="50px" width=" 50px"/> -->
-             <video src={logo} loop muted autoplay height="100px"/>
+             <img src={logo} alt="" height="70px"/>
             </div>
         <div class="restBox">
             <!-- <p>{title}</p> -->
@@ -115,14 +115,6 @@
         flex: 1;
     }
 
-    .popUpTitleBox p {
-        /* margin: 1px; */
-        margin: 0;
-        margin-top: 5px;
-        text-align: center;
-        font-size: 20px;
-    }
-
     .restBox {
         flex: 12;
         width: 100%;
@@ -137,6 +129,9 @@
         width: 100%;
         text-overflow: ellipsis;
         overflow-y: scroll;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex: 3;
         margin: 10px 5px;
         /* border-top: solid 1px #212121; */

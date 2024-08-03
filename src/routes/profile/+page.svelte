@@ -5,17 +5,16 @@
 	import { Icon } from "svelte-awesome";
 	import { powerOff } from "svelte-awesome/icons";
 	import MobileProfile from "$lib/components/MobileProfile/MobileProfile.svelte";
-	import cultural from '$lib/assets/HomePage/cultural.png';
-    import technical from '$lib/assets/HomePage/technical.jpeg'
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
-	import { get } from 'svelte/store';
 	import { defaultUser } from '$lib';
 	export let data;
-	export let form;
+	// export let form;
 
 	// console.log(data)
 	// @ts-ignore
-	const { user_data,user_events } = $user
+	let { user_data,user_events } = $user
+	let profileData: { username: string; email: string; mobile: string; college: string; graduation: number; events: never[]; nightEvents: never[]; };
+	setProfileData()
 
 	const getData:Function = getContext('getData')
 	const whoami:Function = getContext('whoami')
@@ -23,6 +22,9 @@
 	onMount(async()=> {
 		if (!$loggedIn){
 			getData()
+			user_data = $user.user_data
+			user_events = $user.user_events
+			setProfileData()
 		}
 		pageWidth = window.innerWidth
 		window.onresize=()=>{
@@ -36,52 +38,20 @@
 			location.reload() // this will call before navigation which will in turn call whoami
 		}// no need to store data in session storage here, whoami is handling it
 	})
+	
+	function setProfileData(){
+		profileData = {
+			username: user_data?.username ?? 'Username',
+			email : user_data?.email ?? 'email',
+			mobile: user_data?.phone ?? 'Phone',
+			college: user_data?.institute ?? "College",
+			graduation: user_data?.gradYear ?? 'Grad',
+			events :[],
+			nightEvents :[]
+			
+		};
+	}
 
-    let profileData = {
-		username: user_data?.username ?? 'Username',
-		mobile: user_data?.phone ?? 'Phone',
-		college: user_data?.institute ?? "College",
-		graduation: user_data?.gradYear ?? 'Grad',
-		events : [
-		{
-			name: 'Event Name',
-			DateTime: '01.07.24',
-			Location: 'Location',
-			imgUrl: cultural
-		},
-		{
-			name: 'Event Name',
-			DateTime: '01.07.24',
-			Location: 'Location',
-			imgUrl: cultural
-		},
-		{
-			name: 'Event Name',
-			DateTime: '01.07.24',
-			Location: 'Location',
-			imgUrl: cultural
-		},
-	],nightEvents : [
-		{
-			name: 'Night Name',
-			DateTime: '01.07.24',
-			Location: 'Location',
-			imgUrl: technical
-		},
-		{
-			name: 'Night Name',
-			DateTime: '01.07.24',
-			Location: 'Location',
-			imgUrl: technical
-		},
-		{
-			name: 'Night Name',
-			DateTime: '01.07.24',
-			Location: 'Location',
-			imgUrl: technical
-		},
-	]
-	};
 
 	const loading:Function = getContext('loading')
 	const displayPopUp:Function = getContext('displayPopUp')
