@@ -1,6 +1,6 @@
 // import {technical, workshops, cultural, informals} from '$lib/data'
-import type { Link } from "./types";
-import {facebookSquare, twitterSquare, envelopeSquare} from 'svelte-awesome/icons'
+import type { HeaderLink, Link } from "./types";
+import { facebookSquare, twitterSquare, envelopeSquare } from 'svelte-awesome/icons'
 
 const mediumSquare = {
     'medium': {
@@ -43,7 +43,7 @@ export const footerLinks: Array<Link> = [
     {
         url: 'https://www.twitter.com',
         linkText: 'Twitter',
-        linkIcon: twitterSquare 
+        linkIcon: twitterSquare
     },
     {
         url: 'https://www.medium.com',
@@ -51,31 +51,48 @@ export const footerLinks: Array<Link> = [
         linkIcon: mediumSquare
     },
     {
-        url: '/contact',
+        url: '/contactUs',
         linkText: 'Contact',
         linkIcon: envelopeSquare
     }
 ]
 
-export const headerLinks: Array<Link> = [
+export const headerLinks: Array<HeaderLink> = [
     {
         url: '#',
-        linkText: 'About Us'
+        linkText: 'About Us',
+        childLinks: [{
+            url: "/contactUs",
+            linkText: "Contact Us"
+        }],
+        show: false
     },
     {
         url: '#',
-        linkText: 'Event'
+        linkText: 'Event',
+        childLinks: []
+        ,
+        show: false
     },
     {
         url: '#',
-        linkText: 'Workshop'
+        linkText: 'Workshop',
+        childLinks: []
+        ,
+        show: false
     },
     {
         url: '#',
-        linkText: 'Schedule'
+        linkText: 'Schedule',
+        childLinks: []
+        ,
+        show: false
     },
     {
         url: '#',
-        linkText: 'Merch'
+        linkText: 'Merch',
+        childLinks: []
+        ,
+        show: false
     }
 ]

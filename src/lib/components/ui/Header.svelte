@@ -2,13 +2,14 @@
     import { onMount } from "svelte";
     import { page } from "$app/stores";
     import { invalidate, loggedIn } from "$lib/stores";
-    import type { Link } from '../../types';
+    import type { HeaderLink, Link } from '../../types';
     import Icon from 'svelte-awesome/components/Icon.svelte';
     import ellipsisV from 'svelte-awesome/icons/ellipsisV';
     import userO from 'svelte-awesome/icons/userO';
+	import { fade } from "svelte/transition";
 
     export let title: string;
-    export let links: Array<Link> = [];
+    export let links: Array<HeaderLink> = [];
 
     let showMenu: boolean = false;
     let popupMenuPosition: { top: number, right: number } = { top: 0, right: 10 };
@@ -62,8 +63,27 @@
 <header>
     <a class="title" href="/home">{title}</a>
     <nav class="menu">
-        {#each links as link}
-            <a href={link.url} aria-label={link.linkText}>{link.linkText}</a>
+        {#each links as link,ind}
+        <div>
+
+            <a class="links" href={link.url} aria-label={link.linkText} on:mouseenter={
+                () => {
+                    link.show = true
+                    }}
+                on:mouseleave = {() => {
+                    setTimeout(()=>{
+                        link.show = false
+                    },3000)
+                }}
+                >{link.linkText}</a>
+            {#if link.show}
+            <div class="child_links" transition:fade>
+                {#each link.childLinks as otherLink }
+                <a href={otherLink.url} aria-label={otherLink.linkText}>{otherLink.linkText}</a>
+                {/each}
+            </div>
+            {/if}
+        </div>
         {/each}
     </nav>
     <a class="account" href={($invalidate || !$loggedIn) ? `/login/?to=${($page).url.pathname}` : '/profile'}>
@@ -78,6 +98,9 @@
     <nav class="popup-nav">
         {#each links as link}
             <a href={link.url} aria-label={link.linkText} on:click={() => showMenu = false}>{link.linkText}</a>
+            {#each link.childLinks as otherLink }
+                <a href={otherLink.url} aria-label={otherLink.linkText}>{otherLink.linkText}</a>
+                {/each}
         {/each}
     </nav>
 </div>
@@ -102,6 +125,22 @@
         backdrop-filter: blur(10px);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+
+    .child_links{
+        position: absolute;
+        background-color: #fdfafa44;
+        border-radius: 5px;
+        top: 100%;
+        transition: all 0.5s ease;
+    }
+    .child_links a{
+        padding: 5px 0;
+        font-size: 12px !important;
+    }
+    .child_links a:hover{
+        transform: unset !important;
+    }
+
 
     header::after {
         content: '';

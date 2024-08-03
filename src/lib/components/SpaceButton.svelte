@@ -3,7 +3,7 @@
 </script>
 
 
-<button class="btn" type="button">
+<button class="btn" type="submit">
     <strong>{text}</strong>
     <div id="container-stars">
       <div id="stars"></div>
@@ -132,6 +132,15 @@ strong {
   background-image: radial-gradient(#ffffff 1px, transparent 1%);
   background-size: 50px 50px;
   opacity: 0.5;
+}
+
+@media (max-width:450px){
+  .btn{
+    width: 70%;
+  }
+  strong{
+    font-size: 20px;
+  }
 }
 
 @keyframes animStar {

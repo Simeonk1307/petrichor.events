@@ -88,3 +88,9 @@ export type Link = {
     linkText: string;
     linkIcon?: Record<string, IconData>;
 }
+export type HeaderLink = {
+    url: string;
+    linkText: string;
+    childLinks: List<Link>
+    show: boolean
+}
