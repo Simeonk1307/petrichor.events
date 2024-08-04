@@ -1,7 +1,7 @@
 <script lang="ts">
 // @ts-nocheck
-
-    
+    import copy from "$lib/assets/copy.svg";
+    import tick from "$lib/assets/tick.svg";
     import { goto } from '$app/navigation';
     import Globe from '$lib/assets/svgs/globe.svg';
     import hand from '$lib/assets/HomePage/hand.png';
@@ -10,6 +10,18 @@
     
     export let data;
     const getData:Function = getContext('getData')
+    let displayOn = false;
+
+    async function copyToClipBoard() {
+        await navigator.clipboard.writeText($user.user_data.CACode).then(() => {
+            // displayPopUp("Key Copied Successfully")
+            displayOn = true;
+            setTimeout(() => {
+                displayOn = false;
+            }, 1000);
+        });
+    }
+
     onMount(()=>{
         if (!$loggedIn){
 			getData()
@@ -38,6 +50,12 @@
                         <p class="title">Your CA Code</p>
                         <div class="code">
                             <p>{$user.user_data.CACode}</p>
+                            <button type="button" on:click={copyToClipBoard}>
+                                <img
+                                        src={displayOn ? tick : copy}
+                                        alt=""
+                                    />
+                            </button>
                             <!-- <p>CA Code</p> -->
                         </div>
                     </div>
@@ -175,13 +193,27 @@
         /* border: 1px solid orangered; */
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         letter-spacing: 2px;
         padding: 0;
         margin: 0;
         border-radius: 10px;
         background-color: #919191 !important;
     }
+    button{
+        border: none    ;
+        padding-right: 10px;
+    }
+    button:active{
+        border: none;
+    }
+    .code img {
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
+        transition: all 1s ease-in-out;
+    }
+
     .code p{
         font-size: 30px;
         margin: 2%;
