@@ -73,7 +73,7 @@
 						user_data: res.user_data,
 						user_events: res.user_events
 					});
-					console.log(res)
+					// console.log(res)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
 					return true;

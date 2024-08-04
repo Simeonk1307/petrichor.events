@@ -35,6 +35,7 @@
 			// console.log(result)
 			if (result.type == 'success' && result.data) {
 				const rdata = result.data;
+				console.log(rdata)
 				if (rdata.success && (await whoami(rdata.token))) {
 					// this will save all the data to session Storage
 					loading(false);
@@ -47,7 +48,7 @@
 					}
 				} else {
 					loading(false);
-					displayPopUp('Alert', rdata, 4000, afterMessage);
+					displayPopUp('Alert', rdata.err, 4000, afterMessage);
 				}
 			} else {
 				// console.log(result)
