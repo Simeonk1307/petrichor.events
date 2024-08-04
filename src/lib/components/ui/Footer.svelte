@@ -11,7 +11,7 @@
 
     <div class="footer-social">
         {#each links as link, index}
-            <a href={link.url} aria-label={link.linkText}>
+            <a href={link.url} aria-label={link.linkText} target="_blank">
                 {#if link.linkIcon}
                     <div class="footer-icon">
                         <Icon data={link.linkIcon} scale={1.5} />

@@ -182,7 +182,6 @@
 		z-index: 2;
 		font-family: monospace;
 		transform: translate(-50%, -50%);
-		background-color: black;
 		padding: 0.5em;
 		padding-inline: 1em;
 		border-radius: 1em;

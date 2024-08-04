@@ -85,7 +85,7 @@
   }
   #g1-3 {
     background: radial-gradient(farthest-corner at 0% 10%, rgba(var(--color3), 0.8)  0%, rgba(var(--color3), 0) 75%) no-repeat;
-    width: 125vh;
+    width: 100vw;
     height: 100vh;
   }
   #g1-7 {

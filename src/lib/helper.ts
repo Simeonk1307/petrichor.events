@@ -1,6 +1,6 @@
 // import {technical, workshops, cultural, informals} from '$lib/data'
 import type { HeaderLink, Link } from "./types";
-import { facebookSquare, twitterSquare, envelopeSquare } from 'svelte-awesome/icons'
+import { facebookSquare, twitterSquare, envelopeSquare, linkedinSquare, youtubeSquare,instagram } from 'svelte-awesome/icons'
 
 const mediumSquare = {
     'medium': {
@@ -36,19 +36,24 @@ const mediumSquare = {
 
 export const footerLinks: Array<Link> = [
     {
-        url: 'https://www.facebook.com',
-        linkText: 'Facebook',
-        linkIcon: facebookSquare
+        url: 'https://instagram.com/petrichor.iitpkd',
+        linkText: 'Instagram',
+        linkIcon: instagram
     },
     {
-        url: 'https://www.twitter.com',
+        url: 'https://x.com/Petrichor_IIT',
         linkText: 'Twitter',
         linkIcon: twitterSquare
     },
     {
-        url: 'https://www.medium.com',
-        linkText: 'Medium',
-        linkIcon: mediumSquare
+        url: 'https://www.linkedin.com/company/petrichor-iitpkd',
+        linkText: 'Linkedin',
+        linkIcon: linkedinSquare
+    },
+    {
+        url: 'https://youtube.com/@petrichoriitpalakkad173?si=hn8YHyfXVcJ_KZUr',
+        linkText: 'Youtube',
+        linkIcon: youtubeSquare
     },
     {
         url: '/contactUs',

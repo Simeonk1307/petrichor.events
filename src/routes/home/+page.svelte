@@ -31,7 +31,7 @@
 
 </script>
 
-<div class="maincontent {visible ? '': "none"}">
+<div class="maincontent {visible ? 'visible': ""}">
     <HeroSection bind:pageWidth={pageWidth}/>
     <AboutSection />
     <Event bind:pageWidth={pageWidth}/>
@@ -44,9 +44,12 @@
     display: flex;
     flex-direction: column;
     z-index: 11;
-    opacity: 100% ;
+    opacity: 0% ;
     background-color: transparent;
     overflow-x: hidden;
     transition: 1000ms;
+}
+.visible{
+    opacity: 100% !important;
 }
 </style>

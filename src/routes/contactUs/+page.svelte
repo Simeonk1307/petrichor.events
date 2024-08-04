@@ -51,27 +51,33 @@
         justify-content: center;
         align-items: center;
     }
+    .banner{
+        width: 60%;
+    }
     h1{
         display: flex;
         font-size: 3rem;
+        z-index: 11;
+        position: relative;
         justify-content: center;
     }
     form{
         position: relative;
         z-index: 10;
         display: flex;
-        gap: 10px;
+        gap: 20px;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
     input,textarea{
         width: 100%;
-        padding: 12px 10px;
+        padding: 20px 20px;
         background-color: rgb(60, 60, 60);
         color: rgb(157, 154, 154);
-        border-radius: 5px;
+        border-radius: 25px;
         box-shadow: none;
+        font-size: 20px;
         border: none;
     }
     @media (max-width: 450px){
