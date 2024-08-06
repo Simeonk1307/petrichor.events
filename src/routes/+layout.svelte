@@ -30,6 +30,7 @@
 			sessionStorage.setItem('user',  JSON.stringify(defaultUser));
 		}
 		if ($invalidate && $loggedIn) { // if not loggedIn then no need to refesh
+			console.log("Here")
 			await whoami(access_token ?? "a")
 		}
 	});
@@ -38,13 +39,14 @@
 		const data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser)
 		user.set(JSON.parse(data));
 		if (data == JSON.stringify(defaultUser) || data == "{}") {
-			if ($access_token == null || $access_token == undefined){
+			if ($access_token == null || $access_token == undefined || !$loggedIn){
 				// user have not logged In no need for refreshing the data through whoami
 
 				loggedIn.set(false)
 				invalidate.set(true)
 
 			}else{ // user may have logged in
+				console.log("HH")
 				await whoami($access_token ?? "a") 
 			}
 		} else {

@@ -1,19 +1,20 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { goto, preloadData } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { getContext, onMount } from 'svelte';
 	import { Icon } from "svelte-awesome";
 	import { powerOff } from "svelte-awesome/icons";
-	import MobileProfile from "$lib/components/MobileProfile/MobileProfile.svelte";
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
 	import { defaultUser } from '$lib';
+	import EventCard from '$lib/components/MobileProfile/EventCard.svelte';
 	export let data;
+	let eventDisplay = true;
 	// export let form;
 
 	// console.log(data)
 	// @ts-ignore
 	let { user_data,user_events } = $user
-	let profileData: { username: string; email: string; mobile: string; college: string; graduation: number; events: never[]; nightEvents: never[]; };
+	let profileData: { username: any; email: any; mobile: any; college: any; graduation: any; events: any; nightEvents: any; CACodePresent:boolean; };
 	setProfileData()
 
 	const getData:Function = getContext('getData')
@@ -46,6 +47,7 @@
 			mobile: user_data?.phone ?? 'Phone',
 			college: user_data?.institute ?? "College",
 			graduation: user_data?.gradYear ?? 'Grad',
+			CACodePresent: user_data.CACode != "",
 			events :[],
 			nightEvents :[]
 			
@@ -54,7 +56,6 @@
 
 
 	const loading:Function = getContext('loading')
-	const displayPopUp:Function = getContext('displayPopUp')
 
 	$: logout = () => {
 		loading(true)
@@ -72,129 +73,114 @@
 	}
 </script>
 
-{#if user_data}
-	{#if pageWidth > 900}
-	<div class="container">
-		<div class="blocks details" style="">
-			<div class="informations info">
-				<!-- Name and Email -->
-				<div class="n-email" style="padding-left: 20px; opacity: 0.75;">
-					<div class="name-mail-cont">
-						<h1 style="width: 100%; font-weight: bold; margin-bottom: 10px;">Hi, {user_data['username']}</h1>
-						<p style="font-size: smaller; width: 100%; margin-top: 5; margin-bottom: 0;">		
-							{user_data['email']}
-						</p>
-					</div>
-					<form action="?/logout" method="POST" use:enhance={logout}>
-						<button class="logout" type="submit"><Icon data={powerOff} scale={1.4}/></button>
-					</form>
-				</div>
 
-				<div
-					class="user-details"
-					style="padding-left: 30px; margin-top: 20px; display: flex; flex-direction: column;"
-				>
-					<p style="margin-bottom: 5px;">Phone Number</p>
-					<h4 style="margin-top: 0; margin-bottom: 10px;">+91 {user_data['phone']}</h4>
-				</div>
-
-				<div
-					class="user-details"
-					style="padding-left: 30px; margin-top: 20px; display: flex; flex-direction: column;"
-				>
-					<p style="margin-bottom: 5px;">College Name</p>
-					<h4 style="margin-top: 0; margin-bottom: 10px;">{user_data['institute']}</h4>
-				</div>
-
-				<div
-					class="user-details"
-					style="padding-left: 30px; margin-top: 20px; display: flex; flex-direction: column;"
-				>
-					<p style="margin-bottom: 5px;">Graduation Year</p>
-					<h4 style="margin-top: 0; margin-bottom: 10px;">{user_data['gradYear']}</h4>
-				</div>
+<div class="main">
+	<div class="userData">
+		<!-- Name and Email -->
+		<div class="n-email" style="opacity: 0.75;">
+			<div class="name-mail-cont">
+				<h1 style="width: 100%; font-weight: bold; margin-bottom: 10px;">
+					Hi, {profileData.username}
+				</h1>
+				<p style="font-size: smaller; width: 100%; margin-top: 5; margin-bottom: 0;">
+					{profileData.email}
+				</p>
 			</div>
-			<!-- <div class="informations" style="display: flex; ">
-				<div class="accommodation" style="font-size: large">
-					<h1>ACCOMMODATION</h1>
-				</div> -->
-			<!-- </div> -->
+			<form action="?/logout" method="POST" use:enhance={logout}>
+				<button class="logout" type="submit"><Icon data={powerOff} scale={1.4} /></button>
+			</form>
 		</div>
-		<div class="blocks" style="background-color: #242424;">
-			<div
-				class="events_info"
-				style="display: flex; width: 100%; justify-content: space-around; font-size: large; padding-left: 10px;"
-			>
-				<center><h1 class="hover-underline">EVENTS</h1></center>
-			</div>
-
-			<div class="events_info">
-				{#each user_events as event}
-					{#if event.eventId.startsWith('T') || event.eventId.startsWith('C')}
-						<!-- <Event eventId={event.eventId} paymentStatus={event.status} /> -->
-					{/if}
-				{/each}
-			</div>
+		<div class="phone">
+			<h2>Phone Number</h2>
+			<h3>+91 {profileData.mobile}</h3>
 		</div>
-
-		<div class="blocks" style="background-color: #242424;">
-			<div class="informations" style="display: flex; ">
-				<div class="accommodation" style="font-size: large">
-					<h1 class="hover-underline">MUSICAL NIGHTS</h1>
-				</div>
-			</div>
-			<div class="events_info">
-				<!-- {#each user.events as event}
-					{#if event.eventId.startsWith('W') || event.eventId.startsWith('I')}
-						<Event eventId={event.eventId} paymentStatus={event.status} />
-					{/if}
-				{/each} -->
-			</div>
+		<div class="college">
+			<h2>College Name</h2>
+			<h3>{profileData.college}</h3>
 		</div>
+		<div class="phone">
+			<h2>Graduation Year</h2>
+			<h3>{profileData.graduation}</h3>
+		</div>
+		{#if profileData.CACodePresent }
+		<div class="CAButton">
+			<button on:click={()=>{goto('/CA/profile')}}  >Go to CAProfile</button>
+		</div>
+		{/if}
 	</div>
-	{:else}
-		<MobileProfile profileData={profileData}/>
-	{/if}
-{/if}
+	<div class="events">
+		<div class="buttons">
+			<button
+				class="display urEvent {eventDisplay ? 'active' : ''}"
+				on:click={() => {
+					eventDisplay = true;
+				}}>Your Events</button
+			>
+			<button
+				class="display musicNight {!eventDisplay ? 'active' : ''}"
+				on:click={() => {
+					eventDisplay = false;
+				}}>Musical Night</button
+			>
+		</div>
+		{#if eventDisplay}
+			{#if profileData.events.length == 0}
+				<div class="no-message-box">Not Registered in any event</div>
+			{:else}
+				{#each profileData.events as event}
+					<EventCard {event} />
+				{/each}
+			{/if}
+		{:else if profileData.nightEvents.length == 0}
+			<div class="no-message-box">Nothing to Show Here</div>
+		{:else}
+			{#each profileData.nightEvents as event}
+				<EventCard {event} />
+			{/each}
+		{/if}
+	</div>
+</div>
 
 <style>
-	.container {
+	.main {
+		min-height: 110vh;
+		margin-top: 80px;
+		overflow-x: hidden;
 		display: flex;
-		margin-top: 150px;
-		/* flex-direction: row;
-		justify-content: space-around; */
-		height: 100vh;
-		width: 99vw;
-		overflow: scroll;
+		flex-direction: row;
 	}
-	.blocks {
-		flex-grow: 1;
-		margin: 10px;
+	.userData {
+		line-height: 15px;
+		margin-left: 2rem;
+		width: 40%;
+	}
+	.CAButton button{
+		border: none;
+		padding: 5px 10px;
+		background-color: rgb(46, 182, 46);
+		border-radius: 20px;
+	}
+	.buttons {
 		width: 100%;
-		margin: 0 20px;
-		border-radius: 5%;
-		opacity: 0.8;
-		backdrop-filter: blur(10px);
-	}
-	.details {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		justify-content: center;
+		gap: 2rem;
+		border-bottom: 1px solid white;
 	}
-	.info {
-		height: 0;
-		padding-bottom: 10rem;
-	}
-	.informations {
-		flex-grow: 1;
-		border-radius: 5%;
+	.no-message-box {
+		height: 250px;
+		display: flex;
+		min-width: 100%;
+		justify-content: center;
+		align-items: center;
 	}
 	.n-email {
 		display: flex;
 		align-items: center;
-
-		background-color: #333232;
 		border-radius: 20px;
-		padding: 10px;
+		padding: 10px 0;
+		margin-right: 1rem;
 		/* padding-top: 10px; */
 		line-height: 1em;
 		height: auto;
@@ -202,7 +188,7 @@
 		position: relative;
 		place-items: center;
 	}
-	.logout{
+	.logout {
 		position: absolute;
 		text-decoration: none;
 		border-radius: 100em;
@@ -219,67 +205,64 @@
 		border: transparent;
 		color: white;
 		aspect-ratio: 1;
-
 	}
 	.logout:hover {
 		cursor: pointer;
 	}
-	.accommodation {
+	.display {
+		z-index: 2;
+		cursor: pointer;
+		color: white;
+		border: none;
+		font-size: 120%;
+	}
+	.events {
 		display: flex;
-		width: 100%;
-		justify-content: center;
+		flex-direction: column;
+		margin: 1rem;
+		align-items: start;
+		text-align: center;
+		width: 60%;
+		justify-content: start;
+		padding-top: 10px;
+		overflow-y: scroll;
+		background-color: rgba(47, 47, 47, 0.895);
+		border-radius: 10px;
+		z-index: 10;
+		}
+	.active {
+		border-bottom: 5px solid white;
+		font-size: 125%;
 	}
-	.hover-underline {
-		text-decoration: none; /* Set default text decoration to none */
-		font-size: 25px;
-	}
-
-	.hover-underline:hover {
-		text-decoration: underline;
-		text-decoration-color: blue;
-		text-decoration-thickness: 4px;
-	}
-
-	@media (max-width: 800px) {
-		* {
+	@media (max-width: 500px) {
+		.events {
+			margin: 0%;
+		}
+		.main {
 			font-size: small;
 		}
-		.hover-underline {
-			font-size: xx-small;
-		}
-		.accommodation {
-			font-size: xx-small;
-		}
-		.blocks {
-			margin: 5px 5px;
-			border-radius: 5%/10%;
-			width: 25rem;
-		}
-		.informations {
-			margin: 0px;
-			margin-bottom: 5px;
-			/* height: 15rem; */
-			flex-direction: column;
-			border-radius: 5%/10%;
-			width: 25rem;
-		}
-		.n-email {
-			height: 5rem;
-		}
-		.container {
-			display: flex;
-			flex-direction: column;
-			overflow: scroll;
-			align-items: center;
-		}
 	}
-	@media (max-width: 400px) {
-		.blocks,
-		.informations {
-			width: 25rem;
+
+	@media (max-width: 900px){
+		.main{
+			flex-direction: column;
 		}
-		.container {
-			align-items: first baseline;
+		.events {
+			justify-content: center;
+			width: 100vw;
+			align-items: center;	
+		
+		
+		margin-top: 3rem;
+		background-color: transparent;
+		}
+		.buttons {
+			
+			width: inherit;
+		}
+		.userData {
+			width: unset;
 		}
 	}
 </style>
+

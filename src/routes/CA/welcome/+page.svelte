@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { API, POST } from '$lib';
+	import { API, defaultUser, POST } from '$lib';
 	import Globe from '$lib/assets/svgs/globe.svg';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
@@ -105,13 +105,18 @@
 					displayPopUp(
 						"Message",
 						// "Your application have been sent to the Petrichor team. We will mail you back after our team verifies your CA profile.",
-						"CA account generated successfully",
+						"CA account generated successfully. Please Login into your account again to reflect the changes",
 						5000,
 						()=>{
+							invalidate.set(true)
+							loggedIn.set(false)
+							user.set(defaultUser)
+							access_token.set(null)
+							sessionStorage.clear()
 							goto('/CA/profile')
 						}
 					)
-					invalidate.set(true)
+					
 				}else{
 					displayPopUp(
 						"Message",

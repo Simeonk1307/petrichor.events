@@ -264,7 +264,6 @@
 		border-bottom: 2px solid white;
 		padding: 12px 0 ;
 		opacity: 60%;
-		border: 1px solid green;
 	}
 	.strip{
 		display: flex;

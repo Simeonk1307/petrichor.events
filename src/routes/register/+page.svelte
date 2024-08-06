@@ -37,7 +37,7 @@
 			if (institype == '') {
 				warn_select = 'required';
 			} else if (institype != 'neither') {
-				console.log(gradYear);
+				// console.log(gradYear);
 				if (instiName == '') {
 					warn_init_name = 'required';
 				} else if (gradYear?.valueOf() == '') {

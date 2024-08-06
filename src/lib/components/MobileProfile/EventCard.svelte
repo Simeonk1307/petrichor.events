@@ -23,15 +23,19 @@
     .main{
         display: flex;
         flex-direction: row;
+		margin-left: 2rem;
     }
     .cmn{
-        width: 12rem;
         height: 8rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         margin-top: 1.5rem;
     }
+	.data{
+		align-items: flex-start;
+		margin-left: 20px;
+	}
 	.img {
 		width: 10rem;
 		height: 7rem;
@@ -56,6 +60,12 @@
 		.main{
 			margin: 0 5px;
 			max-width: 95vw;
+		}
+	}
+
+	@media (max-width:900px){
+		.main{
+			margin-left: unset;
 		}
 	}
 </style>
