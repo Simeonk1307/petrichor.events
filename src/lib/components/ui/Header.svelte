@@ -156,6 +156,7 @@
     .title {
         font-size: 1.5rem;
         font-weight: bolder;
+        font-family: var(--wfont);
         color: #fff;
         padding-left: 3rem;
         flex: 1;

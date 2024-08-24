@@ -103,7 +103,7 @@
 		window.location.href = '/home'
 	}, 800)
 }}>
-	<div style="all: unset;">{!clicked ? "EXPLORE" : "PETRICHOR 24"}</div>
+	<div style="all: unset;">{!clicked ? "EXPLORE" : "PETRICHOR 25"}</div>
 </div>
 
 <style>

@@ -21,8 +21,8 @@
 		const gradYear = form_vals.get('gradyear');
 		const degree: string = (form_vals.get('stream') as string | null) ?? '';
 		let valid = false;
-		if (username.length > 9) {
-			warn_name = 'Must be less than 10 characters';
+		if (username.length > 25) {
+			warn_name = 'Must be less than 25 characters';
 		} else if (username.length == 0) {
 			warn_name = 'required';
 		} else if (email.length == 0) {
@@ -40,10 +40,14 @@
 				// console.log(gradYear);
 				if (instiName == '') {
 					warn_init_name = 'required';
+				} else if (instiName.length > 100){
+					warn_init_name = 'Must be less than 100 characters';
 				} else if (gradYear?.valueOf() == '') {
 					warn_grade = 'required';
 				} else if (institype == 'college' && degree == '') {
 					warn_degree = 'required';
+				} else if (institype == 'college' && degree.length > 100){
+					warn_degree = 'Must be less than 50 characters';
 				} else {
 					valid = true;
 				}
@@ -51,6 +55,7 @@
 				valid = true;
 			}
 		}
+		console.log(valid)
 		return valid;
 	}
 	// @ts-ignore
@@ -72,7 +77,7 @@
 		loading(true);
 		if (!validate(onsubmit.formData)) {
 			onsubmit.cancel();
-			console.log('cancelled');
+			console.log('Form cancelled');
 			loading(false);
 		}
 
@@ -120,7 +125,8 @@
 		<form action="?/register" method="POST" use:enhance={registerResult} on:change={resetWarns}>
 			<div class="input_box">
 				<label for="username">Name</label>
-				<input type="text" name="username" id="name" placeholder="Name" required maxlength="9" />
+				<h6>Max len: 25</h6>
+				<input type="text" name="username" id="name" placeholder="Name" required maxlength="25" />
 				{#if warn_name}
 					<p><strong>{warn_name}</strong></p>
 				{/if}
@@ -154,14 +160,16 @@
 			{#if instiVal == 'college'}
 				<div class="input_box" transition:fly={{ x: 100 }}>
 					<label for="college">Institute Name</label>
-					<input type="text" name="college" id="college" placeholder="Degree enrolled in" />
+					<h6>Max len: 100</h6>
+					<input type="text" name="college" id="college" placeholder="College name" maxlength="100" />
 					{#if warn_init_name}
 						<p><strong>{warn_init_name}</strong></p>
 					{/if}
 				</div>
 				<div class="input_box" transition:fly={{ x: 100 }}>
 					<label for="stream">Degree</label>
-					<input type="text" name="stream" id="stream" placeholder="Degree enrolled in" />
+					<h6>Max len: 100</h6>
+					<input type="text" name="stream" id="stream" placeholder="Degree enrolled in" maxlength="100"/>
 					{#if warn_degree}
 						<p><strong>{warn_degree}</strong></p>
 					{/if}
@@ -186,7 +194,8 @@
 			{:else if instiVal == 'school'}
 				<div class="input_box" transition:fly={{ x: 100 }}>
 					<label for="college">Institute Name</label>
-					<input type="text" name="college" id="college" placeholder="Degree enrolled in" />
+					<h6>Max len: 100</h6>
+					<input type="text" name="college" id="college" placeholder="School Name" maxlength="100" />
 					{#if warn_init_name}
 						<p><strong>{warn_init_name}</strong></p>
 					{/if}
@@ -304,7 +313,18 @@
 		text-align: end;
 		padding-right: 5px;
 	}
-
+	.input_box {
+		position: relative;
+	}
+	.input_box  h6{
+		position: absolute;
+		font-family: var(--wfont);
+		z-index: 10;
+		top: 12px;
+		font-weight: 500;
+		margin: 0;
+		right: 10px;
+	}
 	button {
 		font-size: 1rem;
 		border-radius: 10rem;

@@ -43,6 +43,7 @@
         font-size: 2rem;
         font-weight: bolder;
         /* color: #fff; */
+        font-family: var(--wfont);
         padding-left: 10px;
         margin-bottom: 20px;
     }

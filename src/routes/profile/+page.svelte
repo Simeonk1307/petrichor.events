@@ -149,6 +149,21 @@
 		display: flex;
 		flex-direction: row;
 	}
+	.name-mail-cont{
+		width: 80%;
+		overflow-y: visible;
+		overflow-x: hidden;
+		text-wrap: nowrap;
+		text-overflow: clip;
+	}
+	.name-mail-cont h1 {
+		font-size: 1.6rem;
+		line-height: 1.2;
+		text-wrap: pretty;
+		word-break: keep-all;
+		word-wrap: break-word;
+		margin: 0;
+	}
 	.userData {
 		line-height: 15px;
 		margin-left: 2rem;
