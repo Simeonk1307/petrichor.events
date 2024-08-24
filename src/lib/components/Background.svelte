@@ -21,7 +21,7 @@
     <div class="gradients-container extra">
       <div class="g" id="g4-1"></div>
   </div>
-    {:else if ["/login","/profile","/register","/forgotpassword"].includes(path) || path.includes('/changepassword/')}
+    {:else if ["/login","/register","/forgotpassword"].includes(path) || path.includes('/changepassword/')}
       <div class="gradients-container extra">
         <div id="g1-3_l" class="g "></div>
       <div id="g1-2_l" class="g "></div>

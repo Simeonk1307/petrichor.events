@@ -10,7 +10,7 @@ export const actions = {
       const data = await request.formData();
       let gradyear = data.get('gradyear')?.valueOf()
       if (data.get('institype') == 'school'){
-         gradyear = 2025 + (12 - Number(data.get('grade')))
+         gradyear = 2025 + (12 - Number(gradyear))
       }
 
       if (data.get('institype') == 'neither'){
@@ -18,9 +18,9 @@ export const actions = {
       }
 
       const username = data.get('username')
-      const length = username?.toString().length ?? 10
-      if (length > 9){
-        return fail(400,{"err":`Username cannot be greater than 9 characters: ${length}`})
+      const length = username?.toString().length ?? 26
+      if (length > 25){
+        return fail(400,{"err":`Username cannot be greater than 9 characters. Given length: ${length}`})
       }
 
       const response = await fetch(API.register,{

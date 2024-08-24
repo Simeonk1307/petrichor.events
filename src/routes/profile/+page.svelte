@@ -92,7 +92,7 @@
 		</div>
 		<div class="phone">
 			<h2>Phone Number</h2>
-			<h3>+91 {profileData.mobile}</h3>
+			<h3 style="font-family: var(--wfont);">+91 {profileData.mobile}</h3>
 		</div>
 		<div class="college">
 			<h2>College Name</h2>
@@ -155,8 +155,10 @@
 		overflow-x: hidden;
 		text-wrap: nowrap;
 		text-overflow: clip;
+		
 	}
-	.name-mail-cont h1 {
+	.name-mail-cont h1 {	
+		color: rgb(255, 255, 255);
 		font-size: 1.6rem;
 		line-height: 1.2;
 		text-wrap: pretty;
@@ -168,6 +170,7 @@
 		line-height: 15px;
 		margin-left: 2rem;
 		width: 40%;
+		z-index: 11;
 	}
 	.CAButton button{
 		border: none;
@@ -193,11 +196,10 @@
 	.n-email {
 		display: flex;
 		align-items: center;
-		border-radius: 20px;
-		padding: 10px 0;
-		margin-right: 1rem;
-		/* padding-top: 10px; */
+		border-radius: 10px;
+		padding: 10px 10px;
 		line-height: 1em;
+		background-color: rgba(48, 53, 56, 0.14);
 		height: auto;
 		text-align: left;
 		position: relative;
