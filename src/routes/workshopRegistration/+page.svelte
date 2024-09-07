@@ -24,10 +24,16 @@
             newEmailField.classList.add('email-container');
             newEmailField.innerHTML = `
             <div class="email-field" style="margin-bottom: 10px; display: flex; flex-direction: column; width: 100%;">
-                <label for="email${emailCount}" style="margin: 5px;">Email:</label>
-                <input type="email" id="email${emailCount}" name="email[]" placeholder="username@gmail.com"
-                    style="height: 50px; width: 100%; font-size: 100%; padding: 10px 20px; border-radius: 10px; background-color: #40413ebb; border: none; color: white;" />
-            </div>`;
+                <input type="email" id="emailid" name="email[]" placeholder="username@gmail.com"
+                    style="height: 60px; width: 100%; font-size: 100%; padding: 10px 20px; border-radius: 10px; text-align: center; background-color: #505050; border: none; color: white;" />
+            </div>
+			<style>
+			::placeholder{
+				color: rgba(255, 255, 255, 0.849);
+				/* font-weight: lighter; */
+				justify-content: center;
+			}
+			</style>`;
             emailFieldsContainer.appendChild(newEmailField);
         } else {
             console.error('Email fields container not found.');
@@ -98,11 +104,12 @@
                 <button type="button" class="amount_button" disabled> Amount: {amount} </button>   
             </div>
             <div class="team_class">
-                <h2> Team:</h2>
+                <!-- <h2> Team:</h2> -->
                 <div class="input_box">
+					<h2> Team:</h2>
                     <div class="emailFields" id="emailFields">
                         <div class="email-container" id="email-container">
-                            <label for="emailLabel">Email:</label>
+                            <!-- <label for="emailLabel">Email:</label> -->
                             <input type="email" id="emailid" name="email[]" placeholder="username@gmail.com" required />
                             {#if warn_email}
                                 <p><strong>{warn_email}</strong></p>
@@ -110,12 +117,14 @@
                         </div>
                     </div>
                 </div>
+				<div class="button_line">
                 <div class="add_btn">
-                    <button type="button" on:click={addEmailField} class="add_button">ADD +</button>
+                    <button type="button" on:click={addEmailField} class="add_button">&nbsp;ADD +&nbsp;</button>
                 </div>
                 <div class="submit_btn">
                     <button type="submit" class="submit_button">Submit</button>
                 </div>
+				</div>
             </div>
             </form>
 
@@ -178,62 +187,96 @@
 		height: 80px;
 	}
     .workshop_Title{
-        margin-top: 7vh;
+        /* margin-top: 7vh; */
+		/* padding-top: 7vh; */
+		margin-left: 4vw;
+		align-self: left;
+		
     }
+	h2{
+		margin-right: 36vw;
+	}
 
     .workshop_Registration {
-		margin-left: 10vw;
+		/* margin-left: 10vw; */
 		display: flex;
-		width: 40vw;
+		width: 100vw;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		/* align-items: center; */
+		/* justify-content: center; */
 	}
 
     form {
 		width: 100%;
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		/* justify-content: center; */
+		/* align-items: center; */
 		flex-direction: column;
 	}
     #email-container {
     margin-bottom: 10px;
     display: flex;
+	justify-content: center; 
+	align-items: center;
     flex-direction: column;
     width: 100%;
     }
-/* 
-    #emailid{
 
+    /* #emailid{
+		width: 50vw;
     } */
-    #emailLabel {
+    /* #emailLabel {
         margin: 5px;
-    }
+    } */
     #emailid {
-		height: 50px;
-		width: 100%;
+		height: 60px;
+		width: 40vw;
 		font-size: 100%;
 		padding: 10px 20px;
 		border-radius: 10px;
-		background-color: #40413ebb;
+		background-color: #505050;
+		justify-content: center;
+		text-align: center;
 		border: none;
 		color: white;
 	}
+	::placeholder {
+		color: rgba(255, 255, 255, 0.849);
+		/* font-weight: lighter; */
+		justify-content: center;
+	}
+	.button_line{
+		display: inline-flex;
+		/* justify-items: baseline; */
+		align-items: center;
+		width: 100vw;
+		/* margin-left: 20vw; */
+		gap: 24vw;
+		/* align-self; */
+
+		justify-content: center;
+		justify-items: center;
+		text-align: center;
+		
+	}
 
     .amount_button{
-        border : 3px dashed grey;
+        border : 3px dashed rgba(158,158,158,255);
         width : 150px;
+		margin-left: 4vw;
+		cursor: default;
         background-color: transparent;
         border-radius: 2.5em;
 		padding: 0.8em 1em;
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		/* align-items: left; */
+		/* justify-content: center; */
 		color: white;
+		font-weight: lighter;
 		text-align: center;
-        margin: 1em 0;
+        /* margin: 1em 0; */
 		font-weight: 100;
+		
     }
     /* #email-container input[type="email"] {
         height: 40px;
@@ -259,13 +302,14 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: flex-start;
-		transition: all 1s ease; 
+		align-items: center;
+		transition: all 1s ease;
 	}
     select,
 	
 	::placeholder {
-		color: rgb(106, 105, 105);
+		color: rgba(255, 255, 255, 0.849);
+		font-weight: lighter;
 	}
 	/* label {
 		margin: 5px;
@@ -309,29 +353,36 @@
     }
     .submit_button{
     color: white;
+	/* margin-left: 50vw; */
+	/* width: 150px; */
     width: calc(40%,78);
-    font-weight: 700;
+	height: 32px;
+    font-weight: 400;
     padding: 0.4rem;
+	margin-left: 5vw;
     padding-left: 0.9rem;
     padding-right: 0.9rem;
     background: linear-gradient(99.74deg, #06dbac, #bd00ff);
-    border-radius: 15px;
+    border-radius: 16px;
     border: none;
+	justify-content: center;
+	text-align: center;
     }
 
     button{
-    width: 150px;
+    /* width: 100px; */
+	/* margin-left: 30vw; */
     background-color: transparent;
     border-radius: 2.5em;
-		padding: 0.8em 1em;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border: solid gray 1px;
-		color: white;
-		text-align: center;
-    margin: 1em 0;
-		font-weight: 100;
+	padding: 0.8em 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: solid gray 1px;
+	color: white;
+	text-align: center;
+    /* margin: 1em 0; */
+	font-weight: 100;
     }
 
     .strip {
