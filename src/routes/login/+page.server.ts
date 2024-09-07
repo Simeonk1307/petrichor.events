@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({url,cookies}) => {
     let nextpg = url.searchParams.get('to')
     
     if (nextpg != null){
-        if (!nextpg.startsWith("/payment?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
+        if (!nextpg.startsWith("/payment/check?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
             nextpg = null
         }
     }

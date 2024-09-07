@@ -6,16 +6,12 @@
     import {goto} from '$app/navigation'
 	import { user } from "$lib/stores";
 
-    function handleClick(id:string,name:string) {
+    function handleClick(id:string) {
       // get the fees and number of particiants here.
       // For workshop number of participants will be only 1 so
       // we will skip the add participant page and directly send user to payment page
       
-      if ($user.user_data.email.endsWith("iitpkd.ac.in")){
-        goto(`/payment/allow?id=${id}`)
-      }else {
-        goto(`/payment?id=${id}`)
-      }
+      goto('/payment/check?id='+id)
     }
 
     //This is the price button 
@@ -49,7 +45,7 @@
                       </div>
                       <p>Happening on <strong style="color:cyan">{ws.date}</strong> at <strong style="color:lightgreen">{ws.venue}</strong></p>
                       <p>{ws.description}</p>
-                      <button on:click={()=>handleClick(id,ws.name)} class="button-reg butt">Register Now for ₹{ws.price}</button>
+                      <button on:click={()=>handleClick(id)} class="button-reg butt">Register Now for ₹{ws.price}</button>
                       {#if ws.prerequisites.length > 0}
                       <p style="color: orange;">Some knowledge in
                           {#each ws.prerequisites as spk, i}

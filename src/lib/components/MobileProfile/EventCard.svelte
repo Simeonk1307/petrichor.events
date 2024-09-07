@@ -1,22 +1,25 @@
 <script lang="ts">
 	import cultural from '$lib/assets/HomePage/cultural.png';
+	
 	export let event = {
 		name: 'Event Name',
-		DateTime: 'Date & Time',
-		Location: 'Location',
-		imgUrl: cultural
+		date: 'Date & Time',
+		venue: 'Location',
+		verified: false,
+		image: cultural
 	};
 </script>
 
 <div class="main">
     <div class="imgPar cmn">
-	    <div class="img" style="background-image:url({event.imgUrl})" />
+	    <div class="img" style="background-image:url({event?.image})" />
     </div>
 	<div class="data cmn" style="line-height: 0px;">
-		<h1>{event.name}</h1>
-		<h3>{event.DateTime}</h3>
-		<h3>{event.Location}</h3>
+		<h1>{event?.name ?? "Event"}</h1>
+		<h3>{event?.date ?? "Date"}</h3>
+		<h3>{event?.venue ?? "Venue"}</h3>
 	</div>
+	<p style="background-color:{event.verified?"green":"red"}">{event.verified?"Verified":"Not Verified"}</p>
 </div>
 
 <style>
@@ -40,6 +43,7 @@
 		width: 10rem;
 		height: 7rem;
 		background-size: cover;
+		background-position: center;
 	}
 	@media (max-width:500px){
 		.data{

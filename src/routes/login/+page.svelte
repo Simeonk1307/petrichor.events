@@ -50,7 +50,7 @@
 					}
 				} else {
 					loading(false);
-					displayPopUp('Alert', rdata.err, 4000, afterMessage);
+					displayPopUp('Alert', rdata.message, 4000, afterMessage);
 				}
 			} else {
 				// console.log(result)

@@ -4,17 +4,19 @@
 	import { loggedIn,invalidate,user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
 	import { workshops } from '$lib/data/workshop';
+	import { enhance } from '$app/forms';
 
     export let data: any;
-	let isInstiUser = $user.user_data.email.endsWith("iitpkd.ac.in");
 	let workshop: { name: any; };
-	let name : string = "Undefined";
 	const getData:Function = getContext('getData')
+	const loading: Function = getContext('loading');
+	const displayPopUp: Function = getContext('displayPopUp');
 
     onMount(async () => {
 		await getData()
-		if (!$loggedIn || $invalidate) {
-			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
+		// console.log($loggedIn)
+		if (!$loggedIn || $invalidate ) {
+			goto(`/login?to=/payment/check${$page.url.search}`);
 		}
 		if (data.id == null){
 			goto(`/`)
@@ -32,8 +34,37 @@
 		}	
 	}
 
-	function submit(){
-
+	function submit(onsubmit: { [x: string]: any; cancel: () => void }){
+		loading(true)
+		onsubmit.formData.set("eventId",data.id)
+		// @ts-ignore
+		return async ({ result }) => {
+			loading(false);
+			// console.log(result)
+			if (result.type == 'success' && result.data) {
+				const data = result.data;
+				// console.log(data);
+				if (data.success) {
+					invalidate.set(true)
+					displayPopUp('Success', `You have been registered to ${workshop.name}. You will receive an email regarding this soon.`,
+						10000,() => {
+							goto('/profile')
+						}
+					)
+				} else {
+					displayPopUp('Alert', data.message, 2000, () => goto('/workshop'));
+				}
+			} else {
+				setTimeout(() => {
+					displayPopUp(
+						'Alert',
+						result.data.err ? result.data.err : 'Something went wrong',
+						2000,
+						() => goto('/workshop')
+					);
+				}, 100);
+			}
+		}
 	}
 
 
@@ -47,12 +78,13 @@
 	</h1>
 	<div class="confirmBox">
 		<p>Hi There! You can register to this event : {workshop.name} for free. Please click register to confirm.</p>
-		<button
-		id="submit"
-		on:click={() => submit()}
-		type="submit"
-		style="cursor:pointer; display:block; margin-top:5px;">Register Now</button
-		>
+		<form action="?/pay" method="post" use:enhance={submit}>
+			<button
+			id="submit"
+			type="submit"
+			style="cursor:pointer; display:block; margin-top:5px;">Register Now</button
+			>
+		</form>
 	</div>
 </div>
 </main>

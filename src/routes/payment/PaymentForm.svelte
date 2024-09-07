@@ -1,46 +1,113 @@
 <script lang="ts">
 
 	import { enhance } from "$app/forms";
+	import { goto } from "$app/navigation";
+	import { invalidate } from "$lib/stores";
     import QRCode from 'qrcode';
-	import { onMount } from "svelte";
+	import { getContext, onMount } from "svelte";
 
-    let isInstiUser = false;
+    export let name:string;
+    export let id:string;
+    export let amount : number;
     let transactionID: string;
-	let CAcode: string;
+	let CAcode: string = "";
+    let verified:boolean;
 	let imgurl: string;
-    let amount = 0;// TODO: to be changed
-	let success = false;
 	let qrcodeurl = `upi://pay?pa=9493256601@ibl&pn=******6601&am=${amount}&mc=0000&mode=02&purpose=00`;
 
     QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
 		imgurl = url;
 	});
+    const loading: Function = getContext('loading');
+	const displayPopUp: Function = getContext('displayPopUp');
 
     onMount(() => {
-		// if (!$loggedIn || $invalidate) {
-		// 	goto(`/login?to=${$page.url.pathname + $page.url.search}`);
-		// }
-		// if (data.id == null || data.name == null){
-		// 	goto(`/`)
-		// }
-		
 		let bgimage = window.document.getElementById('img');
 		if (bgimage !== null) {
 			bgimage.style.backgroundImage = `url(${imgurl})`;
 		}
 	});
 
-    function verify(CACode:string){
-
+    function verify(){
+        if (CAcode.length != 0 && !verified){
+            return
+        }
+        return true
     }
-    function submit(){
 
+    function handleVerify(onsubmit: { [x: string]: any; cancel: () => void }){
+        loading(true)
+        // @ts-ignore
+        return async ({result}) => {
+            loading(false);
+			if (result.type == 'success' && result.data) {
+				const data = result.data;
+				// console.log(data);
+				if (data.verified) {
+                    verified = true
+					const verifyButton = document.getElementById("verify") as HTMLButtonElement
+                    if (verifyButton){
+                        verifyButton.disabled = true
+                    }
+				} else {
+					displayPopUp('Alert', data.err, 4000, () =>{});
+				}
+			} else {
+				setTimeout(() => {
+					displayPopUp(
+						'Alert',
+						result.data.err ? result.data.err : 'Something went wrong',
+						4000,
+						() =>{}
+					);
+				}, 100);
+			}
+        }
     }
+    
+    function submit(onsubmit: { [x: string]: any; cancel: () => void }){
+		loading(true)
+        onsubmit.formData.set("CACode",CAcode)
+        onsubmit.formData.set("eventId",id)
+        if (!verify()){
+            loading(false)
+            displayPopUp("Alert","Please verify the CACode first or remove it completely.",5000,()=>{})
+            onsubmit.cancel()
+        }
+		// @ts-ignore
+		return async ({ result }) => {
+			loading(false);
+
+			if (result.type == 'success' && result.data) {
+				const data = result.data;
+				// console.log(data);
+				if (data.success) {
+					invalidate.set(true)
+					displayPopUp('Success', `You have been registered to ${name}. You will receive an email regarding this soon.`,
+						10000,() => {
+							goto('/profile')
+						}
+					)
+				} else {
+					displayPopUp('Alert', data.message, 4000, () => goto('/workshop'));
+				}
+			} else {
+				setTimeout(() => {
+					displayPopUp(
+						'Alert',
+						result.data.err ? result.data.err : 'Something went wrong',
+						4000,
+						() => goto('/workshop')
+					);
+				}, 100);
+			}
+		}
+	}
 
 </script>
 
 
-<form class="form" method="post" action="?/pay" >
+<form class="form" method="post" action="?/pay" use:enhance={submit}>
     <div style="background-color: rgb(90, 14, 137,0.3);" class="payment">
         <div style="display: inline-block;">
             <p style="margin-bottom: 1rem;margin-top: 0.8rem;font-size:155%;display: inline-block">
@@ -50,9 +117,8 @@
             <p style="margin-top: 1rem;font-size:155%;box-sizing:border-box;font-family:cursive">
                 {amount}
             </p>
-            <svg
+             <svg
                 style="margin-top: -1rem;"
-                xmlns="http://www.w3.org/2000/svg"
                 width="120"
                 height="50"
                 fill-rule="evenodd"
@@ -63,7 +129,7 @@
                     d="M22.41 16.47l-6.03 21.475 21.407.15 5.88-21.625h5.427l-7.05 25.14c-.27.96-1.298 1.74-2.295 1.74H12.31c-1.664 0-2.65-1.3-2.2-2.9l6.724-23.98zm66.182-.15h5.427l-7.538 27.03h-5.58zM49.698 27.582l27.136-.15 1.81-5.707H51.054l1.658-5.256 29.4-.27c1.83-.017 2.92 1.4 2.438 3.167L81.78 29.49c-.483 1.766-2.36 3.197-4.19 3.197H53.316L50.454 43.8h-5.28z"
                     fill="#747474"
                 /></svg
-            >
+            > 
         </div>
     </div>
     <div id="data">
@@ -72,28 +138,29 @@
             id="transId"
             type="text"
             maxlength="50"
+            name="transactionID"
             placeholder="Your Transaction Id"
             style="display:block;"
             bind:value={transactionID}
             required
         />
         <p style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem">CA Code</p>
-        <div class="code_verification" style="">
-            <input
+        <form class="code_verification" action="?/verify" method="post" use:enhance={handleVerify}>
+                <input
                 id="CAcode"
                 type="text"
                 placeholder="Your CA Code(if any)"
                 maxlength="6"
+                name="CACode"
                 style="margin-top:5px;background-color:black !important;border:black"
                 bind:value={CAcode}
-            />
-            <button id="verify" style="cursor:pointer" on:click={() => verify(CAcode)}>Verify</button>
-        </div>
+                />
+                <button id="verify" type="submit" style="cursor:pointer">{verified? "Verified" : "Verify"}</button>
+        </form>
         <div id="submitButton">
             <p id="warning"></p>
             <button
                 id="submit"
-                on:click={() => submit()}
                 type="submit"
                 style="cursor:pointer; display:block; margin-top:5px;">Register Now</button
             >
@@ -103,18 +170,6 @@
 
 
 <style>
-    .images{
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .img{
-        margin: 1em;
-        display: inline-block;
-        width:10rem;
-        height:15rem
-    }
         .form {
             width: 100vw;
             grid-template-areas: 'data payment';
@@ -231,9 +286,6 @@
                 left: 50%;
                 transform: translate(-67%);
             }
-            h1 {
-                width: 100vw;
-            }
             .form {
                 position: relative;
                 left: 50%;
@@ -261,16 +313,6 @@
             }
             #submitButton {
                 width: 18rem;
-            }
-        }
-        @media (max-width:600px){
-            #all{
-                margin-top: -6em;
-            }
-            .images{
-                /* flex-direction: column; */
-                display: grid;
-                grid-template-columns: 1fr 1fr;
             }
         }
     </style>

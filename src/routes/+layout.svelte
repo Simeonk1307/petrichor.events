@@ -12,6 +12,7 @@
     import {Header, Footer, BtpBtn} from '$lib/components/ui';
     // Dummy data in this helper file
     import {footerLinks, headerLinks} from '$lib/helper';
+	import { workshops } from '$lib/data/workshop';
 
 	let path: string;
 
@@ -53,7 +54,7 @@
 	}
 
 	async function whoami(accessToken: string) {
-		console.log("Reloading" + access_token)
+		console.log("Reloading" + accessToken)
 		return await POST(
 			API.whoami,
 			{
@@ -64,6 +65,7 @@
 		)
 			.then((res) => res.json())
 			.then((res) => {
+				// console.log(res)
 				if (res.status == 200) {
 					// invalidate
 					invalidate.set(false);
@@ -71,9 +73,15 @@
 					access_token.set(accessToken);
 					user.set({
 						user_data: res.user_data,
-						user_events: res.user_events
+						user_events: res.user_events.map((ele:string) => {
+							// @ts-ignore
+							const eventData= workshops[ele.eventId] 
+							// @ts-ignore
+							eventData['verified'] = ele.verified
+							return eventData
+						})
 					});
-					// console.log(res)
+					console.log($user)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
 					sessionStorage.setItem('access',accessToken)
@@ -87,7 +95,6 @@
 			})
 			.catch((err) => {
 				console.log(err.toString());
-				confirm("Here")
 				invalidate.set(true);
 				sessionStorage.setItem('loggedIn', 'false');
 				sessionStorage.setItem('user',  JSON.stringify(defaultUser));

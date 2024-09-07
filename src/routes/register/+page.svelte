@@ -87,11 +87,11 @@
 			// console.log(result)
 			if (result.type == 'success' && result.data) {
 				const data = result.data;
-				console.log(data);
+				// console.log(data);
 				if (data.success) {
 					goto('/login');
 				} else {
-					displayPopUp('Alert', data, 2000, () => {});
+					displayPopUp('Alert', data.err, 2000, () => {});
 				}
 			} else {
 				setTimeout(() => {

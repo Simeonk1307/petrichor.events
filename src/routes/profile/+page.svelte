@@ -7,6 +7,7 @@
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
 	import { defaultUser } from '$lib';
 	import EventCard from '$lib/components/MobileProfile/EventCard.svelte';
+	import { workshops } from "$lib/data/workshop.js"
 	export let data;
 	let eventDisplay = true;
 	// export let form;
@@ -18,7 +19,7 @@
 	setProfileData()
 
 	const getData:Function = getContext('getData')
-	const whoami:Function = getContext('whoami')
+	// const whoami:Function = getContext('whoami')
 	let pageWidth = 900;
 	onMount(async()=> {
 		if (!$loggedIn){
@@ -39,6 +40,7 @@
 			location.reload() // this will call before navigation which will in turn call whoami
 		}// no need to store data in session storage here, whoami is handling it
 	})
+
 	
 	function setProfileData(){
 		profileData = {
@@ -48,10 +50,11 @@
 			college: user_data?.institute ?? "College",
 			graduation: user_data?.gradYear ?? 'Grad',
 			CACodePresent: user_data.CACode != "",
-			events :[],
+			events :user_events,
 			nightEvents :[]
 			
 		};
+		console.log(profileData.events)
 	}
 
 

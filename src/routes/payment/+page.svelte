@@ -13,13 +13,16 @@
 	import PaymentForm from './PaymentForm.svelte';
 
     export let data: any;
-	let workshop: { name: any; };
+	let workshop: {
+		price: number; name: any; 
+};
 	const getData:Function = getContext('getData')
 
     onMount(async () => {
+
 		await getData()
 		if (!$loggedIn || $invalidate) {
-			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
+			goto(`/login?to=/payment/check${$page.url.search}`);
 		}
 		if (data.id == null){
 			goto(`/`)
@@ -28,17 +31,18 @@
 		fetchInfo()
 	});
 	
-	fetchInfo()
+	// fetchInfo()
 	function fetchInfo(){
 		// @ts-ignore
 		workshop = workshops[data.id]
-		if (!workshop){
+		if (!workshop || workshop == undefined){
 			goto('/')
 		}	
 	}
-
-	function submit(){
-
+	// @ts-ignore
+	workshop = workshops[data.id]
+	if (!workshop || workshop == undefined){
+		goto('/')
 	}
 
 
@@ -50,7 +54,7 @@
 		<h1 style="text-align:center;margin-top:10rem;">
 		Registering for <span style="color: blueviolet;">{workshop.name}</span>
 	</h1>
-	<PaymentForm />
+	<PaymentForm name={workshop.name} id={data.id} amount={workshop.price}/>
 </div>
 
 
