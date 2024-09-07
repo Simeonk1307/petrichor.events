@@ -1,22 +1,9 @@
 
 <script>
-  import logo from "$lib/assets/comp.jpg";
   import StackedBoxes from './Workshop_cmpt.svelte';
-  import img1 from '$lib/assets/HomePage/worshop1.png'
-  import img2 from '$lib/assets/HomePage/workshop2.png'
-  import img3 from '$lib/assets/HomePage/workshop3.png'
-  import img4 from '$lib/assets/HomePage/workshop4.png'
-  import img5 from '$lib/assets/HomePage/workshop5.png'
-  import img6 from '$lib/assets/HomePage/workshop6.png'
+	import { goto } from "$app/navigation";
+  import { workshops} from "$lib/data/workshop"
 
-  const workshops = [
-    {"name":"WorkShop 1", url:img1},
-    {"name":"WorkShop 2", url:img2},
-    {"name":"WorkShop 3", url:img3},
-    {"name":"WorkShop 4", url:img4},
-    {"name":"WorkShop 5", url:img5},
-    {"name":"WorkShop 6", url:img6},
-  ]
 
 </script>
   
@@ -24,15 +11,15 @@
   <h1 style="padding-left: 5%">Workshop</h1>
   <div class="container">
     <div class="workshop_scroll">
-      {#each workshops as workShop}
-      <StackedBoxes workshop_name={workShop.name} img_url={workShop.url}/>
+      {#each Object.entries(workshops) as [id,workShop]}
+      <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
     {/each}
-    {#each workshops as workShop}
-      <StackedBoxes workshop_name={workShop.name} img_url={workShop.url}/>
+    {#each Object.entries(workshops) as [id,workShop]}
+      <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
     {/each}
     </div>
   </div>
-  <button>Show Workshops</button>
+  <button on:click={()=> goto("/workshop")}>Show Workshops</button>
 </main>
   
 <style>

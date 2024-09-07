@@ -10,7 +10,6 @@
     let content = PopUpObj.message;
     let x:any;
     $:width = 0;
-    export let currentY:number
 
     onMount(()=>{
         popUpDialog.onclose = (e) => {
@@ -41,7 +40,7 @@
 
 </script>
 
-<dialog bind:this={popUpDialog} style="top: {currentY}px;">
+<dialog bind:this={popUpDialog}>
     <div class="popUp Box" >
         <div class="popUpTitleBox">
             <div class="progressDiv" style="width: {width}%;"/>
@@ -74,7 +73,7 @@
         margin: 0;
     }
     dialog{
-        position: relative;
+        position: fixed;
         z-index: 400;
         min-width: 100vw;
         min-height: 100vh;

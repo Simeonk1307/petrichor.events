@@ -42,7 +42,9 @@
 					invalidate.set(false);
 					loggedIn.set(true);
 					// console.log($user)
-					if (data.nextpg != null) goto(data.nextpg);
+					if (data.nextpg != null){
+						goto(data.nextpg);
+					} 
 					else {
 						goto('/profile');
 					}

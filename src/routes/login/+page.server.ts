@@ -4,9 +4,9 @@ import {  fail, type Actions } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({url,cookies}) => {
     let nextpg = url.searchParams.get('to')
-    // console.log(nextpg)
+    
     if (nextpg != null){
-        if (!["/CA/welcome?generate=true","/profile","/CA/profile"].includes(nextpg)){
+        if (!nextpg.startsWith("/payment?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
             nextpg = null
         }
     }

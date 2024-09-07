@@ -143,7 +143,7 @@
         margin-bottom: 10%;
     }
     .greeting span{
-        color: rgb(83, 83, 141);
+        color: rgb(9 170 9);
     }
     .info{
         /* border: 1px solid yellowgreen; */

@@ -1,12 +1,22 @@
 <script lang="ts">
   
-  import Icon from 'svelte-awesome/components/Icon.svelte';
+  import { goto } from '$app/navigation';
+import Icon from 'svelte-awesome/components/Icon.svelte';
   import { play } from 'svelte-awesome/icons';
   export let workshop_name='Workshop';
+  export let workshop_id:string;
   export let img_url;
+
+  function handleClick(){
+    goto(`/workshop#${workshop_id}`)
+  }
+
+
+
+
 </script>
 
-<div class="individualContainer">
+<div class="individualContainer" on:click={()=>handleClick()}>
   <div class="inner">
     <div class="image">
       <img class="image1" alt="logo" src={img_url}>

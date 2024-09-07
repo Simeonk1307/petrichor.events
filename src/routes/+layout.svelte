@@ -17,12 +17,8 @@
 
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
-	let currentY = 0;
 
 	beforeNavigate(async () => {
-		if (window){
-			currentY = window.scrollY
-		}
 		const access_token = $access_token;
 		if (access_token == null || !$loggedIn) {
 			invalidate.set(true);
@@ -30,7 +26,7 @@
 			sessionStorage.setItem('user',  JSON.stringify(defaultUser));
 		}
 		if ($invalidate && $loggedIn) { // if not loggedIn then no need to refesh
-			console.log("Here")
+			// console.log("Here")
 			await whoami(access_token ?? "a")
 		}
 	});
@@ -38,6 +34,7 @@
 	async function getData() {
 		const data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser)
 		user.set(JSON.parse(data));
+		access_token.set(sessionStorage.getItem('access'))
 		if (data == JSON.stringify(defaultUser) || data == "{}") {
 			if ($access_token == null || $access_token == undefined || !$loggedIn){
 				// user have not logged In no need for refreshing the data through whoami
@@ -51,11 +48,12 @@
 			}
 		} else {
 			loggedIn.set(Boolean(sessionStorage.getItem('loggedIn')) ?? false);
+			invalidate.set(false)
 		}
 	}
 
 	async function whoami(accessToken: string) {
-		console.log("Reloading")
+		console.log("Reloading" + access_token)
 		return await POST(
 			API.whoami,
 			{
@@ -78,6 +76,7 @@
 					// console.log(res)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
+					sessionStorage.setItem('access',accessToken)
 					return true;
 				} else {
 					invalidate.set(true);
@@ -88,6 +87,7 @@
 			})
 			.catch((err) => {
 				console.log(err.toString());
+				confirm("Here")
 				invalidate.set(true);
 				sessionStorage.setItem('loggedIn', 'false');
 				sessionStorage.setItem('user',  JSON.stringify(defaultUser));
@@ -99,17 +99,7 @@
 
 	let winsize = 3000;
 	onMount(async () => {
-		// console.log("adas")
-		window.onscroll = (e) => {
-			currentY = window.scrollY
-		}
-		window.onscrollend = (e)=> {
-			currentY = window.scrollY
-		}
-		currentY = window.scrollY	
 		await getData();
-		// console.log($user)
-		winsize = window.innerWidth;
 	});
 
 	function updateLoading(val: boolean) {
@@ -144,10 +134,10 @@
 	$: path = $page.url.pathname;
 </script>
 
-<Loading spinning={loading} currentY={currentY}/>
+<Loading spinning={loading}/>
 
 {#if PopUpObj.isOn}
-	<PopUpBox bind:PopUpObj currentY={currentY}/>
+	<PopUpBox bind:PopUpObj/>
 {/if}
 
 {#if path != '/'}
@@ -157,6 +147,7 @@
 <Background {path} />
 
 <slot />
+
 {#if path != '/'}
     <Footer title={title} links={footerLinks}/>
     <BtpBtn/>
