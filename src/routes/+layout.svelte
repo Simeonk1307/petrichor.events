@@ -12,7 +12,7 @@
     import {Header, Footer, BtpBtn} from '$lib/components/ui';
     // Dummy data in this helper file
     import {footerLinks, headerLinks} from '$lib/helper';
-	import { workshops } from '$lib/data/workshop';
+	import { workshops } from '$lib/data/workshop.js';
 	import { fade, fly } from 'svelte/transition';
 
 	let path: string;

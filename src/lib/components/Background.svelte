@@ -4,7 +4,7 @@
 
 <div class="gradient-bg">
 	{#if path == '/workshop'}
-		<div class="gradients-container extra">
+		<!-- <div class="gradients-container extra">
 			<div id="g1-3" class="g" />
 			<div id="g1-2" class="g" />
 			<div id="g1-1" class="g" />
@@ -15,7 +15,7 @@
 			<div id="g1-2" class="g" />
 			<div id="g1-1" class="g" />
 			<div id="g1-7" class="g" />
-		</div>
+		</div> -->
 	{:else if ['/login', '/register','/profile', '/forgotpassword'].includes(path) || path.includes('/changepassword/')}
 		<div class="gradients-container extra">
 			<div id="g1-3_l" class="g" />

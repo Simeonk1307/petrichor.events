@@ -2,9 +2,12 @@
 
 	import { goto } from '$app/navigation';
 	import Workshop from '$lib/components/homepage/workshop_section/Workshop.svelte';
+	import type { workshop } from '$lib/types';
 	import { onMount } from 'svelte';
     export let id;
-    export let workshop;
+    export let workshop:workshop;
+	export let focus:Function;
+	export let pos:number;
 
 	function handleClick(id: string) {
 		// get the fees and number of particiants here.
@@ -18,21 +21,23 @@
     let WorkShopDiv:HTMLElement;
     onMount(() => {
         
-        WorkShopDiv.onmousemove=(e)=>{
-            let bounds = WorkShopDiv.getBoundingClientRect()
-            let scrollX = e.clientX
-            let scrollY = e.clientY
-            let left = ((scrollX - bounds.left) / bounds.width - 0.5) * 10
-            let top =( (scrollY - bounds.top) / bounds.height - 0.5) * -10
-            WorkShopDiv.style.transform = `rotateX(${left}deg) rotateY(${top}deg)`
-        }
-        WorkShopDiv.onmouseleave=()=>{
-             WorkShopDiv.style.transform = `rotateX(0deg) rotateY(0deg)`
-        }
+        // WorkShopDiv.onmousemove=(e)=>{
+        //     let bounds = WorkShopDiv.getBoundingClientRect()
+        //     let scrollX = e.clientX
+        //     let scrollY = e.clientY
+        //     let left = ((scrollX - bounds.left) / bounds.width - 0.5) * 10
+        //     let top =( (scrollY - bounds.top) / bounds.height - 0.5) * -10
+        //     WorkShopDiv.style.transform = `rotateX(${left}deg) rotateY(${top}deg)`
+        // }
+        // WorkShopDiv.onmouseleave=()=>{
+        //      WorkShopDiv.style.transform = `rotateX(0deg) rotateY(0deg)`
+        // }
     })
 </script>
 
-<div class="workshop_specific" id = {id} bind:this={WorkShopDiv}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="workshop_specific" id = {id} bind:this={WorkShopDiv} on:click={()=>{focus(pos)}}>
     <div class="imageHolder">
         <img src={workshop.image} alt={workshop.name} />
     </div>
@@ -158,12 +163,16 @@
 		border: none;
 		border-radius: 8px;
 		width: max(80vw,300px);
-        min-height: 80vh;
+        min-height: 60vh;
+		height: 70vh;
         /* border: #bd00ff solid; */
         gap:20px;
         transition: all ease-in-out 0.1s;
 		background-color: #000000f6;
         overflow: hidden;
+		cursor: pointer;
+		position: absolute;
+		/* transition: all 1s ease-in-out; */
 		color: white;
         perspective: 1000px;
 		border: 2px solid rgb(105, 9, 183);
@@ -174,7 +183,6 @@
 
 	.imageHolder img {
 		height: 100%;
-        width: 100%;
 		margin-right: 20px; 
 		padding-top: 10px;
 		object-fit: cover;
