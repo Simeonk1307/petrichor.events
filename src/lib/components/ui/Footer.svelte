@@ -28,7 +28,8 @@
 
 <style>
     footer {
-        background-color: transparent;
+        /* background-color: transparent; */
+        background-color: rgb(19, 0, 30);
         color: #fff;
         margin: 20px 20px;
         box-sizing: border-box;
@@ -36,6 +37,10 @@
         width: 100vw;
         mix-blend-mode: hard-light;
         position: relative;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .title {

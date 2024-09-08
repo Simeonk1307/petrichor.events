@@ -41,6 +41,12 @@
 		color: rgba(255, 255, 255, 1);
 		z-index: 2;
 		margin-left: 2em;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.discover > h1 {
+		font-size: 64px;
+		margin-bottom: -1rem;
 	}
 
 </style>

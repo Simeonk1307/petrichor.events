@@ -62,7 +62,7 @@
 
 		<p class="content desc">{workshop.description}</p>
 		{#if workshop.prerequisites.length > 0}
-			<p style="color: orange;">
+			<p style="color: orange; text-align: unset">
 				Prerequisites:
 				{#each workshop.prerequisites as spk, i}
 					<span
@@ -80,7 +80,7 @@
 			class="price_btn"
 			on:click={() => {
 				handleClick(id);
-			}}>Join for ₹ {workshop.price}</button
+			}}>Join {workshop.name} for ₹ {workshop.price}</button
 		>
 	</div>
 </div>
@@ -107,13 +107,17 @@
 	}
     .text{
         flex: 1;
-        text-wrap: balance;
+		/* text-align: justify; */
         overflow: hidden;
         max-width: 50%;
-        transform: translateZ(100px);
+		font-size: 18px;
     }
+	.text h1{
+		font-size: 36px;
+	}
     .text *{
         max-width: 90%;
+		text-align: justify;
     }
     .imageHolder{
         flex: 1;
@@ -128,16 +132,13 @@
 		font-weight: lighter;
 	}
 	.price_btn {
-		margin-left: 18vw;
 		color: white;
-		width: calc(40%, 78);
+		width: 100%;
 		font-weight: 700;
-		padding: 0.4rem;
-		padding-left: 0.9rem;
-		padding-right: 0.9rem;
 		background: linear-gradient(99.74deg, #06dbac, #bd00ff);
 		border-radius: 15px;
 		border: none;
+		text-wrap: nowrap;
 	}
 	.chip {
 		padding: 0.2em;
@@ -165,6 +166,8 @@
         overflow: hidden;
 		color: white;
         perspective: 1000px;
+		border: 2px solid rgb(105, 9, 183);
+		box-shadow: 0 0 10px rgb(245, 76, 245);
         transform:  rotateX(0deg) rotateY(0deg);
         transform-style: preserve-3d ;
 	}
