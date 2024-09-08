@@ -70,7 +70,7 @@
 
 <div class="form-container">
 	<div class="form">
-		<h2>Login to <span id="Petrichor">Petrichor</span></h2>
+		<h2>Login to <span id="Petrichor">petrichor</span>.events</h2>
 		<form action="?/login" method="POST" use:enhance={loginResult}>
 			<div>
 				<input type="email" name="email" id="email" placeholder="Email" required />
@@ -139,14 +139,20 @@
 		margin-bottom: 10px;
 	}
 	input {
-		padding: 3%;
-		margin: 2% 0%;
-		font-size: 100%;
-		border-radius: 10px;
-		width: 80%;
-		background-color: #40413e;
+		--px: 0.75em;
+		padding: var(--px);
+		padding-inline: calc(var(--px) * 2);
+		margin: 1.25% 0%;
+		font-size: 24px;
+		border-radius: 10rem;
+		width: 75%;
+		background-color: #25252543;
 		border: none;
 		color: white;
+		border: 1px solid white;
+	}
+	input:focus{
+		outline: transparent;
 	}
 	::placeholder {
 		color: white;
@@ -169,9 +175,9 @@
 		font-size: 1.5rem;
 		border-radius: 10rem;
 		padding: 2% 7%;
-		background-color: #232423;
-		color: white;
-		font-weight: bold;
+		background-color: rgb(255, 255, 255);
+		/* color: white; */
+		font-weight: bolder;
 		border: none;
 	}
 	#register {
