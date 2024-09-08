@@ -121,7 +121,7 @@
 <main>
 	<div class="form">
 		<div class="blank" />
-		<h2>Register for <span id="Petrichor">Petrichor</span></h2>
+		<h2>Register on <span id="Petrichor">petrichor</span>.events</h2>
 		<form action="?/register" method="POST" use:enhance={registerResult} on:change={resetWarns}>
 			<div class="input_box">
 				<label for="username">Name</label>
@@ -267,7 +267,7 @@
 		height: 80px;
 	}
 	.form {
-		margin-left: 10vw;
+		margin-left: 7vw;
 		display: flex;
 		width: 40vw;
 		flex-direction: column;
@@ -281,6 +281,9 @@
 		align-items: center;
 		flex-direction: column;
 	}
+	.form > h2 {
+		font-size: 40px;
+	}
 	.input_box {
 		width: 100%;
 		display: flex;
@@ -291,14 +294,20 @@
 	}
 	select,
 	input {
-		height: 50px;
+		--px: 0.6em;
+		padding: var(--px);
+		padding-inline: calc(var(--px) * 2);
+		margin: 1.25% 0%;
+		font-size: 24px;
+		border-radius: 10rem;
 		width: 100%;
-		font-size: 100%;
-		padding: 10px 20px;
-		border-radius: 10px;
-		background-color: #40413ebb;
+		background-color: #25252543;
 		border: none;
 		color: white;
+		border: 1px solid white;
+	}
+	input:focus{
+		outline: transparent;
 	}
 	::placeholder {
 		color: rgb(106, 105, 105);
@@ -329,8 +338,7 @@
 		font-size: 1rem;
 		border-radius: 10rem;
 		padding: 2% 7%;
-		background-color: #232423;
-		color: white;
+		background-color: white;
 		font-weight: bold;
 		border: none;
 	}
