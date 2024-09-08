@@ -25,17 +25,31 @@
 	let strip: HTMLElement
 
 	onMount(() => {
-		window.onscroll = () => {
+		let height = window.innerHeight
+		// window.onscroll = 
+		document.onscroll = () => {
 			let value = window.scrollY
-			content.style.left = value* -1 + 'px';
-			img.style.bottom = value* -0.8+ 'px';
-			strip.style.left = value* -5 + 'px';
+			if (value < height + 100 && value >= 0){
+				content.style.left = value* -1 + 'px';
+				img.style.bottom = value* -0.8+ 'px';
+				// strip.style.left = value* -5 + 'px';
+			}
 		}
 	})
 	
 
 </script>
 
+<div class="gradient-bg">
+
+	<div class="gradients-container extra">
+		<div id="g1-3" class="g" />
+		<div id="g1-2" class="g" />
+		<div id="g1-1" class="g" />
+		<div id="g1-7" class="g" />
+	</div>
+</div>
+	
 <main >
 	<div class="first-block">
 		<div class="content" bind:this={content}>
@@ -69,7 +83,7 @@
 
 	<div class="strip_holder" bind:this={strip}>
 		<div class="strip">
-			<div class="strip1">
+			<div class="strip1">	
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
 				<div class="banner">&nbsp;PETRICHOR</div>
@@ -115,6 +129,9 @@
 		overflow-x: hidden;
 		/* z-index: 11 !important; */
 		/* padding: 5em 0; */
+	}
+	main *{
+		overflow: hidden;
 	}
     .first-block{
 		width: 100vw;
@@ -204,12 +221,14 @@
 		margin: 2rem 0;
 		border-top: 2px solid white;
 		border-bottom: 2px solid white;
-		padding: 12px 0 ;
+		padding: 5px 0 ;
 		opacity: 60%;
+		overflow-y: visible !important;
 		position: relative;
 		
 	}
 	.strip{
+		overflow-y: visible !important;
 		display: flex;
 		align-items: center;
 		height: 100%;
@@ -221,6 +240,7 @@
 	.strip1 {
 		display: flex;
 		justify-content: center;
+		overflow-y: visible !important;
 		min-width: max(20%,150px);
 	}
 
@@ -296,5 +316,45 @@
 			width: 100%;
 			max-width: unset;
 		}
+	}
+
+
+	/* Backgorund */
+
+	/* Section 1 */
+	/* Home page */
+	#g1-1 {
+		background: radial-gradient(
+				farthest-corner at 10% 5%,
+				rgba(var(--color2), 1) 0,
+				rgba(var(--color2), 0) 35%
+			)
+			no-repeat;
+	}
+	#g1-2 {
+		background: radial-gradient(
+				farthest-corner at 0px 0px,
+				rgba(var(--color1), 0.8) 0%,
+				rgba(var(--color1), 0) 45%
+			)
+			no-repeat;
+	}
+	#g1-3 {
+		background: radial-gradient(
+				farthest-corner at 0% 10%,
+				rgba(var(--color3), 0.8) 0%,
+				rgba(var(--color3), 0) 75%
+			)
+			no-repeat;
+		width: 100vw;
+		height: 100vh;
+	}
+	#g1-7 {
+		background: radial-gradient(
+				farthest-corner at 0% 52%,
+				rgba(var(--color6), 0.8) 0%,
+				rgba(var(--color6), 0) 45%
+			)
+			no-repeat;
 	}
 </style>

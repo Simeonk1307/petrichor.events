@@ -151,9 +151,10 @@
 	<Header title={title} links={headerLinks}/>
 {/if}
 
-<Background {path} />
-
-<slot />
+<!-- <Background {path} /> -->
+<div class="transite">
+	<slot />
+</div>
 
 {#if path != '/'}
     <Footer title={title} links={footerLinks}/>

@@ -2,6 +2,13 @@
 	import photo from '$lib/assets/about.png';
 </script>
 
+<div class="gradient-bg">
+
+	<div class="gradients-container extra">
+		<div class="g" id="g2-1" />
+	</div>
+</div>
+	
 <main>
     <div class="second-block">
 		<div class="title2 atmos">About Us</div>
@@ -33,7 +40,7 @@
 		/* z-index: 11;	 */
 		align-items: center;
 		overflow: hidden;
-		background-color: transparent;
+		background-color: black;
     }
 	.second-block{
 		flex:1;
@@ -114,5 +121,45 @@
 			padding: 5px;
 			font-size: calc(13px - 0.5vw);
 		}
+	}
+
+
+	/* Background */
+	.g {
+		position: absolute;
+		mix-blend-mode: var(--blending);
+		width: 100%;
+		height: 100%;
+		opacity: 1;
+	}
+	.gradient-bg {
+		width: 100vw;
+		height: 100%;
+		position: absolute;
+		overflow: hidden;
+		background: transparent;
+		top: 0;
+		left: 0;
+	}
+
+	.extra {
+		height: 150vh;
+	}
+
+	.gradients-container {
+		width: 100vw;
+		height: 100vh;
+		position: relative;
+	}
+
+	#g2-1 {
+		background: radial-gradient(
+				circle at center,
+				rgba(var(--color4), 0.5) 0,
+				rgba(var(--color4), 0) 50%
+			)
+			no-repeat;
+		left: 15%;
+		height: 150vh;
 	}
 </style>

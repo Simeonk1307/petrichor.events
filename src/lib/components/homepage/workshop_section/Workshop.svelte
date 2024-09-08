@@ -7,6 +7,11 @@
 
 </script>
   
+<div class="gradient-bg">
+  <div class="gradients-container extra">
+    <div class="g" id="g4-1" />
+  </div>
+</div>
 <main>
   <h1 style="padding-left: 5%">Workshop</h1>
   <div class="container">
@@ -29,8 +34,9 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-color: black;
     width: 100vw;
-    margin-bottom: 20px;
+    overflow: hidden;
   }
   .container{
     width: 100%;
@@ -66,6 +72,19 @@
     margin: 1em 0;
 		font-weight: 100;
   }
+
+  /* Background */
+  #g4-1 {
+		background: radial-gradient(
+				farthest-corner at 55% 50%,
+				rgba(var(--color4), 0.5) 0,
+				rgba(var(--color4), 0) 50%
+			)
+			no-repeat;
+		width: 100vw;
+		top: 0%;
+		height: 100vw;
+	}
 
 </style>
   

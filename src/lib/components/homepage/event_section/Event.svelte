@@ -76,6 +76,12 @@
 	});
 </script>
 
+<div class="gradient-bg">
+	<div class="gradients-container extra">
+		<div class="g" id="g3-1" />
+	</div>
+</div>
+
 <div class="container atmos" bind:this={CardDiv}>
 	<div class="cards">
 		<StackedBoxes event_name="Cultural" img_url={cultural} top={false} left={pageWidth > 600} />
@@ -86,6 +92,18 @@
 </div>
 
 <style>
+	.container {
+		width: 100vw;
+		min-height: 100vh;
+		display: flex;
+		overflow: hidden !important;
+		cursor: pointer;
+		background-color: black;
+		/* z-index: 5; */
+	}
+	.container * {
+		overflow: hidden !important; 
+	}
 	h1 {
 		letter-spacing: 1px;
 		display: flex;
@@ -95,16 +113,8 @@
 		align-items: center;
 		justify-content: center;
 		margin: 0;
+		overflow: visible !important;
 		margin-right: 5rem;
-	}
-	.container {
-		width: 100vw;
-		min-height: 100vh;
-		margin-top: 2em;
-		margin-left: 2em;
-		display: flex;
-		cursor: pointer;
-		/* z-index: 5; */
 	}
 	.cards {
 		flex: 3;
@@ -148,5 +158,18 @@
 		.cards {
 			flex: 2;
 		}
+	}
+
+	/* Background */
+	#g3-1 {
+		background: radial-gradient(
+				farthest-corner at 75% 50%,
+				rgba(var(--color4), 0.5) 0,
+				rgba(var(--color4), 0) 50%
+			)
+			no-repeat;
+		width: 100vw;
+		top: 0%;
+		height: 100vw;
 	}
 </style>

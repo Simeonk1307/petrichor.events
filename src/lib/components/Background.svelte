@@ -59,10 +59,6 @@
 		top: 0;
 		left: 0;
 	}
-  .pad{
-    position: relative;
-    top: 50%;
-  }
 
 	.extra {
 		height: 150vh;
