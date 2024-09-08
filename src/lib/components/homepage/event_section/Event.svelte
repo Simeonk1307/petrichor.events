@@ -76,15 +76,9 @@
 	});
 </script>
 
-<div class="gradient-bg">
-	<div class="gradients-container extra">
-		<div class="g" id="g3-1" />
-	</div>
-</div>
-
 <div class="container atmos" bind:this={CardDiv}>
 	<div class="cards">
-		<StackedBoxes event_name="Cultural" img_url={cultural} top={false} left={pageWidth > 600} />
+		<StackedBoxes event_name="Cultural" img_url={cultural} top={false} left={false}/>
 		<StackedBoxes event_name="Technical" img_url={technical} top={pageWidth > 600} left={false} />
 		<StackedBoxes event_name="Informals" img_url={ardino} top={false} left={false} />
 	</div>
@@ -98,11 +92,11 @@
 		display: flex;
 		overflow: hidden !important;
 		cursor: pointer;
-		background-color: black;
-		/* z-index: 5; */
+		z-index: 2	;
 	}
 	.container * {
 		overflow: hidden !important; 
+		z-index: 2	;
 	}
 	h1 {
 		letter-spacing: 1px;
@@ -134,10 +128,15 @@
 
 	@media (max-width: 600px) {
 		.container{
-			margin: 10px 0 !important;
+			min-height: 100%;
+			overflow:visible !important ;
+			overflow-x: hidden;
+		}
+		h1{
+			max-height: 50px;
 		}
 		.cards {
-			margin-left: 0;
+			padding: 0 !important;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -148,7 +147,6 @@
 	@media (max-width: 900px) {
 		.container {
 			flex-direction: column-reverse;
-			margin: 20px 0;
 			margin-top: 1rem;
 		}
 		h1{
@@ -158,18 +156,5 @@
 		.cards {
 			flex: 2;
 		}
-	}
-
-	/* Background */
-	#g3-1 {
-		background: radial-gradient(
-				farthest-corner at 75% 50%,
-				rgba(var(--color4), 0.5) 0,
-				rgba(var(--color4), 0) 50%
-			)
-			no-repeat;
-		width: 100vw;
-		top: 0%;
-		height: 100vw;
 	}
 </style>

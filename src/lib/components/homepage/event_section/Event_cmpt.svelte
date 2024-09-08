@@ -3,7 +3,6 @@
 
     export let event_name='Event';
     export let img_url;
-    export let date='01.08.24';
     export let top;
     export let left;
     const dialogPopUp:Function = getContext('displayPopUp')

@@ -38,53 +38,76 @@
 	</div>
 	<div class="card event">
         <!-- CARD 3 -->
+		<div class="gradient-bg">
+			<div class="gradients-container extra">
+				<div class="g" id="g3-1" />
+			</div>
+			<div class="gradients-container extra">
+			  <div class="g" id="g4-1" />
+			</div>
+		  </div>
 		<Event bind:pageWidth />
-	</div>
-	<div class="card workshop">
-        <!-- CARD 4 -->
 		<Workshop />
 	</div>
 	<!-- <a  href="/login">Login</a> -->
 </div>
 
 <style>
-	.maincontent {
-        /* position: absolute; */
-		/* display: flex; */
-		/* grid-template-areas: 'stack'; */
-		/* flex-direction: column;
-		z-index: 11;
-		opacity: 0%;
-		background-color: transparent;
-		overflow-x: hidden;
-		transition: 1000ms; */
+	.c{
+		position: relative;
 	}
-	.maincontent > * {
-		/* grid-area: stack; */
-	}
-    .card{
+.card{
         display: flex;
         justify-content: center;
         overflow-x: hidden;
         align-items: center;
         /* background-color: rgba(255, 200, 100); */
+		background-color: transparent;
         position: sticky;
         top: 0;
         height: 100vh;
-    }
-    .hero{
-        /* z-index: 5; */
-    }
-    .about{
-        /* z-index: 4; */
-    }
-    .event{
-        /* z-index: 3; */
-    }
-    .workshop{
-        /* z-index: 2; */
+		overflow-y: hidden;
     }
 	.visible {
 		opacity: 100% !important;
+	}
+	.card:nth-child(3){
+		display: flex;
+		flex-direction: column;
+		height: fit-content;
+		top: 0;
+		position: sticky;
+	}
+	@media(max-width:600px){
+		.card:nth-child(3){
+			height: fit-content;
+			/* overflow-y: visible; */
+		}
+	}
+
+	/* Background */
+	#g4-1 {
+		background: radial-gradient(
+				farthest-corner at 55% 50%,
+				rgba(var(--color4), 0.5) 0,
+				rgba(var(--color4), 0) 50%
+			)
+			no-repeat;
+		width: 100vw;
+		top: 0%;
+		height: 100vw;
+	}
+
+	/* Background */
+	#g3-1 {
+		background: radial-gradient(
+				farthest-corner at 75% 50%,
+				rgba(var(--color4), 0.5) 0,
+				rgba(var(--color4), 0) 50%
+			)
+			no-repeat;
+		width: 100vw;
+		top: 0%;
+		height: 100vw;
 	}
 </style>

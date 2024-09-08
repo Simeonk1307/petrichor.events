@@ -30,7 +30,8 @@
 		document.onscroll = () => {
 			let value = window.scrollY
 			if (value < height + 100 && value >= 0){
-				content.style.left = value* -1 + 'px';
+				if (content)
+					content.style.left = value* -1 + 'px';
 				img.style.bottom = value* -0.8+ 'px';
 				// strip.style.left = value* -5 + 'px';
 			}

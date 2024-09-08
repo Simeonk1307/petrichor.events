@@ -28,9 +28,8 @@
 
 <style>
     footer {
-        background-color: #000;
-        color: #fff;
         background-color: transparent;
+        color: #fff;
         margin: 20px 20px;
         box-sizing: border-box;
         z-index: 11;

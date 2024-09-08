@@ -42,6 +42,9 @@
 		overflow: hidden;
 		background-color: black;
     }
+	main *{
+		z-index: 2;
+	}
 	.second-block{
 		flex:1;
 		display: flex;
@@ -159,7 +162,6 @@
 				rgba(var(--color4), 0) 50%
 			)
 			no-repeat;
-		left: 15%;
 		height: 150vh;
 	}
 </style>

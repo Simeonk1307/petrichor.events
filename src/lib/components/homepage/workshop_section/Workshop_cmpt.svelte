@@ -1,14 +1,12 @@
 <script lang="ts">
   
   import { goto } from '$app/navigation';
-import Icon from 'svelte-awesome/components/Icon.svelte';
-  import { play } from 'svelte-awesome/icons';
   export let workshop_name='Workshop';
   export let workshop_id:string;
   export let img_url;
 
   function handleClick(){
-    goto(`/workshop#${workshop_id}`)
+    window.location.href = (`/workshop#${workshop_id}`)
   }
 
 
@@ -16,16 +14,19 @@ import Icon from 'svelte-awesome/components/Icon.svelte';
 
 </script>
 
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="individualContainer" on:click={()=>handleClick()}>
   <div class="inner">
     <div class="image">
       <img class="image1" alt="logo" src={img_url}>
       <div class="content">
         <p class="heading">{workshop_name}</p>
-        <div class="btn">
+        <!-- <div class="btn">
             <button type="button" class="info_btn">More Info<Icon data={play} scale={0.9}/></button>
             <button type="button" class="register_btn">Register</button>
-        </div>
+        </div> -->
       </div>
     </div>
     

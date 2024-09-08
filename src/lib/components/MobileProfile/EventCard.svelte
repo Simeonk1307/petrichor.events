@@ -11,43 +11,78 @@
 </script>
 
 <div class="main">
-    <div class="imgPar cmn">
+    <div class="imgPar">
 	    <div class="img" style="background-image:url({event?.image})" />
     </div>
-	<div class="data cmn" style="line-height: 0px;">
+	<div class="data cmn">
 		<h1>{event?.name ?? "Event"}</h1>
-		<h3>{event?.date ?? "Date"}</h3>
-		<h3>{event?.venue ?? "Venue"}</h3>
+		<h5>{event?.date ?? "Date"}</h5>
+		<h5>{event?.venue ?? "Venue"}</h5>
+		<p class="verified" style="background-color:{event.verified?"green":"red"}">{event.verified?"Verified":"Not Verified"}</p>
 	</div>
-	<p style="background-color:{event.verified?"green":"red"}">{event.verified?"Verified":"Not Verified"}</p>
 </div>
 
 <style>
     .main{
         display: flex;
         flex-direction: row;
-		margin-left: 2rem;
+		max-width: 100%;
+		min-width: 100%;
     }
-    .cmn{
-        height: 8rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-top: 1.5rem;
-    }
+	.main *{
+		box-sizing: border-box;
+	}
+	.verified{
+		height: 20px;
+		padding: 5px;
+		text-align: center;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center !important;
+		border-radius: 5px;
+		width: 80px !important;
+		text-wrap: nowrap;
+		margin-top: 10px !important;
+	}
 	.data{
+		flex:3;
 		align-items: flex-start;
-		margin-left: 20px;
+		display: flex;
+		flex-direction: column;
+		overflow-x: hidden;
+	}
+	.data *{
+		font-weight: 100 !important;
+		margin: 1px;
+		align-items: flex-start;
+		text-align: start;
+		text-wrap: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		line-break: unset;
+		font-family: cursive;
+		width: 100%;
+	}
+	.data h1{
+		font-size: 20px;
+		font-weight: 800 !important;
 	}
 	.img {
-		width: 10rem;
-		height: 7rem;
+		width: 100%;
+		min-width: 100%;
+		height: 100%;
 		background-size: cover;
 		background-position: center;
 	}
+	.imgPar{
+		flex: 2;	
+		margin-right: 10px;
+	}
 	@media (max-width:500px){
 		.data{
-			font-size: smaller;
+			font-size: 14px;
 		}
 		.imgPar{
 			width: 9rem;
@@ -55,11 +90,8 @@
 		.img{
 			width: 9rem;
 		}
-		.data{
-			padding: 0 10px;
-		}
 		.data h1{
-			font-size: 20px;
+			font-size: 15px;
 		}
 		.main{
 			margin: 0 5px;

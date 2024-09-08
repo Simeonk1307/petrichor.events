@@ -11,15 +11,12 @@
 			<div id="g1-7" class="g" />
 		</div>
 		<div class="gradients-container extra">
-			<div class="g" id="g2-1" />
+			<div id="g1-3" class="g" />
+			<div id="g1-2" class="g" />
+			<div id="g1-1" class="g" />
+			<div id="g1-7" class="g" />
 		</div>
-		<div class="gradients-container extra">
-			<div class="g" id="g3-1" />
-		</div>
-		<div class="gradients-container extra">
-			<div class="g" id="g4-1" />
-		</div>
-	{:else if ['/login', '/register', '/forgotpassword'].includes(path) || path.includes('/changepassword/')}
+	{:else if ['/login', '/register','/profile', '/forgotpassword'].includes(path) || path.includes('/changepassword/')}
 		<div class="gradients-container extra">
 			<div id="g1-3_l" class="g" />
 			<div id="g1-2_l" class="g" />
@@ -74,83 +71,94 @@
 	/* Home page */
 	#g1-1 {
 		background: radial-gradient(
-				farthest-corner at 10% 5%,
+				circle,
 				rgba(var(--color2), 1) 0,
 				rgba(var(--color2), 0) 35%
 			)
 			no-repeat;
+			top: 10%;
+		left: -30%;
+		height: calc(max(100vh,100vw));
 	}
 	#g1-2 {
 		background: radial-gradient(
-				farthest-corner at 0px 0px,
+				circle,
 				rgba(var(--color1), 0.8) 0%,
 				rgba(var(--color1), 0) 45%
 			)
 			no-repeat;
+			top: 10%;
+		left: -20%;
+		height: calc(max(100vh,100vw));
 	}
 	#g1-3 {
 		background: radial-gradient(
-				farthest-corner at 0% 10%,
+				circle,
 				rgba(var(--color3), 0.8) 0%,
-				rgba(var(--color3), 0) 75%
+				rgba(var(--color3), 0) 55%
 			)
 			no-repeat;
 		width: 100vw;
-		height: 100vh;
+		top: 10%;
+		left: -30%;
+		height: calc(max(100vh,100vw));
 	}
 	#g1-7 {
 		background: radial-gradient(
-				farthest-corner at 0% 52%,
+				circle,
 				rgba(var(--color6), 0.8) 0%,
 				rgba(var(--color6), 0) 45%
 			)
 			no-repeat;
+			top: 10%;
+		left: -30%;
+		height: calc(max(100vh,100vw));
 	}
 	/*  */
 	/* LOGIN pages */
 	#g1-1_l {
 		background: radial-gradient(
-				farthest-corner at 70% 55%,
-				rgba(var(--color2), 1) 0,
+				circle,
+				rgba(var(--color2), 0.7) 0,
 				rgba(var(--color2), 0) 35%
 			)
 			no-repeat;
-		width: 100vh;
+		width: 150vw;
 		height: 100vh;
-		left: 40%;
+		left: 0%;
 	}
 	#g1-2_l {
 		background: radial-gradient(
-				farthest-corner at 50% 50%,
-				rgba(var(--color1), 0.8) 0%,
-				rgba(var(--color1), 0) 45%
+				circle,
+				rgba(var(--color1), 0.5) 0%,
+				rgba(var(--color1), 0) 25%
 			)
 			no-repeat;
-		width: 100vh;
-		height: 100vh;
-		left: 40%;
+		width: 150vw;
+		height: 120vh;
+		left: 0%;
 	}
 	#g1-3_l {
 		background: radial-gradient(
-				farthest-corner at 50% 50%,
+				circle,
 				rgba(var(--color3), 0.8) 0%,
-				rgba(var(--color3), 0) 75%
+				rgba(var(--color3), 0) 40%
 			)
 			no-repeat;
-		width: 125vh;
+		width: 150vw;
 		height: 100vh;
-		left: 40%;
+		left: 0%;
 	}
 	#g1-7_l {
 		background: radial-gradient(
-				farthest-corner at 50% 60%,
+				circle,
 				rgba(var(--color6), 0.8) 0%,
-				rgba(var(--color6), 0) 45%
+				rgba(var(--color6), 0) 25%
 			)
 			no-repeat;
-		width: 100vh;
-		height: 120vh;
-		left: 40%;
+		width: 150vw;
+		height: 140vh;
+		left: 0%;
 	}
 	/*  */
 	/* CAPage */

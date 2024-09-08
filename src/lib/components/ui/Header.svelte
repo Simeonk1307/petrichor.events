@@ -119,6 +119,7 @@
         align-items: center;
         width: 100vw;
         top: 0;
+        max-height: 70px;
         z-index: 1000;
         padding: 1.2rem 0;
         background: rgba(255, 255, 255, 0.1);
@@ -158,6 +159,7 @@
         font-weight: bolder;
         font-family: var(--wfont);
         color: #fff;
+        text-wrap: nowrap;
         padding-left: 3rem;
         flex: 1;
         min-width: 200px;

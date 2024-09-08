@@ -4,14 +4,11 @@
 	import { goto } from "$app/navigation";
   import { workshops} from "$lib/data/workshop"
 
-
+  let lesserLength = Object.entries(workshops).length < 4
+  const first = workshops.WP01
 </script>
   
-<div class="gradient-bg">
-  <div class="gradients-container extra">
-    <div class="g" id="g4-1" />
-  </div>
-</div>
+
 <main>
   <h1 style="padding-left: 5%">Workshop</h1>
   <div class="container">
@@ -19,12 +16,18 @@
       {#each Object.entries(workshops) as [id,workShop]}
       <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
     {/each}
+    {#if lesserLength}
+    <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
+    {/if}
     {#each Object.entries(workshops) as [id,workShop]}
       <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
     {/each}
+    {#if lesserLength}
+    <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
+    {/if}
     </div>
   </div>
-  <button on:click={()=> goto("/workshop")}>Show Workshops</button>
+  <button on:click={()=> goto("/workshop")}>Workshops</button>
 </main>
   
 <style>
@@ -34,9 +37,13 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: black;
+    background-color: transparent;
+    z-index: 2;
     width: 100vw;
     overflow: hidden;
+  }
+  main *{
+    z-index: 2	;
   }
   .container{
     width: 100%;
@@ -72,19 +79,6 @@
     margin: 1em 0;
 		font-weight: 100;
   }
-
-  /* Background */
-  #g4-1 {
-		background: radial-gradient(
-				farthest-corner at 55% 50%,
-				rgba(var(--color4), 0.5) 0,
-				rgba(var(--color4), 0) 50%
-			)
-			no-repeat;
-		width: 100vw;
-		top: 0%;
-		height: 100vw;
-	}
 
 </style>
   
