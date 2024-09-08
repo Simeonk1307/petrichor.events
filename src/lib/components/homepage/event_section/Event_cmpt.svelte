@@ -65,7 +65,7 @@
       flex-direction: column;
       left: 30px;
       top: -30px;
-      z-index: 4;
+      /* z-index: 4; */
     }
 
 
@@ -82,7 +82,7 @@
     .image1 {
       min-height: 220px;
       width: 220px;
-      z-index: 5;
+      /* z-index: 5; */
       transition: all 0.35s ease;
     }
 
@@ -102,7 +102,7 @@
       .image1 {
         min-height: 180px;
         width: 200px;
-        z-index: 5;
+        /* z-index: 5; */
       }
       .image{
         left: 20px;

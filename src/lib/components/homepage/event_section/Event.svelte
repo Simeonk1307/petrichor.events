@@ -104,7 +104,7 @@
 		margin-left: 2em;
 		display: flex;
 		cursor: pointer;
-		z-index: 5;
+		/* z-index: 5; */
 	}
 	.cards {
 		flex: 3;

@@ -73,11 +73,11 @@ import Icon from 'svelte-awesome/components/Icon.svelte';
     left: 30px;
     top: -30px;
     width: 100%;
-    z-index: 4;
+    /* z-index: 4; */
     border: 1px solid transparent; 
     display: flex;
     flex-direction: column;
-    z-index: 2; 
+    /* z-index: 2;  */
   }
 
   .individualContainer:hover .image1{

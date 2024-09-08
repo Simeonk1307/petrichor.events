@@ -3,6 +3,7 @@
 	import hand from '$lib/assets/HomePage/hand.png';
 	import { goto } from '$app/navigation';
 	import calculator from 'svelte-awesome/icons/calculator';
+	import { onMount } from 'svelte';
 
 	export let pageWidth:number;
 
@@ -18,13 +19,26 @@
 	function ca_portal(){
 		goto('/CA/welcome')
 	}
+
+	let content: HTMLElement
+	let img: HTMLElement
+	let strip: HTMLElement
+
+	onMount(() => {
+		window.onscroll = () => {
+			let value = window.scrollY
+			content.style.left = value* -1 + 'px';
+			img.style.bottom = value* -0.8+ 'px';
+			strip.style.left = value* -5 + 'px';
+		}
+	})
 	
 
 </script>
 
 <main >
 	<div class="first-block">
-		<div class="content">
+		<div class="content" bind:this={content}>
 
 			<div class="title"><p class="atmos">Petrichor</p></div>
 			<div class="content_box">
@@ -48,12 +62,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="imagediv">
+		<div class="imagediv" bind:this={img}>
 			<img src={hand} alt=""/>
 		</div>
 	</div>
 
-	<div class="strip_holder">
+	<div class="strip_holder" bind:this={strip}>
 		<div class="strip">
 			<div class="strip1">
 				<!-- svelte-ignore a11y-missing-attribute -->
@@ -97,7 +111,9 @@
 		flex-direction: column;
 		background: transparent;
 		background-color: transparent;
-		z-index: 11 !important;
+		position: relative;
+		overflow-x: hidden;
+		/* z-index: 11 !important; */
 		/* padding: 5em 0; */
 	}
     .first-block{
@@ -112,16 +128,18 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		position: relative;
 	}
 	.imagediv{
 		flex: 1;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		position: relative;
 	}
 	button{
 		cursor: pointer;
-		z-index: 2;
+		/* z-index: 2; */
 	}
 	.imagediv img{
 		height: 85vh;
@@ -188,6 +206,7 @@
 		border-bottom: 2px solid white;
 		padding: 12px 0 ;
 		opacity: 60%;
+		position: relative;
 		
 	}
 	.strip{

@@ -30,7 +30,7 @@
         height: 100vh;
         width: 100vw;
 		display: flex;
-		z-index: 11;	
+		/* z-index: 11;	 */
 		align-items: center;
 		overflow: hidden;
 		background-color: transparent;
