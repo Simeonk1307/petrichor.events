@@ -31,10 +31,10 @@
 		</div>
 	{:else}
 		<div class="gradients-container extra">
-			<div id="g1-3" class="g" />
-			<div id="g1-2" class="g" />
-			<div id="g1-1" class="g" />
-			<div id="g1-7" class="g" />
+			<div id="g1-3_1" class="g" />
+			<div id="g1-2_1" class="g" />
+			<div id="g1-1_1" class="g" />
+			<div id="g1-7_1" class="g" />
 		</div>
 	{/if}
 </div>
@@ -66,6 +66,44 @@
 		height: 100vh;
 		position: relative;
 	}
+
+	/* Section 1 */
+	/* Home page */
+	#g1-1_1 {
+		background: radial-gradient(
+				farthest-corner at 10% 5%,
+				rgba(var(--color2), 1) 0,
+				rgba(var(--color2), 0) 35%
+			)
+			no-repeat;
+	}
+	#g1-2_1 {
+		background: radial-gradient(
+				farthest-corner at 0px 0px,
+				rgba(var(--color1), 0.8) 0%,
+				rgba(var(--color1), 0) 45%
+			)
+			no-repeat;
+	}
+	#g1-3_1 {
+		background: radial-gradient(
+				farthest-corner at 0% 10%,
+				rgba(var(--color3), 0.8) 0%,
+				rgba(var(--color3), 0) 75%
+			)
+			no-repeat;
+		width: 100vw;
+		height: 100vh;
+	}
+	#g1-7_1 {
+		background: radial-gradient(
+				farthest-corner at 0% 52%,
+				rgba(var(--color6), 0.8) 0%,
+				rgba(var(--color6), 0) 45%
+			)
+			no-repeat;
+	}
+
 
 	/* Section 1 */
 	/* Home page */
