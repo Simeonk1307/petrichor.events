@@ -1,5 +1,5 @@
 import img1 from '$lib/assets/Workshop/workshop_pcb.jpg'
-import img2 from '$lib/assets/Workshop/workshop_ui.jpg'
+import img2 from '$lib/assets/Workshop/workshop_UI.jpg'
 import img3 from '$lib/assets/Workshop/workshop_app.jpg'
 
 
