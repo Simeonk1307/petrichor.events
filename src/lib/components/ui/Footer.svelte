@@ -85,6 +85,7 @@
     @media (max-width: 820px) {
         footer{
             padding: 10px;
+            width: unset;
         }
         .title{
             margin-bottom: 10px;

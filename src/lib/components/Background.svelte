@@ -3,7 +3,7 @@
 </script>
 
 <div class="gradient-bg">
-	{#if path == '/home' || path == '/workshop'}
+	{#if path == '/workshop'}
 		<div class="gradients-container extra">
 			<div id="g1-3" class="g" />
 			<div id="g1-2" class="g" />

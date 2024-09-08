@@ -14,163 +14,177 @@
       goto('/payment/check?id='+id)
     }
 
-    //This is the price button 
-    let price = 999;
   </script>
-
-<div class="main">
-  <div style="height: 5em;"></div>
-  <div class="header">
-    <h1>Discover Workshops</h1>
-    <h4>Learn new skills from IIT experts</h4>
-  </div>
-  <div class="workshops">
-      {#each Object.entries(workshops) as [id,ws]}
-          <div class="workshop" id="{id}">
-              <div class="about" >
-                  <div class="banner">
-                      <h1>{ws.name}</h1>
-                      <hr>
-                      <p style="font-style: italic;">By
-                          {#each ws.trainee as spk, i}
-                              <span><strong>{spk}</strong>  {i == ws.trainee.length - 1 ? "" : (
-                                  i < ws.trainee.length - 2 ? "," : "and"
-                              )} </span>
-                          {/each}
-                      </p>
-                      <div class="chips">
-                          {#each ws.topics as topic}
-                              <span class="chip">{topic}</span>
-                          {/each}
-                      </div>
-                      <p>Happening on <strong style="color:cyan">{ws.date}</strong> at <strong style="color:lightgreen">{ws.venue}</strong></p>
-                      <p>{ws.description}</p>
-                      <button on:click={()=>handleClick(id)} class="button-reg butt">Register Now for ₹{ws.price}</button>
-                      {#if ws.prerequisites.length > 0}
-                      <p style="color: orange;">Some knowledge in
-                          {#each ws.prerequisites as spk, i}
-                              <span><strong>{spk}</strong>  {i == ws.prerequisites.length - 1 ? "" : (
-                                  i < ws.prerequisites.length - 2 ? "," : "and "
-                              )} </span>
-                          {/each} is expected.
-                      </p>
-                      {/if}
-                  </div>
-              </div>
-              <div class="img" style="background-image: url('{ws.image}');"></div>
-          </div>
-      {/each}
-  </div>
-</div>
-
-<style>
-  .main{
-      background-color: transparent;
-      z-index: 2;
-      position: relative;
-  }
-  .workshop .img{
-      background-position: center;
-      background-repeat: no-repeat;
-  }
-  /* .debug{
-      border: 1px solid white;
-  } */
-   .header{
-    margin-left: 4rem;
-   }
-  .butt{
-      display: block;
-      width: fit-content;
-      text-decoration: unset;
-      padding: 0.8em;
-      padding-inline: 1em;
-      /* background-color: rgb(255, 255, 255); */
-      border-radius: 0.4em;
-      /* border: unset; */
-      /* color:rgb(0, 0, 0); */
-      cursor: pointer;
-      font-size: 15px;
-      margin-top: 1em;
-      margin-bottom: 0.5em;
-      transition: 200ms ease-in-out;
-  }
-  .butt:hover{
-      background-color: rgb(110, 255, 173);
-      color: rgb(0, 0, 0)
-  }
-  .workshop{
+<main>
+    <div class="blank" />
+    <div class="discover"><h1>Discover Workshops</h1><h3>Learn new skills from IIT experts</h3></div>
+    {#each Object.entries(workshops) as [id,workshop]}
+    <div class="workshop_specific" id={id}>
+        <img src={workshop.image} alt={workshop.name} />
+        <div class="text">
+            <h1>{workshop.name}</h1>
+            <!-- <hr> -->
+            <p style="font-style: italic;">By
+                {#each workshop.trainee as spk, i}
+                    <span><strong>{spk}</strong>  {i == workshop.trainee.length - 1 ? "" : (
+                        i < workshop.trainee.length - 2 ? "," : "and"
+                    )} </span>
+                {/each}
+            </p>
+            <div class="chips">
+                {#each workshop.topics as topic}
+                    <span class="chip">{topic}</span>
+                {/each}
+            </div>
+            <p>Happening on <strong style="color:cyan">{workshop.date}</strong> <br/>at <strong style="color:lightgreen">{workshop.venue}</strong></p>
+            
+            <p class="content desc">{workshop.description}</p>
+            {#if workshop.prerequisites.length > 0}
+            <p style="color: orange;">Some knowledge in
+                {#each workshop.prerequisites as spk, i}
+                    <span><strong>{spk}</strong>  {i == workshop.prerequisites.length - 1 ? "" : (
+                        i < workshop.prerequisites.length - 2 ? "," : "and "
+                    )} </span>
+                {/each} is expected.
+            </p>
+            {/if}
+            <button class="price_btn" on:click={()=>{handleClick(id)}}>Join for ₹ {workshop.price}</button>
+        </div>
+    </div>
+    {/each}
+  </main>
+    
+  <style>
+    main{
       display: flex;
-      height: 80vh;
-      margin: 5px 20px;
-      background-color: rgba(0, 0, 0, 0.41);
-  }
-  
-  .workshop > *{
-      width: 50%;
-  }
-  .about{
-      width: 60%;
-      height: 100%;
-  }
-  .img{
-      width: 40%;
-  }
-  .workshop:nth-child(even){
-      display: flex;
-      flex-direction: row-reverse;
-      background-color: transparent;
-      /* color: black */
-  }
-  .workshop:nth-child(odd){
-      display: flex;
-  }
-  .banner{
-      margin: 2em;
-      /* display: flex;
-      flex-direction: column; */
-      border-radius: 2em;
-      padding: 1em;
-      padding-inline: 2em;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+      max-width: 100vw;
+      margin-bottom: 20px;
       color: white;
-  }
-  .content{
-      margin: 3em;
-      text-align: justify;
+    }
+  
+    .blank {
+    height: 80px;
+    }
+    .discover{
+      color: rgba(255, 255, 255,1) ;
+      z-index: 200;
+    }
+    button{
+      width: 150px;
+      /* background-color: transparent; */
+      border-radius: 2.5em;
+          padding: 0.8em 1em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: solid gray 1px;
+          color: rgb(255, 254, 254);
+          z-index: 200;
+          text-align: center;
+      margin: 1em 0;
+          font-weight: 600;
+          font-size: large;
+          
+    }
+  
+    .desc{
+      padding-top: 10px;
+      color: white;
+      z-index: 200;
+      font-weight: lighter;
+    }
+    .price_btn{
+      margin-left: 18vw;
+    color: white;
+    width: calc(40%,78);
+    font-weight: 700;
+    padding: 0.4rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    background: linear-gradient(99.74deg, #06dbac, #bd00ff);
+    border-radius: 15px;
+    border: none;
   }
   .chip{
-      padding: 0.2em;
-      padding-inline: 1em;
-      background-color: rgb(83, 83, 215);
-      margin-right: 1em;
-      border-radius: 1em;
-      margin-bottom: .7em;
-  }
-  .chips{
-      display: flex;
-      flex-wrap: wrap;
-  }
-  .img{
-      background-size: cover;
-      background-position: 20%;
-      margin: 2em;
-      border-radius: 2em;
-  }
+        padding: 0.2em;
+        padding-inline: 1em;
+        background-color: rgb(83, 83, 215);
+        margin-right: 1em;
+        border-radius: 1em;
+        margin-bottom: .7em;
+    }
+    .chips{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .workshop_specific {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        /* background-color: #000000; */
+        color: white;
+        z-index: 200;
+    }
+  
+    .workshop_specific img {
+        width: 40vw; /* Adjust the width as needed */
+        height: auto;
+        margin-right: 20px; /* Space between the image and the text */
+        /* padding: 40px; */
+        padding-top: 10px;
+        object-fit: cover;
+        z-index: 100;
+        border-radius: 16px;
+        color: white;
+        z-index: 200;
+      }
+  
+    .workshop_specific .text  {
+        font-weight: bold;
+        color: white;
+        z-index: 200;
+    }
+  
+    .workshop_specific .text .speaker {
+        margin: 5px 0;
+        color: white;
+        z-index: 200;
+        font-weight: lighter;
+    }
+  
+    .workshop_specific .text .content {
+        margin: 0;
+        color: white;
+        z-index: 200;
+        font-weight: lighter;
+    }
+    .content  {
+      font-size: 18px;
+      color: white;
+      z-index: 200;
+      font-weight: lighter;
+    }
+    .speaker{
+      font-size: 18px;
+      padding-top: 5px;
+      padding-bottom: 2px;
+      color: white;
+      z-index: 200;
+      font-weight: lighter;
+    }
 
-  @media (max-width: 1000px){
-      .banner{
-          margin: 0em;
-      }
-      .img{
-          margin: 2em 0.5em;
-      }
-      *{
-          /* font-size: smaller;   // try this also*/ 
-          font-size: small; 
-      }
-      .workshop{
-          height: 50%;
-      }
-  }
-</style>
+    @media(max-width:900px){
+        .workshop_specific{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+  </style>
     
+  

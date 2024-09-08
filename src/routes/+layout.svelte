@@ -13,8 +13,11 @@
     // Dummy data in this helper file
     import {footerLinks, headerLinks} from '$lib/helper';
 	import { workshops } from '$lib/data/workshop';
+	import { fade, fly } from 'svelte/transition';
 
 	let path: string;
+	export let data;
+	let windowX:number
 
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
@@ -107,6 +110,10 @@
 	let winsize = 3000;
 	onMount(async () => {
 		await getData();
+		windowX = window.innerWidth
+		window.onresize = ()=> {
+			windowX = window.innerWidth
+		}
 	});
 
 	function updateLoading(val: boolean) {
@@ -151,10 +158,15 @@
 	<Header title={title} links={headerLinks}/>
 {/if}
 
-<!-- <Background {path} /> -->
-<div class="transite">
+<Background {path} />
+{#key data.url}
+<div
+in:fade={{duration: 400, delay: 400 }}
+out:fly={{ x: windowX, duration: 400 }}
+>
 	<slot />
 </div>
+{/key}
 
 {#if path != '/'}
     <Footer title={title} links={footerLinks}/>
