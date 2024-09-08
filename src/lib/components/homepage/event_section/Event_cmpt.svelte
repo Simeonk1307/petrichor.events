@@ -75,7 +75,8 @@
     .heading{
       margin-top: 5%;
       padding: 2%;
-      font-size: medium;
+      font-family: var(--pfont);
+      font-size: 20px;
       font-weight: bolder;
     }
     .image1 {

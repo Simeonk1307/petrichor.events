@@ -157,45 +157,45 @@
 	#g1-1_l {
 		background: radial-gradient(
 				circle,
-				rgba(var(--color2), 0.7) 0,
-				rgba(var(--color2), 0) 35%
+				rgba(var(--color8), 0.7) 0,
+				rgba(var(--color8), 0) 25%
 			)
 			no-repeat;
-		width: 150vw;
+		width: 125vw;
 		height: 100vh;
 		left: 0%;
 	}
 	#g1-2_l {
 		background: radial-gradient(
 				circle,
-				rgba(var(--color1), 0.5) 0%,
-				rgba(var(--color1), 0) 25%
+				rgba(var(--color1), 0.3) 0%,
+				rgba(var(--color1), 0) 55%
 			)
 			no-repeat;
-		width: 150vw;
+		width: 90vw;
 		height: 120vh;
 		left: 0%;
 	}
 	#g1-3_l {
 		background: radial-gradient(
 				circle,
-				rgba(var(--color3), 0.8) 0%,
-				rgba(var(--color3), 0) 40%
+				rgba(var(--color10), 0.5) 0%,
+				rgba(var(--color10), 0) 35%
 			)
 			no-repeat;
-		width: 150vw;
+		width: 110vw;
 		height: 100vh;
 		left: 0%;
 	}
 	#g1-7_l {
 		background: radial-gradient(
 				circle,
-				rgba(var(--color6), 0.8) 0%,
-				rgba(var(--color6), 0) 25%
+				rgba(var(--color9), 0.6) 0%,
+				rgba(var(--color9), 0) 30%
 			)
 			no-repeat;
-		width: 150vw;
-		height: 140vh;
+		width: 99vw;
+		height: 120vh;
 		left: 0%;
 	}
 	/*  */

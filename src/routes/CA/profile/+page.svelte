@@ -198,7 +198,8 @@
         padding: 0;
         margin: 0;
         border-radius: 10px;
-        background-color: #919191 !important;
+        background-color: #0320223d !important;
+        border: 2px white solid;
     }
     button{
         border: none    ;
@@ -217,6 +218,8 @@
     .code p{
         font-size: 30px;
         margin: 2%;
+        color: white;
+        font-family: monospace;
         /* background-color: #919191; */
     }
     .for_reg{

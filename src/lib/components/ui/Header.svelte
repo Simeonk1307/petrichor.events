@@ -155,9 +155,9 @@
     }
 
     .title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: bolder;
-        font-family: var(--wfont);
+        font-family: var(--sfont);
         color: #fff;
         text-wrap: nowrap;
         padding-left: 3rem;

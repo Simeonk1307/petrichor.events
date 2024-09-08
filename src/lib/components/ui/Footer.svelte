@@ -47,7 +47,7 @@
         font-size: 2rem;
         font-weight: bolder;
         /* color: #fff; */
-        font-family: var(--wfont);
+        font-family: var(--sfont);
         padding-left: 10px;
         margin-bottom: 20px;
     }
@@ -63,6 +63,7 @@
         text-decoration: none;
         font-size: 1.5rem;
         display: flex;
+        gap: 50px;
         align-items: center;
         font-weight: bolder;
         padding-left: 10px;

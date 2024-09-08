@@ -222,8 +222,12 @@
 	}
 	.userData {
 		line-height: 15px;
+		margin-top: 3em;
 		margin-left: 2rem;
+		display: flex;
+		flex-direction: column;
 		min-width: 250px;
+		gap: 0.5rem;
 		z-index: 11;
 		flex: 1;
 	}
@@ -278,14 +282,15 @@
 		align-items: center;
 		flex-direction: column;
 		border-radius: 20px;
-		background-color: #d3d3d387;
+		background-color: #ffffff58;
 		margin: 20px;
+		margin-top: 3rem;
 		position: relative;
 		flex: 2;
 		z-index: 2;
 		overflow-y: scroll !important;
-		max-height: 75%;
-		height: 75%;
+		max-height: 100%;
+		height: 100%;
 	}
 	.logout {
 		position: absolute;

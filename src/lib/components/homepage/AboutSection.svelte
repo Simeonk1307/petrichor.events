@@ -73,6 +73,7 @@
 		font-weight: 100;
 		color: white;
 		line-height: 1.5;
+		font-family: var(--pfont);
 		letter-spacing: 0.005cap;
 		padding: 10px 0;
 		padding-right: 30px;
