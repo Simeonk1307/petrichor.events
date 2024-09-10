@@ -28,10 +28,10 @@
 </script>
 
 <div class="maincontent {visible ? 'visible' : ''}">
-	<div class="card hero">
-		<HeroSection bind:pageWidth />
+	<HeroSection bind:pageWidth />
+	<!-- <div class="card hero"> -->
         <!-- CARD 1 -->
-	</div>
+	<!-- </div> -->
 	<div class="card about">
         <!-- CARD 2 -->
 		<AboutSection />
@@ -46,16 +46,13 @@
 			  <div class="g" id="g4-1" />
 			</div>
 		  </div>
-		<Event bind:pageWidth />
+		<!-- <Event bind:pageWidth /> -->
 		<Workshop />
 	</div>
 	<!-- <a  href="/login">Login</a> -->
 </div>
 
 <style>
-	.c{
-		position: relative;
-	}
 .card{
         display: flex;
         justify-content: center;
@@ -68,6 +65,9 @@
         height: 100vh;
 		overflow-y: hidden;
     }
+	.event{
+		padding-top: 3em;
+	}
 	.visible {
 		opacity: 100% !important;
 	}

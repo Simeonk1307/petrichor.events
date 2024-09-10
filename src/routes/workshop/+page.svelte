@@ -22,7 +22,7 @@
 		}
 	});
 	function alignItem(pos: number) {
-		if (pageWidth <= 1135) {
+		if (pageWidth <= 1000) {
 			return;
 		}
 		let i = 0;
@@ -31,20 +31,24 @@
 		for (let l of WorkShopDiv.children) {
 			if (i == pos) {
 				// continue;
-				gsap.set(l, {
-					zIndex: pos + len
-				});
+				// gsap.set(l, {
+				// });
 				gsap.to(l, {
+					zIndex: pos + len,
 					duration: 1,
-					ease: 'ease-in-out',
+					ease: 'sine',
+					scaleY:1.1,
+					scaleX:1.02,
 					transform: `translate(0,0)`
 				});
 			} else if (i < pos) {
 				let trl = `translate(-${left * 10}%,0)`;
 				gsap.to(l, {
 					duration: 1,
-					ease: 'ease-in-out',
+					ease:"slow",
 					transform: trl,
+					scaleY:1 + ((left) * 0.02),
+					scaleX:1,
 					zIndex: i
 				});
 				left--;
@@ -52,7 +56,9 @@
 				let trl = `translate(${right * 10}%,0)`;
 				gsap.to(l, {
 					duration: 1,
-					ease: 'ease-in-out',
+					scaleY:1 + (len - right - 1) * 0.02,
+					scaleX:1,
+					ease:"slow",
 					transform: trl,
 					zIndex: len - right - 1
 				});
@@ -65,7 +71,7 @@
 
 <main>
 	<div class="blank" />
-	<div class="discover">
+	<div class="discover atmos">
 		<h1>Discover Workshops</h1>
 		<h3>Learn new skills from IIT experts</h3>
 	</div>
@@ -136,16 +142,17 @@
 		margin-bottom: 1em;
 	}
 	.discover > h1 {
-		font-size: 64px;
+		font-size: 50px;
+		font-family: var(--sfont);
 		margin-bottom: -1rem;
 	}
-	@media (max-width:1135px){
+	@media (max-width:1000px){
 		.eventHolder {
 			overflow-y: scroll;
 			flex-direction: column;
 			position: static;
 			padding: 10px;
-			display: grid;
+			display: flex;
 			grid-template-columns: auto auto;
 			height: unset;
 		}
@@ -153,7 +160,7 @@
 			position: relative;
 		}
 		.discover h1{
-			font-size: 2rem;
+			font-size: 1.8rem;
 		}
 	}
 	@media (max-width: 900px) {
@@ -162,14 +169,14 @@
 			flex-direction: column;
 			position: static;
 			display: flex;
-			padding: 10px;
+			padding: 30px;
 			height: unset;
 		}
 		.eventHolder label {
 			position: relative;
 		}
 		.discover h1{
-			font-size: 2rem;
+			font-size: 1.5rem;
 		}
 	}
 </style>

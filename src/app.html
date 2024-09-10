@@ -1,328 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Petrichor 2025</title>
-		<meta charset="utf-8" />
-    <!-- <link rel="stylesheet" 
+
+<head>
+  <title>Petrichor 2025</title>
+  <meta charset="utf-8" />
+  <!-- <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <meta name="csrf_token" content="{{ csrf_token() }}">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Krona+One&family=Merriweather&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
-		%sveltekit.head%
-	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
-		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
-	</body>
+  <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf_token" content="{{ csrf_token() }}">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+  %sveltekit.head%
+</head>
+
+<body data-sveltekit-preload-data="hover">
+  <div style="display: contents">%sveltekit.body%</div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
+</body>
+
 </html>
 
 
 <style>
-  *{
+  * {
     box-sizing: border-box !important;
     scroll-behavior: smooth;
   }
-@font-face {
-		font-family: 'Atmospheric';
-		src: url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('embedded-opentype'), /* Internet Explorer */
-			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('woff2'),             /* Super Modern Browsers */
-			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('woff'),              /* Pretty Modern Browsers */
-			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('truetype'),          /* Safari, Android, iOS */
-			url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('svg');               /* Legacy iOS */
-		font-weight: 200;
-	}
-	:root{
-		--pfont: 'Raleway', sans-serif;
-		--sfont: 'Atmospheric', sans-serif;
-		--wfont: 'Arial', sans-serif;
-	}
-	:root{
+
+  @font-face {
+    font-family: 'Atmospheric';
+    src: url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('embedded-opentype'),
+      /* Internet Explorer */
+      url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('woff2'),
+      /* Super Modern Browsers */
+      url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('woff'),
+      /* Pretty Modern Browsers */
+      url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('truetype'),
+      /* Safari, Android, iOS */
+      url('%sveltekit.assets%/Fonts/Atmospheric.ttf') format('svg');
+    /* Legacy iOS */
+    font-weight: 200;
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('%sveltekit.assets%/Fonts/Roboto.ttf') format('embedded-opentype'),
+      /* Internet Explorer */
+      url('%sveltekit.assets%/Fonts/Roboto.ttf') format('woff2'),
+      /* Super Modern Browsers */
+      url('%sveltekit.assets%/Fonts/Roboto.ttf') format('woff'),
+      /* Pretty Modern Browsers */
+      url('%sveltekit.assets%/Fonts/Roboto.ttf') format('truetype'),
+      /* Safari, Android, iOS */
+      url('%sveltekit.assets%/Fonts/Roboto.ttf') format('svg');
+    /* Legacy iOS */
+    font-weight: 200;
+  }
+
+  :root {
+    --pfont: 'Raleway', sans-serif;
+    --wfont: 'Roboto', sans-serif;
+    --ofont: 'Arial', sans-serif;
+    --sfont: 'Atmospheric', sans-serif;
+  }
+
+  :root {
     --color-bg1: rgba(108, 0, 162, 0.534);
     --color-bg2: rgba(0, 16, 82, 0.423);
     --color1: 42, 190, 253;
     --color2: 30, 239, 81;
-    --color3:200, 0, 255;
+    --color3: 200, 0, 255;
     --color4: 184, 3, 255;
     --color5: 2, 255, 192;
     --color6: 5, 189, 62;
     --color7: 232, 0, 255;
-    --color8: 234,12, 213;
+    --color8: 234, 12, 213;
     --color9: 189, 5, 134;
     --color10: 0, 255, 204;
     --color-interactive: 140, 100, 255;
     --circle-size: 60%;
     --blending: hard-light;
-	}
-	html, body{
-		margin: 0 !important;
-		padding: 0 !important;
-		width: 100vw;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw;
     min-height: 100vh;
     min-width: 100vw;
-    max-width: 100vw;   
+    max-width: 100vw;
     /* overflow-x: hidden  ; */
-		/* position: absolute; */
-		color: white;
-		font-family: var(--pfont);
+    /* position: absolute; */
+    color: white;
+    font-family: var(--pfont);
     box-sizing: border-box;
-    scrollbar-width: none;  /* Firefox */
+    scrollbar-width: none;
+    /* Firefox */
     position: absolute;
     background: black;
-	}
-  body{
-    overflow-x: hidden ;
   }
-  *{
+
+  body {
+    overflow-x: hidden;
+  }
+
+  * {
     background-color: transparent;
     background: transparent;
+    font-family: var(--pfont);
   }
-  a{
+
+  a {
     text-decoration: none;
     color: white;
     z-index: 2;
     position: relative;
     font-family: var(--pfont);
   }
-  input{
+
+  input {
     z-index: 2;
     position: relative;
   }
-  button{
+
+  button {
     position: relative;
     cursor: pointer;
     z-index: 2;
     font-family: var(--pfont);
   }
-	.a-unset{
-		color: inherit;
-		text-decoration: unset;
-	}
 
-	.atmos{
-		font-family: var(--sfont) !important;
-	}
-	
-/* CSS */
-.button-28 {
-  appearance: none;
-  background-color: transparent;
-  border: 2px solid #1A1A1A;
-  border-radius: 15px;
-  box-sizing: border-box;
-  color: #dcdcdc;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-size: 16px;
-  font-weight: 600;
-  line-height: normal;
-  margin: 0;
-  min-height: 60px;
-  min-width: 0;
-  outline: none;
-  padding: 16px 24px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  /* width: 100%; */
-  will-change: transform;
-}
-
-.button-28:disabled {
-  pointer-events: none;
-  color: rgba(200, 200, 200, 0.402);
-  border-color: grey;
-  cursor:not-allowed;
-}
-
-.button-28:hover {
-  color: #fff;
-  background-color: #1A1A1A;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-  transform: translateY(-2px);
-}
-
-.button-28:active {
-  box-shadow: none;
-  transform: translateY(0);
-}
-
-/* CSS */
-.button-85 {
-  padding: 0.6em 2em;
-  border: none;
-  outline: none;
-  color: rgb(255, 255, 255);
-  background: #111;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-85:before {
-  content: "";
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
-  );
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing-button-85 20s linear infinite;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 10px;
-}
-
-@keyframes glowing-button-85 {
-  0% {
-    background-position: 0 0;
+  .a-unset {
+    color: inherit;
+    text-decoration: unset;
   }
-  50% {
-    background-position: 400% 0;
+
+  .atmos {
+    font-family: var(--sfont) !important;
+    text-shadow: 1px 1px 1px #a5a5a5,
+		1px 1.5px 1px #a5a5a5,
+		1px 2px 1px #a5a5a5,
+		1px 2.5px 1px #a5a5a5,
+		1px 3px 1px #a5a5a5
+		;
   }
-  100% {
-    background-position: 0 0;
+
+  /* CSS */
+  .button-28 {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #dcdcdc;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    /* width: 100%; */
+    will-change: transform;
   }
-}
 
-.button-85:after {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #222;
-  left: 0;
-  top: 0;
-  border-radius: 10px;
-}
+  .button-28:disabled {
+    pointer-events: none;
+    color: rgba(200, 200, 200, 0.402);
+    border-color: grey;
+    cursor: not-allowed;
+  }
 
-.button-contactus {
-  width: 165px;
-  height: 62px;
-  cursor: pointer;
-  color: #fff;
-  font-size: 17px;
-  border-radius: 1rem;
-  border: none;
-  position: relative;
-  background: #100720;
-  transition: 0.1s;
-}
+  .button-28:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
 
-.button-contactus::after {
-  content: '';
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,94,247,1) 17.8%, rgba(2,245,255,1) 100.2% );
-  filter: blur(15px);
-  z-index: -1;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+  .button-28:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
 
-.button-contactus:active {
-  transform: scale(0.9) rotate(3deg);
-  background: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,94,247,1) 17.8%, rgba(2,245,255,1) 100.2% );
-  transition: 0.5s;
-}
+  /* CSS */
+  .button-85 {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
 
-.button-reg {
-  --green: #1BFD9C;
-  font-size: 15px;
-  padding: 0.7em 2.7em;
-  letter-spacing: 0.06em;
-  position: relative;
-  font-family: inherit;
-  border-radius: 0.6em;
-  overflow: hidden;
-  transition: all 0.3s;
-  line-height: 1.4em;
-  border: 2px solid var(--green);
-  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
-  color: var(--green);
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
-}
+  .button-85:before {
+    content: "";
+    background: linear-gradient(45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+  }
 
-.button-reg:hover {
-  color: #82ffc9;
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
-}
-
-.button-reg:before {
-  content: "";
-  position: absolute;
-  left: -4em;
-  width: 4em;
-  height: 100%;
-  top: 0;
-  transition: transform .4s ease-in-out;
-  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
-}
-
-.g {
-		position: absolute;
-		mix-blend-mode: var(--blending);
-		width: 100%;
-		height: 100%;
-    background-color: black;
-		opacity: 1;
-	}
-	.gradient-bg {
-		width: 100vw;
-		height: 100%;
-		position: absolute;
-		overflow: hidden;
-		background: black;
-		top: 0;
-		left: 0;
-	}
-
-	.extra {
-		height: 150vh;
-	}
-
-	.gradients-container {
-		width: 100vw;
-		height: 100vh;
-		position: relative;
-	}
-
-.button-reg:hover:before {
-  transform: translateX(15em);
-}
-
-::-webkit-scrollbar {
-        width: 1px;
-        background: transparent; /* make scrollbar transparent */
+  @keyframes glowing-button-85 {
+    0% {
+      background-position: 0 0;
     }
+
+    50% {
+      background-position: 400% 0;
+    }
+
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+  .button-85:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+  .button-contactus {
+    width: 165px;
+    height: 62px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    border-radius: 1rem;
+    border: none;
+    position: relative;
+    background: #100720;
+    transition: 0.1s;
+  }
+
+  .button-contactus::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(255, 94, 247, 1) 17.8%, rgba(2, 245, 255, 1) 100.2%);
+    filter: blur(15px);
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .button-contactus:active {
+    transform: scale(0.9) rotate(3deg);
+    background: radial-gradient(circle farthest-corner at 10% 20%, rgba(255, 94, 247, 1) 17.8%, rgba(2, 245, 255, 1) 100.2%);
+    transition: 0.5s;
+  }
+
+  .button-reg {
+    --green: #1BFD9C;
+    font-size: 15px;
+    padding: 0.7em 2.7em;
+    letter-spacing: 0.06em;
+    position: relative;
+    font-family: inherit;
+    border-radius: 0.6em;
+    overflow: hidden;
+    transition: all 0.3s;
+    line-height: 1.4em;
+    border: 2px solid var(--green);
+    background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
+    color: var(--green);
+    box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+  }
+
+  .button-reg:hover {
+    color: #82ffc9;
+    box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+  }
+
+  .button-reg:before {
+    content: "";
+    position: absolute;
+    left: -4em;
+    width: 4em;
+    height: 100%;
+    top: 0;
+    transition: transform .4s ease-in-out;
+    background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
+  }
+
+  .g {
+    position: absolute;
+    mix-blend-mode: var(--blending);
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 1;
+  }
+
+  .gradient-bg {
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    background: black;
+    top: 0;
+    left: 0;
+  }
+
+  .extra {
+    height: 150vh;
+  }
+
+  .gradients-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .button-reg:hover:before {
+    transform: translateX(15em);
+  }
+
+  ::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+    /* make scrollbar transparent */
+  }
 </style>

@@ -6,6 +6,9 @@
 	import { onMount } from 'svelte';
 	export let data: any;
 	onMount(() => {
+		if (!$loggedIn || $invalidate) {
+			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
+		}
 		let workshop: any | null;
 		if (data.id) {
 			// @ts-ignore
@@ -17,9 +20,6 @@
 			goto('/workshop');
 		}
 
-		if (!$loggedIn || $invalidate) {
-			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
-		}
 		if ($user.user_data.email.endsWith('iitpkd.ac.in')) {
 			goto(`/payment/allow?id=${data.id}`);
 		} else {

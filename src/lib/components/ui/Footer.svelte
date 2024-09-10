@@ -31,8 +31,8 @@
         /* background-color: transparent; */
         background-color: rgb(19, 0, 30);
         color: #fff;
-        margin: 20px 20px;
         box-sizing: border-box;
+        padding-left: 20px;
         z-index: 11;
         width: 100vw;
         mix-blend-mode: hard-light;
@@ -50,6 +50,12 @@
         font-family: var(--sfont);
         padding-left: 10px;
         margin-bottom: 20px;
+        text-shadow: 1px 1px 1px #a5a5a5,
+		1px 2px 1px #a5a5a5,
+		1px 3px 1px #a5a5a5,
+		1px 4px 1px #a5a5a5,
+		1px 5px 1px #a5a5a5
+		;
     }
 
     .footer-social {

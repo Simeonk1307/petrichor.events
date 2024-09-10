@@ -27,6 +27,7 @@
         display: flex;
         flex-direction: row;
 		max-width: 100%;
+		min-height: 120px;
 		min-width: 100%;
     }
 	.main *{
@@ -34,35 +35,37 @@
 	}
 	.verified{
 		height: 20px;
-		padding: 5px;
+		padding: 10px;
 		text-align: center;
 		margin: 0;
 		display: flex;
 		justify-content: center;
 		align-items: center !important;
 		border-radius: 5px;
-		width: 80px !important;
+		width: 110px !important;
 		text-wrap: nowrap;
 		margin-top: 10px !important;
 	}
 	.data{
 		flex:3;
+		min-height: 100%;
+		height: 100%;
 		align-items: flex-start;
+		justify-content: center;
 		display: flex;
 		flex-direction: column;
 		overflow-x: hidden;
 	}
 	.data *{
 		font-weight: 100 !important;
-		margin: 1px;
+		margin: 5px;
 		align-items: flex-start;
 		text-align: start;
 		text-wrap: nowrap;
-		overflow: hidden;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		line-break: unset;
-		font-family: cursive;
+		font-family: var(--wfont);
 		width: 100%;
 	}
 	.data h1{

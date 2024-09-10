@@ -43,9 +43,44 @@
         }
     }
 
+    let plang: string[] = [
+	 'PETRICHOR',
+	 'पेट्रीकोर',
+	 'பெட்ரிகோர்',
+	 'પેટ્રિકોર',
+	 'പെട്രിക്കോർ',
+	 'পেট্রিকোর',
+	 'పెట్రికోర్',
+	 'ਪੈਟ੍ਰਿਕੋਰ'
+	];
+    let len = plang.length
+	let titleDiv: HTMLElement
+
     onMount(() => {
         window.addEventListener('scroll', handleScroll);
         document.addEventListener('click', handleClickOutside);
+        let pos = 0
+		let posi = 0;
+		let atLast = 0;
+        setInterval(() => {
+			if (pos >= plang[posi].length){
+				if (atLast < 10){
+					atLast++
+					return
+				}else {
+					atLast = 0;
+				let prev = posi;
+				while (posi == prev){
+					posi = (Math.random() * 100 ) % len | 0
+				}
+				pos = 0
+				titleDiv.innerText = ""
+			}
+			}
+			if (titleDiv){
+				titleDiv.innerText += plang[posi].at(pos++) 
+			}
+		},100)
         return () => {
             window.removeEventListener('scroll', handleScroll);
             document.removeEventListener('click', handleClickOutside);
@@ -61,7 +96,7 @@
 
 {#if links.length > 0}
 <header>
-    <a class="title" href="/home">{title}</a>
+    <a class="title atmos" href="/home" bind:this={titleDiv}></a>
     <nav class="menu">
         {#each links as link,ind}
         <div>

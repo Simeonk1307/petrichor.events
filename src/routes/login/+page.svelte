@@ -210,6 +210,7 @@
 			height: 100%;
 			min-height: 640px;
 			display: flex;
+			margin: 0;
 			flex-wrap: wrap;
 			flex-direction: column;
 			justify-content: center;

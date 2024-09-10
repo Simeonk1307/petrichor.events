@@ -12,8 +12,8 @@
 			// For workshop number of participants will be only 1 so
 			// we will skip the add participant page and directly send user to payment page
 
-			// goto('/payment/check?id=' + id);
-			window.open("https://docs.google.com/forms/d/e/1FAIpQLSfjtgKgnDf_dX3QyrkisEODDw0z2MkRIXAtN28NyHiPEpD5Jg/viewform")
+			goto('/payment/check?id=' + id);
+			// window.open("https://docs.google.com/forms/d/e/1FAIpQLSfjtgKgnDf_dX3QyrkisEODDw0z2MkRIXAtN28NyHiPEpD5Jg/viewform")
 		}
 
 		let WorkShopDiv:HTMLElement;
@@ -83,7 +83,7 @@
 				class="price_btn"
 				on:click={() => {
 					handleClick(id);
-				}}>Join {workshop.name} for ₹ {workshop.price}</button
+				}}>Join for ₹ {workshop.price}</button
 			>
 		</div>
 	</div>
@@ -106,6 +106,7 @@
 			text-align: center;
 			margin: 1em 0;
 			font-weight: 600;
+			overflow: hidden;
 			font-size: large;
 		}
 		.text{
@@ -113,25 +114,37 @@
 			/* text-align: justify; */
 			overflow: hidden;
 			max-width: 50%;
-			font-size: calc(14px + 0.1vw);
+			gap: calc(10px + 0.3vw);
+			height: 100%;
+			padding: 10px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			font-size: calc(15px + 0.3vw);
 		}
 		.text h1{
-			font-size: calc(30px + 0.1vw);
+			font-size: calc(27px + 0.1vw);
 		}
 		.text *{
 			max-width: 90%;
+			margin: 0;
 			/* text-align: justify; */
+		}
+		.text > *{
+			width: 100%;
 		}
 		.imageHolder{
 			flex: 1;
-			height: 100%;
+			width: min(50%,400px);
+			/* height: 100%; */
 		}
 
 		.desc {
-			padding-top: 10px;
 			color: white;
 			font-size: 15px;
 			width: 100%;
+			font-family: var(--wfont);
 			font-weight: lighter;
 		}
 		.price_btn {
@@ -161,11 +174,11 @@
 			border: none;
 			border-radius: 8px;
 			width: max(80vw,320px);
-			min-height: 60vh;
-			height: 70vh;
+			min-height: 400px;
+
 			/* border: #bd00ff solid; */
-			gap:20px;
-			transition: all ease-in-out 0.1s;
+			gap:15px;
+			/* transition: all ease-in-out 0.1s; */
 			background-color: #000000f6;
 			overflow: hidden;
 			cursor: pointer;
@@ -177,12 +190,13 @@
 		}
 
 		.imageHolder img {
-			height: 100%;
+			width: 100%;
 			margin-right: 20px; 
 			padding-top: 10px;
 			object-fit: cover;
 			border-radius: 16px;
 			color: white;
+			object-position: center;
 		}
 
 		.workshop_specific .text {
@@ -196,12 +210,30 @@
 			font-weight: lighter;
 		}
 
-		@media (max-width: 1135px) {
+		@media(min-width:1200px){
+			.workshop_specific{
+				height: 500px;
+			}
+			.imageHolder{
+				width: 400px;
+				height: 100% ;
+			}
+			.imageHolder img{
+				height: 100%;
+				width: unset;
+			}
+			.text {
+				flex: 1.5;
+				max-width: unset;
+			}
+		}
+
+		@media (max-width: 1000px) {
 			.workshop_specific {
 				display: flex;
 				flex-direction: column;
 				position: relative;
-				width: auto;
+				width: max(320px,70vw);
 				min-height: unset;
 				height: fit-content;
 			}
@@ -221,7 +253,7 @@
 				text-align: start;
 			}
 			.price_btn{
-				font-size: calc(8px + 1vw);
+				font-size: calc(10px + 1vw);
 			}
 		}
 	</style>
