@@ -160,6 +160,7 @@
 			font-weight: normal;
 			margin-top: 20%;
 			margin-right: 10%;
+			margin: 0;
 		}
 		input {
 			padding: 3%;
@@ -183,6 +184,8 @@
 			height: 100%;
 			min-height: 640px;
 			display: flex;
+			
+			font-size: smaller;
 			flex-wrap: wrap;
 			flex-direction: column;
 			justify-content: center;

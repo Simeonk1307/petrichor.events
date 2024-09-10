@@ -1,5 +1,12 @@
-<script>
+<script lang="ts">
 	import photo from '$lib/assets/about.png';
+	import { onMount } from 'svelte';
+
+	export let slidePhoto:Function;
+	let img:HTMLElement;
+	slidePhoto = (value:number) => {
+	}
+
 </script>
 
 <div class="gradient-bg">
@@ -25,7 +32,7 @@
 			Petrichor'25!
 		</div>
 	</div>
-	<div class="photo_holder">
+	<div class="photo_holder" bind:this={img}>
 		<img src={photo} class="photo" alt=""/>
 	</div>
 
@@ -56,6 +63,7 @@
 	}
 	.photo_holder{
 		flex: 1;
+		position: relative;
 		margin: 50px;
 	}
 	.photo{

@@ -16,16 +16,16 @@ export interface event {
 
 export interface workshop {
     name: string,
-    about: string,
-    speakers: string[],
+    description: string,
+    trainee: string[],
     date: string,
-    fees: number,
+    price: number,
     topics: string[],
-    regdate: string,
-    location: string,
-    prereq: string[],
+    // regdate: string,
+    venue: string,
+    prerequisites: string[],
     image: string,
-    id: string
+    // id: string
 }
 
 export interface person{

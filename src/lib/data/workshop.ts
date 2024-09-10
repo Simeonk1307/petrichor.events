@@ -1,11 +1,12 @@
 import img1 from '$lib/assets/Workshop/workshop_pcb.jpg'
 import img2 from '$lib/assets/Workshop/workshop_UI.jpg'
 import img3 from '$lib/assets/Workshop/workshop_app.jpg'
+import type { workshop } from '$lib/types'
 
 
-export let workshops = {
+export let workshops:{[id: string]:workshop} = {
     "WP01": {
-        "name":"PCB Design Workshop",
+        name:"PCB Design Workshop",
         "trainee":[], 
         "date":"SEP 28,29",
         "venue":"IIT PKD Nila samgatha 30x and electronics lab",
