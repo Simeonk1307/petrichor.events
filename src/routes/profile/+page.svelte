@@ -29,7 +29,7 @@
 
 	const getData: Function = getContext('getData');
 	// const whoami:Function = getContext('whoami')
-	let pageWidth = 900;
+	let pageWidth = 1000;
 	onMount(async () => {
 		if (!$loggedIn) {
 			getData();

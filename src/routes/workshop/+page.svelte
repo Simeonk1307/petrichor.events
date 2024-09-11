@@ -25,14 +25,29 @@
 		max-width: 100vw;
 		margin-bottom: 20px;
 		color: white;
+		position: relative;
 	}
-  .eventHolder{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap:20px;
-  }
+	input {
+		display: none;
+	}
+	.eventHolder {
+		overflow-y: scroll;
+		flex-direction: column;
+		position: static;
+		display: flex;
+		padding: 30px;
+		height: unset;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
+	}
+	.eventHolder label {
+		position: absolute;
+		transform-style: flat;
+	}
+	.crousel {
+		position: relative;
+	}
 
 	.blank {
 		height: 5em;
@@ -40,13 +55,17 @@
 	.discover {
 		color: rgba(255, 255, 255, 1);
 		z-index: 2;
-		margin-left: 2em;
 		text-align: center;
 		margin-bottom: 1em;
 	}
 	.discover > h1 {
-		font-size: 64px;
+		font-size: 50px;
+		font-family: var(--sfont);
 		margin-bottom: -1rem;
 	}
-
+	@media (max-width: 900px) {
+		.discover h1{
+			font-size: 1.5rem;
+		}
+	}
 </style>

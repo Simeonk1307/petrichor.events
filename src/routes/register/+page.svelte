@@ -353,7 +353,8 @@
 	@media (max-width: 720px) {
 		.form {
 			width: 100vw;
-			margin: 0 10vw;
+			font-size: smaller;
+			margin: 0 7px;
 		}
 		.input_box {
 			font-size: smaller;

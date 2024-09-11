@@ -113,6 +113,7 @@
 		background-color: black;
 		display: grid;
 		place-items: center;
+		text-shadow: none;
 	}
 
 	.big{
@@ -141,7 +142,7 @@
 	.petr {
 		font-weight: 800;
 		font-size: 12svw;
-		font-family: var(--wfont);
+		font-family: var(--ofont);
 		position: relative;
 		z-index: 1;
 		transition: 300ms linear;

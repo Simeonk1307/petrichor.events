@@ -10,7 +10,7 @@
   
 
 <main>
-  <h1 style="padding-left: 5%">Workshop</h1>
+  <h1 class="atmos" style="padding-left: 5%">Workshop</h1>
   <div class="container">
     <div class="workshop_scroll">
       {#each Object.entries(workshops) as [id,workShop]}
@@ -44,6 +44,9 @@
   }
   main *{
     z-index: 2	;
+  }
+  main h1{
+    font-family: var(--sfont);
   }
   .container{
     width: 100%;

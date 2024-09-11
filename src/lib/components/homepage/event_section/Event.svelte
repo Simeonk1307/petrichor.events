@@ -78,7 +78,7 @@
 
 <div class="container atmos" bind:this={CardDiv}>
 	<div class="cards">
-		<StackedBoxes event_name="Cultural" img_url={cultural} top={false} left={false}/>
+		<StackedBoxes event_name="Cultural" img_url={cultural} top={false} left={pageWidth >= 600}/>
 		<StackedBoxes event_name="Technical" img_url={technical} top={pageWidth > 600} left={false} />
 		<StackedBoxes event_name="Informals" img_url={ardino} top={false} left={false} />
 	</div>
