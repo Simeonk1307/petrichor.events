@@ -368,6 +368,7 @@
 		.userData {
 			width: unset;
 			flex: unset;
+			gap:0px;
 		}
 		.eventHolder{
 			padding: 20px 10px;

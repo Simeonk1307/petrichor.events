@@ -1,7 +1,13 @@
 
 // const backend_url = 'http://127.0.0.1:8000/'
 // const backend_url = 'https://petri-back.vercel.app/'
-const backend_url = 'https://petrichor-backend.vercel.app/'
+// const backend_url = 'https://petrichor-backend.vercel.app/'
+
+
+let backend_url = import.meta.env.VITE_backend
+if (backend_url == null || backend_url == undefined){
+    backend_url = process.env.VITE_backend
+}
 
 export const API = {
     login: backend_url + 'api/login/',
