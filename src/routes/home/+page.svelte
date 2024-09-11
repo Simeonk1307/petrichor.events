@@ -7,6 +7,8 @@
 	import { getContext, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
+	let slideHero:Function;
+	let slideAbout:Function;
 	let visible = false;
 
 	export let data;
@@ -23,18 +25,28 @@
 		window.onresize = () => {
 			pageWidth = window.innerWidth;
 		};
+		window.onscroll = (e)=>{
+			let val = window.scrollY
+			// console.log(val)
+			if (slideHero){
+				slideHero(val)
+			}
+			if (slideAbout){
+				slideAbout(val)
+			}
+		}
 		access_token.set(data.accessToken);
 	});
 </script>
 
 <div class="maincontent {visible ? 'visible' : ''}">
-	<HeroSection bind:pageWidth />
+	<HeroSection bind:pageWidth bind:slide={slideHero} />
 	<!-- <div class="card hero"> -->
         <!-- CARD 1 -->
 	<!-- </div> -->
 	<div class="card about">
         <!-- CARD 2 -->
-		<AboutSection />
+		<AboutSection bind:slidePhoto={slideAbout}/>
 	</div>
 	<div class="card event">
         <!-- CARD 3 -->

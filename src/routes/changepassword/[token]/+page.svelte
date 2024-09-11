@@ -92,6 +92,7 @@
 		font-size: 300%;
 		font-weight: normal;
 		/* margin: 5% 5%; */
+		margin: 0;
 	}
 	input {
 		padding: 3%;

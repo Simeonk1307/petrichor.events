@@ -176,6 +176,11 @@
 		height: 120vh;
 		left: 0%;
 	}
+	@media ( max-width: 900px){
+		#g1-2_l{
+			width: 100vw;
+		}
+	}
 	#g1-3_l {
 		background: radial-gradient(
 				circle,

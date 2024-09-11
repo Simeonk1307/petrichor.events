@@ -32,7 +32,7 @@
         background-color: rgb(19, 0, 30);
         color: #fff;
         box-sizing: border-box;
-        padding-left: 20px;
+        padding-left: 2rem;
         z-index: 11;
         width: 100vw;
         mix-blend-mode: hard-light;
@@ -100,6 +100,8 @@
         }
         .title{
             margin-bottom: 10px;
+            text-wrap: nowrap;
+            font-size: 25px;
         }
         .footer-social a {
             font-size: 1rem;

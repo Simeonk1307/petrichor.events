@@ -89,16 +89,18 @@
 				const data = result.data;
 				// console.log(data);
 				if (data.success) {
-					goto('/login');
+					displayPopUp("Message",data.message ?? "Please check your email.",5000,()=>{
+						goto('/login');
+					})
 				} else {
-					displayPopUp('Alert', data.err, 2000, () => {});
+					displayPopUp('Alert', data.err, 4000, () => {});
 				}
 			} else {
 				setTimeout(() => {
 					displayPopUp(
 						'Alert',
 						result.data.err ? result.data.err : 'Invalid Credentials',
-						2000,
+						4000,
 						() => goto('/register')
 					);
 				}, 100);
@@ -353,7 +355,8 @@
 	@media (max-width: 720px) {
 		.form {
 			width: 100vw;
-			margin: 0 10vw;
+			font-size: smaller;
+			margin: 0 7px;
 		}
 		.input_box {
 			font-size: smaller;

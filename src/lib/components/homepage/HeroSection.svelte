@@ -6,6 +6,17 @@
 	import { onMount } from 'svelte';
 
 	export let pageWidth: number;
+	export let slide:Function;
+
+	slide = (value:number) => {
+		if (value < height + 100 && value >= 0) {
+				if (content)
+					content.style.left = value* -1 + 'px';
+				if (img) 
+					img.style.bottom = value * -0.8 + 'px';
+				// strip.style.left = value* -5 + 'px';
+		}
+	}
 
 	function discover() {
 		window.scrollTo({
@@ -33,6 +44,7 @@
 	let dot: HTMLElement;
 	let img: HTMLElement;
 	let strip: HTMLElement;
+	let height = 0;
 
 	onMount(() => {
 		let pos = 0;
@@ -40,18 +52,6 @@
 		// let atLast = 0;
 		let x = setInterval(() => {
 			if (pos >= plang[posi].length) {
-				// if (atLast < 5) {
-				// 	atLast++;
-				// 	return;
-				// } else {
-				// 	atLast = 0;
-				// 	let prev = posi;
-				// 	while (posi == prev) {
-				// 		posi = (Math.random() * 100) % len | 0;
-				// 	}
-				// 	pos = 0;
-				// 	title.innerText = '';
-				// }
 				dot.style.display = 'none'
 				clearInterval(x)
 				return
@@ -61,18 +61,10 @@
 			}
 		}, 600);
 
-		let height = window.innerHeight;
+		height = window.innerHeight;
 		// window.onscroll =
-		document.onscroll = () => {
-			let value = window.scrollY;
-			if (value < height + 100 && value >= 0) {
-				if (content)
-					content.style.left = value* -1 + 'px';
-				if (img) img.style.bottom = value * -0.8 + 'px';
-				// strip.style.left = value* -5 + 'px';
-			}
-		};
 	});
+
 </script>
 
 <div class="gradient-bg">
