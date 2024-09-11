@@ -58,28 +58,25 @@
 				<span class="chip">{topic}</span>
 			{/each}
 		</div>
-		<div class="text">
-			<h1>{workshop.name}</h1>
-			<!-- <hr> -->
-			{#if workshop.trainee.length > 0}
-				<p style="font-style: italic;">
-					By
-					{#each workshop.trainee as spk, i}
-						<span
-							><strong>{spk}</strong>
-							{i == workshop.trainee.length - 1 ? '' : i < workshop.trainee.length - 2 ? ',' : 'and'}
-						</span>
-					{/each}
-				</p>
-			{/if}
-			<div class="chips">
-				{#each workshop.topics as topic}
-					<span class="chip">{topic}</span>
+		<p>
+			Happening on <strong style="color:cyan">{workshop.date}</strong> <br />at
+			<strong style="color:lightgreen">{workshop.venue}</strong>
+		</p>
+
+		<p class="content desc">{workshop.description}</p>
+		{#if workshop.prerequisites.length > 0}
+			<p style="color: orange; text-align: unset">
+				Prerequisites:
+				{#each workshop.prerequisites as spk, i}
+					<span
+						><strong>{spk}</strong>
+						{i == workshop.prerequisites.length - 1
+							? ''
+							: i < workshop.prerequisites.length - 2
+							? ','
+							: 'and '}
+					</span>
 				{/each}
-			</div>
-			<p>
-				Happening on <strong style="color:cyan">{workshop.date}</strong> <br />at
-				<strong style="color:lightgreen">{workshop.venue}</strong>
 			</p>
 		{/if}
 		<button
@@ -89,7 +86,7 @@
 			}}>Join for ₹ {workshop.price}</button
 		>
 	</div>
-
+</div>
 <style>
 	*{
 		box-sizing: border-box;
@@ -239,72 +236,5 @@
 		.price_btn{
 			font-size: calc(10px + 1vw);
 		}
-
-		.imageHolder img {
-			width: 100%;
-			margin-right: 20px; 
-			padding-top: 10px;
-			object-fit: cover;
-			border-radius: 16px;
-			color: white;
-			object-position: center;
-		}
-
-		.workshop_specific .text {
-			font-weight: bold;
-			color: white;
-		}
-
-		.workshop_specific .text .content {
-			margin: 0;
-			color: white;
-			font-weight: lighter;
-		}
-
-		@media(min-width:1200px){
-			.workshop_specific{
-				height: 500px;
-			}
-			.imageHolder{
-				width: 400px;
-				height: 100% ;
-			}
-			.imageHolder img{
-				height: 100%;
-				width: unset;
-			}
-			.text {
-				flex: 1.5;
-				max-width: unset;
-			}
-		}
-
-		@media (max-width: 1000px) {
-			.workshop_specific {
-				display: flex;
-				flex-direction: column;
-				position: relative;
-				width: max(320px,70vw);
-				min-height: unset;
-				height: fit-content;
-			}
-			.imageHolder {
-				width: 100%;
-				height: unset;
-			}
-			.imageHolder img{
-				height: unset;
-				width: 100%;
-			}
-			.text{
-				max-width: 90%;
-				display: flex;
-				justify-content: center;
-				flex-direction: column;
-				text-align: start;
-			}
-			.price_btn{
-				font-size: calc(10px + 1vw);
-			}
-		}
-	</style>
+	}
+</style>
