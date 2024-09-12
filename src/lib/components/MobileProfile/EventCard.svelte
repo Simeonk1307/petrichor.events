@@ -29,6 +29,8 @@
 		max-width: 100%;
 		min-height: 120px;
 		min-width: 100%;
+    margin: 20px 0;
+
     }
 	.main *{
 		box-sizing: border-box;
@@ -97,7 +99,6 @@
 			font-size: 15px;
 		}
 		.main{
-			margin: 0 5px;
 			max-width: 95vw;
 		}
 	}
