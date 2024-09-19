@@ -3,7 +3,7 @@ import img2 from '$lib/assets/Workshop/ui.jpg'
 import img3 from '$lib/assets/Workshop/appdev.jpg'
 import img4 from '$lib/assets/Workshop/fusion_360.png'
 import img5 from '$lib/assets/Workshop/ml.png'
-import img6 from '$lib/assets/Workshop/iot.jpg'
+import img6 from '$lib/assets/Workshop/Iot.png'
 import type { workshop } from '$lib/types'
 
 
