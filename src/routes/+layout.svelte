@@ -57,7 +57,7 @@
 	}
 
 	async function whoami(accessToken: string) {
-		console.log("Reloading" + accessToken)
+		// console.log("Reloading" + accessToken)
 		return await POST(
 			API.whoami,
 			{
@@ -84,7 +84,7 @@
 							return eventData
 						})
 					});
-					console.log($user)
+					// console.log($user)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
 					sessionStorage.setItem('access',accessToken)
