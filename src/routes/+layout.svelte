@@ -47,7 +47,7 @@
 				invalidate.set(true)
 
 			}else{ // user may have logged in
-				console.log("HH")
+				// console.log("HH")
 				await whoami($access_token ?? "a") 
 			}
 		} else {
@@ -57,7 +57,7 @@
 	}
 
 	async function whoami(accessToken: string) {
-		console.log("Reloading" + accessToken)
+		// console.log("Reloading" + accessToken)
 		return await POST(
 			API.whoami,
 			{
@@ -84,7 +84,7 @@
 							return eventData
 						})
 					});
-					console.log($user)
+					// console.log($user)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
 					sessionStorage.setItem('access',accessToken)

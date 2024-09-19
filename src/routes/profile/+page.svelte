@@ -61,7 +61,7 @@
 			events: user_events,
 			nightEvents: []
 		};
-		console.log(profileData.events);
+		// console.log(profileData.events);
 	}
 
 	const loading: Function = getContext('loading');
@@ -110,15 +110,21 @@
 			<h2>Graduation Year</h2>
 			<h3>{profileData.graduation}</h3>
 		</div>
-		{#if profileData.CACodePresent}
-			<div class="CAButton">
+		<div class="CAButton">
+			{#if profileData.CACodePresent}
 				<button
 					on:click={() => {
 						goto('/CA/profile');
 					}}>Go to CAProfile</button
 				>
+			{:else}
+			<button class="purple"
+			on:click={() => {
+				goto('/CA/welcome');
+			}}>Apply For CA</button
+		>
+				{/if}
 			</div>
-		{/if}
 	</div>
 	{#if pageWidth <= 900}
 		<div class="events">
@@ -214,6 +220,12 @@
 		word-break: keep-all;
 		word-wrap: break-word;
 		margin: 0;
+	}
+
+	.purple{
+		background: linear-gradient(45deg,rgb(182, 62, 182),rgb(59, 150, 219));
+		font-weight: bold;
+		color: white;
 	}
 	.name-mail-cont p {
 		font-size: smaller;

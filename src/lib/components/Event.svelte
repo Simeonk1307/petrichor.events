@@ -6,7 +6,7 @@
 
     export let eventId : string
     export let paymentStatus: string
-    console.log(eventId)
+    // console.log(eventId)
     let Eventtype=""
     let events=[]
     switch (eventId.charAt(0)) {
@@ -24,7 +24,7 @@
             break;
     }
     const event = events.find((e) => e.id == eventId);
-    console.log(events)
+    // console.log(events)
 </script>
 
 {#if event}
