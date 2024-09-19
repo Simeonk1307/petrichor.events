@@ -16,7 +16,7 @@ export const actions = {
     "pay": async ( {request,cookies} ) => {
         // call apply event Paid here
         // check for transactionId. and CAcode is taken only if verified
-        console.log("registering");
+        // console.log("registering");
         const data = await request.formData();
         let CACode = data.get("CACode")
         if (CACode == ""){
@@ -61,7 +61,7 @@ export const actions = {
     "verify": async ( {request,cookies} ) => {
         // call apply event Paid here
         // check for transactionId. and CAcode is taken only if verified
-        console.log("verifying");
+        // console.log("verifying");
         const data = await request.formData();
         // console.log(data)
         const response = await POST(

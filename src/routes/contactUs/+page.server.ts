@@ -13,7 +13,7 @@ export const actions = {
         },undefined)
         .then(res => res.json())
         .then((res)=> {
-            console.log(res)
+            // console.log(res)
             if (res.status == 200){
                 return {
                     "success":true

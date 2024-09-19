@@ -16,7 +16,7 @@ export const actions = {
    "pay": async ( {request,cookies} ) => {
         // call apply event Paid here
         // check for transactionId. and CAcode is taken only if verified
-        console.log("registering");
+        // console.log("registering");
         const data = await request.formData();
         const participants:string[] = []
         const eventId = data.get("eventId")
