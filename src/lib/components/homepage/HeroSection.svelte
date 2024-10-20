@@ -7,6 +7,7 @@
 
 	export let pageWidth: number;
 	export let slide:Function;
+	export let toAnimate: boolean;
 
 	slide = (value:number) => {
 		if (value < height + 100 && value >= 0) {
@@ -50,16 +51,20 @@
 		let pos = 0;
 		let posi = 0;
 		// let atLast = 0;
-		let x = setInterval(() => {
-			if (pos >= plang[posi].length) {
-				dot.style.display = 'none'
-				clearInterval(x)
-				return
-			}
-			if (title) {
-				title.innerText += plang[posi].at(pos++);
-			}
-		}, 600);
+		if (toAnimate){
+			let x = setInterval(() => {
+				if (pos >= plang[posi].length) {
+					dot.style.display = 'none'
+					clearInterval(x)
+					return
+				}
+				if (title) {
+					title.innerText += plang[posi].at(pos++);
+				}
+			}, 600);
+		} else {
+			title.innerText = plang[posi]
+		}
 
 		height = window.innerHeight;
 		// window.onscroll =

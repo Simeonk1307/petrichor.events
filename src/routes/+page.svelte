@@ -1,6 +1,7 @@
 <script lang="ts">
+	import HeroSection from "$lib/components/homepage/HeroSection.svelte";
 	import { onMount } from "svelte";
-	
+	let background: HTMLElement
 	let plang: any = {
 		english: 'PETRICHOR',
 		hindi: 'पेट्रीकोर',
@@ -16,13 +17,18 @@
 	let curr_petr_phrase = 'PETRICHOR';
 	
 	let isPhone = false
-	let mouse: HTMLDivElement
+	
+	let winsize = 3000;
+	let mouseX = 0;
+    let mouseY = 0;
 	onMount(() => {
+		winsize = window.innerWidth;
 		// window.location.replace('/events')
 		isPhone = document.body.clientWidth < 500
 		document.onmousemove = (e) => {
-			mouse.style.left = `${e.clientX}px`
-			mouse.style.top = `${e.clientY}px`
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+			background.style.clipPath = `circle(100px at ${mouseX}px ${mouseY}px)`;
 		}
 		hovering = true
 	})
@@ -36,8 +42,10 @@
 		if (curr_lang_index >= langs.length) {
 			curr_lang_index = 0;
 		}
-		ptext.style.filter = 'blur(2svw)';
+		if (ptext)
+			ptext.style.filter = 'blur(2svw)';
 		setTimeout(() => {
+			console.log("here")
 			curr_petr_phrase = plang[langs[curr_lang_index]];
 			ptext.style.filter = '';
 			tooltip_text = `Petrichor in ${langs[curr_lang_index]}`
@@ -79,66 +87,68 @@
 
 	let hovering = false;
 	let ptext: HTMLDivElement;
-	let clicked = false;
+	let main:HTMLElement;
 	setInterval(setLang, 2000);
+
+	function openHome() {
+		main.style.pointerEvents = 'none'
+		let x = 120;
+		setInterval(() => {
+			background.style.clipPath = `circle(${x}px at ${mouseX}px ${mouseY}px)`
+			x += 100
+		}, 50)
+		setTimeout(() => {
+			window.location.href = '/home'
+		}, 800);
+	}
 </script>
 
-<div class="main atmos" style="--p: '{curr_petr_phrase}'">
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<main on:click={openHome} bind:this={main}>
+	<div class="main atmos foreground" style="--p: '{curr_petr_phrase}'">
+		<div
 		bind:this={ptext}
 		class="petr"
 		
-	>
+		>
 		{curr_petr_phrase}
 	</div>
 	<span>{tttf}</span>
 </div>
-
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="mouse {clicked ? "big" : "small"}" bind:this={mouse} on:click={() => {
-	clicked = true;
-	setTimeout(() => {
-		window.location.href = '/home'
-	}, 800)
-}}>
-	<div style="all: unset;">{!clicked ? "EXPLORE" : "PETRICHOR 25"}</div>
+<div class="background" bind:this={background}>
+<HeroSection pageWidth={winsize} slide={()=>{}} toAnimate={false} />
 </div>
-
-<style>
+	
+</main>
+	
+	
+	<style>
 	.main {
 		width: 100svw;
 		height: 100svh;
-		background-color: black;
 		display: grid;
 		place-items: center;
+		background-size: cover;
+		position: relative;
+		cursor: none;
 		text-shadow: none;
 	}
+	.foreground {
+      position: absolute;
+      z-index: 1;
+    }
 
-	.big{
-		height: 200em;
-		background-color: black;
-	}
-	.small{
-		height: 8em;
-		background-color: white;
-	}
-	.mouse{
-		cursor: none;
-		position: absolute;
-		top: -100vh;
-		left: -100vw;
-		transform: translate(-50%, -50%);
-		z-index: 100;
-		/* height: 10em; */
-		aspect-ratio: 1;
-		border-radius: 100vh;
-		color: black;
-		display: grid;
-		place-items: center;
-		transition: height 1s linear, background-color 1s linear;
-	}
+	.background {
+      z-index: 3;
+	  position: absolute;
+	  top: 0;
+      pointer-events: none;
+      width: 100vw;
+      height: 100vh;
+      background-color: rebeccapurple;
+      clip-path: circle(100px at 0px 0px);
+    }
 	.petr {
 		font-weight: 800;
 		font-size: 12svw;

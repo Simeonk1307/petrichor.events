@@ -14,11 +14,13 @@
     import {footerLinks, headerLinks} from '$lib/helper';
 	import { workshops } from '$lib/data/workshop.js';
 	import { fade, fly } from 'svelte/transition';
+	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
 
 	let path: string;
 	export let data;
 	let windowX:number
-
+	let mouse: HTMLDivElement
+	let clicked = false;
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
 
@@ -159,12 +161,15 @@
 {/if}
 
 <Background {path} />
+ <!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 {#key data.url}
 <div
+class="main"
 in:fade={{duration: 400, delay: 400 }}
 out:fly={{ x: windowX, duration: 400 }}
 >
-	<slot />
+		<slot />
 </div>
 {/key}
 
@@ -172,3 +177,6 @@ out:fly={{ x: windowX, duration: 400 }}
     <Footer title={title} links={footerLinks}/>
     <BtpBtn/>
 {/if}
+
+<style>
+</style>

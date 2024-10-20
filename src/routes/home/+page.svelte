@@ -40,7 +40,7 @@
 </script>
 
 <div class="maincontent {visible ? 'visible' : ''}">
-	<HeroSection bind:pageWidth bind:slide={slideHero} />
+	<HeroSection bind:pageWidth bind:slide={slideHero} toAnimate={false}/>
 	<!-- <div class="card hero"> -->
         <!-- CARD 1 -->
 	<!-- </div> -->
