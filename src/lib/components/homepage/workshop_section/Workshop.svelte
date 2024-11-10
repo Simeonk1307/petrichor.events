@@ -1,17 +1,33 @@
 
 <script>
-  import logo from "$lib/assets/comp.jpg";
   import StackedBoxes from './Workshop_cmpt.svelte';
+	import { goto } from "$app/navigation";
+  import { workshops} from "$lib/data/workshop"
+
+  let lesserLength = Object.entries(workshops).length < 4
+  const first = workshops.WP01
 </script>
   
+
 <main>
-  <h1 style="padding-left: 5%">Workshop</h1>
+  <h1 class="atmos" style="padding-left: 5%">Workshop</h1>
   <div class="container">
-    <StackedBoxes workshop_name="Workshop 1" img_url={logo}/>
-    <StackedBoxes workshop_name="Workshop 1" img_url={logo}/>
-    <StackedBoxes workshop_name="Workshop 1" img_url={logo}/>
+    <div class="workshop_scroll">
+      {#each Object.entries(workshops) as [id,workShop]}
+      <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
+    {/each}
+    {#if lesserLength}
+    <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
+    {/if}
+    {#each Object.entries(workshops) as [id,workShop]}
+      <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
+    {/each}
+    {#if lesserLength}
+    <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
+    {/if}
+    </div>
   </div>
-  <button>Show Workshops</button>
+  <button on:click={()=> goto("/workshop")}>Workshops</button>
 </main>
   
 <style>
@@ -21,15 +37,37 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    flex-wrap: wrap;
+    background-color: transparent;
+    z-index: 2;
+    width: 100vw;
+    overflow: hidden;
+  }
+  main *{
+    z-index: 2	;
+  }
+  main h1{
+    font-family: var(--sfont);
   }
   .container{
+    width: 100%;
     display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-start;
   }
+  .workshop_scroll{
+    display: flex;
+    justify-content: flex-start;
+    animation: workshop 12s linear infinite;
+  }
+  .workshop_scroll:hover{
+    animation-play-state: paused;
+  }
+  @keyframes workshop{
+		from{
+      transform: translateX(0);
+		} to {
+			transform: translateX(-50%);
+		}
+	}
   button{
     width: 150px;
     background-color: transparent;

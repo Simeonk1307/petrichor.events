@@ -1,15 +1,21 @@
 import { API, POST } from "$lib";
-import { fail } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
-import { rss } from "svelte-awesome/icons";
+import type { PageServerLoad } from "./$types";
+import {  fail, type Actions } from "@sveltejs/kit";
 
-export const load: PageServerLoad = async ({url}) => {
-    const nextpg = url.searchParams.get('nextpg')
-
+export const load: PageServerLoad = async ({url,cookies}) => {
+    let nextpg = url.searchParams.get('to')
+    
+    if (nextpg != null){
+        if (!nextpg.startsWith("/payment/check?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
+            nextpg = null
+        }
+    }
     // console.log(nextpg)
+
+    const accesstoken = cookies.get('session_id')
 	return {
-        nextpg : nextpg,
-		logged_in: false
+        "nextpg" : nextpg,
+        "accessToken": (accesstoken == undefined) ? null : accesstoken
 	};
 };
 
@@ -34,17 +40,18 @@ export const actions = {
                     currTime.setSeconds(currTime.getSeconds() + MAX_AGE)
                     cookies.set("session_id",res.token,{
                         secure:true,
-                        httpOnly:true,
+                        // httpOnly:true,
                         maxAge: MAX_AGE,
-                        expires:currTime
+                        expires:currTime,
+                        path:'/'
                     })
+                    return res
                 }else{
                     return fail(400,{...res,"err":res.message})
                 }
             }else{
                 return fail(400,{...res,"err":res.message})
             }
-            return res
         })
         .catch(err => {
             return fail(400,{

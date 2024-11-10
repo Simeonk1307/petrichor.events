@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { getContext, onMount } from "svelte";
+	import { getContext } from "svelte";
 
     export let event_name='Event';
     export let img_url;
-    export let date='01.08.24';
     export let top;
     export let left;
     const dialogPopUp:Function = getContext('displayPopUp')
@@ -20,15 +19,12 @@
   
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="individualContainer" style="{top ? "top:100px;" :""} {left ? "left:15%;" : ""} " on:click={handleClick}>
+  <div class="individualContainer" style="{top ? "top:40%;" :""} {left ? "left:15%;" : ""} " on:click={handleClick}>
     <div class="inner">
       <div class="image">
         <img class="image1" alt="logo" src={img_url}>
         <div class="content">
           <p class="heading">{event_name}</p>
-          <div class="btn">
-              <p class="heading">{date}</p>
-          </div>
         </div>
       </div>
       
@@ -44,7 +40,7 @@
   
     .individualContainer {
       width: 220px;
-      height: 280px;
+      height: 250px;
       margin: 50px 30px;
       position: relative;
       box-sizing: border-box;
@@ -68,7 +64,7 @@
       flex-direction: column;
       left: 30px;
       top: -30px;
-      z-index: 4;
+      /* z-index: 4; */
     }
 
 
@@ -79,25 +75,15 @@
     .heading{
       margin-top: 5%;
       padding: 2%;
-      font-size: medium;
+      font-family: var(--pfont);
+      font-size: 20px;
       font-weight: bolder;
-    }
-    
-    .btn{
-      display: flex;
-      align-items: center;
-      margin-top: 0%;
-      padding-top: 2%;
-      align-items: center;
-      padding-right: 9%;
-      overflow: hidden;
-      gap: 10%;
     }
     .image1 {
       min-height: 220px;
       width: 220px;
-      z-index: 5;
-      transition: all 0.25s ease;
+      /* z-index: 5; */
+      transition: all 0.35s ease;
     }
 
     /* .individualContainer:hover .image{
@@ -107,7 +93,7 @@
     @media (max-width:900px){
       .individualContainer {
         width: 200px;
-        height: 240px;
+        height: 210px;
         margin: 45px 30px;
         position: relative;
         box-sizing: border-box;
@@ -116,7 +102,11 @@
       .image1 {
         min-height: 180px;
         width: 200px;
-        z-index: 5;
+        /* z-index: 5; */
+      }
+      .image{
+        left: 20px;
+        top: -25px;
       }
     }
 

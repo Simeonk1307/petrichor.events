@@ -1,5 +1,7 @@
-export const load = async ({ url }) => {
-	return {
-		path: url.pathname
-	};
-};
+import type { PageServerLoad } from "./home/$types"
+
+export const load : PageServerLoad = ({ url }) => {
+    return {
+      url: url.pathname,
+    }
+  }

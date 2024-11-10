@@ -2,91 +2,177 @@
 	import Globe from '$lib/assets/svgs/globe.svg';
 	import hand from '$lib/assets/HomePage/hand.png';
 	import { goto } from '$app/navigation';
+	import calculator from 'svelte-awesome/icons/calculator';
+	import { onMount } from 'svelte';
 
-	export let pageWidth:number;
+	export let pageWidth: number;
+	export let slide:Function;
+	export let toAnimate: boolean;
 
-	function discover(){
+	slide = (value:number) => {
+		if (value < height + 100 && value >= 0) {
+				if (content)
+					content.style.left = value* -1 + 'px';
+				if (img) 
+					img.style.bottom = value * -0.8 + 'px';
+				// strip.style.left = value* -5 + 'px';
+		}
+	}
+
+	function discover() {
 		window.scrollTo({
 			top: window.innerHeight,
-			behavior:'smooth'
+			behavior: 'smooth'
+		});
+	}
+	let plang: string[] = [
+		'PETRICHOR',
+		'पेट्रीकोर',
+		'பெட்ரிகோர்',
+		'પેટ્રિકોર',
+		'പെട്രിക്കോർ',
+		'পেট্রিকোর',
+		'పెట్రికోర్',
+		'ਪੈਟ੍ਰਿਕੋਰ'
+	];
 
+	function ca_portal() {
+		goto('/CA/welcome');
+	}
+	let len = plang.length;
+	let content: HTMLElement;
+	let title: HTMLElement;
+	let dot: HTMLElement;
+	let img: HTMLElement;
+	let strip: HTMLElement;
+	let height = 0;
+
+	onMount(() => {
+		let pos = 0;
+		let posi = 0;
+		// let atLast = 0;
+		if (toAnimate){
+			let x = setInterval(() => {
+				if (pos >= plang[posi].length) {
+					dot.style.display = 'none'
+					clearInterval(x)
+					return
+				}
+				if (title) {
+					title.innerText += plang[posi].at(pos++);
+				}
+			}, 600);
+		} else {
+			title.innerText = plang[posi]
 		}
-		)
-	}
 
-	function ca_portal(){
-		goto('/CA/welcome')
-	}
-	
+		height = window.innerHeight;
+		// window.onscroll =
+	});
 
 </script>
 
+<div class="gradient-bg">
+	<div class="gradients-container extra">
+		<div id="g1-3" class="g" />
+		<div id="g1-2" class="g" />
+		<div id="g1-1" class="g" />
+		<div id="g1-7" class="g" />
+	</div>
+</div>
+
 <main>
 	<div class="first-block">
-		<div class="content">
-
-			<div class="title"><p>Petrichor</p></div>
+		<div class="content" bind:this={content}>
+			<div class="title">
+				<p class="atmos" bind:this={title} />
+				<p class="atmos dot" bind:this={dot}>|</p>
+			</div>
 			<div class="content_box">
-
 				<div class="caption">
-					Experience the Magic of Petrichor<br/>
-					Join us at IITPKD for a celebration of culture, creativity, and camaraderie at the Petrichor fest.
+					Experience the Magic of Petrichor<br />
+					Join us at IITPKD for a celebration of culture, creativity, and camaraderie at the Petrichor
+					fest.
 				</div>
 				<div class="buton_area">
-						<button type="button" class="ca_portal" on:click={ca_portal}>CA Portal 
-							<svg width="20px" height="20px" viewBox="0 2.5 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M10 7L15 12L10 17" stroke="gray" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</button>
-						<button type="button" class="discover" on:click={discover}>Discover More 
-							<svg width="20px" height="20px" viewBox="0 2.5 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M10 7L15 12L10 17" stroke="gray" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-
-						</button>
+					<button type="button" class="ca_portal" on:click={ca_portal}
+						>CA Portal
+						<svg
+							width="20px"
+							height="20px"
+							viewBox="0 2.5 19 19"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M10 7L15 12L10 17"
+								stroke="gray"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</button>
+					<button type="button" class="discover" on:click={discover}
+						>Discover More
+						<svg
+							width="20px"
+							height="20px"
+							viewBox="0 2.5 19 19"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M10 7L15 12L10 17"
+								stroke="gray"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</button>
 				</div>
 			</div>
 		</div>
-		{#if pageWidth > 700}
-		<div class="imagediv">
-			<img src={hand} alt=""/>
-		</div>
-		{/if}
-	</div>
-
-	<div class="strip">
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
-		</div>
-		<div class="strip1">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-			<div class="banner">&nbsp;PETRICHOR</div>
+		<div class="imagediv" bind:this={img}>
+			<img src={hand} alt="" />
 		</div>
 	</div>
 
+	<div class="strip_holder" bind:this={strip}>
+		<div class="strip">
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+			<div class="strip1">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
+				<div class="banner">&nbsp;PETRICHOR</div>
+			</div>
+		</div>
+	</div>
 </main>
 
 <style>
@@ -96,51 +182,73 @@
 		flex-direction: column;
 		background: transparent;
 		background-color: transparent;
+		position: relative;
+		overflow-x: hidden;
+		/* z-index: 11 !important; */
 		/* padding: 5em 0; */
 	}
-    .first-block{
+	main * {
+		overflow: hidden;
+	}
+	.first-block {
 		width: 100vw;
 		flex: 8;
 		/* margin-bottom: 5em; */
 		display: flex;
-		
-    }
-	.content{
+	}
+	.content {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		position: relative;
 	}
-	.imagediv{
+	.imagediv {
 		flex: 1;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		position: relative;
 	}
-	button{
+	.dot {
+		position: relative;
+		animation: blink 0.5s infinite;
+		text-shadow: 1px 1px 1px #a5a5a5, 1px 1.5px 1px #a5a5a5, 1px 2px 1px #a5a5a5,
+			1px 2.5px 1px #a5a5a5, 1px 3px 1px #a5a5a5;
+	}
+	@keyframes blink {
+		100% {
+			opacity: 0;
+		}
+	}
+	button {
 		cursor: pointer;
-		z-index: 2;
+		/* z-index: 2; */
 	}
-	.imagediv img{
+	.imagediv img {
 		height: 85vh;
 		width: 50vw;
 	}
 	.title {
 		flex: 2;
+		align-items: last baseline;
 		padding-left: 4vw;
 		display: flex;
-		align-items: flex-end;
 		color: white;
+		position: relative;
 	}
 	.title p {
-		font-size: calc(40px + 1.5vw);
+		font-size: calc(25px + 1.5vw);
 		font-weight: 100;
 		margin: 0;
+		text-shadow: 1px 1px 1px #a5a5a5, 1px 1.5px 1px #a5a5a5, 1px 2px 1px #a5a5a5,
+			1px 2.5px 1px #a5a5a5, 1px 3px 1px #a5a5a5;
 	}
-	.content_box{
+	.content_box {
 		flex: 3;
 		display: flex;
 		flex-direction: column;
+		gap: 2rem;
 		justify-content: center;
 	}
 	.caption {
@@ -151,13 +259,13 @@
 		text-wrap: wrap;
 		padding-left: 4vw;
 	}
-	.buton_area{
+	.buton_area {
 		display: flex;
+		width: 80%;
+		max-width: 520px;
 		justify-content: center;
 		align-items: flex-end;
 		justify-content: space-evenly;
-		margin-top: 5rem;
-		margin-right: 10vw;
 	}
 	button {
 		border-radius: 2.5em;
@@ -171,33 +279,42 @@
 		text-align: center;
 		font-weight: 100;
 	}
-	.strip {
-		display: flex;
+	.strip_holder {
 		flex: 2;
-		align-items: center;
-		overflow-x: hidden;
+
 		width: 100vw;
 		max-height: 35px;
+		align-items: center;
+
+		overflow-x: hidden;
 		margin: 2rem 0;
 		border-top: 2px solid white;
 		border-bottom: 2px solid white;
-		padding-top: 12px;
-		padding-bottom: 12px;
+		padding: 5px 0;
 		opacity: 60%;
+		overflow-y: visible !important;
+		position: relative;
 	}
-	.strip1 {
+	.strip {
+		overflow: visible !important;
 		display: flex;
-		justify-content: center;
-		min-width: max(20%,150px);
-
+		align-items: center;
+		height: 100%;
 		/* Apply animation to this element */
 		-moz-animation: example1 5s linear infinite;
 		-webkit-animation: example1 5s linear infinite;
 		animation: example1 5s linear infinite;
 	}
+	.strip1 {
+		display: flex;
+		justify-content: center;
+		overflow-y: visible !important;
+		min-width: max(20%, 150px);
+	}
 
 	.banner {
-		display: inline-block;
+		display: flex;
+		justify-content: center;
 	}
 	/* Move it (define the animation) */
 	@-moz-keyframes example1 {
@@ -205,7 +322,7 @@
 			-moz-transform: translateX(0%);
 		}
 		100% {
-			-moz-transform: translateX(-100%);
+			-moz-transform: translateX(min(-20%, -150px));
 		}
 	}
 	@-webkit-keyframes example1 {
@@ -213,7 +330,7 @@
 			-webkit-transform: translateX(0%);
 		}
 		100% {
-			-webkit-transform: translateX(-100%);
+			-webkit-transform: translateX(min(-20%, -150px));
 		}
 	}
 	@keyframes example1 {
@@ -223,30 +340,84 @@
 			transform: translateX(0%);
 		}
 		100% {
-			-moz-transform: translateX(-100%); /* Firefox bug fix */
-			-webkit-transform: translateX(-100%); /* Firefox bug fix */
-			transform: translateX(-100%);
+			-moz-transform: translateX(min(-20%, -150px)); /* Firefox bug fix */
+			-webkit-transform: translateX(min(-20%, -150px)); /* Firefox bug fix */
+			transform: translateX(min(-20%, -150px));
 		}
 	}
 
-
-	@media only screen and (max-width:900px){
-
+	@media only screen and (max-width: 900px) {
 		.caption {
 			font-size: 14px;
 		}
-		button{
+		button {
 			padding: 0.5em 1em;
 		}
-		.imagediv img{
+		.imagediv img {
 			height: 65vh;
 		}
-		.first-block{
+		.first-block {
 			flex: 7;
 		}
-		.strip{
+		.strip_holder {
 			padding: 8px 0;
 			margin: 1em 0;
 		}
+	}
+
+	@media (max-width: 700px) {
+		.first-block {
+			flex-direction: column-reverse;
+		}
+		.imagediv img {
+			width: 100vw;
+			height: 50vh;
+		}
+		.title {
+			flex: 1;
+		}
+		.buton_area {
+			width: 100%;
+			max-width: unset;
+		}
+	}
+
+	/* Backgorund */
+
+	/* Section 1 */
+	/* Home page */
+	#g1-1 {
+		background: radial-gradient(
+				farthest-corner at 10% 5%,
+				rgba(var(--color2), 1) 0,
+				rgba(var(--color2), 0) 35%
+			)
+			no-repeat;
+	}
+	#g1-2 {
+		background: radial-gradient(
+				farthest-corner at 0px 0px,
+				rgba(var(--color1), 0.8) 0%,
+				rgba(var(--color1), 0) 45%
+			)
+			no-repeat;
+	}
+	#g1-3 {
+		background: radial-gradient(
+				farthest-corner at 0% 10%,
+				rgba(var(--color3), 0.8) 0%,
+				rgba(var(--color3), 0) 75%
+			)
+			no-repeat;
+		width: 100vw;
+		height: 100vh;
+	}
+	#g1-7 {
+		background: radial-gradient(
+				farthest-corner at 0% 52%,
+				rgba(var(--color6), 0.8) 0%,
+				rgba(var(--color6), 0) 45%
+			)
+			no-repeat;
 	}
 </style>

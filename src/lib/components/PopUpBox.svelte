@@ -1,6 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { PopUp } from "$lib/PopUp";
+    // import logo from "$lib/assets/logo.png"
+    import logo from "$lib/assets/logo.png"
 
     let popUpDialog:HTMLDialogElement;
     export let PopUpObj:PopUp;
@@ -39,19 +41,21 @@
 </script>
 
 <dialog bind:this={popUpDialog}>
-    <div class="popUp Box">
+    <div class="popUp Box" >
         <div class="popUpTitleBox">
             <div class="progressDiv" style="width: {width}%;"/>
-            <p>{title}</p>
-        </div>
+            <!-- <img src={logo} alt="" height="50px" width=" 50px"/> -->
+             <img src={logo} alt="" height="70px"/>
+            </div>
         <div class="restBox">
+            <!-- <p>{title}</p> -->
             <div class="popUpContentBox">
                 <p>{content}</p>
             </div>
             <div class="buttonDiv">
                 <button on:click={ () => {
                     popUpDialog.close()
-                }} >Ok</button>
+                }} >Dismiss</button>
             </div>
         </div>
     </div>
@@ -60,78 +64,89 @@
 <style>
     button{
         color: white;
+        background-color: #7171714a;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    p{
+        text-align: center;
+        margin: 0;
     }
     dialog{
-        position: absolute;
+        position: fixed;
         z-index: 400;
-        width: 100vw;
-        height: 100vh;
+        min-width: 100vw;
+        min-height: 100vh;
         display: flex;
         align-items: center;
+        margin: 0 !important;
         justify-content: center;
         background-color: #6161614a;
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
     }
 
-    .progressDiv{
+    .progressDiv {
         width: 0;
-        background-color: #b7a6ef;
+        background-color: #7e7e7e;
         transition: all 0.0000001s ease-in;
         height: 5px;
     }
-    .popUp{
-        color: #e8ddf9;
+    .popUp {
+        color: #ede7f6;
+        display: flex;
         flex-direction: column;
         position: absolute;
         align-items: center;
         height: auto;
         overflow-x: scroll;
         overflow-y: scroll;
-        min-width: 200px ;
-        min-height: 200px;
-        /* padding: 5px;     */
     }
 
-    .popUpTitleBox{
+    .popUpTitleBox {
         width: 100%;
-        background-color: #8662FA;
+        margin: 0 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* background-color: #ef5350; */
+        background-color: black;
         flex: 1;
     }
 
-    .popUpTitleBox p {
-        /* margin: 1px; */
-        margin: 0;
-        margin-top: 5px;
-        text-align: center;
-        font-size: 25px;
-    }
-
-    .restBox{
+    .restBox {
         flex: 12;
         width: 100%;
-        padding: 5px;
+        padding-bottom: 20px;
+        margin: 0 30px;
         display: flex;
         flex-direction: column;
         background-color: black;
     }
 
-    .popUpContentBox{
-        width:100%;
+    .popUpContentBox {
+        width: 100%;
         text-overflow: ellipsis;
         overflow-y: scroll;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex: 3;
+        margin: 10px 5px;
         /* border-top: solid 1px #212121; */
     }
 
-    .popUpContentBox p{
+    .popUpContentBox p {
         margin: 3px;
         text-align: center;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .Box{
         max-width: 60%;
         max-height: 80%;
+        min-width: 300px;
+        min-height: 200px ;
     }
 
     .buttonDiv{

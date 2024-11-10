@@ -3,24 +3,25 @@
 </script>
 
 {#if spinning}
-<div class="main">
-  <div class="spinner" />
+<div class="main" >
+		<div class="spinner" />
 </div>
 {/if}
 <style>
   .main{
     height: 100vh;
     width: 100vw;
-    position: absolute;
-    top:0;
+    position: fixed;
+	pointer-events: none;
     left:0;
-    height: 100vw;
-    z-index: 5;
+    z-index: 1001;
     opacity: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
     background-color: rgba(0, 0, 0,0.8);
   }
 	.spinner {
-    margin: 25% 50%;
 		border: 8px solid #f3f3f3;
 		border-top: 8px solid #3498db;
 		border-radius: 50%;

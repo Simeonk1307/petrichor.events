@@ -1,8 +1,8 @@
 import { API } from '$lib/index'
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
-/** @type {import('./$types').Actions} */
 
+/** @type {import('./$types').Actions} */
 
 export const actions = {	
     register: async ({request}) => {
@@ -10,11 +10,17 @@ export const actions = {
       const data = await request.formData();
       let gradyear = data.get('gradyear')?.valueOf()
       if (data.get('institype') == 'school'){
-         gradyear = 2024 + (12 - Number(data.get('grade')))
+         gradyear = 2025 + (12 - Number(gradyear))
       }
 
       if (data.get('institype') == 'neither'){
         gradyear = 0;
+      }
+
+      const username = data.get('username')
+      const length = username?.toString().length ?? 26
+      if (length > 25){
+        return fail(400,{"err":`Username cannot be greater than 9 characters. Given length: ${length}`})
       }
 
       const response = await fetch(API.register,{

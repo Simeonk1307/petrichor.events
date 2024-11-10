@@ -1,28 +1,35 @@
 <script lang="ts">
   
-  import Icon from 'svelte-awesome/components/Icon.svelte';
-  import { play } from 'svelte-awesome/icons';
+  import { goto } from '$app/navigation';
   export let workshop_name='Workshop';
+  export let workshop_id:string;
   export let img_url;
+
+  function handleClick(){
+    window.location.href = (`/workshop/?id=${workshop_id}`)
+  }
+
+
+
+
 </script>
 
-<div class="individualContainer">
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="individualContainer" on:click={()=>handleClick()}>
   <div class="inner">
     <div class="image">
-      <div class="workshop_image">
-        <img class="image1" alt="logo" src={img_url}>
-      </div>
+      <img class="image1" alt="logo" src={img_url}>
       <div class="content">
         <p class="heading">{workshop_name}</p>
-        <div class="btn">
+        <!-- <div class="btn">
             <button type="button" class="info_btn">More Info<Icon data={play} scale={0.9}/></button>
             <button type="button" class="register_btn">Register</button>
-        </div>
-    </div>
+        </div> -->
+      </div>
     </div>
     
-    <div class="outline">
-    </div>
   </div>
 </div>
 
@@ -35,10 +42,8 @@
 
   .individualContainer {
     float: left;
-    width: 33.33%;
-    padding: 50px;
-    padding-right: 60px;
-    padding-left: 60px;
+    min-width: max(20vw,250px);
+    max-width: 300px;
     box-sizing: border-box;
     border: 1px solid transparent; 
     overflow: hidden;
@@ -63,11 +68,15 @@
     margin-left: 3%;
     overflow: hidden;
     padding-left: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 5%; */
+    left: 30px;
+    top: -30px;
+    width: 100%;
+    /* z-index: 4; */
     border: 1px solid transparent; 
     display: flex;
     flex-direction: column;
-    z-index: 2; 
+    /* z-index: 2;  */
   }
 
   .workshop_image {
@@ -97,6 +106,7 @@
 .heading{
   margin-top: 5%;
   padding: 2%;
+  pointer-events: none;
   font-size: medium;
   font-weight: bolder;
   
@@ -145,19 +155,8 @@
 }
   .image1 {
     height: 200px;
-  }
-
-  @media screen and (max-width: 1000px) {
-    .individualContainer {
-      width: 50%;
-      align-self: center;
-    }
-  }
-
-  @media screen and (max-width: 700px) {
-    .individualContainer {
-      width: 100%;
-      padding: 5% 8%;
-    }
+    width: 100%;
+    pointer-events: none;
+    transition: all 0.25s ease-in-out;
   }
 </style>
