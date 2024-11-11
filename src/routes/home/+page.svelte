@@ -6,6 +6,7 @@
 	import { access_token, loggedIn } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	
 
 	let slideHero:Function;
 	let slideAbout:Function;
@@ -37,7 +38,34 @@
 		}
 		access_token.set(data.accessToken);
 	});
+
+
+export let page: string;
+page='Home'
 </script>
+
+
+
+<div class="nav-container hidden-mobile">
+	{#if page === 'Home'}
+	  <button class="btn bottom-middle"><i class="arrow down"></i></button>
+	  <button class="btn bottom-right"><i class="arrow down-right"></button>
+	  <button class="btn right-middle"><i class="arrow right"></button>
+	{:else if page === 'About'}
+	  <button class="btn bottom-middle"><i class="arrow down"></button>
+	  <button class="btn bottom-left"><i class="arrow down-left"></button>
+	  <button class="btn left-middle"><i class="arrow left"></i></button>
+	{:else if page === 'Event'}
+	  <button class="btn top-middle"><i class="arrow up"></button>
+	  <button class="btn top-right"><i class="arrow up-right"></i></button>
+	  <button class="btn right-middle"><i class="arrow right"></button>
+	{:else if page === 'Workshop'}
+	  <button class="btn top-middle"><i class="arrow up"></i></button>
+	  <button class="btn top-left"><i class="arrow up-left"></i></button>
+	  <button class="btn left-middle"><i class="arrow left"></i></button>
+	{/if}
+  </div>
+
 
 <div class="maincontent {visible ? 'visible' : ''}">
 	<HeroSection bind:pageWidth bind:slide={slideHero} toAnimate={false}/>
@@ -122,4 +150,95 @@
 		top: 0%;
 		height: 100vw;
 	}
+
+
+
+
+
+
+
+	.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hidden-mobile {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .hidden-mobile {
+      display: flex;
+    }
+  }
+
+  .btn {
+    position: absolute;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(51, 51, 51, 0.7);
+    color: white;
+    cursor: pointer;
+  }
+
+  /* Button positions */
+  .bottom-middle { bottom: 10px; left: 50%; transform: translateX(-50%); }
+  .bottom-right { bottom: 10px; right: 10px; }
+  .right-middle { right: 10px; top: 50%; transform: translateY(-50%); }
+
+  .bottom-left { bottom: 10px; left: 10px; }
+  .left-middle { left: 10px; top: 50%; transform: translateY(-50%); }
+
+  .top-middle { top: 80px; left: 50%; transform: translateX(-50%); }
+  .top-right { top: 80px; right: 10px; }
+  .top-left { top: 80px; left: 10px; }
+	
+	
+.arrow {
+  border: solid whitesmoke;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.down-right {
+  transform: rotate(22.5deg);
+  -webkit-transform: rotate(22.5deg);
+}
+.up-right {
+  transform: rotate(-112.5deg);
+  -webkit-transform: rotate(-112.5deg);
+}
+.down-left {
+  transform: rotate(67.5deg);
+  -webkit-transform: rotate(67.5deg);
+}
+.up-left {
+  transform: rotate(-157.5deg);
+  -webkit-transform: rotate(-157.5deg);
+}
+
 </style>
