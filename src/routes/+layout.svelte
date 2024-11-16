@@ -173,7 +173,7 @@ out:fly={{ x: windowX, duration: 400 }}
 </div>
 {/key}
 
-{#if path != '/'}
+{#if path != '/' && path != '/home'}
     <Footer title={title} links={footerLinks}/>
     <BtpBtn/>
 {/if}

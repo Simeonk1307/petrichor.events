@@ -14,6 +14,7 @@
 
 </script>
 
+ 
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -68,7 +69,7 @@
     margin-left: 3%;
     overflow: hidden;
     padding-left: 5%;
-    padding-bottom: 5%; */
+    padding-bottom: 5%;
     left: 30px;
     top: -30px;
     width: 100%;
