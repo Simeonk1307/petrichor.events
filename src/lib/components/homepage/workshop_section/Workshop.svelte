@@ -9,6 +9,13 @@
 </script>
   
 
+
+<div class="gradient-bg">
+  <div class="gradients-container extra">
+    <div class="g" id="g4-1" />
+  </div>
+</div>
+
 <main>
   <h1 class="atmos" style="padding-left: 5%">Workshop</h1>
   <div class="container">
@@ -61,6 +68,20 @@
   .workshop_scroll:hover{
     animation-play-state: paused;
   }
+
+  /* Background */
+	#g4-1 {
+		background: radial-gradient(
+				farthest-corner at 55% 50%,
+				rgba(var(--color4), 0.5) 0,
+				rgba(var(--color4), 0) 50%
+			)
+			no-repeat;
+		width: 100vw;
+		top: 0%;
+		height: 100vw;
+	}
+
   @keyframes workshop{
 		from{
       transform: translateX(0);
