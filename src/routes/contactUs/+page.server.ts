@@ -29,7 +29,7 @@ export const actions = {
         })
         .catch((err)=> fail(400,{
                 "success":false,
-                "err":err.toString(),
+                "err":"Unable to resolve the response. Please re-try after sometime",
             })
         )
 

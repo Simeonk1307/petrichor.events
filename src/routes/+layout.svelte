@@ -19,8 +19,6 @@
 	let path: string;
 	export let data;
 	let windowX:number
-	let mouse: HTMLDivElement
-	let clicked = false;
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
 
@@ -99,7 +97,7 @@
 				}
 			})
 			.catch((err) => {
-				console.log(err.toString());
+				// console.log(err.toString());
 				invalidate.set(true);
 				sessionStorage.setItem('loggedIn', 'false');
 				sessionStorage.setItem('user',  JSON.stringify(defaultUser));

@@ -26,6 +26,9 @@
 		// window.location.replace('/events')
 		isPhone = document.body.clientWidth < 500
 		document.onmousemove = (e) => {
+			if (opening) {
+				return
+			}
 			mouseX = e.clientX;
 			mouseY = e.clientY;
 			background.style.clipPath = `circle(100px at ${mouseX}px ${mouseY}px)`;
@@ -89,9 +92,11 @@
 	let ptext: HTMLDivElement;
 	let main:HTMLElement;
 	setInterval(setLang, 2000);
-
+	let opening = false;
 	function openHome() {
+		opening = true
 		main.style.pointerEvents = 'none'
+		background.style.transition = "none"
 		let x = 120;
 		setInterval(() => {
 			background.style.clipPath = `circle(${x}px at ${mouseX}px ${mouseY}px)`
@@ -146,8 +151,9 @@
       pointer-events: none;
       width: 100vw;
       height: 100vh;
+	  /* transition: clip-path 1s ease-in-out; */
       background-color: rebeccapurple;
-      clip-path: circle(100px at 0px 0px);
+      clip-path: circle(100px at 50vw 50vh);
     }
 	.petr {
 		font-weight: 800;

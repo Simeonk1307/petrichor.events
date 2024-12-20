@@ -4,6 +4,7 @@
 	import { workshops } from '$lib/data/workshop.js';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { payment_url } from '$lib';
 	export let data: any;
 	onMount(() => {
 		if (!$loggedIn || $invalidate) {
@@ -20,11 +21,12 @@
 			goto('/workshop');
 		}
 
-		if ($user.user_data.email.endsWith('iitpkd.ac.in')) {
-			goto(`/payment/allow?id=${data.id}`);
-		} else {
-			goto(`/payment?id=${data.id}`);
-		}   
+		goto(`${payment_url}participants?id=${data.id}&user=${$user.user_data.email}`)
+		// if ($user.user_data.email.endsWith('iitpkd.ac.in')) {	
+		// 	goto(`/payment/allow?id=${data.id}`);
+		// } else {
+		// 	goto(`/payment?id=${data.id}`);
+		// }   
 	});
 </script>
 

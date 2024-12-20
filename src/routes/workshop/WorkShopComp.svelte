@@ -1,7 +1,7 @@
 	<script lang="ts">
 
 	import { goto } from '$app/navigation';
-	import Workshop from '$lib/components/homepage/workshop_section/Workshop.svelte';
+	import {payment_url} from "$lib/index";
 	import type { workshop } from '$lib/types';
 	import { onMount } from 'svelte';
 	export let id;
@@ -12,7 +12,7 @@
 			// For workshop number of participants will be only 1 so
 			// we will skip the add participant page and directly send user to payment page
 
-			goto('/payment/check?id=' + id);
+			goto(`${payment_url}check?id=${id}`);
 			// window.open("https://docs.google.com/forms/d/e/1FAIpQLSfjtgKgnDf_dX3QyrkisEODDw0z2MkRIXAtN28NyHiPEpD5Jg/viewform")
 		}
 

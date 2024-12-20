@@ -46,8 +46,18 @@
 	let img: HTMLElement;
 	let strip: HTMLElement;
 	let height = 0;
+	let mouseX = 0;
+	let mouseY = 0;
+	let middle: Array<number> = [];
 
 	onMount(() => {
+		if (img) {
+			const bounds = img.getBoundingClientRect();
+			middle = [];
+			// getting mid point of the whole card Div
+			middle.push(((bounds.left + bounds.right) / 2) | 0);
+			middle.push(((bounds.top + bounds.bottom) / 2) | 0);
+		}
 		let pos = 0;
 		let posi = 0;
 		// let atLast = 0;
@@ -68,6 +78,21 @@
 
 		height = window.innerHeight;
 		// window.onscroll =
+		img.onmousemove = (e) => {
+			const moveX = ((e.clientX - middle[0]) / 45) | 0;
+			const moveY = ((e.clientY - middle[1]) / 45) | 0;
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+			// console.log(moveX+ " "+moveY)
+			moveX;
+			moveY;
+			if ( Math.abs(moveY) >= 35) return
+			img.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
+		};
+		img.onmouseleave = (e) => {
+			// console.log('leave' + img.className);
+			img.style.transform = `translateX(0px) translateY(0px)`;
+		};
 	});
 
 </script>
@@ -206,8 +231,10 @@
 	.imagediv {
 		flex: 1;
 		display: flex;
+		z-index: 11;
 		align-items: center;
 		justify-content: center;
+		transition: all 0.2s ease-in-out;
 		position: relative;
 	}
 	.dot {

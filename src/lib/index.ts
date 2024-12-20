@@ -1,7 +1,10 @@
 
-// const backend_url = 'http://127.0.0.1:8000/'
-const backend_url = 'https://petri-back.vercel.app/'
+const backend_url = 'http://127.0.0.1:8000/'
+// const backend_url = 'https://petri-back.vercel.app/'
 // const backend_url = 'https://petrichor-backend.vercel.app/'
+
+export const frontend_url = 'http://127.0.0.1:5173/'
+export const payment_url = 'http://127.0.0.1:5174/'
 
 
 // let backend_url = import.meta.env.VITE_backend
@@ -129,5 +132,3 @@ export const footer = {
 }
 
 export const defaultUser = {user_data:{email:"",CACode:"",gradYear:0,institute:"",phone:"",registrations:-1,stream:"",username:""},user_events:[]}
-
-

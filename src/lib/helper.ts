@@ -73,7 +73,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '#',
+        url: '/events',
         linkText: 'Event',
         childLinks: []
         ,

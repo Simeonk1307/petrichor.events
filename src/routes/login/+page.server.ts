@@ -1,4 +1,4 @@
-import { API, POST } from "$lib";
+import { API, payment_url, POST } from "$lib";
 import type { PageServerLoad } from "./$types";
 import {  fail, type Actions } from "@sveltejs/kit";
 
@@ -45,6 +45,7 @@ export const actions = {
                         expires:currTime,
                         path:'/'
                     })
+                    console.log(res)
                     return res
                 }else{
                     return fail(400,{...res,"err":res.message})
@@ -56,7 +57,7 @@ export const actions = {
         .catch(err => {
             return fail(400,{
                 "success":false,
-                "err":err.toString(),
+                "err":"Unable to resolve the response. Please re-try after sometime",
             })
         })
 
