@@ -29,13 +29,13 @@
 			<div id="g1-5" class="g" />
 			<div id="g1-6" class="g" />
 		</div>
-	<!-- {:else if path != '/home'}
+	{:else if path != '/home'}
 		<div class="gradients-container extra">
 			<div id="g1-3_1" class="g" />
 			<div id="g1-2_1" class="g" />
 			<div id="g1-1_1" class="g" />
 			<div id="g1-7_1" class="g" />
-		</div> -->
+		</div>
 	{/if}
 </div>
 
