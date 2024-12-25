@@ -34,12 +34,8 @@
     {#each Object.entries(workshops) as [id, workshop], pos}
     <div 
     class="card {id}"
-    on:mouseover={(e) => showImage(id,e)}
-    on:focus={(e) => showImage(id,e)}
-    on:mouseout={(e) => hideImage(id,e)}
-    on:blur={(e) => hideImage(id,e)}
-    on:mousedown={() => {goto(`/workshop/${id}`)}}
     role="button"
+    on:mousedown={() => {goto(`/workshop/${id}`)}}
     tabindex="0"
     >
     <div
@@ -87,6 +83,15 @@
         cursor: pointer;
         z-index: 12;
 		background-color: rgba(25, 179, 245, 0.363);
+        transition: all 0.5s ease-in-out;
+    }
+    .card:hover {   
+        filter: blur(0px) grayscale(0);
+        scale: 1;
+    }
+    .card:not(:hover) {
+        filter: blur(1px) grayscale(1);
+        scale: 0.9;
     }
     .imageHolder{
         height: 20rem;
@@ -96,7 +101,7 @@
     img{
         height: 20rem;
         aspect-ratio: 1;
-        clip-path: circle(0% at center);
+        clip-path: circle(100% at center);
         transition: 1s ease-in-out;
     }
     .discover {

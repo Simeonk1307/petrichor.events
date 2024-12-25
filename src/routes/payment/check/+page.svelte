@@ -9,19 +9,20 @@
 	onMount(() => {
 		if (!$loggedIn || $invalidate) {
 			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
+			return
 		}
 		let workshop: any | null;
 		if (data.id) {
 			// @ts-ignore
 			workshop = workshops[data.id];
 		} else {
-			goto('/workshop');
+			goto('/workshop');return;
 		}
-		if (!workshop || workshop != undefined) {
-			goto('/workshop');
+		console.log(workshop)
+		if (!workshop || workshop == undefined) {
+			goto('/workshop');return;
 		}
-
-		goto(`${payment_url}participants?id=${data.id}&user=${$user.user_data.email}`)
+		window.location.href = (`${payment_url}participants?id=${data.id}&user=${$user.user_data.email}`)
 		// if ($user.user_data.email.endsWith('iitpkd.ac.in')) {	
 		// 	goto(`/payment/allow?id=${data.id}`);
 		// } else {

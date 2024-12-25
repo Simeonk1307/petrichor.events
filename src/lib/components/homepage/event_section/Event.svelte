@@ -120,6 +120,7 @@
 	.cards {
 		flex: 3;
 		display: grid;
+		margin-top: 84px;
 		grid-template-columns: auto auto;
 	}
 

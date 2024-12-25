@@ -47,7 +47,7 @@
 				invalidate.set(true)
 
 			}else{ // user may have logged in
-				console.log("HH")
+				// console.log("HH")
 				await whoami($access_token ?? "a") 
 			}
 		} else {

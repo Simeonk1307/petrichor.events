@@ -1,22 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Loading from '$lib/components/Loading.svelte';
-	import Person from '$lib/components/Person.svelte';
-	import type { event } from '$lib/types';
 	import { closedRegistrations } from '$lib/data'
 
 	import { onMount } from 'svelte';
-	import { titleCase } from '$lib/index';
+	import { events_compiledmap } from "$lib/markdown";
 	import { goto } from '$app/navigation';
 
-	export let data: any;
-	let events = data['nofee']['events'];
-	let events1 = data['withfee']
+	export let data;
+	let events = data['events'];
 	let loading = false
-	let registeredEvents:Array<string>
+	let registeredEvents;
 	
-	let bg: HTMLDivElement;
-	let currentEvent: event = events[data.eventID];
+	let bg;
+	let currentEvent = events[data.eventID];
 	let registered = false;
 	onMount(() => {
 		bg.style.backgroundImage = `url("${currentEvent.image}")`;
@@ -29,55 +25,150 @@
 
 	let registering = false;
 
-	let currEveFee = events1[parseInt(currentEvent.id.slice(2))].fees
-	let content: HTMLDivElement;
-	const setEvent = (event: event) => {
+	// let currEveFee = events1[parseInt(currentEvent.id.slice(2))].fees
+	let content;
+	const setEvent = (event) => {
 		registering = false;
 		bg.style.backgroundImage = `url("${event.image}")`;
-		currentEvent = event;
-		let eventId = currentEvent.id.slice(2)
-		currEveFee = events1[parseInt(eventId)].fees
 		registered=false	
+		const code = (events_compiledmap[event.id])
+		update(code.data)
 		if(registeredEvents?.includes(event.id)){
 			registered=true
 		}
-		// registeredEvents.forEach(element =>{
-		// 	if(element == event.id){
-		// 		registered=true
-		// 	}
-		// })
-		console.log(eventId)
 		if (content){
 			content.scrollTo(0, 0)
 		}
 	};
 
+	
+    let iframe: HTMLIFrameElement;
+
+    let transformed_code: string;
+
+    const srcdoc = `
+    <!doctype html>
+    <html>
+        <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+            <script type='module'>
+                let c;
+
+                function update(source) {
+                    
+                    const blob = new Blob([source],{ type: 'text/javascript' });
+                    const url = URL.createObjectURL(blob);
+					// console.log(source)
+                    import(url).then(( { default : App }) => {
+                        if (c) c.$destroy();
+
+                        document.body.lastElementChild.innerHTML = '';
+                        c = new App({ target: document.body.lastElementChild })
+                    
+                    })
+
+                }
+
+
+                window.addEventListener('message', event => {
+                update(event.data)})
+            <\/script>
+            <style>
+            * {
+                box-sizing: border-box;
+                font-family: var(--wfont);
+            }
+
+            h1 {
+                font-family: var(--sfont) !important;
+                text-shadow: 1px 1px 1px #a5a5a5,
+                    1px 1.5px 1px #a5a5a5,
+                    1px 2px 1px #a5a5a5,
+                    1px 2.5px 1px #a5a5a5,
+                    1px 3px 1px #a5a5a5
+                    ;
+            }
+                ::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+    /* make scrollbar transparent */
+  }
+    :root {
+    --pfont: 'Raleway', sans-serif;
+    --wfont: 'Roboto', sans-serif;
+    --ofont: 'Arial', sans-serif;
+    --sfont: 'Fredericka the Great', sans-serif;
+  }
+                .bg {
+                    
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100vw;
+                    filter: blur(5px) brightness(50%);
+                    background-position: center;
+		background-size: cover;
+                    background-image: url(${currentEvent.image});
+                }
+                .content {
+                    z-index: 1;
+                    padding-top: 5.5em;
+                    padding-left: 1em;
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    color: white;
+                    flex-direction: column;
+                    place-items: center;
+                    overflow-y: scroll;
+                }
+                body {
+                    margin: 0;
+                }
+				@media (max-width:600px) {
+					.content {
+					z-index: 1;
+					padding-top: 2em;
+					margin: 0;
+					padding-left: 0;
+				}
+				}
+        </style>
+        </head>
+        <body>
+            <div class="bg"> </div>
+            <div class="content"></div>
+        </body>  
+    </html>
+    `;
+    let height = 0;
+    function update(code: string) {
+        console.log("Updating")
+        iframe.contentWindow?.postMessage(code, "*");
+    }
+
 </script>
 
-<Loading spinning = {loading}></Loading>
 
 <div class="bg" bind:this={bg} />
 <div class="parent">
 	<div class="sidebar">
 			<div class="sbcont">
 		
-				{#each events as event, index}
+				{#each Object.values(events) as event, index}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div
 				class="card"
 				style="background-image: url('{event.image}');"
 				on:mouseenter={() => {
-					setEvent(event);
-					let query = new URLSearchParams($page.url.searchParams.toString());
-					query.set('id', index.toString());
-					goto(`?${query.toString()}`);
-					
+					setEvent(event);	
 				}}
 				on:mousedown={() => {
 					setEvent(event);
-					let query = new URLSearchParams($page.url.searchParams.toString());
-					query.set('id', index.toString());
-					goto(`?${query.toString()}`);
 					
 				}}
 			>
@@ -88,112 +179,13 @@
 				{/each}
 			</div>
 	</div>
-	<div class="content" bind:this={content}>
-		<div class="banner">
-			<h1 class="atmos" style="height: {currentEvent.name.length > 18 ? '14rem' : '10rem'};">
-				{currentEvent && currentEvent.name}
-			</h1>
-			<span class="date">{currentEvent.date}</span>
-			{#if currentEvent.theme}
-			<h2>THEME</h2>
-			<p style="margin-top: -1rem;">{currentEvent.theme}</p>
-			{/if}
-			<p>{currentEvent && currentEvent.about}</p>
-			<div class="buttons">
-				<a href="#rules" class="a-unset register">LEARN MORE</a>
-				{#if closedRegistrations.includes(currentEvent.id)}
-					<!-- svelte-ignore a11y-missing-attribute -->
-					<a class="a-unset register">Registrations Closed</a>
-				{:else}
-					<a href="#register" class="a-unset register">REGISTER NOW FOR {currEveFee==0?'FREE':`₹${currEveFee}`}</a>
-				{/if}
-			</div>
-		</div>
-		<div class="rulebook" id="rules">
-			<div class="structure">
-				<!-- {#each Object.keys(currentEvent.rulebook.structure) as struct}
-                    <h2>{titleCase(struct)}</h2>
-                    {#each currentEvent.rulebook.structure[struct] as point}
-                        <li>{point}</li>
-                    {/each}
-                {/each} -->
-				{#if currentEvent.rulebook.structure.length > 0}
-					<h2>STRUCTURE</h2>
-				{/if}
-				{#if currentEvent.rulebook.structure}
-				{#each currentEvent.rulebook.structure as struct}
-					<li class="nodot">{titleCase(struct)}</li>
-				{/each}
-				{/if}
-			</div>
-			<div class="rules">
-				<h2>RULES</h2>
-				{#if currentEvent.rulebook.rules}
-				{#each currentEvent.rulebook.rules as struct}
-					<li class="nodot">{titleCase(struct)}</li>
-				{/each}
-				{/if}
-			</div>
-			<div class="judging">
-				<h2>JUDGING CRITERIA</h2>
-				{#if currentEvent.rulebook.judging}
-				{#each currentEvent.rulebook.judging as struct}
-					<li class="nodot">{titleCase(struct)}</li>
-				{/each}
-				{/if}
-			</div>
-			<div class="prizes">
-				<h2>PRIZES WORTH</h2>
-				{#if currentEvent.rulebook.prizes}
-				{#if currentEvent.id.slice(0,1)=='T'}
-				{#each currentEvent.rulebook.prizes as struct}
-					<li style="list-style: none;">{titleCase(struct)}</li>
-				{/each}
-				{/if}
-				{#if currentEvent.id.slice(0,1)=='C'}
-				{#each currentEvent.rulebook.prizes as struct, index}
-					<li style="font-size: 22px; list-style: none; font-weight: 400">Prize for position {index + 1} : {titleCase(struct)}</li>
-				{/each}
-				{/if}
-				{/if}
-			</div>
-		</div>
-		<div >
-			<h2 >ORGANISERS</h2>
-			<div class="orgcont">
-				{#each currentEvent.organisers as p}
-					<Person personData={p} />
-				{/each}
-			</div>
-			{#if closedRegistrations.includes(currentEvent.id)}
-				<div class="button-cont">
-					<button class="register">Registrations Closed</button>
-				</div>
-			{:else}
-			<div class="button-cont">
-				{#if registering || registered}
-					<button
-						id="register"
-						class="register"
-						disabled
-						style="background-color: aqua;opacity:40%"
-						on:click={() => goto('/payment/check/')}
-						>{registered ? 'Registered' : 'Register for' + currentEvent.name}</button
-					>
-				{/if}
-				{#if !registering && !registered}
-					<button
-					id="register"
-						class="register"
-						on:click={() => {
-							goto('/payment/check/')
-						}}>{registered ? 'Registered ' : 'Register for ' + currentEvent.name}</button
-					>
-				{/if}
-			</div>
-			{/if}
-		</div>
-	</div>
+	<iframe
+            class="content"
+            bind:this={iframe}
+            title="repl"
+            {srcdoc}
+            {height}
+        />
 </div>
 
 <style>
@@ -322,14 +314,12 @@
 	}
 	.content {
 		z-index: 1;
-		padding-top: 5.5em;
-		padding-left: 1em;
 		position: relative;
 		width: 100%;
 		display: flex;
+		height: 100vh;
 		flex-direction: column;
 		place-items: center;
-		height: 90vh;
 		overflow-y: scroll;
 	}
 	.buttons {

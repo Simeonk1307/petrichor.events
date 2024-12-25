@@ -119,7 +119,7 @@
 			speedy += (e.clientY - prevY)
 			prevX = e.clientX
 			prevY = e.clientY
-			console.log (speedx + "__" + speedy)
+			// console.log (speedx + "__" + speedy)
 			x = setInterval(() => {
 				if (cursor) {
 					cursor.style.top = `${cursor.style.top + speedy}px`;
@@ -127,7 +127,7 @@
 				}
 				speedx *= 0.001
 				speedy *= 0.001
-				console.log (speedx + " " + speedy)
+				// console.log (speedx + " " + speedy)
 				if (Math.abs(speedx) <= 1 && Math.abs(speedy) <= 1) {
 					clearInterval(x)
 					speedx = 0; speedy = 0
@@ -139,13 +139,13 @@
 
 	function change(currentId: number, dir: number) {
 		// if (isTransitioning) return;
-		console.log(currentId);
+		// console.log(currentId);
 
 		const currentElement = elementMap[currentId];
 		const nextId = next[currentId][dir];
 		const nextElement = elementMap[nextId];
-		console.log(nextId);
-		console.log(dir);
+		// console.log(nextId);
+		// console.log(dir);
 
 		gsap.to(currentElement, { scale: 0.8, duration: 0.5 });
 		gsap.to(nextElement, { scale: 0.8, duration: 0.5, delay: 0.5 });
@@ -200,10 +200,9 @@
 <!-- <button on:click={() => change(currentComponent, 2,1)} class="corner-btn top-right">bt1</button>
 <button on:click={() => change(currentComponent, 3,2)} class="corner-btn bottom-left">btn2</button>
 <button on:click={() => change(currentComponent, 4,3)} class="corner-btn bottom-right">btn3</button> -->
-<div class="cursor" bind:this={cursor}>
-</div>
+<!-- <div class="cursor" bind:this={cursor}>
+</div> -->
 
-<div class="nav-container hidden-mobile">
 	{#if currentComponent === 1}
 		<button class="btn bottom-middle" on:click={() => change(1, 3)}><i class="arrow down" /></button
 		>
@@ -230,12 +229,8 @@
 		<button class="btn top-left" on:click={() => change(4, 6)}><i class="arrow up-left" /></button>
 		<button class="btn left-middle" on:click={() => change(4, 5)}><i class="arrow left" /></button>
 	{/if}
-</div>
 
 <style>
-	* {
-		cursor: none;
-	}
 	.cursor {
 		width: 10px;
 		height: 10px;
@@ -253,6 +248,7 @@
 		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
+		z-index:20;
 	}
 	.maincontent {
 		display: grid;
@@ -266,6 +262,7 @@
 		align-items: center;
 		width: 100vw;
 		top: 0;
+		z-index: 20;
 		position: relative;
 		/* background-color: rgba(255, 200, 100); */
 		height: 100vh;
@@ -279,8 +276,8 @@
 		top: 0;
 		left: 0;
 		width: 100vw;
+		z-index:30;
 		height: 100vh;
-		z-index: 10;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -302,6 +299,8 @@
 		height: 35px;
 		width: 35px;
 		border: none;
+		z-index:30;
+		transform: translateZ(10px);
 		border-radius: 4px;
 		background-color: rgba(51, 51, 51, 0.7);
 		color: white;
