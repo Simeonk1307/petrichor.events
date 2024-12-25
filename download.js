@@ -79,18 +79,48 @@ export const pre_components = [
         name : 'Person',
         type: "svelte",
         source: `<script lang="ts">
-    export let personData = {
-        name: 'John Doe',
-        phone: '123-456-7890',
-        image: 'https://picsum.photos/200/300'
-    }
+    export let name = 'John Doe'
+    export let phone = '123-456-7890'
+    import { onMount } from "svelte";
+
+    let url = 'https://picsum.photos/200/300'
+    let origin = "https://finance-petrichor.vercel.app"
+
+     onMount(() => {
+        if (window.top.location.origin)
+            origin = window.top.location.origin
+    
+        // img_div = document.getElementById("back_bg") as HTMLDivElement;
+        if (phone != '123-456-7890') {
+            url = \`\${origin}/uploads/\${name.toLowerCase()}.png\`
+        }
+
+        if (origin ==  "https://finance-petrichor.vercel.app" || origin == "http://localhost:5173"){
+            fetch('https://petri-back.vercel.app/internal/image/', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                credentials: 'include',
+                mode: 'cors',
+                body: JSON.stringify({
+                    "name":name,
+                    "password": process.env.pass
+                })
+            }).then(res => res.json())
+            .then(res => {
+                const imageURL = \`data:image/png;base64,\${res.image}\`;
+                url = \`\${imageURL}\`;
+            })
+        }
+    })
 </script>
 
 <div class="main">
-    <div class="backpic" style="background-image: url('{personData.image}');">
+    <div class="backpic" id="back_bg" style="background-image: url('{url}');">
     </div>
-    <h2>{personData.name}</h2>
-    <p>{personData.phone}</p>
+    <h2>{name}</h2>
+    <p>{phone}</p>
 </div>
 
 
@@ -364,3 +394,24 @@ for (const event of events_data) {
 }
 // console.log(JSON.stringify(events_compiledmap,null, 2))
 fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap,null, 2)}`)
+
+await fetch('https://petri-back.vercel.app/internal/images/all/', {
+    method: 'POST',
+    headers: {
+        'Content-type': 'application/json',
+    },
+    credentials: 'include',
+    mode: 'cors',
+    body: JSON.stringify({
+        "password": process.env.pass
+    })
+}).then(res => res.json())
+.then(async res => {
+    console.log("Got all images")
+    for (const image of res.data) {
+        fs.writeFileSync(path.resolve("./static/uploads/",`${image.name.toLowerCase()}.png`),Buffer.from(image.image,'base64'))
+    }
+    return res.data
+}).catch(err => {
+    console.log(err.toString())
+})
