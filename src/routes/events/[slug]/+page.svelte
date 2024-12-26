@@ -44,8 +44,6 @@
 	
     let iframe: HTMLIFrameElement;
 
-    let transformed_code: string;
-
     const srcdoc = `
     <!doctype html>
     <html>
@@ -189,27 +187,6 @@
 </div>
 
 <style>
-	.banner > h1{
-		font: var(--sfont);
-	}
-	.button-cont {
-		width: 100%;
-		display: grid;
-		place-items: center;
-		margin-bottom: 3em;
-		margin-top: 1em;
-	}
-	.orgcont {
-		display: flex;
-		justify-content: center;
-	}
-	#register > h2 {
-		text-align: center;
-	}
-	.nodot {
-		list-style-type: none;
-		margin-bottom: 0.6em;
-	}
 
 	.card {
 		width: 90%;
@@ -273,6 +250,7 @@
 		scrollbar-width: none;  /* Firefox */
 		overflow-y: scroll;
 		height: 100vh;
+		padding-top: 80px;
 		width: 25%;
 		background-color: #28282d98;
 		backdrop-filter: blur(40px);
@@ -316,40 +294,12 @@
 		z-index: 1;
 		position: relative;
 		width: 100%;
+		border: none	;
 		display: flex;
 		height: 100vh;
 		flex-direction: column;
 		place-items: center;
 		overflow-y: scroll;
-	}
-	.buttons {
-		margin-top: 2rem;
-		margin-bottom: 2rem;
-	}
-	.buttons > a {
-		margin-left: 0.75em;
-		margin-right: 0.75em;
-	}
-	.banner > h1 {
-		font-size: 4.5vw;
-		/* position: absolute;   */
-		right: 5vw;
-		margin-bottom: -2.33rem;
-		margin-top: 1.33rem;
-		text-align: center;
-	}
-	.banner > p {
-		margin-top: 2em;
-		font-size: 23px;
-		width: 90%;
-	}
-	.banner > span {
-		font-size: 20px;
-	}
-	.rulebook {
-		margin-top: 2rem;
-		width: 85%;
-		font-size: 22px;
 	}
 	
 	@keyframes banneranim {
@@ -363,26 +313,7 @@
 			background-position: 0 0;
 		}
 	}
-	.banner {
-		display: flex;
-		flex-direction: column;
-		width: 85%;
-		place-items: center;
-		background-color: rgba(0, 0, 0, 0.146);
-		/*
-		* Created with https://www.css-gradient.com
-		* Gradient link: https://www.css-gradient.com/?c1=ab84d1&c2=1422c1&gt=l&gd=dtl
-		*/
-		/* background: #ab84d14b; */
-		/* background: linear-gradient(135deg, #ab84d134, #1422c139); */
-		backdrop-filter: blur(100px);
-		background-size: 150% 150%;
-		padding: 1rem;
-		border-radius: 12px;
-		margin-top: 1em;
-		/* animation: banneranim 5s linear infinite; */
-	}
-	@media (max-width: 600px) {
+		@media (max-width: 600px) {
 		/* .sidebar {
 			height: 20vh;
 			display: flex;
@@ -397,12 +328,6 @@
 			position: relative;
 			cursor: pointer;
 		} */
-		.banner > h1{
-			font-size: 28px;
-		}
-		.date{
-			margin-top: -3em;
-		}
 		.content {
 			z-index: 1;
 			padding-top: 2em;

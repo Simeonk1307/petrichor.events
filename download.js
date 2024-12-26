@@ -369,6 +369,22 @@ let events_data = await fetch('https://petri-back.vercel.app/internal/events/all
     console.log(err.toString())
 })
 const events_compiledmap = {}
+const events = {
+    'C': {"events": {}},
+    "T": {"events": {}},
+    "W": {"events": {}},
+    "I": {"events": {}}
+    
+}
+
+function addEvent(event) {
+    const event_data = {
+        "name": event.name,
+        "id": event.eventId,
+        "image": event.image_url,
+    }
+    events[event.eventId.at(0)]['events'][event.eventId] = event_data
+}
 
 for (const event of events_data) {
     await fetch('https://petri-back.vercel.app/internal/event/', {
@@ -386,6 +402,7 @@ for (const event of events_data) {
     }).then(res => res.json())
     .then(async res => {
         if (res.status == 200){
+            addEvent(res)
             // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
             const result = await compileasync(res.markdown) 
             console.log(event.eventId)
@@ -397,8 +414,10 @@ for (const event of events_data) {
         console.log(err.toString())
     })
 }
+// console.log(events.T.events)
 // console.log(JSON.stringify(events_compiledmap,null, 2))
 fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap,null, 2)}`)
+fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events,null, 2)}`)
 
 await fetch('https://petri-back.vercel.app/internal/images/all/', {
     method: 'POST',

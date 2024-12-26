@@ -1,25 +1,24 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { cultural, technical } from '$lib/data';
+import { events_data } from '$lib/new_data';
 
 
 export const load: PageLoad = ({ params, url }) => {
     const url_parts = url.pathname.split('/')
     let eventID = url_parts[url_parts.length - 1] 
-    if (eventID == "technical") {
-        eventID = Object.keys(technical.events)[0]
-    } else if (eventID == "cultural") {
-        eventID = Object.keys(cultural.events)[0]
-    } 
-    console.log(eventID)
-
-    if (params.slug == 'technical'){
-        return {'events':technical, 'eventID': eventID, "type": 'technical'}
-    } else if (params.slug == 'cultural'){
-        // console.log(cultural)
-        return {'events':cultural.events, 'eventID': eventID, "type": 'cultural'}
+    const event_type = params.slug.at(0)?.toUpperCase()
+    if (eventID == params.slug) {
+        eventID = Object.keys(events_data[event_type].events)[0]
     }
 
-    throw error(404)
+    return {'events':events_data[event_type].events, 'eventID': eventID, "type": 'technical'}
+    // if (params.slug == 'technical'){
+    // } else if (params.slug == 'cultural'){
+    //     // console.log(cultural)
+    //     return {'events':cultural.events, 'eventID': eventID, "type": 'cultural'}
+    // }
+
+    // throw error(404)
     
 };
