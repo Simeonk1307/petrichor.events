@@ -17,10 +17,6 @@
 	onMount(() => {
 		bg.style.backgroundImage = `url("${currentEvent.image}")`;
 		setEvent(currentEvent)
-		let local=window.localStorage.getItem("registeredEvents")?.split(",")
-		if (local){
-			registeredEvents = local;
-		}
 	});
 
 	let registering = false;
@@ -32,7 +28,9 @@
 		bg.style.backgroundImage = `url("${event.image}")`;
 		registered=false	
 		const code = (events_compiledmap[event.id])
-		update(code.data)
+		setTimeout(() => {
+			update(code.data)
+		},100)
 		if(registeredEvents?.includes(event.id)){
 			registered=true
 		}
@@ -56,7 +54,7 @@
                 let c;
 
                 function update(source) {
-                    
+				
                     const blob = new Blob([source],{ type: 'text/javascript' });
                     const url = URL.createObjectURL(blob);
 					// console.log(source)
@@ -221,20 +219,6 @@
 		bottom: 0;
 		left: 1em;
 	}
-	.register {
-		padding: 0.8em;
-		padding-inline: 1em;
-		background-color: rgba(237, 237, 237, 0.137);
-		border-radius: 0.4em;
-		border: unset;
-		color: white;
-		font-size: 20px;
-		transition: 200ms ease-in-out;
-	}
-	.register:hover {
-		background-color: rgb(255, 255, 255);
-		color: black;
-	}
 	.bg {
 		position: fixed;
 		top: 0;
@@ -314,20 +298,6 @@
 		}
 	}
 		@media (max-width: 600px) {
-		/* .sidebar {
-			height: 20vh;
-			display: flex;
-			overflow: auto;
-			width: initial;
-		}
-		.card {
-			all: unset;
-			width: 30vw;
-			background-position: center;
-			background-size: cover;
-			position: relative;
-			cursor: pointer;
-		} */
 		.content {
 			z-index: 1;
 			padding-top: 2em;
@@ -378,22 +348,9 @@
 		.sbcont {
 			overflow: scroll;
 		}
-		.banner {
-			margin: 1em;
-			width: 90%;
-		}
 		.content {
 			margin: 0;
 			padding-left: 0;
-		}
-		.register {
-			display: block;
-			margin-bottom: 1em;
-			text-align: center;
-		}
-		.orgcont {
-			display: block;
-			padding-left: 25%;
 		}
 	}
 </style>
