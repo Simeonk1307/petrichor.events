@@ -286,7 +286,7 @@ async function compileasync(markdown) {
                 build.onResolve({ filter: /.*/ }, (args) => {
                     // console.log("J", args)
                     if (args.path === 'svelte') {
-                        return { path: `${CDN_URL}/svelte/index.mjs`, namespace: 'cdn' };
+                        return { path: `${CDN_URL}/svelte/internal/index.mjs`, namespace: 'cdn' };
                     }
                     if (args.path.startsWith('svelte/')) {
                         return { path: `${CDN_URL}/svelte/${args.path.slice(7)}/index.mjs`, namespace: 'cdn' };
