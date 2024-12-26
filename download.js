@@ -358,11 +358,15 @@ let events_data = await fetch('https://petri-back.vercel.app/internal/events/all
 }).then(res => res.json())
 .then(async res => {
     console.log("Got all events")
-    return res.data
+    if (res.status == 200) {
+        return res.data
+    } else {
+        console.log(res)
+        return []
+    }
 }).catch(err => {
     console.log(err.toString())
 })
-
 const events_compiledmap = {}
 
 for (const event of events_data) {
@@ -408,8 +412,17 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
 }).then(res => res.json())
 .then(async res => {
     console.log("Got all images")
-    for (const image of res.data) {
-        fs.writeFileSync(path.resolve("./static/uploads/",`${image.name.toLowerCase()}.png`),Buffer.from(image.image,'base64'))
+    if  (res.status == 200) {
+
+        for (const image of res.data) {
+            try {
+                fs.writeFileSync(path.resolve("./static/uploads/",`${image.name.toLowerCase()}.png`),Buffer.from(image.image,'base64'))
+            } catch(e) {
+                console.log("Erro in file save: " + image)
+            }
+        }
+    } else {
+        console.log(res)
     }
     return res.data
 }).catch(err => {
