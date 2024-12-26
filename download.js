@@ -413,6 +413,8 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
 .then(async res => {
     console.log("Got all images")
     if  (res.status == 200) {
+        fs.rmSync("./static/uploads/",{recursive:true,force:true})
+        fs.mkdirSync("./static/uploads/",{recursive:true})
 
         for (const image of res.data) {
             try {
