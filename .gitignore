@@ -12,3 +12,4 @@ script.*
 *.vercel
 package-lock.json
 pnpm-lock.yaml
+static/uploads/*.png

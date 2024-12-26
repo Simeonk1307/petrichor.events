@@ -2,6 +2,7 @@ import { compile } from "svelte/compiler";
 import { compile as mdcompile } from "mdsvex"
 import { build } from 'esbuild';
 import fs from "fs"
+import path from "path"
 
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
@@ -420,7 +421,7 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
             try {
                 fs.writeFileSync(path.resolve("./static/uploads/",`${image.name.toLowerCase()}.png`),Buffer.from(image.image,'base64'))
             } catch(e) {
-                console.log("Erro in file save: " + image)
+                console.log("Erro in file save: " + image + ":" + image.name + " " + e.toString())
             }
         }
     } else {
