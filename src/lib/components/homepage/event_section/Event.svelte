@@ -96,13 +96,14 @@
 		width: 100vw;
 		min-width: 100vw;
 		min-height: 100vh;
+		top: 100px;
+		overflow-y: scroll;
+		position: relative;
 		display: flex;
-		overflow: hidden !important;
 		cursor: pointer;
 		z-index: 2	;
 	}
 	.container * {
-		overflow: hidden !important; 
 		z-index: 2	;
 	}
 	h1 {
@@ -114,14 +115,13 @@
 		align-items: center;
 		justify-content: center;
 		margin: 0;
-		overflow: visible !important;
 		margin-right: 5rem;
 	}
 	.cards {
 		flex: 3;
 		display: grid;
-		margin-top: 84px;
 		grid-template-columns: auto auto;
+		overflow-y: scroll !important;
 	}
 
 	
@@ -151,7 +151,6 @@
 	@media (max-width: 600px) {
 		.container{
 			min-height: 100%;
-			overflow:visible !important ;
 			overflow-x: hidden;
 		}
 		h1{
@@ -169,7 +168,6 @@
 	@media (max-width: 900px) {
 		.container {
 			flex-direction: column-reverse;
-			margin-top: 1rem;
 		}
 		h1{
 			font-size: calc(50px - 1vw);

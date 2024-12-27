@@ -186,7 +186,7 @@
 			<!-- CARD 2 -->
 			<AboutSection bind:slidePhoto={slideAbout} />
 		</div>
-		<div class="card about" bind:this={eventDiv}>
+		<div class="card about event" bind:this={eventDiv}>
 			<Event bind:pageWidth />
 		</div>
 
@@ -231,6 +231,9 @@
 	{/if}
 
 <style>
+
+
+
 	.cursor {
 		width: 10px;
 		height: 10px;
@@ -270,6 +273,9 @@
 	.visible {
 		opacity: 100% !important;
 	}
+	.event {
+		overflow: auto;
+	}
 
 	.nav-container {
 		position: fixed;
@@ -283,15 +289,6 @@
 		align-items: center;
 	}
 
-	.hidden-mobile {
-		display: none;
-	}
-
-	@media (min-width: 768px) {
-		.hidden-mobile {
-			display: flex;
-		}
-	}
 
 	.btn {
 		position: absolute;
@@ -349,10 +346,10 @@
 	}
 
 	.arrow {
-		border: solid whitesmoke;
-		border-width: 0 3px 3px 0;
+		/* border: solid whitesmoke; */
+		/* border-width: 0 3px 3px 0;
 		display: inline-block;
-		padding: 3px;
+		padding: 3px; */
 	}
 	.right {
 		transform: rotate(-45deg);

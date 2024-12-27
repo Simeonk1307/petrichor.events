@@ -80,54 +80,66 @@ export const pre_components = [
         name : 'Person',
         type: "svelte",
         source: `<script lang="ts">
-    export let name = 'John Doe'
-    export let phone = '123-456-7890'
+    export let name = "John Doe";
+    export let phone = "123-456-7890";
     import { onMount } from "svelte";
 
-    let url = 'https://picsum.photos/200/300'
-    let origin = "https://finance-petrichor.vercel.app"
+    let url = "https://www.svgrepo.com/download/454078/account.svg";
+    let origin = "https://finance-petrichor.vercel.app";
 
-     onMount(() => {
-        if (window.top.location.origin)
-            origin = window.top.location.origin
-    
+    onMount(async () => {
+        if (window.top.location.origin) origin = window.top.location.origin;
+
         // img_div = document.getElementById("back_bg") as HTMLDivElement;
-        if (phone != '123-456-7890') {
-            url = \`\${origin}/uploads/\${name.toLowerCase()}.png\`
-        
-
-            if (origin ==  "https://finance-petrichor.vercel.app" || origin == "http://localhost:5173"){
-                fetch('https://petri-back.vercel.app/internal/image/', {
-                    method: 'POST',
+        if (phone != "123-456-7890") {
+            console.log("Origin:", origin), process.env.pass;
+            
+            if (
+                origin == "https://finance-petrichor.vercel.app" ||
+                origin == "http://localhost:5173"
+            ) {
+                console.log("Fetching image", origin);
+                await fetch("https://petri-back.vercel.app/internal/image/", {
+                    method: "POST",
                     headers: {
-                        'Content-type': 'application/json',
+                        "Content-type": "application/json",
                     },
-                    credentials: 'include',
-                    mode: 'cors',
+                    credentials: "include",
+                    mode: "cors",
                     body: JSON.stringify({
-                        "name":name,
-                        "password": process.env.pass
-                    })
-                }).then(res => res.json())
-                .then(res => {
+                        name: name
+                    }),
+                })
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log("Got Image");
                     const imageURL = \`data:image/png;base64,\${res.image}\`;
                     url = \`\${imageURL}\`;
                 })
+                .catch((err) => {
+                    console.log("image fetch error: ", err.toString());
+                });
+            } else {
+                url = \`\${origin}/uploads/\${name.toLowerCase()}.png\`;
             }
+        } else {
+            url = "https://picsum.photos/200/300" 
         }
-    })
+    });
 </script>
 
 <div class="main">
-    <div class="backpic" id="back_bg" style="background-image: url('{url}');">
-    </div>
+    <div
+        class="backpic"
+        id="back_bg"
+        style="background-image: url('{url}');"
+    ></div>
     <h2>{name}</h2>
     <p>{phone}</p>
 </div>
 
-
 <style>
-    .main{
+    .main {
         background-color: rgb(27, 27, 27, 0.5);
         backdrop-filter: blur(12px);
         font-family: var(--pfont);
@@ -137,7 +149,7 @@ export const pre_components = [
         overflow: hidden;
         width: 14em;
     }
-    .backpic{
+    .backpic {
         background-size: cover;
         background-position: center;
         position: relative;
@@ -147,14 +159,14 @@ export const pre_components = [
         margin: 1rem;
         background-repeat: no-repeat;
     }
-    h2{
+    h2 {
         font-family: var(--pfont);
         margin-left: 1rem;
         width: max-content;
         /* color: black; */
-    } 
-    p{
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    p {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         letter-spacing: 0.05em;
         margin: 1rem;
         margin-top: -0.5rem;
@@ -163,7 +175,8 @@ export const pre_components = [
         text-align: center;
         border-radius: 0 0 0.4em 0.4em;
     }
-</style>`
+</style>
+`
     },
     {
         id: 1,
@@ -211,7 +224,7 @@ export const pre_components = [
     onMount(() => {
         origin = window.top?.location.url    
     })
-        
+
 	function handleClick() {
 		if (url.startsWith("#")) {
 			const rulesElement = document.getElementById(url.replace('#', ""));
@@ -219,7 +232,9 @@ export const pre_components = [
 				rulesElement.scrollIntoView({ behavior: 'smooth' });
 				rulesElement.focus(); // Optionally focus the element
 			}
-		}else {
+		} else if (url == "register") {
+            window.top.location.href = \`\${origin}/#register\`
+        }else {
 			window.top.location.href = url;
 		}
 	}
@@ -270,9 +285,11 @@ export const pre_components = [
 		}
 	}
 </style>
+
 `
     }
 ]
+
 
 async function compileasync(markdown) {
     generate_lookup([
@@ -350,7 +367,7 @@ async function compileasync(markdown) {
 
 }
 
-let events_data = await fetch('https://petri-back.vercel.app/internal/events/all/', {
+let events_data = await fetch('http://localhost:8000/internal/events/all/', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -358,8 +375,8 @@ let events_data = await fetch('https://petri-back.vercel.app/internal/events/all
     credentials: 'include',
     mode: 'cors',
     body: JSON.stringify({
-        // "password": process.env.pass
-        "password": process.env.pass
+        // "password": "joPcyq-kipwyc-2jygva"
+        "password": "joPcyq-kipwyc-2jygva"
     })
 }).then(res => res.json())
 .then(async res => {
@@ -395,7 +412,7 @@ function addEvent(event) {
 }
 
 for (const event of events_data) {
-    await fetch('https://petri-back.vercel.app/internal/event/', {
+    await fetch('http://localhost:8000/internal/event/', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -404,8 +421,8 @@ for (const event of events_data) {
         mode: 'cors',
         body: JSON.stringify({
             "id": event.eventId,
-            // "password": process.env.pass
-            "password": process.env.pass
+            // "password": "joPcyq-kipwyc-2jygva"
+            "password": "joPcyq-kipwyc-2jygva"
         })
     }).then(res => res.json())
     .then(async res => {
@@ -429,7 +446,7 @@ fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.strin
 
 export const event_ids=${JSON.stringify(event_ids,null,2)};`)
 
-await fetch('https://petri-back.vercel.app/internal/images/all/', {
+await fetch('http://localhost:8000/internal/images/all/', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -437,7 +454,7 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
     credentials: 'include',
     mode: 'cors',
     body: JSON.stringify({
-        "password": process.env.pass
+        "password": "joPcyq-kipwyc-2jygva"
     })
 }).then(res => res.json())
 .then(async res => {

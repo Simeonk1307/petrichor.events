@@ -341,9 +341,10 @@
 		.sidebar {
 			height: 17svh;
 			display: flex;
+			padding-top: 0px;
 			overflow-x: auto; /* Use overflow-x for horizontal scroll */
-			width: 97%; /* Set the sidebar width to 100% of its parent */
-			margin: 0 0.5em;
+			width: 100%; 
+			margin: 0;
 		}
 		
 		.sbcont > *{
@@ -378,7 +379,6 @@
 			/* width: 100vw; */
 		}
 		.content {
-			height: 79svh;
 			overflow-x: hidden;
 		}
 		.sbcont {
