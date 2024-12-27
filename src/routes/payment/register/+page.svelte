@@ -2,7 +2,7 @@
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
 	import { loggedIn, invalidate, user } from '$lib/stores';
-	import { page } from '$app/state';
+	import { page } from '$app/stores';
 	import { getContext } from 'svelte';
 	import Free from '$lib/components/Free.svelte';
 	import Pay from '$lib/components/Pay.svelte';
@@ -23,7 +23,7 @@
 	onMount(() => {
 		getData()
 		if (!$loggedIn || $invalidate) {
-			goto(`/login?to=${page.url.pathname + page.url.search}`);
+			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
 			return
 		}
 		show = false;
