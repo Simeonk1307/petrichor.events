@@ -3,9 +3,6 @@
 const backend_url = 'https://petri-back.vercel.app/'
 // const backend_url = 'https://petrichor-backend.vercel.app/'
 
-export const frontend_url = 'http://127.0.0.1:5173/'
-export const payment_url = 'http://localhost:5174/'
-
 
 // let backend_url = import.meta.env.VITE_backend
 // if (backend_url == null || backend_url == undefined){
@@ -21,7 +18,7 @@ export const API = {
     events_apply_free: backend_url + 'api/auth/events/apply/free/',
     feedback: backend_url + 'api/send_grievance',
     whoami: backend_url + "api/auth/",
-    event: backend_url + "api/event/",
+    get_event: backend_url + "internal/event/",
     // verifyCA: "https://pcap-back-production.up.railway.app/api/events/verify",
     generateCA: backend_url + 'api/auth/CA/create/',
     verifyCA: backend_url + 'api/CA/verify/',

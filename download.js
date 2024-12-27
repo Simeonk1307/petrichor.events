@@ -94,25 +94,26 @@ export const pre_components = [
         // img_div = document.getElementById("back_bg") as HTMLDivElement;
         if (phone != '123-456-7890') {
             url = \`\${origin}/uploads/\${name.toLowerCase()}.png\`
-        }
+        
 
-        if (origin ==  "https://finance-petrichor.vercel.app" || origin == "http://localhost:5173"){
-            fetch('https://petri-back.vercel.app/internal/image/', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                credentials: 'include',
-                mode: 'cors',
-                body: JSON.stringify({
-                    "name":name,
-                    "password": process.env.pass
+            if (origin ==  "https://finance-petrichor.vercel.app" || origin == "http://localhost:5173"){
+                fetch('https://petri-back.vercel.app/internal/image/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    credentials: 'include',
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        "name":name,
+                        "password": process.env.pass
+                    })
+                }).then(res => res.json())
+                .then(res => {
+                    const imageURL = \`data:image/png;base64,\${res.image}\`;
+                    url = \`\${imageURL}\`;
                 })
-            }).then(res => res.json())
-            .then(res => {
-                const imageURL = \`data:image/png;base64,\${res.image}\`;
-                url = \`\${imageURL}\`;
-            })
+            }
         }
     })
 </script>
@@ -205,6 +206,12 @@ export const pre_components = [
         type: "svelte",
         source: `<script lang="ts">
     export let url = "#rules";
+    import { onMount } from "svelte";
+    let origin = ""
+    onMount(() => {
+        origin = window.top?.location.url    
+    })
+        
 	function handleClick() {
 		if (url.startsWith("#")) {
 			const rulesElement = document.getElementById(url.replace('#', ""));
@@ -212,7 +219,7 @@ export const pre_components = [
 				rulesElement.scrollIntoView({ behavior: 'smooth' });
 				rulesElement.focus(); // Optionally focus the element
 			}
-		} else {
+		}else {
 			window.top.location.href = url;
 		}
 	}
@@ -227,7 +234,7 @@ export const pre_components = [
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
-	.buttons > button {
+	.buttons > a {
 		margin-left: 0.75em;
 		margin-right: 0.75em;
 	}
@@ -244,6 +251,7 @@ export const pre_components = [
 		padding-inline: 1em;
 		background-color: rgba(237, 237, 237, 0.137);
 		border-radius: 0.4em;
+        margin: 0 10px;
 		border: unset;
 		color: white;
 		font-size: 20px;
@@ -253,18 +261,15 @@ export const pre_components = [
 		background-color: rgb(255, 255, 255);
 		color: black;
 	}
-        @media (max-width: 600px) {
-            .register {
+
+	@media (max-width: 600px){
+		.register {
 			display: block;
 			margin-bottom: 1em;
 			text-align: center;
 		}
-            .buttons {
-            margin-bottom: 0px;
-            }
-        }
+	}
 </style>
-
 `
     }
 ]
@@ -377,7 +382,10 @@ const events = {
     
 }
 
+let event_ids = [];
+
 function addEvent(event) {
+    event_ids.push(event.eventId)
     const event_data = {
         "name": event.name,
         "id": event.eventId,
@@ -417,7 +425,9 @@ for (const event of events_data) {
 // console.log(events.T.events)
 // console.log(JSON.stringify(events_compiledmap,null, 2))
 fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap,null, 2)}`)
-fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events,null, 2)}`)
+fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events,null, 2)}; 
+
+export const event_ids=${JSON.stringify(event_ids,null,2)};`)
 
 await fetch('https://petri-back.vercel.app/internal/images/all/', {
     method: 'POST',

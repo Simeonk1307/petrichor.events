@@ -1,47 +1,44 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { closedRegistrations } from '$lib/data'
-
 	import { onMount } from 'svelte';
 	import { events_compiledmap } from "$lib/markdown";
-	import { goto } from '$app/navigation';
+	import type { FrontEvent } from '$lib/types.js';
 
 	export let data;
-	let events = data['events'];
-	let loading = false
-	let registeredEvents;
+	let events : {[key: string]: FrontEvent} = data['events'];
+	let registeredEvents: string[];
 	
-	let bg;
+	let frontend_url: string;
+	let bg: HTMLElement;
 	let currentEvent = events[data.eventID];
 	let registered = false;
 	onMount(() => {
 		bg.style.backgroundImage = `url("${currentEvent.image}")`;
 		setEvent(currentEvent)
+		frontend_url = window.location.origin
 	});
-
-	let registering = false;
-
+	let registering = false;	
 	// let currEveFee = events1[parseInt(currentEvent.id.slice(2))].fees
 	let content;
-	const setEvent = (event) => {
+	const setEvent = (event: FrontEvent) => {
 		registering = false;
 		bg.style.backgroundImage = `url("${event.image}")`;
-		registered=false	
+		registered=false
+		currentEvent = events[event.id]	
 		const code = (events_compiledmap[event.id])
 		setTimeout(() => {
+			if (iframe.contentWindow){
+				iframe.contentWindow.scrollTo({ top: 0, behavior: 'smooth' });
+			}
+			window.scrollTo({ top: 0, behavior: 'smooth' });
 			update(code.data)
 		},100)
 		if(registeredEvents?.includes(event.id)){
 			registered=true
 		}
-		if (content){
-			content.scrollTo(0, 0)
-		}
 	};
 
 	
     let iframe: HTMLIFrameElement;
-
     const srcdoc = `
     <!doctype html>
     <html>
@@ -57,12 +54,13 @@
 				
                     const blob = new Blob([source],{ type: 'text/javascript' });
                     const url = URL.createObjectURL(blob);
+					const content_holder = document.getElementById('content_holder')
 					// console.log(source)
                     import(url).then(( { default : App }) => {
                         if (c) c.$destroy();
 
-                        document.body.lastElementChild.innerHTML = '';
-                        c = new App({ target: document.body.lastElementChild })
+                        content_holder.innerHTML = '';
+                        c = new App({ target: content_holder })
                     
                     })
 
@@ -124,7 +122,19 @@
                 }
                 body {
                     margin: 0;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-direction: column;
                 }
+					#register {
+		border: none;
+		font-size: 20px;
+		color: white;
+		position: relative;
+		text-decoration: none;
+		z-index: 10;
+	}
 				@media (max-width:600px) {
 					.content {
 					z-index: 1;
@@ -136,8 +146,8 @@
         </style>
         </head>
         <body>
-            <div class="bg"> </div>
-            <div class="content"></div>
+            <div class="content" id="content_holder"></div>
+			<span id="register"></span>
         </body>  
     </html>
     `;
@@ -175,16 +185,42 @@
 				{/each}
 			</div>
 	</div>
+	<div class="eventarea">
+
 	<iframe
-            class="content"
-            bind:this={iframe}
-            title="repl"
-            {srcdoc}
-            {height}
-        />
+	class="content"
+	bind:this={iframe}
+	title="repl"
+	{srcdoc}
+	{height}
+	/>
+		<a id="register" href="{frontend_url}/payment/register?id={currentEvent.id}">Register</a>
+	</div>
 </div>
 
 <style>
+	.eventarea {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		position: relative;
+	}
+	#register {
+		border: none;
+		background-color: rgba(164, 164, 164, 0.545);
+		padding: 10px;
+		border-radius: 5px;
+		margin: 10px 20px;
+		font-size: 20px;
+		color: white;
+		/* position: absolute;  */
+		right: 0;
+		bottom: 0;
+		text-decoration: none;
+		z-index: 10;
+	}
 
 	.card {
 		width: 90%;

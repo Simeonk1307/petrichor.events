@@ -1,4 +1,4 @@
-import { API, payment_url, POST } from "$lib";
+import { API, POST } from "$lib";
 import type { PageServerLoad } from "./$types";
 import {  fail, type Actions } from "@sveltejs/kit";
 
@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({url,cookies}) => {
     let nextpg = url.searchParams.get('to')
     
     if (nextpg != null){
-        if (!nextpg.startsWith("/payment/check?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
+        if (!nextpg.startsWith("/payment/register?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
             nextpg = null
         }
     }
@@ -45,7 +45,7 @@ export const actions = {
                         expires:currTime,
                         path:'/'
                     })
-                    console.log(res)
+                    // console.log(res)
                     return res
                 }else{
                     return fail(400,{...res,"err":res.message})

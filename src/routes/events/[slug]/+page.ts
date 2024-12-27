@@ -1,6 +1,4 @@
-import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { cultural, technical } from '$lib/data';
 import { events_data } from '$lib/new_data';
 
 

@@ -65,13 +65,20 @@ export type UserData = {
     registrations: number
 }
 
-export type Event = {
-    eventId: string
+export type FrontEvent = {
+    id: string,
+    name: string,
+    fee: number,
+    minMember:number,
+    maxMember:number,
+    isTeam:boolean,
+    markdown:string,
+    image: string
 }
 
 export type User = {
     user_data : UserData,
-    user_events : Event[]
+    user_events : FrontEvent[]
 }
 
 export type informal = {
