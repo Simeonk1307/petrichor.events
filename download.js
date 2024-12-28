@@ -89,10 +89,10 @@ export const pre_components = [
 
     onMount(async () => {
         if (window.top.location.origin) origin = window.top.location.origin;
-
+        console.log(phone)
         // img_div = document.getElementById("back_bg") as HTMLDivElement;
         if (phone != "123-456-7890") {
-            console.log("Origin:", origin), process.env.pass;
+            console.log("Origin:", origin);
             
             if (
                 origin == "https://finance-petrichor.vercel.app" ||
@@ -120,6 +120,7 @@ export const pre_components = [
                     console.log("image fetch error: ", err.toString());
                 });
             } else {
+                console.log("from uploads")
                 url = \`\${origin}/uploads/\${name.toLowerCase()}.png\`;
             }
         } else {
