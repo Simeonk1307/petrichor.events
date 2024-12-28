@@ -367,7 +367,7 @@ async function compileasync(markdown) {
 
 }
 
-let events_data = await fetch('http://localhost:8000/internal/events/all/', {
+let events_data = await fetch('https://petri-back.vercel.app/internal/events/all/', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -375,8 +375,8 @@ let events_data = await fetch('http://localhost:8000/internal/events/all/', {
     credentials: 'include',
     mode: 'cors',
     body: JSON.stringify({
-        // "password": "joPcyq-kipwyc-2jygva"
-        "password": "joPcyq-kipwyc-2jygva"
+        // "password": process.env.pass
+        "password": process.env.pass
     })
 }).then(res => res.json())
 .then(async res => {
@@ -412,7 +412,7 @@ function addEvent(event) {
 }
 
 for (const event of events_data) {
-    await fetch('http://localhost:8000/internal/event/', {
+    await fetch('https://petri-back.vercel.app/internal/event/', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -421,8 +421,8 @@ for (const event of events_data) {
         mode: 'cors',
         body: JSON.stringify({
             "id": event.eventId,
-            // "password": "joPcyq-kipwyc-2jygva"
-            "password": "joPcyq-kipwyc-2jygva"
+            // "password": process.env.pass
+            "password": process.env.pass
         })
     }).then(res => res.json())
     .then(async res => {
@@ -446,7 +446,7 @@ fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.strin
 
 export const event_ids=${JSON.stringify(event_ids,null,2)};`)
 
-await fetch('http://localhost:8000/internal/images/all/', {
+await fetch('https://petri-back.vercel.app/internal/images/all/', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -454,7 +454,7 @@ await fetch('http://localhost:8000/internal/images/all/', {
     credentials: 'include',
     mode: 'cors',
     body: JSON.stringify({
-        "password": "joPcyq-kipwyc-2jygva"
+        "password": process.env.pass
     })
 }).then(res => res.json())
 .then(async res => {
