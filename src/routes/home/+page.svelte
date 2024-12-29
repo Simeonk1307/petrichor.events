@@ -293,7 +293,7 @@
 	}
 	.bottom {
 		bottom: 0px;
-		background: radial-gradient(transparent, rgb(90, 147, 201));
+		background: linear-gradient(transparent, rgb(90, 147, 201));
 	}
 	.left {
 		left: 0;

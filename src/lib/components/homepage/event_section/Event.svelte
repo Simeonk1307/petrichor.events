@@ -123,7 +123,9 @@
 		grid-template-columns: auto auto;
 		overflow-y: scroll !important;
 	}
-
+	.gradient-bg {
+		height: 110vh;
+	}
 	
 	/* Background */
 	#g3-1 {
@@ -134,7 +136,7 @@
 			)
 			no-repeat;
 		width: 100vw;
-		top: 0%;
+		top: -20%;
 		height: 100vw;
 	}
 
@@ -163,6 +165,12 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+		}
+		#g3-1 {
+			height: 150vh;
+			width: 150vw;
+			left: -10%;
+			top: 20%;
 		}
 	}
 
