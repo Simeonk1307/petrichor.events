@@ -64,7 +64,7 @@ export const footerLinks: Array<Link> = [
 
 export const headerLinks: Array<HeaderLink> = [
     {
-        url: '#',
+        url: '/home?to=2',
         linkText: 'About Us',
         childLinks: [{
             url: "/contactUs",
@@ -73,7 +73,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '/events',
+        url: '/home?to=3',
         linkText: 'Event',
         childLinks: []
         ,

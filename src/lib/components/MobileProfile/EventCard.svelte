@@ -1,13 +1,19 @@
 <script lang="ts">
-	import cultural from '$lib/assets/HomePage/cultural.png';
+	import { goto } from '$app/navigation';
+import cultural from '$lib/assets/HomePage/cultural.png';
 	
 	export let event = {
 		name: 'Event Name',
-		date: 'Date & Time',
-		venue: 'Location',
+		id: "T",
 		verified: false,
 		image: cultural
 	};
+	let links = {
+		"T": "events/technical",
+		"C": "events/cultural",
+		"I": "events/informals",
+		"W": "workshop/"
+	}
 </script>
 
 <div class="main">
@@ -16,9 +22,15 @@
     </div>
 	<div class="data cmn">
 		<h1>{event?.name ?? "Event"}</h1>
-		<h5>{event?.date ?? "Date"}</h5>
-		<h5>{event?.venue ?? "Venue"}</h5>
 		<p class="verified" style="background-color:{event.verified?"green":"red"}">{event.verified?"Verified":"Not Verified"}</p>
+		<button on:click={()=> {
+			if (["T","C","I"].includes(event.id.at(0))) {
+				goto(`${links[event.id.at(0)]}/`)
+			} else {
+				goto(`${links[event.id.at(0)]}/${event.id}`)
+			}
+			
+		}} >More Details</button>
 	</div>
 </div>
 
@@ -32,6 +44,14 @@
     margin: 20px 0;
 
     }
+	button {
+		border: none;
+		padding: 10px;
+		background-color: gray;
+		max-width: 150px;
+		display: flex;
+		justify-content: center;
+	}
 	.main *{
 		box-sizing: border-box;
 	}

@@ -12,9 +12,8 @@
     import {Header, Footer, BtpBtn} from '$lib/components/ui';
     // Dummy data in this helper file
     import {footerLinks, headerLinks} from '$lib/helper';
-	import { workshops } from '$lib/data/workshop.js';
 	import { fade, fly } from 'svelte/transition';
-	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
+	import { events_data } from '$lib/new_data.js';
 
 	let path: string;
 	export let data;
@@ -68,22 +67,33 @@
 		)
 			.then((res) => res.json())
 			.then((res) => {
-				// console.log(res)
+				// console.log(res.user_data)
 				if (res.status == 200) {
 					// invalidate
 					invalidate.set(false);
 					loggedIn.set(true);
 					access_token.set(accessToken);
-					user.set({
+					const events = res.user_events.map((ele:string) => {
+							// @ts-ignore
+						// console.log(ele)
+						const type = ele.eventId.at(0)
+						let eventData= events_data[type][ele.eventId] 
+						if (eventData == null) {
+							eventData = {
+								"name" : "Some Event",
+								"image": "https://picsum.photos/200/300",
+								"id": "T"
+							}
+						}
+						// @ts-ignore
+						eventData['verified'] = ele.verified
+						return eventData
+					})
+					const user_content = {
 						user_data: res.user_data,
-						user_events: res.user_events.map((ele:string) => {
-							// @ts-ignore
-							const eventData= workshops[ele.eventId] 
-							// @ts-ignore
-							eventData['verified'] = ele.verified
-							return eventData
-						})
-					});
+						user_events: events 
+					}
+					user.set(user_content);
 					// console.log($user)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');

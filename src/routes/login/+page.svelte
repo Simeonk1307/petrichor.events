@@ -36,7 +36,14 @@
 			if (result.type == 'success' && result.data) {
 				const rdata = result.data;
 				// console.log(rdata)
-				if (rdata.success && (await whoami(rdata.token))) {
+				const whoami_res = (await whoami(rdata.token))
+				// console.log(whoami_res)
+				if (!whoami_res) {
+					loading(false)
+					displayPopUp('Alert', "Unable to log you in. Please retry after sometime", 4000, afterMessage);
+					return
+				}
+				if (rdata.success) {
 					// this will save all the data to session Storage
 					loading(false);
 					invalidate.set(false);
@@ -53,7 +60,6 @@
 					displayPopUp('Alert', rdata.message, 4000, afterMessage);
 				}
 			} else {
-				// console.log(result)
 				setTimeout(() => {
 					loading(false);
 					displayPopUp(
@@ -73,10 +79,10 @@
 		<h2>Login to <span id="Petrichor">petrichor</span>.events</h2>
 		<form action="?/login" method="POST" use:enhance={loginResult}>
 			<div>
-				<input type="email" name="email" id="email" placeholder="Email" required />
+				<input type="email" name="email" id="email" placeholder="Email" required autocomplete="username" />
 			</div>
 			<div>
-				<input type="password" id="password" name="password" placeholder="Password" required />
+				<input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password" />
 			</div>
 			<div class="button_holder">
 				<div class="button_divs">

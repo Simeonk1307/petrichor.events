@@ -7,7 +7,6 @@
 	import { getContext, onMount } from 'svelte';
 
 	import gsap from 'gsap';
-
 	let slideHero: Function;
 	let slideAbout: Function;
 	let visible = false;
@@ -19,6 +18,13 @@
 	let mainDiv: HTMLElement;
 
 	let currentComponent: number = 1;
+
+	let reverse = {
+  1: { 2: 1, 4: 2, 3: 3 },
+  2: { 4: 3, 3: 4, 1: 5 },
+  3: { 1: 7, 2: 8, 4: 1 },
+  4: { 3: 5, 2: 7, 1: 6 }
+};
 
 	// 1 : right
 	// 2: bottom- right
@@ -60,7 +66,17 @@
 	export let data;
 	const getData: Function = getContext('getData');
 	let pageWidth = 0;
+	let onMountDone = false;
+	let prevGoto = ""
+	$: if (prevGoto != data.goto && onMountDone) {
+		if (data.goto != null) {
+			change(reverse[currentComponent][Number.parseInt(data.goto)])
+		}
+		prevGoto = data.goto
+	}
+
 	onMount(() => {
+
 		setTimeout(() => {
 			visible = true;
 		}, 10);
@@ -110,13 +126,12 @@
 		// let max_expand = -3.5;
 
 		let dir = 0;
-		mainDiv.onwheel = (e) => {
-			// Set animation progress based on scroll position
+		let startX = 0, startY = 0;
+
+		const switching = (deltaX: number, deltaY: number, isTouch?: boolean ) => {
 			if (scrolling || animating) {
 				return
 			}
-			let deltaX = e.deltaX;
-			let deltaY = e.deltaY;
 			if (deltaX < 0 ) {
 				widthLeft += -deltaX * 0.6;
 			} else {
@@ -138,21 +153,21 @@
 					let turnUp = false;
 					let turnDown = false;
 					
-
 					if (heightDown > 40) {
 						turnDown = true;
 					}
 
+					
 					if (widthLeft > 40) {
 						turnLeft = true;
 					}
 					if (widthRight > 40) {
 						turnRight = true;
 					}
-					if (heightUp > 40) {
+					
+					if (heightUp > 40 || (isTouch && heightUp > 4)) {
 						turnUp = true;
 					}
-
 					// 1 : right
 					// 2: bottom- right
 					// 3: bottom
@@ -161,13 +176,18 @@
 					// 6: top-left
 					// 7: top
 					// 8: top-right
-					if (widthLeft > 0 && turnDown) {
+					let minReq = 0
+					if (isTouch) {
+						minReq = 20
+					}
+					console.log(isTouch, minReq, widthLeft, widthRight)
+					if (widthLeft > minReq && turnDown) {
 						dir = 4;
-					} else if (widthLeft > 0 && turnUp) {
+					} else if (widthLeft > minReq && turnUp) {
 						dir = 6;
-					} else if (widthRight > 0 && turnUp) {
+					} else if (widthRight > minReq && turnUp) {
 						dir = 8;
-					} else if (widthRight > 0 && turnDown) {
+					} else if (widthRight > minReq && turnDown) {
 						dir = 2;
 					} else if (turnDown) {
 						dir = 3;
@@ -180,6 +200,7 @@
 					} else {
 						dir = 0;
 					}
+					console.log(dir)
 					change(dir);
 				}
 				heightDown = 0;
@@ -188,9 +209,36 @@
 				widthLeft = 0;
 			}, 100);
 		};
-	});
-	let animating = false;
 
+		mainDiv.onwheel = (e) => {
+			// Set animation progress based on scroll position
+			let deltaX = e.deltaX;
+			let deltaY = e.deltaY;
+			console.log(deltaX, deltaY)
+			switching(deltaX, deltaY)
+
+		}
+		mainDiv.ontouchstart = (e) => {
+			const touch = e.touches[0]
+			startX = touch.clientX
+			startY = touch.clientY
+		}
+		mainDiv.ontouchmove = (e) => {
+			const touch = e.touches[0]
+			let deltaX = (startX - touch.clientX) * 0.1;
+			let deltaY = (startY - touch.clientY) * 0.1 ;
+			console.log(deltaX, deltaY)
+			switching(deltaX, deltaY, true)
+		}
+		if (data.goto != null ) {
+			change(reverse[currentComponent][Number.parseInt(data.goto)])
+		}
+		onMountDone = true
+
+	});
+
+	
+	let animating = false;
 	function change(dir: number) {
 		// if (isTransitioning) return;
 		// console.log(currentId);
