@@ -2,9 +2,9 @@
 	import Globe from '$lib/assets/svgs/globe.svg';
 	import hand from '$lib/assets/HomePage/hand.png';
 	import { goto } from '$app/navigation';
-	import calculator from 'svelte-awesome/icons/calculator';
 	import { onMount } from 'svelte';
 
+	export let change: Function;
 	export let pageWidth: number;
 	export let slide:Function;
 	export let toAnimate: boolean;
@@ -20,10 +20,7 @@
 	}
 
 	function discover() {
-		window.scrollTo({
-			top: window.innerHeight,
-			behavior: 'smooth'
-		});
+		change(3)
 	}
 	let plang: string[] = [
 		'PETRICHOR',
