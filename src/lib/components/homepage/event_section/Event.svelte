@@ -152,6 +152,7 @@
 		.container{
 			min-height: 100%;
 			overflow-x: hidden;
+			margin-top: 300px;
 		}
 		h1{
 			max-height: 50px;

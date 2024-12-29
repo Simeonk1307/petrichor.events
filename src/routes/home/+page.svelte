@@ -3,22 +3,14 @@
 	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
 	import Event from '$lib/components/homepage/event_section/Event.svelte';
 	import Workshop from '$lib/components/homepage/workshop_section/Workshop.svelte';
-	import dot from '$lib/assets/dot.png';
 	import { access_token, loggedIn } from '$lib/stores';
-	import arrowImg from '$lib/assets/arrow.svg';
 	import { getContext, onMount } from 'svelte';
 
 	import gsap from 'gsap';
-	import star from 'svelte-awesome/icons/star';
 
 	let slideHero: Function;
 	let slideAbout: Function;
 	let visible = false;
-	let btn1 = 'About';
-	let btn2 = 'Workshop';
-	let btn3 = 'Event';
-
-	let arrow: HTMLElement;
 
 	let homeDiv: HTMLElement;
 	let aboutDiv: HTMLElement;
@@ -36,29 +28,6 @@
 	// 6: top-left
 	// 7: top
 	// 8: top-right
-	let direction = {
-		1: {
-			1: 3,
-			2: 2,
-			3: 1
-		},
-		2: {
-			1: 3,
-			2: 4,
-			3: 5
-		},
-		3: {
-			1: 7,
-			2: 8,
-			3: 1
-		},
-		4: {
-			1: 7,
-			2: 6,
-			3: 5
-		}
-	};
-
 	let next = {
 		1: {
 			1: 2,
@@ -82,17 +51,11 @@
 		}
 	};
 
-	// let id={
-	//     1:1,
-	//     2:2,
-	//     3:3,
-	//     4:4
-	// }
-
 	let elementMap: { [key: number]: HTMLElement } = {};
 	let screenWidth: number;
 	let screenHeight: number;
-	let cursor: HTMLElement;
+	// let cursor: HTMLElement;
+	let scrolling  = false;
 
 	export let data;
 	const getData: Function = getContext('getData');
@@ -132,118 +95,39 @@
 			3: eventDiv,
 			4: workshopDiv
 		};
-		let speedx = 0;
-		let speedy = 0;
-		let prevX = 0,
-			prevY = 0;
-		let x: string | number | NodeJS.Timeout | undefined;
-		window.onmousemove = (e) => {
-			clearInterval(x);
-			if (cursor) {
-				cursor.style.top = `${e.clientY}px`;
-				cursor.style.left = `${e.clientX}px`;
-			}
-			speedx += e.clientX - prevX;
-			speedy += e.clientY - prevY;
-			prevX = e.clientX;
-			prevY = e.clientY;
-			// console.log (speedx + "__" + speedy)
-			x = setInterval(() => {
-				if (cursor) {
-					cursor.style.top = `${cursor.style.top + speedy}px`;
-					cursor.style.left = `${cursor.style.left + speedx}px`;
-				}
-				speedx *= 0.001;
-				speedy *= 0.001;
-				// console.log (speedx + " " + speedy)
-				if (Math.abs(speedx) <= 1 && Math.abs(speedy) <= 1) {
-					clearInterval(x);
-					speedx = 0;
-					speedy = 0;
-				}
-			}, 5);
-		};
 
-		let animation_length: number[] = [];
-		let start = 0;
-		// for (const child of arrow.children) {
-		// 	animation_length.push(start);
-		// }
+		for (let key = 1; key < 5; key ++) {
+			const ele = elementMap[key]
+			ele.onscroll = (e) => {
+				scrolling = true
+			}
+			ele.onscrollend = (e) => {
+				scrolling = false
+			}
+		}
 
 		let wheelTimeout: number;
-		let max_expand = -3.5;
+		// let max_expand = -3.5;
 
 		let dir = 0;
 		mainDiv.onwheel = (e) => {
 			// Set animation progress based on scroll position
+			if (scrolling || animating) {
+				return
+			}
 			let deltaX = e.deltaX;
 			let deltaY = e.deltaY;
-
-			let turnLeft = false;
-			let turnRight = false;
-			let turnUp = false;
-			let turnDown = false;
-			if (deltaY > 0) {
-				turnDown = true;
-			}
-
-			if (deltaX < 0) {
-				turnLeft = true;
-			}
-			if (deltaX > 0) {
-				turnRight = true;
-			}
-			if (deltaY < 0) {
-				turnUp = true;
-			}
-			// 1 : right
-			// 2: bottom- right
-			// 3: bottom
-			// 4: bottom-left
-			// 5: left
-			// 6: top-left
-			// 7: top
-			// 8: top-right
-			if (turnLeft && turnDown) {
-				dir = 4;
-			} else if (turnLeft && turnUp) {
-				dir = 6;
-			} else if (turnRight && turnUp) {
-				dir = 8;
-			} else if (turnRight && turnDown) {
-				dir = 2;
-			} else if (turnDown) {
-				dir = 3;
-			} else if (turnUp) {
-				dir = 7;
-			} else if (turnLeft) {
-				dir = 5;
+			if (deltaX < 0 ) {
+				widthLeft += -deltaX * 0.6;
 			} else {
-				dir = 1;
+				widthRight += deltaX * 0.6;
 			}
 
-			const nextId = next[currentComponent][dir];
-			if (nextId != null || nextId != undefined) {
-				if (deltaX < 0) {
-					widthLeft += -deltaX * 0.6;
-				} else {
-					widthRight += deltaX * 0.6;
-				}
-
-				if (deltaY < 0) {
-					heightUp += -deltaY * 0.6;
-				} else {
-					heightDown += deltaY * 0.6;
-				}
+			if (deltaY < 0) {
+				heightUp += -deltaY * 0.6;
+			} else {
+				heightDown += deltaY * 0.6;
 			}
-
-			// for (const animatedElement of arrow.children) {
-			// 	if (animation_length[0] - 0.1 * (i + 1) >= max_expand) {
-			// 		animation_length[i] -= 0.1 * (i + 1);
-			// 		animatedElement.style.transform = `translateX(${animation_length[i]}px)`;
-			// 		i++;
-			// 	}
-			// }
 			clearTimeout(wheelTimeout);
 
 			// Set a timeout to detect the end of the scrolling
@@ -253,17 +137,19 @@
 					let turnRight = false;
 					let turnUp = false;
 					let turnDown = false;
-					if (heightDown > 10) {
+					
+
+					if (heightDown > 40) {
 						turnDown = true;
 					}
 
-					if (widthLeft > 10) {
+					if (widthLeft > 40) {
 						turnLeft = true;
 					}
-					if (widthRight > 10) {
+					if (widthRight > 40) {
 						turnRight = true;
 					}
-					if (heightUp > 10) {
+					if (heightUp > 40) {
 						turnUp = true;
 					}
 
@@ -275,13 +161,13 @@
 					// 6: top-left
 					// 7: top
 					// 8: top-right
-					if (turnLeft && turnDown) {
+					if (widthLeft > 0 && turnDown) {
 						dir = 4;
-					} else if (turnLeft && turnUp) {
+					} else if (widthLeft > 0 && turnUp) {
 						dir = 6;
-					} else if (turnRight && turnUp) {
+					} else if (widthRight > 0 && turnUp) {
 						dir = 8;
-					} else if (turnRight && turnDown) {
+					} else if (widthRight > 0 && turnDown) {
 						dir = 2;
 					} else if (turnDown) {
 						dir = 3;
@@ -292,7 +178,7 @@
 					} else if (turnRight) {
 						dir = 1;
 					} else {
-						dir = 0
+						dir = 0;
 					}
 					change(dir);
 				}
@@ -311,7 +197,7 @@
 		let currentId = currentComponent;
 		const currentElement = elementMap[currentId];
 		const nextId = next[currentId][dir];
-		console.log(next[currentId], dir)
+
 		if (nextId == null || nextId == undefined) {
 			return;
 		}
@@ -337,10 +223,12 @@
 			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, y: `0`, delay: 0.5 });
 		}
 
-		gsap.to(nextElement, { duration: 1, delay: 1.5, scale: 1, ease: 'back' });
+		gsap.to(nextElement, { duration: 1, delay: 1.5, scale: 1, ease: 'back' }).then(() => {
+
+			animating = false;
+		});
 		// console.log(nextElement) ;
 		currentComponent = nextId;
-		animating = false;
 	}
 
 	let heightDown = 0;
@@ -371,10 +259,31 @@
 	</div>
 </main>
 
+{#if currentComponent == 1}
 <div class="shadow bottom" style="height:{heightDown}px;" />
+<div class="shadow right" style="width:{widthRight}px;" />
+<button class="arrow right-middle" on:click={()=>{change(1)}}/>
+<button class="arrow bottom-right" on:click={()=>{change(2)}}/>
+<button class="arrow bottom-middle"  on:click={()=>{change(3)}}/>
+{:else if currentComponent == 2} 
+<div class="shadow bottom" style="height:{heightDown}px;" />
+<div class="shadow left" style="width:{widthLeft}px;" />
+<button class="arrow bottom-middle" on:click={()=>{change(3)}}/>
+<button class="arrow bottom-left" on:click={()=>{change(4)}}/>
+<button class="arrow left-middle" on:click={()=>{change(5)}}/>
+{:else if currentComponent == 3} 
+<div class="shadow top" style="height:{heightUp}px;" />
+<div class="shadow right" style="width:{widthRight}px;" />
+<button class="arrow top-right" on:click={()=>{change(8)}}/>
+<button class="arrow top-middle" on:click={()=>{change(7)}}/>
+<button class="arrow right-middle" on:click={()=>{change(1)}}/>
+{:else} 
 <div class="shadow top" style="height:{heightUp}px;" />
 <div class="shadow left" style="width:{widthLeft}px;" />
-<div class="shadow right" style="width:{widthRight}px;" />
+<button class="arrow top-left" on:click={()=>{change(6)}}/>
+<button class="arrow top-middle" on:click={()=>{change(7)}}/>
+<button class="arrow left-middle" on:click={()=>{change(5)}}/>
+{/if}
 
 <style>
 	.shadow {
@@ -384,7 +293,7 @@
 	}
 	.bottom {
 		bottom: 0px;
-		background: linear-gradient(transparent, rgb(90, 147, 201));
+		background: radial-gradient(transparent, rgb(90, 147, 201));
 	}
 	.left {
 		left: 0;
@@ -402,25 +311,41 @@
 		top: 0px;
 		background: linear-gradient(rgb(90, 147, 201), transparent);
 	}
-	.width {
-		height: 100vh;
-	}
+
 	.arrow {
-		display: flex;
-		align-items: center;
-		height: 35px;
-		width: 35px;
-		border: none;
-		transition: all 2s ease-in-out;
-		cursor: pointer;
+		width: 20px;
+		height: 20px;
+		z-index: 20;
+		position: absolute;
+		transform: rotate(45deg);
+		border-left: none;
+		border-top: none;
+		border-right: 2px #fff solid;
+		border-bottom: 2px #fff solid;
 	}
 
-	.arrow img {
-		display: block;
+	.arrow:before {
+		content: '';
+		width: 10px;
+		height: 10px; 
 		position: absolute;
-		width: 18px;
-		height: 1.5vw;
-		/* animation: animate 2s linear; */
+		border-left: none;
+		border-top: none;
+		border-right: 1px #fff solid;
+		border-bottom: 1px #fff solid;
+		animation-duration: 2s;
+		animation-iteration-count: infinite;
+		animation-name: arrow;
+	}
+
+	@keyframes arrow {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+			transform: translate(-10px, -10px);
+		}
 	}
 
 	main {
@@ -437,13 +362,12 @@
 	.card {
 		display: flex;
 		justify-content: center;
-		overflow: hidden;
+		overflow: auto;
 		align-items: center;
 		width: 100vw;
 		top: 0;
 		z-index: 20;
 		position: relative;
-		/* background-color: rgba(255, 200, 100); */
 		height: 100vh;
 	}
 	.visible {
@@ -470,61 +394,48 @@
 		cursor: pointer;
 		transition: all 2s ease-in-out;
 	}
-
 	/* Button positions */
 	.bottom-middle {
 		bottom: 10px;
-		left: 50%;
+		left: calc(50% - 10px);
 		/* transform: translateX(-50%); */
 	}
 	.bottom-right {
 		bottom: 10px;
 		right: 10px;
 		left: auto;
+		transform: rotateZ(0deg);
 	}
 	.right-middle {
 		right: 10px;
 		top: 50%;
-		transform: translateY(-50%);
+		transform: rotateZ(-45deg);
 	}
 
 	.bottom-left {
 		bottom: 10px;
 		left: 10px;
+		transform: rotateZ(90deg);
 	}
 	.left-middle {
 		left: 10px;
 		top: 50%;
-		transform: translateY(-50%);
+		transform: rotateZ(135deg);
 	}
 
 	.top-middle {
 		top: 80px;
 		left: 50%;
-		transform: translateX(-50%);
+		transform: rotateZ(-135deg);
 	}
 	.top-right {
 		top: 80px;
 		right: 10px;
+		transform: rotateZ(-90deg);
 	}
 	.top-left {
 		top: 80px;
 		left: 10px;
-	}
-	.down-right {
-		transform: rotate(45deg);
-		-webkit-transform: rotateZ(0deg);
-	}
-	.up-right {
-		transform: rotate(-112.5deg);
-		-webkit-transform: rotate(-112.5deg);
-	}
-	.down-left {
-		transform: rotate(67.5deg);
-		-webkit-transform: rotate(67.5deg);
-	}
-	.up-left {
-		transform: rotate(-157.5deg);
-		-webkit-transform: rotate(-157.5deg);
+		transform: rotateZ(180deg);
 	}
 </style>
