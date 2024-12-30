@@ -305,7 +305,7 @@
 </script>
 
 {#if alertshow != -1}
-<label transition:fade	>
+<label out:fade={{duration:1000}}	>
 	<input type="checkbox" class="alertCheckbox" autocomplete="off" />
 	<div class="alert info">
 		<div class="alertbar" style="width: {alertshow}%;"></div>
@@ -365,11 +365,11 @@
 
 <style>
 
-	.alertbar {
+.alertbar {
 		position: absolute;
 		height: 100%;
 		left: 0;
-		background-color: rgba(176, 7, 255, 0.247);
+		background-color: rgba(176, 7, 255, 0.544);
 	}
 
  label {
@@ -377,6 +377,7 @@
 	 top: 60px;
 	 left: 0;
 	 display: flex;
+	 transition: all 1s ease-in-out;
 	 width: 100%;
 	 justify-content: center;
  }
@@ -404,6 +405,10 @@
 
 :checked + .alert {
   display: none;
+}
+
+label :checked {
+	opacity: 0;
 }
 
 .alertText {
