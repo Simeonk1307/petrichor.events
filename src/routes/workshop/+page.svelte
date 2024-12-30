@@ -32,9 +32,7 @@
 			>
 				<div class="hover-content">
 					<span style="display: flex;gap:4px;">
-						<div>Price:</div>
-						<div class="date">{` ${workshop.price}`}</div>
-						Rs
+						<div class="date">{`₹${workshop.price}`}</div>
 					</span>
 					{#if workshop.prerequisites.length > 0}
 						<p class="opi" style="color: orange; text-align: left;">
@@ -42,11 +40,6 @@
 							{#each workshop.prerequisites as spk, i}
 								<li>
 									{(spk.length > 70) ? `${spk.substring(0,70)}...` : spk}
-									<!-- {i == workshop.prerequisites.length - 1
-										? ''
-										: i < workshop.prerequisites.length - 2
-										? ','
-										: 'and'} -->
 								</li>
 							{/each}
 						</p>
@@ -71,13 +64,13 @@
 		border-radius: 20px;
 		color: #fff;
 		display: flex;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.712);
+		background-color: rgba(0, 0, 0, 0.805);
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
 		transition: bottom 0.5s ease;
 		padding: 20px;
+		margin-top: 50px;
 		text-align: left;
 		z-index: 100;
 	}
@@ -95,7 +88,7 @@
 		-webkit-hyphens: auto;
 		hyphens: auto;
 		text-overflow: clip;
-		padding: 0 10px;
+		/* padding: 0 10px; */
 	}
 
 	.card:hover .hover-content {
@@ -114,9 +107,14 @@
 		color: rgb(205, 245, 145);
 	}
 	.date {
-		position: relative;
+		position: absolute;
+		top: -25px;
+		left: 20px;
+		border-radius: 100px;
+		padding: 10px;
+		background-color: #b3e5fccf;
 		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-		color: #04e5fa;
+		color: black;
 	}
 	.card:hover .opi {
 		opacity: 1;
@@ -165,7 +163,6 @@
 		width: 20rem;
 		cursor: pointer;
 		z-index: 12;
-		background-color: rgba(25, 179, 245, 0.363);
 		transition: all 0.5s ease-in-out;
 	}
 	.main:hover .card:not(:hover) {
@@ -215,6 +212,33 @@
 	@media (max-width: 900px) {
 		.discover h1 {
 			font-size: 1.5rem;
+		}
+	}
+	@media (hover: none) {
+		.card {
+			border-radius: 10px;
+		}
+		.hover-content {
+			position: absolute;
+			height: 0;
+			margin: 0;
+			padding: 0;
+			bottom: 0;
+			background-color: transparent;
+		}
+		.date {
+			left: 0px;
+			top: -70px;
+			padding: 0;
+			text-align: center;
+			display: flex;
+			align-items: center	;
+			justify-content: center;
+			width: 65px;
+			height: 65px;
+		}
+		.opi {
+			display: none;
 		}
 	}
 	@media (pointer: coarse) {
