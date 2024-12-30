@@ -75,7 +75,7 @@
             <div><p>Min Members required: {event.minMember}</p></div>
             <div><p>Max Members allowed: {event.maxMember}</p></div>
             <div class="amt_btn">
-                <button type="button" class="amount_button" disabled> Amount: {event.fee} </button>   
+                <button type="button" class="amount_button" disabled> AMOUNT: {event.fee} </button>   
             </div>
             <div class="team_class">
                 <h2> Team:</h2>
@@ -91,14 +91,14 @@
 						<div class="emailFields" id="emailFields"> 
 							<div class="email-container" id="email-container">
 								<label for="emailLabel">Email:</label>
-								<input type="email" id="emailid" name={`email${index}`} bind:value={emails[index]}/>
+								<input type="email" id="emailid" name={`email${index}`} placeholder="example@email.com" bind:value={emails[index]}/>
 							</div>
 						</div>
 					{/each}
                 </div>
                 <div class="add_btn">
                     <button type="button" on:click={addParticipants} class="add_button">ADD +</button>
-                    <button type="button" on:click={removeParticipants} class="add_button">Remove -</button>
+                    <button type="button" on:click={removeParticipants} class="add_button">REMOVE -</button>
                 </div>
                 <div class="submit_btn">
                     <button class="submit_button"on:click={regsiterWithCheck}>Submit</button>
@@ -123,7 +123,7 @@
 		width: 100vw;
 		display: flex;
 		align-items: center;
-		justify-content: flex-start;
+		justify-content: center;
 	}
     
     .blank {
@@ -131,15 +131,17 @@
 	}
     .workshop_Title{
         margin-top: 7vh;
+		align-items: left;
     }
 
     .workshop_Registration {
-		margin-left: 10vw;
+		/* margin-left:10vw; */
 		display: flex;
-		width: 40vw;
+		width: 100vw;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		justify-items: center;
 	}
 
     form {
@@ -186,6 +188,7 @@
 		text-align: center;
         margin: 1em 0;
 		font-weight: 100;
+		cursor: default;
     }
     /* #email-container input[type="email"] {
         height: 40px;
@@ -204,7 +207,9 @@
     /* label{
 
     } */
-
+	.team_class{
+	/* align-items: center; */
+	}
 
     .input_box {
 		width: 100%;
@@ -222,13 +227,13 @@
 	/* label {
 		margin: 5px;
 	} */
-	.input_box p {
+	/* .input_box p {
 		width: 100%;
 		color: red;
 		margin: 0;
 		text-align: end;
 		padding-right: 5px;
-	}
+	} */
 
     /* button {
 		font-size: 1rem;
@@ -239,12 +244,12 @@
 		font-weight: bold;
 		border: none;
 	} */
-	.button_holder {
+	.add_btn {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 20px;
-		margin: 20px 30px;
+		/* margin: 20px 30px; */
 		width: 100%;
 	}
 	@media (max-width: 720px) {
@@ -261,7 +266,7 @@
     }
     .submit_button{
     color: white;
-    width: calc(40%,78);
+    width: calc(40%,100);
     font-weight: 700;
     padding: 0.4rem;
     padding-left: 0.9rem;
@@ -269,6 +274,7 @@
     background: linear-gradient(99.74deg, #06dbac, #bd00ff);
     border-radius: 15px;
     border: none;
+	/* align-items: flex-end; */
     }
 
     button{
@@ -286,5 +292,6 @@
 		font-weight: 100;
     }
 
+	
 
 </style>
