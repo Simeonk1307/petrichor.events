@@ -182,6 +182,7 @@
 		flex: 1;
 		position: relative;
 		padding: 20px;
+		
 		color: white;
 		justify-content: center;
 		display: flex;
@@ -192,6 +193,8 @@
 		width: 90%;
 		z-index: -1;
 		position: absolute;
+		max-height: 500px;
+		aspect-ratio: 1;
 		filter: brightness(0.5);
 		border-radius: 10px;
 	}
