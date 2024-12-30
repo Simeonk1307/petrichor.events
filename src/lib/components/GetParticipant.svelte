@@ -98,7 +98,7 @@
 						<button type="button" class="amount_button" disabled> {fee != 0 ? `AMOUNT: ${fee}` : "FREE"} </button>
 					</div>
 				</div>
-				<div class="team_class" style="flex: {emails.length == 1 ? "1" : "2"};">
+				<div class="team_class" style="flex: {emails.length <= 1 ? "1" : "2"};">
 					<h2>Team:</h2>
 					<div class="emailFields" id="emailFields">
 						<div class="email-container" id="email-container">
