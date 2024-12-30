@@ -7,6 +7,7 @@
 	import { getContext, onMount } from 'svelte';
 
 	import gsap from 'gsap';
+	import { fade, fly } from 'svelte/transition';
 	let slideHero: Function;
 	let slideAbout: Function;
 	let visible = false;
@@ -66,6 +67,7 @@
 	export let data;
 	const getData: Function = getContext('getData');
 	let pageWidth = 0;
+	let alertshow = data.goto == null ? 0 : -1
 	let onMountDone = false;
 	let prevGoto = ""
 	$: if (prevGoto != data.goto && onMountDone) {
@@ -80,6 +82,16 @@
 		setTimeout(() => {
 			visible = true;
 		}, 10);
+		let x = setInterval(() => {
+			alertshow += 0.1
+			if (alertshow > 100) {
+				setTimeout(() => {
+					alertshow = -1
+
+					clearInterval(x)
+				}, 10)
+			}
+		}, 10)
 		if (!$loggedIn) {
 			getData();
 		}
@@ -144,10 +156,18 @@
 				heightDown += deltaY * 0.6;
 			}
 			clearTimeout(wheelTimeout);
+			if (isTouch && (heightUp > 40 || heightDown > 40 || widthLeft > 40 || widthRight > 40 )) {
+				animate(isTouch)
+			}
 
 			// Set a timeout to detect the end of the scrolling
 			wheelTimeout = setTimeout(() => {
-				if (!animating) {
+				animate(isTouch)
+			}, 100);
+		};
+
+		function animate (isTouch?:boolean) {
+			if (!animating) {
 					let turnLeft = false;
 					let turnRight = false;
 					let turnUp = false;
@@ -165,7 +185,7 @@
 						turnRight = true;
 					}
 					
-					if (heightUp > 40 || (isTouch && heightUp > 4)) {
+					if (heightUp > 40) {
 						turnUp = true;
 					}
 					// 1 : right
@@ -180,7 +200,7 @@
 					if (isTouch) {
 						minReq = 20
 					}
-					console.log(isTouch, minReq, widthLeft, widthRight)
+					// console.log(isTouch, minReq, widthLeft, widthRight)
 					if (widthLeft > minReq && turnDown) {
 						dir = 4;
 					} else if (widthLeft > minReq && turnUp) {
@@ -207,8 +227,7 @@
 				heightUp = 0;
 				widthRight = 0;
 				widthLeft = 0;
-			}, 100);
-		};
+		}
 
 		mainDiv.onwheel = (e) => {
 			// Set animation progress based on scroll position
@@ -251,27 +270,27 @@
 		}
 		const nextElement = elementMap[nextId];
 		animating = true;
-		gsap.to(currentElement, { scale: 0.8, duration: 0.5 });
-		gsap.to(nextElement, { scale: 0.8, duration: 0.5, delay: 0.5 });
+		gsap.to(currentElement, { scale: 0.8, duration: 0.2 });
+		gsap.to(nextElement, { scale: 0.8, duration: 0.2, delay: 0.2 });
 		if (dir === 1) {
-			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, delay: 0.2 });
 		} else if (dir === 2) {
-			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, y: `-${screenHeight}`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, y: `-${screenHeight}`, delay: 0.2 });
 		} else if (dir === 3) {
-			gsap.to(mainDiv, { duration: 1, y: `-${screenHeight}`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, y: `-${screenHeight}`, delay: 0.2 });
 		} else if (dir === 4) {
-			gsap.to(mainDiv, { duration: 1, x: `0`, y: `-${screenHeight}`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, x: `0`, y: `-${screenHeight}`, delay: 0.2 });
 		} else if (dir === 5) {
-			gsap.to(mainDiv, { duration: 1, x: `0`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, x: `0`, delay: 0.2 });
 		} else if (dir === 6) {
-			gsap.to(mainDiv, { duration: 1, x: `0`, y: `0`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, x: `0`, y: `0`, delay: 0.2 });
 		} else if (dir === 7) {
-			gsap.to(mainDiv, { duration: 1, y: `0`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, y: `0`, delay: 0.2 });
 		} else if (dir === 8) {
-			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, y: `0`, delay: 0.5 });
+			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, y: `0`, delay: 0.2 });
 		}
 
-		gsap.to(nextElement, { duration: 1, delay: 1.5, scale: 1, ease: 'back' }).then(() => {
+		gsap.to(nextElement, { duration: 1, delay: 0.8, scale: 1, ease: 'back' }).then(() => {
 
 			animating = false;
 		});
@@ -285,6 +304,17 @@
 	let widthRight = 0;
 </script>
 
+{#if alertshow != -1}
+<label transition:fade	>
+	<input type="checkbox" class="alertCheckbox" autocomplete="off" />
+	<div class="alert info">
+		<div class="alertbar" style="width: {alertshow}%;"></div>
+		<span class="alertText"> Fest Dates and event registration pages will be released soon
+			<br class="clear"/></span>
+		<span class="alertClose">X</span>
+	</div>
+</label>
+{/if}
 <main>
 	<div class="maincontent {visible ? 'visible' : ''}" bind:this={mainDiv}>
 		<div class="card about" bind:this={homeDiv}>
@@ -334,6 +364,75 @@
 {/if}
 
 <style>
+
+	.alertbar {
+		position: absolute;
+		height: 100%;
+		left: 0;
+		background-color: rgba(176, 7, 255, 0.247);
+	}
+
+ label {
+	 position: absolute;
+	 top: 60px;
+	 left: 0;
+	 display: flex;
+	 width: 100%;
+	 justify-content: center;
+ }
+
+.alert {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  z-index: 30;
+  padding: 10px;
+  margin: 10px;
+  line-height: 1.8;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-weight: 400;
+}
+
+.alertCheckbox {
+  display: none;
+}
+
+:checked + .alert {
+  display: none;
+}
+
+.alertText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+.alertClose {
+  float: right;
+  align-self: flex-end;
+  margin: 0;
+  font-size: 15px;
+}
+
+.clear {
+  clear: both;
+}
+
+.info {
+  background-color: rgba(255, 165, 123, 0.495);
+  border: 1px solid #DDD;	
+  color: #ffffff;
+  mix-blend-mode: lighten;
+  font-weight: 700;
+}
 	.shadow {
 		z-index: 20;
 		width: 100vw;

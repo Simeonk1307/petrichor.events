@@ -45,7 +45,6 @@
         <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
             <script type='module'>
                 let c;
@@ -75,6 +74,20 @@
                 box-sizing: border-box;
                 font-family: var(--wfont);
             }
+			@font-face {
+				font-family: 'Atmospheric';
+				src: url('/Fonts/Atmospheric.ttf') format('embedded-opentype'),
+				/* Internet Explorer */
+				url('/Fonts/Atmospheric.ttf') format('woff2'),
+				/* Super Modern Browsers */
+				url('/Fonts/Atmospheric.ttf') format('woff'),
+				/* Pretty Modern Browsers */
+				url('/Fonts/Atmospheric.ttf') format('truetype'),
+				/* Safari, Android, iOS */
+				url('/Fonts/Atmospheric.ttf') format('svg');
+				/* Legacy iOS */
+				font-weight: 200;
+			}
 
             h1 {
                 font-family: var(--sfont) !important;
@@ -84,65 +97,65 @@
                     1px 2.5px 1px #a5a5a5,
                     1px 3px 1px #a5a5a5
                     ;
+				font-size: 40px;
             }
-                ::-webkit-scrollbar {
-    width: 1px;
-    background: transparent;
-    /* make scrollbar transparent */
-  }
-    :root {
-    --pfont: 'Raleway', sans-serif;
-    --wfont: 'Roboto', sans-serif;
-    --ofont: 'Arial', sans-serif;
-    --sfont: 'Fredericka the Great', sans-serif;
-  }
-                .bg {
-                    
-		position: fixed;
-		top: 0;
-		left: 0;
-		height: 100vh;
-		width: 100vw;
-                    filter: blur(5px) brightness(50%);
-                    background-position: center;
-		background-size: cover;
-                    background-image: url(${currentEvent.image});
-                }
-                .content {
-                    z-index: 1;
-                    padding-top: 5.5em;
-                    padding-left: 1em;
-                    position: relative;
-                    width: 100%;
-                    display: flex;
-                    color: white;
-                    flex-direction: column;
-                    place-items: center;
-                    overflow-y: scroll;
-                }
-                body {
-                    margin: 0;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					flex-direction: column;
-                }
-					#register {
-		border: none;
-		font-size: 20px;
-		color: white;
-		position: relative;
-		text-decoration: none;
-		z-index: 10;
-	}
-				@media (max-width:600px) {
-					.content {
-					z-index: 1;
-					padding-top: 2em;
-					margin: 0;
-					padding-left: 0;
-				}
-				}
+			::-webkit-scrollbar {
+				width: 1px;
+				background: transparent;
+				/* make scrollbar transparent */
+			}
+			:root {
+				--pfont: 'Raleway', sans-serif;
+				--wfont: 'Roboto', sans-serif;
+				--ofont: 'Arial', sans-serif;
+				--sfont: 'Atmospheric', sans-serif;
+			}
+			.bg {
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 100vh;
+				width: 100vw;
+				filter: blur(5px) brightness(50%);
+				background-position: center;
+				background-size: cover;
+				background-image: url(${currentEvent.image});
+			}
+			.content {
+				z-index: 1;
+				padding-top: 5.5em;
+				padding-left: 1em;
+				position: relative;
+				width: 100%;
+				display: flex;
+				color: white;
+				flex-direction: column;
+				place-items: center;
+				overflow-y: scroll;
+			}
+			body {
+				margin: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+			#register {
+				border: none;
+				font-size: 20px;
+				color: white;
+				position: relative;
+				text-decoration: none;
+				z-index: 10;
+			}
+			@media (max-width:600px) {
+				.content {
+				z-index: 1;
+				padding-top: 2em;
+				margin: 0;
+				padding-left: 0;
+			}
+		}
         </style>
         </head>
         <body>
@@ -344,6 +357,9 @@
 			padding-top: 0px;
 			overflow-x: auto; /* Use overflow-x for horizontal scroll */
 			width: 100%; 
+			position: fixed;
+			bottom: 0;
+			z-index: 30;
 			margin: 0;
 		}
 		
@@ -378,6 +394,9 @@
 			flex-direction: column-reverse;
 			/* width: 100vw; */
 		}
+		.eventarea {
+			margin-bottom: 17svh;
+		}
 		.content {
 			overflow-x: hidden;
 		}
@@ -385,7 +404,6 @@
 			overflow: scroll;
 		}
 		.content {
-			margin: 0;
 			padding-left: 0;
 		}
 	}

@@ -119,6 +119,17 @@
 
 	let winsize = 3000;
 	onMount(async () => {
+		/// disable reload on older browsers
+		document.addEventListener('touchstart', touchstartHandler, {passive: false});
+		document.addEventListener('touchmove', touchmoveHandler, {passive: false});
+		/// disable navigation in older browsers
+		if (window.safari) {
+			history.pushState(null, null, location.href);
+			window.onpopstate = function(event) {
+				history.go(1);
+			};
+		}
+		///
 		await getData();
 		windowX = window.innerWidth
 		window.onresize = ()=> {
@@ -181,7 +192,7 @@ out:fly={{ x: windowX, duration: 400 }}
 </div>
 {/key}
 
-{#if path != '/' && path != '/home'}
+{#if path != '/' && path != '/home' && path.startsWith('events')}
     <Footer title={title} links={footerLinks}/>
     <BtpBtn/>
 {/if}
