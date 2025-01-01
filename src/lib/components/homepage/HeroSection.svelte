@@ -86,8 +86,8 @@
 			<div class="content_box">
 				<div class="caption">
 					Experience the Magic of Petrichor<br />
-					Join us at IITPKD for a celebration of culture, creativity, and camaraderie at the Petrichor
-					fest.
+					Celebrate culture, creativity, and camaraderie at IITPKD's iconic fest.<br/>
+					<strong>Join Us on <span style="color: #9575CD;">18th</span> and <span style="color: #9575CD;">19th</span> January at IIT Palakkad to Experience the festivities.</strong>
 				</div>
 				<div class="buton_area">
 					<button type="button" class="ca_portal" on:click={ca_portal}
