@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	//Here we can change the images for the time being i just kept the same images
 	import { workshops } from '$lib/data/workshop.js';
 	import WorkShopComp from './WorkShopComp.svelte';
+	goto('/home')
 </script>
 
 <main>

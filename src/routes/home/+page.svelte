@@ -48,8 +48,7 @@
         <!-- CARD 2 -->
 		<AboutSection bind:slidePhoto={slideAbout}/>
 	</div>
-	<div class="card event">
-        <!-- CARD 3 -->
+	<!-- <div class="card event">
 		<div class="gradient-bg">
 			<div class="gradients-container extra">
 				<div class="g" id="g3-1" />
@@ -58,9 +57,9 @@
 			  <div class="g" id="g4-1" />
 			</div>
 		  </div>
-		<!-- <Event bind:pageWidth /> -->
+		<Event bind:pageWidth />
 		<Workshop />
-	</div>
+	</div> -->
 	<!-- <a  href="/login">Login</a> -->
 </div>
 

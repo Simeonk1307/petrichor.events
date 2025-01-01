@@ -14,6 +14,8 @@
     let emailCount = 1;
     $: amount = price*emailCount
 
+	goto('/home')
+
     function addEmailField() {
         emailCount++;
         const emailFieldsContainer = document.getElementById('emailFields');
