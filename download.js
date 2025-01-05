@@ -463,7 +463,7 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
 }).then(res => {
     console.log(res)
     return res
-})
+}).
 then(res => res.json())
 .then(async res => {
     console.log("Got all images")
