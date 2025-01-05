@@ -182,6 +182,7 @@
         iframe.contentWindow?.postMessage(code, "*");
     }
 
+	// `${frontend_url}/payment/register?id=${currentEvent.id}`
 </script>
 
 
@@ -219,8 +220,10 @@
 	{srcdoc}
 	{height}
 	/>
-		<a id="register" class={registration_closed || registered ? "closed" : ""} href={registration_closed ? "#" : registered ? "#" : `${frontend_url}/payment/register?id=${currentEvent.id}`}>{
-			registration_closed ? "Registration Closed" : registered ? "Registered" : "Register"
+		<a id="register" class={registration_closed || registered ? "closed" : ""} href={registration_closed ? "#" : registered ? "#" : 
+		`${frontend_url}/message/Thank you showing interest in Petrichor'25. Registrations will start in some time`
+	}>{
+			registration_closed ? "Registration Closed" : registered ? "Registered" : "Registeration starting soon"
 		}</a>
 	</div>
 </div>

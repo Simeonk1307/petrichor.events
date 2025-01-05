@@ -110,12 +110,12 @@
                     }}
                 on:click = {() => {
                     if (link.linkText == "Event" || link.linkText == "Workshop") {
-                        displayPopUp(
-						"Message",
-						`${link.linkText} registrations will start soon.`,
-						5000,
-						()=>{}
-                        )
+                        // displayPopUp(
+						// "Message",
+						// `${link.linkText} registrations will start soon.`,
+						// 5000,
+						// ()=>{}
+                        // )
                     } else if (link.url === "#") {
                         displayPopUp(
 						"Message",
