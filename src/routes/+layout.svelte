@@ -120,8 +120,8 @@
 	let winsize = 3000;
 	onMount(async () => {
 		/// disable reload on older browsers
-		document.addEventListener('touchstart', touchstartHandler, {passive: false});
-		document.addEventListener('touchmove', touchmoveHandler, {passive: false});
+		document.addEventListener('touchstart', () => {}, {passive: false});
+		document.addEventListener('touchmove', () => {}, {passive: false});
 		/// disable navigation in older browsers
 		if (window.safari) {
 			history.pushState(null, null, location.href);

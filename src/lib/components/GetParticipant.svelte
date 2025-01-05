@@ -91,7 +91,7 @@
 				<div class="event_info" bind:this={event_card}>
 					<img src="{event.image_url}" />
 
-					<div class="workshop_Title"><h1>{event.name}</h1></div>
+					<div class="workshop_Title"><h1 style="text-align: center;">{event.name}</h1></div>
 					<div><p>Min Members required: {event.minMember}</p></div>
 					<div><p>Max Members allowed: {event.maxMember}</p></div>
 					<div class="amt_btn">
@@ -162,11 +162,13 @@
 	.workshop_Registration {
 		/* margin-left:10vw; */
 		display: flex;
+		gap: 100px;
 		width: 100vw;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		justify-items: center;
+		margin-top: 80px;
 	}
 	#email-container {
 		margin-bottom: 10px;
@@ -197,6 +199,7 @@
 		aspect-ratio: 1;
 		filter: brightness(0.5);
 		border-radius: 10px;
+		/* height: 90%; */
 	}
 	.team_class {
 		flex: 2;
@@ -250,6 +253,12 @@
 		width: 100%;
 	}
 	@media (max-width: 720px) {
+		.workshop_Registration{
+			gap: 30px;
+		}
+		.amount_button{
+			border: 1px solid grey;
+		}
 		.form {
 			width: 100vw;
 			margin: 0 10vw;
@@ -266,8 +275,12 @@
 		.emailFields {
 			width: 100%;
 		}
+		.event_info img {
+			/* width: 100%; */
+			height: 100%;
+		}
 		.event_info {
-			margin-top: 100px;
+			margin-inline: 10px;
 		}
 	}
 	.submit_button {
