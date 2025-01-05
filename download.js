@@ -460,8 +460,9 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
     body: JSON.stringify({
         "password": process.env.pass
     })
-}).then(res => {
+}).then(async res => {
     console.log(res)
+    console.log(await res.text())
     return res
 }).
 then(res => res.json())
