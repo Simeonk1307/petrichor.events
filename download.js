@@ -368,6 +368,42 @@ async function compileasync(markdown) {
 
 }
 
+console.log("Getting images")
+await fetch('https://petri-back.vercel.app/internal/images/all/', {
+    method: 'POST',
+    headers: {
+        'Content-type': 'application/json',
+    },
+    credentials: 'include',
+    mode: 'cors',
+    body: JSON.stringify({
+        "password": process.env.pass
+    })
+}).then(res => {
+    console.log(res)
+    return res.json()})
+.then(async res => {
+    console.log("Got all images")
+    if  (res.status == 200) {
+        fs.rmSync("./static/uploads/",{recursive:true,force:true})
+        fs.mkdirSync("./static/uploads/",{recursive:true})
+
+        for (const image of res.data) {
+            try {
+                fs.writeFileSync(path.resolve("./static/uploads/",`${image.name.toLowerCase()}.png`),Buffer.from(image.image,'base64'))
+            } catch(e) {
+                console.log("Erro in file save: " + image + ":" + image.name + " " + e.toString())
+            }
+        }
+    } else {
+        console.log(res)
+    }
+    return res.data
+}).catch(err => {
+    console.log(err.toString())
+})
+
+
 let events_data = await fetch('https://petri-back.vercel.app/internal/events/all/', {
     method: 'POST',
     headers: {
@@ -413,9 +449,9 @@ function addEvent(event) {
 }
 
 for (const event of events_data) {
-    // if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
-    //     continue
-    // }
+    if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
+        continue
+    }
     await fetch('https://petri-back.vercel.app/internal/event/', {
         method: 'POST',
         headers: {
@@ -449,35 +485,3 @@ fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSO
 fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events,null, 2)}; 
 
 export const event_ids=${JSON.stringify(event_ids,null,2)};`)
-console.log("Getting images")
-await fetch('https://petri-back.vercel.app/internal/images/all/', {
-    method: 'POST',
-    headers: {
-        'Content-type': 'application/json',
-    },
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({
-        "password": process.env.pass
-    })
-}).then(res => res.json())
-.then(async res => {
-    console.log("Got all images")
-    if  (res.status == 200) {
-        fs.rmSync("./static/uploads/",{recursive:true,force:true})
-        fs.mkdirSync("./static/uploads/",{recursive:true})
-
-        for (const image of res.data) {
-            try {
-                fs.writeFileSync(path.resolve("./static/uploads/",`${image.name.toLowerCase()}.png`),Buffer.from(image.image,'base64'))
-            } catch(e) {
-                console.log("Erro in file save: " + image + ":" + image.name + " " + e.toString())
-            }
-        }
-    } else {
-        console.log(res)
-    }
-    return res.data
-}).catch(err => {
-    console.log(err.toString())
-})
