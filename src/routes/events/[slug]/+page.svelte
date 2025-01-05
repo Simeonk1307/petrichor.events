@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { events_compiledmap } from "$lib/markdown";
 	import type { FrontEvent } from '$lib/types.js';
+	import { user } from '$lib/stores.js';
+	import { closed_events } from '$lib/helper.js';
 
 	export let data;
 	let events : {[key: string]: FrontEvent} = data['events'];
@@ -11,18 +13,20 @@
 	let bg: HTMLElement;
 	let currentEvent = events[data.eventID];
 	let registered = false;
+	let registration_closed = false;
 	onMount(() => {
 		bg.style.backgroundImage = `url("${currentEvent.image}")`;
-		setEvent(currentEvent)
+		registeredEvents = []
+		for (const user_event of $user.user_events) {
+			registeredEvents.push(user_event.id)
+		}
 		frontend_url = window.location.origin
+		setEvent(currentEvent)
 	});
-	let registering = false;	
 	// let currEveFee = events1[parseInt(currentEvent.id.slice(2))].fees
-	let content;
+	
 	const setEvent = (event: FrontEvent) => {
-		registering = false;
 		bg.style.backgroundImage = `url("${event.image}")`;
-		registered=false
 		currentEvent = events[event.id]	
 		const code = (events_compiledmap[event.id])
 		setTimeout(() => {
@@ -34,6 +38,13 @@
 		},100)
 		if(registeredEvents?.includes(event.id)){
 			registered=true
+		} else {
+			registered = false;
+		}
+		if (closed_events.includes(event.id)) {
+			registration_closed = true
+		} else {
+			registration_closed = false;	
 		}
 	};
 
@@ -208,11 +219,17 @@
 	{srcdoc}
 	{height}
 	/>
-		<a id="register" href="{frontend_url}/payment/register?id={currentEvent.id}">Register</a>
+		<a id="register" class={registration_closed || registered ? "closed" : ""} href={registration_closed ? "#" : registered ? "#" : `${frontend_url}/payment/register?id=${currentEvent.id}`}>{
+			registration_closed ? "Registration Closed" : registered ? "Registered" : "Register"
+		}</a>
 	</div>
 </div>
 
 <style>
+	.closed {
+		background-color: rgba(62, 62, 62, 0.545);
+		cursor: pointer;
+	}
 	.eventarea {
 		display: flex;
 		flex-direction: column;
