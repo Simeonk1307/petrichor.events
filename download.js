@@ -369,7 +369,7 @@ async function compileasync(markdown) {
 }
 
 console.log("Getting images")
-await fetch('https://petri-back.vercel.app/internal/images/all/', {
+await fetch('https://petrichor-backend.vercel.app/internal/images/all/', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -404,7 +404,7 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
 })
 
 
-let events_data = await fetch('https://petri-back.vercel.app/internal/events/all/', {
+let events_data = await fetch('https://petrichor-backend.vercel.app/internal/events/all/', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -452,7 +452,7 @@ for (const event of events_data) {
     if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
         continue
     }
-    await fetch('https://petri-back.vercel.app/internal/event/', {
+    await fetch('https://petrichor-backend.vercel.app/internal/event/', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
