@@ -380,7 +380,7 @@ await fetch('https://petrichor-backend.vercel.app/internal/images/all/', {
         "password": process.env.pass
     })
 }).then(res => {
-    console.log(res)
+    // console.log(res)
     return res.json()})
 .then(async res => {
     console.log("Got all images")
