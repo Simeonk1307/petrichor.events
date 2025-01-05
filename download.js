@@ -413,6 +413,9 @@ function addEvent(event) {
 }
 
 for (const event of events_data) {
+    if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
+        continue
+    }
     await fetch('https://petri-back.vercel.app/internal/event/', {
         method: 'POST',
         headers: {
