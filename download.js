@@ -443,7 +443,7 @@ for (const event of events_data) {
         console.log(err.toString())
     })
 }
-console.log(events)
+// console.log(events)
 // console.log(JSON.stringify(events_compiledmap,null, 2))
 fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap,null, 2)}`)
 fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events,null, 2)}; 
@@ -460,7 +460,11 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
     body: JSON.stringify({
         "password": process.env.pass
     })
-}).then(res => res.json())
+}).then(res => {
+    console.log(res)
+    return res
+})
+then(res => res.json())
 .then(async res => {
     console.log("Got all images")
     if  (res.status == 200) {
