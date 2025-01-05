@@ -1,49 +1,23 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import utr1 from '$lib/assets/UtrRefer/utr1.jpeg'
 	import utr2 from '$lib/assets/UtrRefer/utr2.jpeg'
 	import utr3 from '$lib/assets/UtrRefer/utr3.jpeg'
 	import utr4 from '$lib/assets/UtrRefer/utr4.jpeg'
 	import utr5 from '$lib/assets/UtrRefer/utr5.jpeg'
 	import Zoom from '$lib/components/Zoom.svelte';
-	import { loggedIn,invalidate,user } from '$lib/stores';
-	import { getContext, onMount } from 'svelte';
-	import { workshops } from '$lib/data/workshop';
-	import PaymentForm from './PaymentForm.svelte';
+	import { onMount } from 'svelte';
+    import PaymentForm from './PaymentForm.svelte';
 
-    export let data: any;
-	let workshop: {
-		price: number; name: any; 
-};
-	const getData:Function = getContext('getData')
+    export let event: any;
+    export let participants: string[];
+	export let amount: any = 0;
 
-    onMount(async () => {
-
-		await getData()
-		if (!$loggedIn || $invalidate) {
-			goto(`/login?to=/payment/check${$page.url.search}`);
+	onMount(() => {
+		if (amount == 0 ) {
+			goto(`/payment/register?id=${event.eventId}`)
 		}
-		if (data.id == null){
-			goto(`/`)
-		}
-		
-		fetchInfo()
-	});
-	
-	// fetchInfo()
-	function fetchInfo(){
-		// @ts-ignore
-		workshop = workshops[data.id]
-		if (!workshop || workshop == undefined){
-			goto('/')
-		}	
-	}
-	// @ts-ignore
-	workshop = workshops[data.id]
-	if (!workshop || workshop == undefined){
-		goto('/')
-	}
+	})
 
 
 </script>
@@ -52,9 +26,9 @@
 
 	<div id="all">
 		<h1 style="text-align:center;margin-top:10rem;">
-		Registering for <span style="color: blueviolet;">{workshop.name}</span>
-	</h1>
-	<PaymentForm name={workshop.name} id={data.id} amount={workshop.price}/>
+		Registering for <span style="color: blueviolet;">{event.name}</span>
+	</h1>	
+	<PaymentForm name={event.name} id={event.eventId} amount={amount} participants={participants}/>
 </div>
 
 

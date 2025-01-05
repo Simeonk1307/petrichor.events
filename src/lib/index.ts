@@ -1,24 +1,24 @@
 
 // const backend_url = 'http://127.0.0.1:8000/'
 // const backend_url = 'https://petri-back.vercel.app/'
-// const backend_url = 'https://petrichor-backend.vercel.app/'
+const backend_url = 'https://petrichor-backend.vercel.app/'
 
 
-let backend_url = import.meta.env.VITE_backend
-if (backend_url == null || backend_url == undefined){
-    backend_url = process.env.VITE_backend
-}
+// let backend_url = import.meta.env.VITE_backend
+// if (backend_url == null || backend_url == undefined){
+//     backend_url = process.env.VITE_backend
+// }
 
 export const API = {
     login: backend_url + 'api/login/',
     register: backend_url + 'api/register/',
     forgotpassword: backend_url + 'api/forget-password/',
     changepassword: backend_url + 'api/change-password/',
-    events_apply_paid: backend_url + 'api/auth/events/apply/paid',
-    events_apply_free: backend_url + 'api/auth/events/apply/free',
+    events_apply_paid: backend_url + 'api/auth/events/apply/paid/',
+    events_apply_free: backend_url + 'api/auth/events/apply/free/',
     feedback: backend_url + 'api/send_grievance',
     whoami: backend_url + "api/auth/",
-    event: backend_url + "api/event/",
+    get_event: backend_url + "internal/event/",
     // verifyCA: "https://pcap-back-production.up.railway.app/api/events/verify",
     generateCA: backend_url + 'api/auth/CA/create/',
     verifyCA: backend_url + 'api/CA/verify/',
@@ -129,5 +129,3 @@ export const footer = {
 }
 
 export const defaultUser = {user_data:{email:"",CACode:"",gradYear:0,institute:"",phone:"",registrations:-1,stream:"",username:""},user_events:[]}
-
-

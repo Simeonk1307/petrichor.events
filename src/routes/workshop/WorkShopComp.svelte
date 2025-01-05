@@ -1,23 +1,33 @@
-<script lang="ts">
+	<script lang="ts">
 
 	import { goto } from '$app/navigation';
-	import Workshop from '$lib/components/homepage/workshop_section/Workshop.svelte';
+	import { closed_workshops } from '$lib/helper';
+	import { user } from '$lib/stores';
 	import type { workshop } from '$lib/types';
 	import { onMount } from 'svelte';
 	export let id;
 	export let workshop:workshop;
 
-	function handleClick(id: string) {
-		// get the fees and number of particiants here.
-		// For workshop number of participants will be only 1 so
-		// we will skip the add participant page and directly send user to payment page
-
-		// goto('/payment/check?id=' + id);
-		window.open("https://docs.google.com/forms/d/e/1FAIpQLSfjtgKgnDf_dX3QyrkisEODDw0z2MkRIXAtN28NyHiPEpD5Jg/viewform")
-	}
+		function handleClick(id: string) {
+			if (closed_workshops.includes(id)) {
+				return
+			}
+			// get the fees and number of particiants here.
+			// For workshop number of participants will be only 1 so
+			// we will skip the add participant page and directly send user to payment page
+			goto(`/payment/register?id=${id}`);
+			// window.open("https://docs.google.com/forms/d/e/1FAIpQLSfjtgKgnDf_dX3QyrkisEODDw0z2MkRIXAtN28NyHiPEpD5Jg/viewform")
+		}
 
 	let WorkShopDiv:HTMLElement;
+	let registered = false;
 	onMount(() => {
+
+		for (const event of $user.user_events) {
+			if (event.id == id) {
+				registered = true
+			}
+		}
 		
 		// WorkShopDiv.onmousemove=(e)=>{
 		//     let bounds = WorkShopDiv.getBoundingClientRect()
@@ -79,15 +89,24 @@
 				{/each}
 			</p>
 		{/if}
-		<button
-			class="price_btn"
-			on:click={() => {
-				handleClick(id);
-			}}>Join for ₹ {workshop.price}</button
-		>
+		{#if closed_workshops.includes(id)}
+			<button
+			class="price_btn">Registration closed</button
+			>
+		{:else if registered}
+			<button
+				class="price_btn">Registered</button
+			>
+		{:else}
+			<button
+				class="price_btn"
+				on:click={() => {
+					handleClick(id);
+				}}>Join for ₹ {workshop.price}</button
+			>
+		{/if}
 	</div>
 </div>
-
 <style>
 	*{
 		box-sizing: border-box;

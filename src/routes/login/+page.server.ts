@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({url,cookies}) => {
     let nextpg = url.searchParams.get('to')
     
     if (nextpg != null){
-        if (!nextpg.startsWith("/payment/check?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
+        if (!nextpg.startsWith("/payment/register?id=") && !["/CA/welcome?generate=true","/profile","/CA/profile",].includes(nextpg)){
             nextpg = null
         }
     }
@@ -45,6 +45,7 @@ export const actions = {
                         expires:currTime,
                         path:'/'
                     })
+                    // console.log(res)
                     return res
                 }else{
                     return fail(400,{...res,"err":res.message})
@@ -56,7 +57,7 @@ export const actions = {
         .catch(err => {
             return fail(400,{
                 "success":false,
-                "err":err.toString(),
+                "err":"Unable to resolve the response. Please re-try after sometime",
             })
         })
 

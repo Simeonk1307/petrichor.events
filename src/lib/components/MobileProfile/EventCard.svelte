@@ -1,13 +1,19 @@
 <script lang="ts">
-	import cultural from '$lib/assets/HomePage/cultural.png';
+	import { goto } from '$app/navigation';
+import cultural from '$lib/assets/HomePage/cultural.png';
 	
 	export let event = {
 		name: 'Event Name',
-		date: 'Date & Time',
-		venue: 'Location',
+		id: "T",
 		verified: false,
 		image: cultural
 	};
+	let links = {
+		"T": "events/technical",
+		"C": "events/cultural",
+		"I": "events/informals",
+		"W": "workshop/"
+	}
 </script>
 
 <div class="main">
@@ -16,9 +22,15 @@
     </div>
 	<div class="data cmn">
 		<h1>{event?.name ?? "Event"}</h1>
-		<h5>{event?.date ?? "Date"}</h5>
-		<h5>{event?.venue ?? "Venue"}</h5>
 		<p class="verified" style="background-color:{event.verified?"green":"red"}">{event.verified?"Verified":"Not Verified"}</p>
+		<button on:click={()=> {
+			if (["T","C","I"].includes(event.id.at(0))) {
+				goto(`${links[event.id.at(0)]}/`)
+			} else {
+				goto(`${links[event.id.at(0)]}/${event.id}`)
+			}
+			
+		}} >More Details</button>
 	</div>
 </div>
 
@@ -27,44 +39,55 @@
         display: flex;
         flex-direction: row;
 		max-width: 100%;
+		min-height: 120px;
 		min-width: 100%;
     margin: 20px 0;
 
     }
+	button {
+		border: none;
+		padding: 10px;
+		background-color: gray;
+		max-width: 150px;
+		display: flex;
+		justify-content: center;
+	}
 	.main *{
 		box-sizing: border-box;
 	}
 	.verified{
 		height: 20px;
-		padding: 5px;
+		padding: 10px;
 		text-align: center;
 		margin: 0;
 		display: flex;
 		justify-content: center;
 		align-items: center !important;
 		border-radius: 5px;
-		width: 80px !important;
+		width: 110px !important;
 		text-wrap: nowrap;
 		margin-top: 10px !important;
 	}
 	.data{
 		flex:3;
+		min-height: 100%;
+		height: 100%;
 		align-items: flex-start;
+		justify-content: center;
 		display: flex;
 		flex-direction: column;
 		overflow-x: hidden;
 	}
 	.data *{
 		font-weight: 100 !important;
-		margin: 1px;
+		margin: 5px;
 		align-items: flex-start;
 		text-align: start;
 		text-wrap: nowrap;
-		overflow: hidden;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		line-break: unset;
-		font-family: cursive;
+		font-family: var(--wfont);
 		width: 100%;
 	}
 	.data h1{

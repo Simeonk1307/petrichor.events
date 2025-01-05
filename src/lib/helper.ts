@@ -14,6 +14,16 @@ const mediumSquare = {
     }
 };
 
+export const closed_workshops = [
+    "WP01",
+    "WP02",
+    "WP03",
+    "WP04",
+    "WP05",
+    "WP06",
+]
+
+export const closed_events = []
 // export function getEventDataJS(eventID: string){
 //     const Tresult = technical.events.filter((e) => e.id == eventID)
 //     if (Tresult.length > 0){
@@ -64,7 +74,7 @@ export const footerLinks: Array<Link> = [
 
 export const headerLinks: Array<HeaderLink> = [
     {
-        url: '#',
+        url: '/home?to=2',
         linkText: 'About Us',
         childLinks: [{
             url: "/contactUs",
@@ -73,14 +83,14 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '#',
+        url: '/home?to=3',
         linkText: 'Event',
         childLinks: []
         ,
         show: false
     },
     {
-        url: '#',
+        url: '/workshop',
         linkText: 'Workshop',
         childLinks: []
         ,

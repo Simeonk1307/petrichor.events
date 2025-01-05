@@ -29,11 +29,11 @@
 <style>
     footer {
         /* background-color: transparent; */
-        background-color: rgb(19, 0, 30);
+        background-color: rgb(0, 0, 0);
         color: #fff;
         box-sizing: border-box;
         padding-left: 2rem;
-        z-index: 11;
+        z-index: 999;
         width: 100vw;
         mix-blend-mode: hard-light;
         position: relative;
@@ -50,12 +50,12 @@
         font-family: var(--sfont);
         padding-left: 10px;
         margin-bottom: 20px;
-        text-shadow: 1px 1px 1px #a5a5a5,
+        /* text-shadow: 1px 1px 1px #a5a5a5,
 		1px 2px 1px #a5a5a5,
 		1px 3px 1px #a5a5a5,
 		1px 4px 1px #a5a5a5,
 		1px 5px 1px #a5a5a5
-		;
+		; */
     }
 
     .footer-social {

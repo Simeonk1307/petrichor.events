@@ -1,6 +1,4 @@
 <script lang="ts">
-    import Icon from 'svelte-awesome/components/Icon.svelte';
-    import {instagram, facebook, linkedin, twitter} from 'svelte-awesome/icons'
     export let categoryName : string
     export let members : Array<Array<string>>
 </script>
