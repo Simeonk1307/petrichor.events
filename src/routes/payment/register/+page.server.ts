@@ -81,7 +81,7 @@ export const actions = {
             CACode = "null"
         }
         const transactionID = data.get("transactionID")
-        const participants:string[] = data.get('participants'); // since only 1 member registers at a time
+        const participants:string[] = JSON.parse(data.get('participants')) // since only 1 member registers at a time
         const eventId = data.get("eventId")
         const accessToken = cookies.get('session_id') ?? "a"
         
