@@ -12,13 +12,12 @@
     import {Header, Footer, BtpBtn} from '$lib/components/ui';
     // Dummy data in this helper file
     import {footerLinks, headerLinks} from '$lib/helper';
-	import { workshops } from '$lib/data/workshop';
 	import { fade, fly } from 'svelte/transition';
+	import { events_data } from '$lib/new_data.js';
 
 	let path: string;
 	export let data;
 	let windowX:number
-
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
 
@@ -68,22 +67,33 @@
 		)
 			.then((res) => res.json())
 			.then((res) => {
-				// console.log(res)
+				// console.log(res.user_data)
 				if (res.status == 200) {
 					// invalidate
 					invalidate.set(false);
 					loggedIn.set(true);
 					access_token.set(accessToken);
-					user.set({
+					const events = res.user_events.map((ele:string) => {
+							// @ts-ignore
+						// console.log(ele)
+						const type = ele.eventId.at(0)
+						let eventData= events_data[type][ele.eventId] 
+						if (eventData == null) {
+							eventData = {
+								"name" : "Some Event",
+								"image": "https://picsum.photos/200/300",
+								"id": "T"
+							}
+						}
+						// @ts-ignore
+						eventData['verified'] = ele.verified
+						return eventData
+					})
+					const user_content = {
 						user_data: res.user_data,
-						user_events: res.user_events.map((ele:string) => {
-							// @ts-ignore
-							const eventData= workshops[ele.eventId] 
-							// @ts-ignore
-							eventData['verified'] = ele.verified
-							return eventData
-						})
-					});
+						user_events: events 
+					}
+					user.set(user_content);
 					// console.log($user)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
@@ -97,7 +107,7 @@
 				}
 			})
 			.catch((err) => {
-				console.log(err.toString());
+				// console.log(err.toString());
 				invalidate.set(true);
 				sessionStorage.setItem('loggedIn', 'false');
 				sessionStorage.setItem('user',  JSON.stringify(defaultUser));
@@ -109,6 +119,17 @@
 
 	let winsize = 3000;
 	onMount(async () => {
+		/// disable reload on older browsers
+		document.addEventListener('touchstart', () => {}, {passive: false});
+		document.addEventListener('touchmove', () => {}, {passive: false});
+		/// disable navigation in older browsers
+		if (window.safari) {
+			history.pushState(null, null, location.href);
+			window.onpopstate = function(event) {
+				history.go(1);
+			};
+		}
+		///
 		await getData();
 		windowX = window.innerWidth
 		window.onresize = ()=> {
@@ -159,16 +180,22 @@
 {/if}
 
 <Background {path} />
+ <!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 {#key data.url}
 <div
+class="main"
 in:fade={{duration: 400, delay: 400 }}
 out:fly={{ x: windowX, duration: 400 }}
 >
-	<slot />
+		<slot />
 </div>
 {/key}
 
-{#if path != '/'}
+{#if path != '/' && path != '/home' && path.startsWith('events')}
     <Footer title={title} links={footerLinks}/>
     <BtpBtn/>
 {/if}
+
+<style>
+</style>

@@ -1,58 +1,34 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { loggedIn,invalidate,user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
-	import { workshops } from '$lib/data/workshop';
 	import { enhance } from '$app/forms';
+	import { invalidate } from '$lib/stores';
+	import { goto } from '$app/navigation';
 
-    export let data: any;
-	let workshop: { name: any; };
-	const getData:Function = getContext('getData')
+    export let event: any;
+    export let participants: any;
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
 
-    onMount(async () => {
-		await getData()
-		// console.log($loggedIn)
-		if (!$loggedIn || $invalidate ) {
-			goto(`/login?to=/payment/check${$page.url.search}`);
-		}
-		if (data.id == null){
-			goto(`/`)
-		}
-		
-		fetchInfo()
-	});
-	
-	fetchInfo()
-	function fetchInfo(){
-		// @ts-ignore
-		workshop = workshops[data.id]
-		if (!workshop){
-			goto('/')
-		}	
-	}
-
 	function submit(onsubmit: { [x: string]: any; cancel: () => void }){
 		loading(true)
-		onsubmit.formData.set("eventId",data.id)
+
+		onsubmit.formData.set("eventId",event.eventId)
+		onsubmit.formData.set("participants",participants)
 		// @ts-ignore
 		return async ({ result }) => {
 			loading(false);
-			// console.log(result)
+
 			if (result.type == 'success' && result.data) {
 				const data = result.data;
-				// console.log(data);
 				if (data.success) {
 					invalidate.set(true)
-					displayPopUp('Success', `You have been registered to ${workshop.name}. You will receive an email regarding this soon.`,
+					displayPopUp('Success', `You have been registered to ${event.name}. You will receive an email regarding this soon.`,
 						10000,() => {
-							goto('/profile')
+							goto(`profile`)
 						}
 					)
 				} else {
-					displayPopUp('Alert', data.message, 2000, () => goto('/workshop'));
+					displayPopUp('Alert', data.message, 2000, () => goto(`workshop`));
 				}
 			} else {
 				setTimeout(() => {
@@ -60,7 +36,7 @@
 						'Alert',
 						result.data.err ? result.data.err : 'Something went wrong',
 						2000,
-						() => goto('/workshop')
+						() => goto(`workshop`)
 					);
 				}, 100);
 			}
@@ -74,11 +50,11 @@
 
 	<div id="all">
 		<h1 style="text-align:center;margin-top:10rem;">
-		Registering for <span style="color: blueviolet;">{workshop.name}</span>
+		Registering for <span style="color: blueviolet;">{event.name}</span>
 	</h1>
 	<div class="confirmBox">
-		<p>Hi There! You can register to this event : {workshop.name} for free. Please click register to confirm.</p>
-		<form action="?/pay" method="post" use:enhance={submit}>
+		<p>Hi There! You can register to this event : {event.name} for free. Please click register to confirm.</p>
+		<form action="?/payfree" method="post" use:enhance={submit}>
 			<button
 			id="submit"
 			type="submit"

@@ -4,6 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
+		"prebuild": "node download.js",
+		"predev": "node download.js",
 		"build": "vite build",
 		"preview": "vite preview",
 		"host": "vite --host",
@@ -29,6 +31,9 @@
 		"@phippsytech/svelte-qrious": "^0.0.3",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"@types/ws": "^8.5.8",
+		"esbuild": "^0.24.2",
+		"gsap": "^3.12.5",
+		"mdsvex": "^0.12.3",
 		"qrcode": "^1.5.4",
 		"save": "^2.9.0",
 		"svelte-awesome": "^3.3.1",

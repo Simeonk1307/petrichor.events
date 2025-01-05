@@ -76,6 +76,12 @@
 	});
 </script>
 
+<div class="gradient-bg">
+	<div class="gradients-container extra">
+		<div class="g" id="g3-1" />
+	</div>
+</div>
+
 <div class="container atmos" bind:this={CardDiv}>
 	<div class="cards">
 		<StackedBoxes event_name="Cultural" img_url={cultural} top={false} left={pageWidth >= 600}/>
@@ -88,14 +94,16 @@
 <style>
 	.container {
 		width: 100vw;
-		min-height: 100vh;
+		min-width: 100vw;
+		min-height: 110vh;
+		top: 100px;
+		overflow-y: scroll;
+		position: relative;
 		display: flex;
-		overflow: hidden !important;
 		cursor: pointer;
 		z-index: 2	;
 	}
 	.container * {
-		overflow: hidden !important; 
 		z-index: 2	;
 	}
 	h1 {
@@ -107,13 +115,29 @@
 		align-items: center;
 		justify-content: center;
 		margin: 0;
-		overflow: visible !important;
 		margin-right: 5rem;
 	}
 	.cards {
 		flex: 3;
 		display: grid;
 		grid-template-columns: auto auto;
+		overflow-y: scroll !important;
+	}
+	.gradient-bg {
+		height: 110vh;
+	}
+	
+	/* Background */
+	#g3-1 {
+		background: radial-gradient(
+				farthest-corner at 75% 30%,
+				rgba(var(--color4), 0.5) 0,
+				rgba(var(--color4), 0) 30%
+			)
+			no-repeat;
+		width: 100vw;
+		top: -20%;
+		height: 100vw;
 	}
 
 	@media (max-width: 1000px){
@@ -129,8 +153,8 @@
 	@media (max-width: 600px) {
 		.container{
 			min-height: 100%;
-			overflow:visible !important ;
 			overflow-x: hidden;
+			margin-top: 300px;
 		}
 		h1{
 			max-height: 50px;
@@ -142,12 +166,17 @@
 			align-items: center;
 			justify-content: center;
 		}
+		#g3-1 {
+			height: 150vh;
+			width: 150vw;
+			left: -10%;
+			top: 20%;
+		}
 	}
 
 	@media (max-width: 900px) {
 		.container {
 			flex-direction: column-reverse;
-			margin-top: 1rem;
 		}
 		h1{
 			font-size: calc(50px - 1vw);

@@ -7,6 +7,7 @@
     import ellipsisV from 'svelte-awesome/icons/ellipsisV';
     import userO from 'svelte-awesome/icons/userO';
 	import { fade } from "svelte/transition";
+	import { goto } from "$app/navigation";
 
     export let title: string;
     export let links: Array<HeaderLink> = [];

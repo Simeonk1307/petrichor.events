@@ -171,6 +171,6 @@
 				rgba(var(--color4), 0) 50%
 			)
 			no-repeat;
-		height: 150vh;
+		height: 100vh;
 	}
 </style>

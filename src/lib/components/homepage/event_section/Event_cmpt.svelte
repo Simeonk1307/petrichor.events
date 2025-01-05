@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getContext } from "svelte";
+  import { goto } from '$app/navigation';
 
     export let event_name='Event';
     export let img_url;
@@ -7,12 +8,7 @@
     export let left;
     const dialogPopUp:Function = getContext('displayPopUp')
     function handleClick() {
-      dialogPopUp(
-        "Message",
-        "Yet to be scheduled.",
-        5000,
-        () => {}
-      )
+      goto('/events/' + event_name.toLowerCase())
     }
 
   </script>
