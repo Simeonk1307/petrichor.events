@@ -9,7 +9,7 @@ export const load: PageServerLoad  = async ({url, cookies}) => {
     // get event_info
     // let result = await POST(API.get_event, {
     //     "id": id,
-    //     "password": "joPcyq-kipwyc-2jygva"
+    //     "password": process.env.pass
     // }, undefined)
 
     // const res = await result.json()
