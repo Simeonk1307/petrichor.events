@@ -67,7 +67,8 @@
 	export let data;
 	const getData: Function = getContext('getData');
 	let pageWidth = 0;
-	let alertshow = data.goto == null ? 0 : -1
+	// let alertshow = data.goto == null ? 0 : -1
+	let alertshow = -1
 	let onMountDone = false;
 	let prevGoto = ""
 	$: if (prevGoto != data.goto && onMountDone) {
@@ -82,16 +83,16 @@
 		setTimeout(() => {
 			visible = true;
 		}, 10);
-		let x = setInterval(() => {
-			alertshow += 0.1
-			if (alertshow > 100) {
-				setTimeout(() => {
-					alertshow = -1
+		// let x = setInterval(() => {
+		// 	alertshow += 0.1
+		// 	if (alertshow > 100) {
+		// 		setTimeout(() => {
+		// 			alertshow = -1
 
-					clearInterval(x)
-				}, 10)
-			}
-		}, 10)
+		// 			clearInterval(x)
+		// 		}, 10)
+		// 	}
+		// }, 10)
 		if (!$loggedIn) {
 			getData();
 		}
@@ -103,7 +104,7 @@
 		};
 		window.onscroll = (e) => {
 			let val = window.scrollY;
-			console.log(val);
+			// console.log(val);
 			if (slideHero) {
 				slideHero(val);
 			}

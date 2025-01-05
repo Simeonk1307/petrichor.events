@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { getContext, onMount } from "svelte";
     import { page } from "$app/stores";
     import { invalidate, loggedIn } from "$lib/stores";
     import type { HeaderLink, Link } from '../../types';
@@ -93,6 +93,8 @@
             updatePopupMenuPosition();
         }
     }
+
+    const displayPopUp: Function = getContext('displayPopUp')
 </script>
 
 {#if links.length > 0}
@@ -106,6 +108,23 @@
                 () => {
                     link.show = true
                     }}
+                on:click = {() => {
+                    if (link.linkText == "Event" || link.linkText == "Workshop") {
+                        // displayPopUp(
+						// "Message",
+						// `${link.linkText} registrations will start soon.`,
+						// 5000,
+						// ()=>{}
+                        // )
+                    } else if (link.url === "#") {
+                        displayPopUp(
+						"Message",
+						"Coming Soon",
+						5000,
+						()=>{}
+                        )
+                    }
+                }}
                 on:mouseleave = {() => {
                     setTimeout(()=>{
                         link.show = false

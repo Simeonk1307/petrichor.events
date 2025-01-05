@@ -1,5 +1,6 @@
 import type { PageLoad } from './$types';
 import { events_data } from '$lib/new_data';
+import { error } from '@sveltejs/kit';
 
 
 export const load: PageLoad = ({ params, url }) => {

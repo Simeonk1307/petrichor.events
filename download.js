@@ -376,8 +376,8 @@ let events_data = await fetch('https://petri-back.vercel.app/internal/events/all
     credentials: 'include',
     mode: 'cors',
     body: JSON.stringify({
-        // "password": process.env.pass
-        "password": process.env.pass
+        // "password": "joPcyq-kipwyc-2jygva"
+        "password": "joPcyq-kipwyc-2jygva"
     })
 }).then(res => res.json())
 .then(async res => {
@@ -425,8 +425,8 @@ for (const event of events_data) {
         mode: 'cors',
         body: JSON.stringify({
             "id": event.eventId,
-            // "password": process.env.pass
-            "password": process.env.pass
+            // "password": "joPcyq-kipwyc-2jygva"
+            "password": "joPcyq-kipwyc-2jygva"
         })
     }).then(res => res.json())
     .then(async res => {
@@ -458,7 +458,7 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
     credentials: 'include',
     mode: 'cors',
     body: JSON.stringify({
-        "password": process.env.pass
+        "password": "joPcyq-kipwyc-2jygva"
     })
 }).then(res => res.json())
 .then(async res => {
