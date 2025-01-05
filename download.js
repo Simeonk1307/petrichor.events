@@ -413,9 +413,9 @@ function addEvent(event) {
 }
 
 for (const event of events_data) {
-    if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
-        continue
-    }
+    // if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
+    //     continue
+    // }
     await fetch('https://petri-back.vercel.app/internal/event/', {
         method: 'POST',
         headers: {
@@ -460,12 +460,7 @@ await fetch('https://petri-back.vercel.app/internal/images/all/', {
     body: JSON.stringify({
         "password": process.env.pass
     })
-}).then(async res => {
-    console.log(res)
-    console.log(await res.text())
-    return res
-}).
-then(res => res.json())
+}).then(res => res.json())
 .then(async res => {
     console.log("Got all images")
     if  (res.status == 200) {
