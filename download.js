@@ -443,13 +443,13 @@ for (const event of events_data) {
         console.log(err.toString())
     })
 }
-// console.log(events.T.events)
+console.log(events)
 // console.log(JSON.stringify(events_compiledmap,null, 2))
 fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap,null, 2)}`)
 fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events,null, 2)}; 
 
 export const event_ids=${JSON.stringify(event_ids,null,2)};`)
-
+console.log("Getting images")
 await fetch('https://petri-back.vercel.app/internal/images/all/', {
     method: 'POST',
     headers: {
