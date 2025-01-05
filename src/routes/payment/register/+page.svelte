@@ -21,6 +21,9 @@
 	const getData: Function = getContext('getData')
 
 	onMount(() => {
+		if (event.eventId == undefined) {
+			goto('/home')
+		}
 		getData()
 		if (!$loggedIn || $invalidate) {
 			goto(`/login?to=${$page.url.pathname + $page.url.search}`);

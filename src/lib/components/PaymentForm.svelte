@@ -16,7 +16,7 @@
 	let CAcode: string = '';
 	let verified: boolean;
 	let imgurl: string;
-	let qrcodeurl = `upi://pay?pa=9493256601@ibl&pn=******6601&am=${amount}&mc=0000&mode=02&purpose=00`;
+	let qrcodeurl = `upi://pay?pa=vinaykrishna348@okhdfcbank&pn=******6025&am=${amount}&mc=0000&mode=02&purpose=00`;
 
 	QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
 		imgurl = url;
@@ -164,6 +164,7 @@
 				/></svg
 			>
 		</div>
+		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use  UPI ID: vinaykrishna348@okhdfcbank</p>
 	</div>
 	<div id="data">
 		<p style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem">Transaction Id</p>
@@ -215,7 +216,7 @@
 	}
 	.payment {
 		grid-area: payment;
-		height: 23rem;
+		/* height: 23rem; */
 		width: 20rem;
 		text-align: center;
 		background-color: black;
