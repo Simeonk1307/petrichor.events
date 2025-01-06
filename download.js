@@ -8,6 +8,10 @@ const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
 const components_map = new Map()
 
+// const backend_url = 'http://127.0.0.1:8000/'
+// const backend_url = 'https://petri-back.vercel.app/'
+const backend_url = 'https://petrichor-backend.vercel.app/'
+
 
 function generate_lookup(components) {
     components.forEach(component => {
@@ -369,7 +373,7 @@ async function compileasync(markdown) {
 }
 
 console.log("Getting images")
-await fetch('https://petrichor-backend.vercel.app/internal/images/all/', {
+await fetch(`${backend_url}internal/images/all/`, {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -404,7 +408,7 @@ await fetch('https://petrichor-backend.vercel.app/internal/images/all/', {
 })
 
 
-let events_data = await fetch('https://petrichor-backend.vercel.app/internal/events/all/', {
+let events_data = await fetch(`${backend_url}/internal/events/all/`, {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -452,7 +456,7 @@ for (const event of events_data) {
     if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
         continue
     }
-    await fetch('https://petrichor-backend.vercel.app/internal/event/', {
+    await fetch(`${backend_url}/internal/event/`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',

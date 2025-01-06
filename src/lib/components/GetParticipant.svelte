@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Strip from '$lib/components/Strip.svelte';
 	import { onMount } from 'svelte';
 	import VanillaTilt from 'vanilla-tilt';
 	export let event: any;
@@ -118,6 +117,7 @@
 										name={`email${index}`}
 										placeholder="example@email.com"
 										bind:value={emails[index]}
+										required
 									/>
 								</div>
 							</div>

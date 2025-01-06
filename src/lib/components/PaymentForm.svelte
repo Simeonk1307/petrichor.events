@@ -16,7 +16,7 @@
 	let CAcode: string = '';
 	let verified: boolean;
 	let imgurl: string;
-	let qrcodeurl = `upi://pay?pa=9493256601@ibl&pn=******6601&am=${amount}&mc=0000&mode=02&purpose=00`;
+	let qrcodeurl = `upi://pay?pa=vinaykrishna348@okhdfcbank&pn=******6025&am=${amount}&mc=0000&mode=02&purpose=00`;
 
 	QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
 		imgurl = url;
@@ -48,7 +48,7 @@
 				if (res.status == 200) {
 					if (res.verified) {
 						// handle
-						return res;
+						return {"type":"success","data":res};
 					} else {
 						return fail(400, { ...res, err: res.message });
 					}
@@ -164,6 +164,7 @@
 				/></svg
 			>
 		</div>
+		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use  UPI ID: vinaykrishna348@okhdfcbank</p>
 	</div>
 	<div id="data">
 		<p style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem">Transaction Id</p>
@@ -188,7 +189,7 @@
 				style="margin-top:5px;background-color:black !important;border:black"
 				bind:value={CAcode}
 			/>
-			<button id="verify" type="submit" style="cursor:pointer" on:click={handleVerify}
+			<button id="verify" type="button" style="cursor:pointer" on:click={handleVerify}
 				>{verified ? 'Verified' : 'Verify'}</button
 			>
 		</div>
@@ -215,7 +216,7 @@
 	}
 	.payment {
 		grid-area: payment;
-		height: 23rem;
+		/* height: 23rem; */
 		width: 20rem;
 		text-align: center;
 		background-color: black;
@@ -276,8 +277,11 @@
 		color: #fcf3ff;
 		outline: none;
 	}
-	#verify {
+	#verify:disabled {
 		background-color: rgb(17, 184, 17);
+	}
+	#verify {
+		background-color: rgb(184, 17, 17);
 		color: #fcf3ff;
 		border: none;
 		height: 1.5rem;

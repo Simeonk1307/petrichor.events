@@ -7,17 +7,17 @@ export const load: PageServerLoad  = async ({url, cookies}) => {
     const id = url.searchParams.get("id")
     
     // get event_info
-    // let result = await POST(API.get_event, {
-    //     "id": id,
-    //     "password": process.env.pass
-    // }, undefined)
+    let result = await POST(API.get_event, {
+        "id": id,
+        "password": process.env.pass
+    }, undefined)
 
-    // const res = await result.json()
+    const res = await result.json()
 
     const accesstoken = cookies.get("session_id")
     return {
         "id" : id,
-        "event": {},
+        "event": res,
         "accessToken": (accesstoken == undefined) ? null : accesstoken
     }
 }
@@ -28,7 +28,6 @@ export const actions = {
         // call apply event Paid here
         // check for transactionId. and CAcode is taken only if verified
         console.log("registering");
-        return
         const data = await request.formData();
         let CACode = data.get("CACode")
         if (CACode == ""){
@@ -76,14 +75,13 @@ export const actions = {
         // call apply event Paid here
         // check for transactionId. and CAcode is taken only if verified
         console.log("registering");
-        return
         const data = await request.formData();
         let CACode = data.get("CACode")
         if (CACode == ""){
             CACode = "null"
         }
         const transactionID = data.get("transactionID")
-        const participants:string[] = data.get('participants'); // since only 1 member registers at a time
+        const participants:string[] = JSON.parse(data.get('participants')) // since only 1 member registers at a time
         const eventId = data.get("eventId")
         const accessToken = cookies.get('session_id') ?? "a"
         

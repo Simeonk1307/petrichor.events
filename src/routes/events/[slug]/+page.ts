@@ -4,10 +4,9 @@ import { error } from '@sveltejs/kit';
 
 
 export const load: PageLoad = ({ params, url }) => {
-    const url_parts = url.pathname.split('/')
-    let eventID = url_parts[url_parts.length - 1] 
+    let eventID = url.searchParams.get('id')
     const event_type = params.slug.at(0)?.toUpperCase()
-    if (eventID == params.slug) {
+    if (eventID == null) {
         eventID = Object.keys(events_data[event_type].events)[0]
     }
 
