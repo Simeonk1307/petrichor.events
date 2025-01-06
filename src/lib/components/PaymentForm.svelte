@@ -189,7 +189,7 @@
 				style="margin-top:5px;background-color:black !important;border:black"
 				bind:value={CAcode}
 			/>
-			<button id="verify" type="submit" style="cursor:pointer" on:click={handleVerify}
+			<button id="verify" type="button" style="cursor:pointer" on:click={handleVerify}
 				>{verified ? 'Verified' : 'Verify'}</button
 			>
 		</div>
