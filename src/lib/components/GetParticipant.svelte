@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Strip from '$lib/components/Strip.svelte';
 	import { onMount } from 'svelte';
 	import VanillaTilt from 'vanilla-tilt';
 	export let event: any;

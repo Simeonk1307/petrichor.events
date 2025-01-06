@@ -118,13 +118,14 @@
 					}}>Go to CAProfile</button
 				>
 			{:else}
-			<button class="purple"
-			on:click={() => {
-				goto('/CA/welcome');
-			}}>Apply For CA</button
-		>
-				{/if}
-			</div>
+				<button
+					class="purple"
+					on:click={() => {
+						goto('/CA/welcome');
+					}}>Apply For CA</button
+				>
+			{/if}
+		</div>
 	</div>
 	{#if pageWidth <= 900}
 		<div class="events">
@@ -143,21 +144,20 @@
 				>
 			</div>
 			<div class="eventHolder">
-
 				{#if eventDisplay}
-				{#if profileData.events.length == 0}
-				<div class="no-message-box">Not Registered in any event</div>
-				{:else}
-				{#each profileData.events as event}
-				<EventCard {event} />
-				{/each}
-				{/if}
+					{#if profileData.events.length == 0}
+						<div class="no-message-box">Not Registered in any event</div>
+					{:else}
+						{#each profileData.events as event}
+							<EventCard {event} />
+						{/each}
+					{/if}
 				{:else if profileData.nightEvents.length == 0}
-				<div class="no-message-box">Nothing to Show Here</div>
+					<div class="no-message-box">Nothing to Show Here</div>
 				{:else}
-				{#each profileData.nightEvents as event}
-				<EventCard {event} />
-				{/each}
+					{#each profileData.nightEvents as event}
+						<EventCard {event} />
+					{/each}
 				{/if}
 			</div>
 		</div>
@@ -222,8 +222,8 @@
 		margin: 0;
 	}
 
-	.purple{
-		background: linear-gradient(45deg,rgb(182, 62, 182),rgb(59, 150, 219));
+	.purple {
+		background: linear-gradient(45deg, rgb(182, 62, 182), rgb(59, 150, 219));
 		font-weight: bold;
 		color: white;
 	}
@@ -243,7 +243,7 @@
 		z-index: 11;
 		flex: 1;
 	}
-	.container{
+	.container {
 		flex: 3;
 		display: flex;
 		min-height: 100%;
@@ -345,7 +345,7 @@
 		border-radius: 10px;
 		z-index: 10;
 	}
-	.eventHolder{
+	.eventHolder {
 		padding: 10px;
 		width: 100%;
 	}
@@ -380,9 +380,9 @@
 		.userData {
 			width: unset;
 			flex: unset;
-			gap:0px;
+			gap: 0px;
 		}
-		.eventHolder{
+		.eventHolder {
 			padding: 20px 10px;
 		}
 	}

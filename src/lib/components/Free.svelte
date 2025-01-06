@@ -13,7 +13,7 @@
 		loading(true)
 
 		onsubmit.formData.set("eventId",event.eventId)
-		onsubmit.formData.set("participants",participants)
+		onsubmit.formData.set("participants",JSON.stringify(participants))
 		// @ts-ignore
 		return async ({ result }) => {
 			loading(false);
