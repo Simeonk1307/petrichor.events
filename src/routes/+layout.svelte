@@ -76,8 +76,8 @@
 					const events = res.user_events.map((ele:string) => {
 							// @ts-ignore
 						// console.log(ele)
-						const type = ele.eventId.at(0)
-						let eventData= events_data[type][ele.eventId] 
+						const event_type = ele.eventId.at(0)
+						let eventData= events_data[event_type].events[ele.eventId] 
 						if (eventData == null) {
 							eventData = {
 								"name" : "Some Event",

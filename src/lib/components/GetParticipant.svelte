@@ -117,6 +117,7 @@
 										name={`email${index}`}
 										placeholder="example@email.com"
 										bind:value={emails[index]}
+										required
 									/>
 								</div>
 							</div>

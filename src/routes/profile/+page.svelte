@@ -7,7 +7,6 @@
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
 	import { defaultUser } from '$lib';
 	import EventCard from '$lib/components/MobileProfile/EventCard.svelte';
-	import { workshops } from '$lib/data/workshop.js';
 	export let data;
 	let eventDisplay = true;
 	// export let form;

@@ -24,11 +24,11 @@
 					invalidate.set(true)
 					displayPopUp('Success', `You have been registered to ${event.name}. You will receive an email regarding this soon.`,
 						10000,() => {
-							goto(`profile`)
+							goto(`/profile`)
 						}
 					)
 				} else {
-					displayPopUp('Alert', data.message, 2000, () => goto(`workshop`));
+					displayPopUp('Alert', data.message, 2000, () => goto(`/workshop`));
 				}
 			} else {
 				setTimeout(() => {
@@ -36,7 +36,7 @@
 						'Alert',
 						result.data.err ? result.data.err : 'Something went wrong',
 						2000,
-						() => goto(`workshop`)
+						() => goto(`/workshop`)
 					);
 				}, 100);
 			}

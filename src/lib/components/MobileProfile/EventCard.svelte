@@ -25,7 +25,7 @@ import cultural from '$lib/assets/HomePage/cultural.png';
 		<p class="verified" style="background-color:{event.verified?"green":"red"}">{event.verified?"Verified":"Not Verified"}</p>
 		<button on:click={()=> {
 			if (["T","C","I"].includes(event.id.at(0))) {
-				goto(`${links[event.id.at(0)]}/`)
+				goto(`${links[event.id.at(0)]}?id=${event.id}`)
 			} else {
 				goto(`${links[event.id.at(0)]}/${event.id}`)
 			}
