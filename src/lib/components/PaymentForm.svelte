@@ -48,7 +48,7 @@
 				if (res.status == 200) {
 					if (res.verified) {
 						// handle
-						return res;
+						return {"type":"success","data":res};
 					} else {
 						return fail(400, { ...res, err: res.message });
 					}
@@ -277,8 +277,11 @@
 		color: #fcf3ff;
 		outline: none;
 	}
-	#verify {
+	#verify:disabled {
 		background-color: rgb(17, 184, 17);
+	}
+	#verify {
+		background-color: rgb(184, 17, 17);
 		color: #fcf3ff;
 		border: none;
 		height: 1.5rem;
