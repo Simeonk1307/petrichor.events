@@ -141,7 +141,7 @@
 
 	function preventReload() {
 		if (path.includes('/payment/register')) {
-			if (window) {
+			if (window != undefined) {
 				window.onbeforeunload = (e) => {
 					e.preventDefault();
 					if (
@@ -153,7 +153,7 @@
 				};
 			}
 		} else {
-			if (window) {
+			if (window != undefined) {
 				window.onbeforeunload = () => {}
 			}
 		}
@@ -190,7 +190,6 @@
 	setContext('whoami', whoami);
 	$: {
 		path = $page.url.pathname;
-		preventReload()
 	}
 </script>
 
