@@ -11,7 +11,7 @@
       if (event_name.toLowerCase() == "informals") {
         dialogPopUp(
           "Message",
-          "Commin Soon",
+          "Coming Soon",
           5000,
           () => {}
         )
@@ -24,7 +24,7 @@
   
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="individualContainer" style="{top ? "top:40%;" :""} {left ? "left:15%;" : ""} " on:click={handleClick}>
+  <div class="individualContainer" style="{top ? "top:40%;" :""} {left ? "left:15%;top:15%;" : ""} " on:click={handleClick}>
     <div class="inner">
       <div class="image">
         <img class="image1" alt="logo" src={img_url}>
@@ -46,7 +46,7 @@
     .individualContainer {
       width: 220px;
       height: 250px;
-      margin: 50px 30px;
+      margin-inline: 30px;
       position: relative;
       box-sizing: border-box;
       border: 1px solid gainsboro; 

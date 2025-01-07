@@ -5,15 +5,19 @@ import fs from "fs"
 import path from "path"
 import dotenv from "dotenv";
 
-dotenv.config()
+try {
+    dotenv.config() 
+} catch (e) {
+    console.log(e.toString())
+}
 
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
 const components_map = new Map()
 
-// const backend_url = 'http://127.0.0.1:8000/'
+const backend_url = 'http://127.0.0.1:8000/'
 // const backend_url = 'https://petri-back.vercel.app/'
-const backend_url = 'https://petrichor-backend.vercel.app/'
+// const backend_url = 'https://petrichor-backend.vercel.app/'
 
 
 function generate_lookup(components) {
@@ -168,18 +172,18 @@ export const pre_components = [
         background-repeat: no-repeat;
     }
     h2 {
-        font-family: var(--pfont);
-        margin-left: 1rem;
-        width: max-content;
-        /* color: black; */
+        font-family: var(--pfont) !important;
+        overflow: hidden;
+        width: 100% !important;
+        text-overflow: clip;
+        word-wrap: break-word;
+        font-weight: 700;
     }
     p {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         letter-spacing: 0.05em;
         margin: 1rem;
-        margin-top: -0.5rem;
         overflow: hidden;
-        width: fit-content;
         text-align: center;
         border-radius: 0 0 0.4em 0.4em;
     }
@@ -218,6 +222,12 @@ export const pre_components = [
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 10px;
+        text-align: center;
+    }
+    p {
+        margin: 10px;
+        text-align: center;
     }
 </style>`
     }
