@@ -86,9 +86,28 @@
 {:else if register}
 <Participants bind:event={event} bind:emails={emails} bind:user={$user.user_data.email} registerEvent={registerEvent} />
 {:else if free}
+<button on:click={goBack} class="goBack">Go Back</button>
 <Free bind:event={event} bind:participants={emails} goBack={goBack}/>
 {:else if paid}
+<button on:click={goBack} class="goBack">Go Back</button>
 <Pay bind:event={event} bind:participants={emails} bind:amount={amount} goBack={goBack}/>
 
 
 {/if}
+
+<style>
+	.goBack {
+		position: absolute;
+		top: 5.5rem;
+		left: 2rem;
+		z-index: 10;
+		width: 7rem;
+		height: 2.5rem;
+		font-size: large;
+		border-radius: 2.5em;
+		background-color: rgba(241, 179, 146, 0.906);
+		border: none;
+		display: block;
+		margin: 0 auto;
+	}
+</style>	

@@ -5,7 +5,11 @@ import fs from "fs"
 import path from "path"
 import dotenv from "dotenv";
 
-dotenv.config()
+try {
+    dotenv.config() 
+} catch (e) {
+    console.log(e.toString())
+}
 
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
@@ -168,18 +172,18 @@ export const pre_components = [
         background-repeat: no-repeat;
     }
     h2 {
-        font-family: var(--pfont);
-        margin-left: 1rem;
-        width: max-content;
-        /* color: black; */
+        font-family: var(--pfont) !important;
+        overflow: hidden;
+        width: 100% !important;
+        text-overflow: clip;
+        word-wrap: break-word;
+        font-weight: 700;
     }
     p {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         letter-spacing: 0.05em;
         margin: 1rem;
-        margin-top: -0.5rem;
         overflow: hidden;
-        width: fit-content;
         text-align: center;
         border-radius: 0 0 0.4em 0.4em;
     }
@@ -218,6 +222,12 @@ export const pre_components = [
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 10px;
+        text-align: center;
+    }
+    p {
+        margin: 10px;
+        text-align: center;
     }
 </style>`
     }
@@ -498,38 +508,83 @@ function addEvent(event) {
     events[event.eventId.at(0)]['events'][event.eventId] = event_data
 }
 
-for (const event of events_data) {
-    if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
-        continue
+function getTaggedEvents(tag) {
+    let tagged_events = [];
+    for (const event of events_data) {
+        if (event.tags[0] == tag || event.tags[1] == tag) {
+            tagged_events.push(event)
+        }
     }
-    await fetch(`${backend_url}/internal/event/`, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-        },
-        credentials: 'include',
-        mode: 'cors',
-        body: JSON.stringify({
-            "id": event.eventId,
-            // "password": process.env.pass
-            "password": process.env.pass
-        })
-    }).then(res => res.json())
-        .then(async res => {
-            if (res.status == 200) {
-                addEvent(res)
-                // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
-                const result = await compileasync(res.markdown)
-                console.log(event.eventId)
-                // events_compiledmap.set(event.eventId, result)
-                events_compiledmap[event.eventId] = result
-            }
-        })
-        .catch(err => {
-            console.log(err.toString())
-        })
+    return tagged_events;
 }
-// console.log(events)
+
+function mergeEvents(tagged_events) {
+    let tags = new Set();
+    let noTagEvents = [];
+    let mergedEvents = [];
+    for (const event of tagged_events) {
+        if (event.tags[1].length != 0) {
+            tags.add(event.tags[1])
+        } else {
+            noTagEvents.push(event);
+        }
+    }
+    for (const tag of tags) {
+        for (const event of getTaggedEvents(tag)) {
+            mergedEvents.push(event)
+        }
+    }
+    for (const event of noTagEvents) {
+        mergedEvents.push(event)
+    }
+    return mergedEvents;
+}
+
+let online_events = mergeEvents(getTaggedEvents("online"));
+let offline_events = mergeEvents(getTaggedEvents("offline"));
+
+async function fetchEvents(events_data) {
+    for (const event of events_data) {
+        if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
+            continue
+        }
+        await fetch(`${backend_url}/internal/event/`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            credentials: 'include',
+            mode: 'cors',
+            body: JSON.stringify({
+                "id": event.eventId,
+                // "password": process.env.pass
+                "password": process.env.pass
+            })
+        }).then(res => res.json())
+            .then(async res => {
+                if (res.status == 200) {
+                    addEvent(res)
+                    // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
+                    const result = await compileasync(res.markdown)
+                    console.log(event.eventId)
+                    // events_compiledmap.set(event.eventId, result)
+                    events_compiledmap[event.eventId] = result
+                } else {
+                    console.log(res)
+                }
+            })
+            .catch(err => {
+                console.log(err.toString())
+            })
+    }
+}
+
+await fetchEvents(online_events);
+await fetchEvents(offline_events);
+
+// fetchEvents(events_data);
+
+// console.log(events.T)
 // console.log(JSON.stringify(events_compiledmap,null, 2))
 fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap, null, 2)}`)
 fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events, null, 2)}; 

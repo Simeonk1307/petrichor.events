@@ -1,3 +1,11 @@
+import dotenv from 'dotenv'
+
+try {
+    dotenv.config()
+}
+catch (e) {
+    console.log(e)
+}
 
 // const backend_url = 'http://127.0.0.1:8000/'
 // const backend_url = 'https://petri-back.vercel.app/'
