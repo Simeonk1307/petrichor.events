@@ -3,6 +3,9 @@ import { compile as mdcompile } from "mdsvex"
 import { build } from 'esbuild';
 import fs from "fs"
 import path from "path"
+import dotenv from "dotenv";
+
+dotenv.config()
 
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
@@ -288,6 +291,9 @@ export const pre_components = [
 			margin-bottom: 1em;
 			text-align: center;
 		}
+        .buttons {
+            margin: 0px;
+        }
 	}
 </style>
 
