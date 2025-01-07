@@ -3,6 +3,9 @@ import { compile as mdcompile } from "mdsvex"
 import { build } from 'esbuild';
 import fs from "fs"
 import path from "path"
+import dotenv from "dotenv";
+
+dotenv.config()
 
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
