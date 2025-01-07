@@ -15,9 +15,9 @@ const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
 const components_map = new Map()
 
-const backend_url = 'http://127.0.0.1:8000/'
+// const backend_url = 'http://127.0.0.1:8000/'
 // const backend_url = 'https://petri-back.vercel.app/'
-// const backend_url = 'https://petrichor-backend.vercel.app/'
+const backend_url = 'https://petrichor-backend.vercel.app/'
 
 
 function generate_lookup(components) {
@@ -511,7 +511,7 @@ function addEvent(event) {
 function getTaggedEvents(tag) {
     let tagged_events = [];
     for (const event of events_data) {
-        if (event.tag[0] == tag || event.tag[1] == tag) {
+        if (event.tags[0] == tag || event.tags[1] == tag) {
             tagged_events.push(event)
         }
     }
@@ -523,8 +523,8 @@ function mergeEvents(tagged_events) {
     let noTagEvents = [];
     let mergedEvents = [];
     for (const event of tagged_events) {
-        if (event.tag[1].length) {
-            tags.add(event.tag[1])
+        if (event.tags[1].length != 0) {
+            tags.add(event.tags[1])
         } else {
             noTagEvents.push(event);
         }
@@ -540,8 +540,8 @@ function mergeEvents(tagged_events) {
     return mergedEvents;
 }
 
-// let online_events = mergeEvents(getTaggedEvents("online"));
-// let offline_events = mergeEvents(getTaggedEvents("offline"));
+let online_events = mergeEvents(getTaggedEvents("online"));
+let offline_events = mergeEvents(getTaggedEvents("offline"));
 
 async function fetchEvents(events_data) {
     for (const event of events_data) {
@@ -579,12 +579,12 @@ async function fetchEvents(events_data) {
     }
 }
 
-// fetchEvents(online_events);
-// fetchEvents(offline_events);
+await fetchEvents(online_events);
+await fetchEvents(offline_events);
 
-fetchEvents(events_data);
+// fetchEvents(events_data);
 
-// console.log(events)
+// console.log(events.T)
 // console.log(JSON.stringify(events_compiledmap,null, 2))
 fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap, null, 2)}`)
 fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events, null, 2)}; 

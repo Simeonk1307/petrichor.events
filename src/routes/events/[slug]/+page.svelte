@@ -255,15 +255,23 @@
 		width: 100%;
 		position: relative;
 	}
+	#register:hover {
+		background-color: rgb(255, 255, 255);
+		color: black;
+	}
 	#register {
 		border: none;
-		background-color: rgba(164, 164, 164, 0.545);
-		padding: 10px;
-		border-radius: 5px;
-		margin: 10px 20px;
-		font-size: 20px;
+		padding: 0.8em;
+		padding-inline: 1em;
+		background-color: rgba(237, 237, 237, 0.137);
+		border-radius: 0.4em;
+        margin: 0 10px;
+		border: unset;
 		color: white;
-		/* position: absolute;  */
+		font-size: 20px;
+		transition: 200ms ease-in-out;
+		font-family: var(--pfont) !important;
+		font-weight: bold;
 		right: 0;
 		bottom: 0;
 		text-decoration: none;
