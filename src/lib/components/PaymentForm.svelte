@@ -11,6 +11,7 @@
 	export let id: string;
 	export let amount: number;
 	export let participants: any;
+	export let goBack: Function;
 
 	let transactionID: string;
 	let CAcode: string = '';
@@ -128,7 +129,7 @@
 						}
 					);
 				} else {
-					displayPopUp('Alert', data.message, 4000, () => goto('/workshop'));
+					displayPopUp('Alert', data.message, 4000, () => goBack());
 				}
 			} else {
 				setTimeout(() => {
@@ -136,7 +137,7 @@
 						'Alert',
 						result.data.err ? result.data.err : 'Something went wrong',
 						4000,
-						() => goto('/workshop')
+						() => goBack()
 					);
 				}, 100);
 			}

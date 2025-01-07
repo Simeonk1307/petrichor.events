@@ -23,7 +23,7 @@ function generate_lookup(components) {
 export const pre_components = [
     {
         id: 1,
-        name : 'Section',
+        name: 'Section',
         type: "svelte",
         source: `<script lang="ts">
     export let name;
@@ -53,7 +53,7 @@ export const pre_components = [
     },
     {
         id: 1,
-        name : 'Box',
+        name: 'Box',
         type: "svelte",
         source: `<div><slot/></div>
 
@@ -81,7 +81,7 @@ export const pre_components = [
     },
     {
         id: 1,
-        name : 'Person',
+        name: 'Person',
         type: "svelte",
         source: `<script lang="ts">
     export let name = "John Doe";
@@ -125,7 +125,7 @@ export const pre_components = [
                 });
             } else {
                 // console.log("from uploads")
-                url = \`\${origin}/uploads/\${name.toLowerCase()}.png\`;
+                url = \`\${origin}/uploads/\${name.toLowerCase()}.webp\`;
             }
         } else {
             url = "https://picsum.photos/200/300" 
@@ -185,7 +185,7 @@ export const pre_components = [
     },
     {
         id: 1,
-        name : 'FlexSection',
+        name: 'FlexSection',
         type: "svelte",
         source: `<div><slot /></div>
 
@@ -202,7 +202,7 @@ export const pre_components = [
     },
     {
         id: 1,
-        name : 'CenterSection',
+        name: 'CenterSection',
         type: "svelte",
         source: `<script lang="ts">
     export let name;
@@ -218,9 +218,9 @@ export const pre_components = [
     }
 </style>`
     }
-    ,{
+    , {
         id: 1,
-        name : 'Button',
+        name: 'Button',
         type: "svelte",
         source: `<script lang="ts">
     export let url = "#rules";
@@ -354,26 +354,26 @@ async function compileasync(markdown) {
         },
     ];
     let isError = false;
-        const result = await build({
-            entryPoints: ['./markdown.mdx'],
-            bundle: true,
-            format: 'esm',
-            plugins,
-            write: false,
-        }).catch(e => {
-            isError = true
-            return {
-                outputFiles:[{
-                    text: `<p>${e.message}</p>`
-                }]
-            }
-        });
-    return ({"data":result.outputFiles[0].text, isError});
+    const result = await build({
+        entryPoints: ['./markdown.mdx'],
+        bundle: true,
+        format: 'esm',
+        plugins,
+        write: false,
+    }).catch(e => {
+        isError = true
+        return {
+            outputFiles: [{
+                text: `<p>${e.message}</p>`
+            }]
+        }
+    });
+    return ({ "data": result.outputFiles[0].text, isError });
 
 }
 
-console.log("Getting images")
-await fetch(`${backend_url}internal/images/all/`, {
+console.log("Getting images' name")
+const organizers_names = await fetch(`${backend_url}internal/images/info/`, {
     method: 'POST',
     headers: {
         'Content-type': 'application/json',
@@ -383,29 +383,69 @@ await fetch(`${backend_url}internal/images/all/`, {
     body: JSON.stringify({
         "password": process.env.pass
     })
-}).then(res => {
-    // console.log(res)
-    return res.json()})
-.then(async res => {
-    console.log("Got all images")
-    if  (res.status == 200) {
-        fs.rmSync("./static/uploads/",{recursive:true,force:true})
-        fs.mkdirSync("./static/uploads/",{recursive:true})
+}).then(res => res.json())
+    .then(res => {
+        return res.data
+    })
 
-        for (const image of res.data) {
-            try {
-                fs.writeFileSync(path.resolve("./static/uploads/",`${image.name.toLowerCase()}.png`),Buffer.from(image.image,'base64'))
-            } catch(e) {
-                console.log("Erro in file save: " + image + ":" + image.name + " " + e.toString())
-            }
-        }
-    } else {
-        console.log(res)
+// console.log(organizers_names)
+const result_promises = []
+let i = 0;
+// request to backend in patch of 5
+let no_of_images = organizers_names.length
+while (i < no_of_images) {
+    let upto = Math.min(no_of_images, i + 5)
+
+    for (let j = i; j < upto; j ++) {
+        const name = organizers_names[j];
+
+        result_promises.push(
+            fetch(`${backend_url}internal/image/`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                credentials: 'include',
+                mode: 'cors',
+                body: JSON.stringify({
+                    "name": name,
+                    "password": process.env.pass
+                })
+            }).then(res => {
+                // console.log(res)
+                return res.json()
+            }).catch(err => { return { "status": 500, "message": err.toString() } })
+        )
     }
-    return res.data
-}).catch(err => {
-    console.log(err.toString())
-})
+    
+    await Promise.all(result_promises).then(results => {
+        fs.rmSync("./static/uploads/", { recursive: true, force: true })
+        fs.mkdirSync("./static/uploads/", { recursive: true })
+        let i = 0;
+        for (const res of results) {
+            if (res.status == 200) {
+                // console.log(res.name)
+                const image = res
+                try {
+                    fs.writeFileSync(path.resolve("./static/uploads/", `${image.name.toLowerCase()}.webp`), Buffer.from(image.image, 'base64'))
+                } catch (e) {
+                    console.log("Error in file save: " + image + ":" + image.name + " " + e.toString())
+                }
+            } else {
+                console.log("unsuccessful: ",res, i)
+            }
+            i++
+        }
+        console.log("5 new images added")
+    }).catch(err => {
+        console.log(err.toString())
+    })    
+    i += 5
+
+
+}
+
+console.log("Got all images")
 
 
 let events_data = await fetch(`${backend_url}/internal/events/all/`, {
@@ -420,24 +460,24 @@ let events_data = await fetch(`${backend_url}/internal/events/all/`, {
         "password": process.env.pass
     })
 }).then(res => res.json())
-.then(async res => {
-    console.log("Got all events")
-    if (res.status == 200) {
-        return res.data
-    } else {
-        console.log(res)
-        return []
-    }
-}).catch(err => {
-    console.log(err.toString())
-})
+    .then(async res => {
+        console.log("Got all events")
+        if (res.status == 200) {
+            return res.data
+        } else {
+            console.log(res)
+            return []
+        }
+    }).catch(err => {
+        console.log(err.toString())
+    })
 const events_compiledmap = {}
 const events = {
-    'C': {"events": {}},
-    "T": {"events": {}},
-    "W": {"events": {}},
-    "I": {"events": {}}
-    
+    'C': { "events": {} },
+    "T": { "events": {} },
+    "W": { "events": {} },
+    "I": { "events": {} }
+
 }
 
 let event_ids = [];
@@ -469,23 +509,23 @@ for (const event of events_data) {
             "password": process.env.pass
         })
     }).then(res => res.json())
-    .then(async res => {
-        if (res.status == 200){
-            addEvent(res)
-            // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
-            const result = await compileasync(res.markdown) 
-            console.log(event.eventId)
-            // events_compiledmap.set(event.eventId, result)
-            events_compiledmap[event.eventId] =  result
-        }
-    })
-    .catch(err => {
-        console.log(err.toString())
-    })
+        .then(async res => {
+            if (res.status == 200) {
+                addEvent(res)
+                // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
+                const result = await compileasync(res.markdown)
+                console.log(event.eventId)
+                // events_compiledmap.set(event.eventId, result)
+                events_compiledmap[event.eventId] = result
+            }
+        })
+        .catch(err => {
+            console.log(err.toString())
+        })
 }
 // console.log(events)
 // console.log(JSON.stringify(events_compiledmap,null, 2))
-fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap,null, 2)}`)
-fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events,null, 2)}; 
+fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSON.stringify(events_compiledmap, null, 2)}`)
+fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events, null, 2)}; 
 
-export const event_ids=${JSON.stringify(event_ids,null,2)};`)
+export const event_ids=${JSON.stringify(event_ids, null, 2)};`)
