@@ -2,7 +2,11 @@
 <script>
   import StackedBoxes from './Workshop_cmpt.svelte';
 	import { goto } from "$app/navigation";
+  import done_n_dusted from "$lib/assets/done_n_dusted.png"
   import { workshops} from "$lib/data/workshop"
+  import { Footer } from '$lib/components/ui';
+	// Dummy data in this helper file
+	import { footerLinks } from '$lib/helper';
 
   let lesserLength = Object.entries(workshops).length < 4
   const first = workshops.WP01
@@ -17,11 +21,14 @@
 </div>
 
 <main>
-  <h1 class="atmos" style="padding-left: 5%">Workshop</h1>
+  <h1 class="atmos" style="margin-top:100px;">Workshop</h1>
   <div class="container">
-    <div class="workshop_scroll">
+    <div style="width: 100%;display:flex; justify-content:center; ">
+      <img height="200px" width="320px" src={done_n_dusted} />
+    </div>
+    <!-- <div class="workshop_scroll">
       {#each Object.entries(workshops) as [id,workShop]}
-      <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
+      <StackedBoxes workshop_name={`${workShop.name}(Done And Dusted)`} img_url={workShop.image} workshop_id = {id}/>
     {/each}
     {#if lesserLength}
     <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
@@ -32,16 +39,17 @@
     {#if lesserLength}
     <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
     {/if}
-    </div>
+    </div> -->
   </div>
-  <button on:click={()=> goto("/workshop")}>Workshops</button>
+  <!-- <button on:click={()=> goto("/workshop")}>Workshops</button> -->
+  <Footer title="Petrichor" links={footerLinks} />
 </main>
   
 <style>
   main{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     min-height: 100vh;
     background-color: transparent;
@@ -57,6 +65,7 @@
   }
   .container{
     width: 100%;
+    mix-blend-mode: color;
     display: flex;
     justify-content: flex-start;
   }

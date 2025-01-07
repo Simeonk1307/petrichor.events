@@ -7,6 +7,7 @@
 	let left: number, right: number;
 
 	onMount(() => {
+		goto('/home')
 		VanillaTilt.init(document.querySelectorAll('.card'), {
 			max:10,
 			speed:10000
