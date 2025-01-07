@@ -6,6 +6,7 @@
 
     export let event: any;
     export let participants: any;
+    export let goBack: Function;
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
 
@@ -28,7 +29,7 @@
 						}
 					)
 				} else {
-					displayPopUp('Alert', data.message, 2000, () => goto(`/workshop`));
+					displayPopUp('Alert', data.message, 2000, () => goBack());
 				}
 			} else {
 				setTimeout(() => {
@@ -36,7 +37,7 @@
 						'Alert',
 						result.data.err ? result.data.err : 'Something went wrong',
 						2000,
-						() => goto(`/workshop`)
+						() => goBack()
 					);
 				}, 100);
 			}

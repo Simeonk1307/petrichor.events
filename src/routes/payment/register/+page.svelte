@@ -29,8 +29,17 @@
 			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
 			return
 		}
+		window.onbeforeunload= (e) => {
+			console.log(e)
+			e.preventDefault()
+			if (confirm("You may lose the participants added to the event. Do you want to continue? ")) {
+				e.returnValue = true;
+			}
+			e.returnValue =  false;
+		}
 		show = false;
 	})
+
 
 	const registerEvent = () => {
 		let verified = $user.user_data.email.endsWith('iitpkd.ac.in');
@@ -49,6 +58,12 @@
 			paid = true
 		}
 		register = false
+	}
+
+	const goBack = () => {
+		register = true
+		free = false;
+		paid = false
 	}
 
 
@@ -78,9 +93,9 @@
 {:else if register}
 <Participants bind:event={event} bind:emails={emails} bind:user={$user.user_data.email} registerEvent={registerEvent} />
 {:else if free}
-<Free bind:event={event} bind:participants={emails}/>
+<Free bind:event={event} bind:participants={emails} goBack={goBack}/>
 {:else if paid}
-<Pay bind:event={event} bind:participants={emails} bind:amount={amount}/>
+<Pay bind:event={event} bind:participants={emails} bind:amount={amount} goBack={goBack}/>
 
 
 {/if}

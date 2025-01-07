@@ -11,6 +11,7 @@
 
     export let event: any;
     export let participants: string[];
+	export let goBack: Function;
 	export let amount: any = 0;
 
 	onMount(() => {
@@ -28,7 +29,7 @@
 		<h1 style="text-align:center;margin-top:10rem;">
 		Registering for <span style="color: blueviolet;">{event.name}</span>
 	</h1>	
-	<PaymentForm name={event.name} id={event.eventId} amount={amount} participants={participants}/>
+	<PaymentForm name={event.name} id={event.eventId} amount={amount} participants={participants} goBack={goBack}/>
 </div>
 
 
