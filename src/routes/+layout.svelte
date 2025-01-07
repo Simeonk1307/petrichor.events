@@ -8,16 +8,16 @@
 	import { POST, API, defaultUser } from '$lib/index.js';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
 	import { beforeNavigate } from '$app/navigation';
-    
-    import {Header, Footer, BtpBtn} from '$lib/components/ui';
-    // Dummy data in this helper file
-    import {footerLinks, headerLinks} from '$lib/helper';
+
+	import { Header, Footer, BtpBtn } from '$lib/components/ui';
+	// Dummy data in this helper file
+	import { footerLinks, headerLinks } from '$lib/helper';
 	import { fade, fly } from 'svelte/transition';
 	import { events_data } from '$lib/new_data.js';
 
 	let path: string;
 	export let data;
-	let windowX:number
+	let windowX: number;
 	let loading = false;
 	let PopUpObj = new PopUp('', '', false, null);
 
@@ -26,32 +26,33 @@
 		if (access_token == null || !$loggedIn) {
 			invalidate.set(true);
 			sessionStorage.setItem('loggedIn', 'false');
-			sessionStorage.setItem('user',  JSON.stringify(defaultUser));
+			sessionStorage.setItem('user', JSON.stringify(defaultUser));
 		}
-		if ($invalidate && $loggedIn) { // if not loggedIn then no need to refesh
+		if ($invalidate && $loggedIn) {
+			// if not loggedIn then no need to refesh
 			// console.log("Here")
-			await whoami(access_token ?? "a")
+			await whoami(access_token ?? 'a');
 		}
 	});
 
 	async function getData() {
-		const data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser)
+		const data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser);
 		user.set(JSON.parse(data));
-		access_token.set(sessionStorage.getItem('access'))
-		if (data == JSON.stringify(defaultUser) || data == "{}") {
-			if ($access_token == null || $access_token == undefined || !$loggedIn){
+		access_token.set(sessionStorage.getItem('access'));
+		if (data == JSON.stringify(defaultUser) || data == '{}') {
+			if ($access_token == null || $access_token == undefined || !$loggedIn) {
 				// user have not logged In no need for refreshing the data through whoami
 
-				loggedIn.set(false)
-				invalidate.set(true)
-
-			}else{ // user may have logged in
+				loggedIn.set(false);
+				invalidate.set(true);
+			} else {
+				// user may have logged in
 				// console.log("HH")
-				await whoami($access_token ?? "a") 
+				await whoami($access_token ?? 'a');
 			}
 		} else {
 			loggedIn.set(Boolean(sessionStorage.getItem('loggedIn')) ?? false);
-			invalidate.set(false)
+			invalidate.set(false);
 		}
 	}
 
@@ -73,31 +74,31 @@
 					invalidate.set(false);
 					loggedIn.set(true);
 					access_token.set(accessToken);
-					const events = res.user_events.map((ele:string) => {
-							// @ts-ignore
+					const events = res.user_events.map((ele: string) => {
+						// @ts-ignore
 						// console.log(ele)
-						const event_type = ele.eventId.at(0)
-						let eventData= events_data[event_type].events[ele.eventId] 
+						const event_type = ele.eventId.at(0);
+						let eventData = events_data[event_type].events[ele.eventId];
 						if (eventData == null) {
 							eventData = {
-								"name" : "Some Event",
-								"image": "https://picsum.photos/200/300",
-								"id": "T"
-							}
+								name: 'Some Event',
+								image: 'https://picsum.photos/200/300',
+								id: 'T'
+							};
 						}
 						// @ts-ignore
-						eventData['verified'] = ele.verified
-						return eventData
-					})
+						eventData['verified'] = ele.verified;
+						return eventData;
+					});
 					const user_content = {
 						user_data: res.user_data,
-						user_events: events 
-					}
+						user_events: events
+					};
 					user.set(user_content);
 					// console.log($user)
 					sessionStorage.setItem('user', JSON.stringify($user));
 					sessionStorage.setItem('loggedIn', 'true');
-					sessionStorage.setItem('access',accessToken)
+					sessionStorage.setItem('access', accessToken);
 					return true;
 				} else {
 					invalidate.set(true);
@@ -110,32 +111,53 @@
 				// console.log(err.toString());
 				invalidate.set(true);
 				sessionStorage.setItem('loggedIn', 'false');
-				sessionStorage.setItem('user',  JSON.stringify(defaultUser));
+				sessionStorage.setItem('user', JSON.stringify(defaultUser));
 				return false;
 			});
 	}
 
-    const title: string = 'Petrichor 25'
+	const title: string = 'Petrichor 25';
 
 	let winsize = 3000;
 	onMount(async () => {
 		/// disable reload on older browsers
-		document.addEventListener('touchstart', () => {}, {passive: false});
-		document.addEventListener('touchmove', () => {}, {passive: false});
+		document.addEventListener('touchstart', () => {}, { passive: false });
+		document.addEventListener('touchmove', () => {}, { passive: false });
 		/// disable navigation in older browsers
 		if (window.safari) {
 			history.pushState(null, null, location.href);
-			window.onpopstate = function(event) {
+			window.onpopstate = function (event) {
 				history.go(1);
 			};
 		}
 		///
 		await getData();
-		windowX = window.innerWidth
-		window.onresize = ()=> {
-			windowX = window.innerWidth
-		}
+		windowX = window.innerWidth;
+		window.onresize = () => {
+			windowX = window.innerWidth;
+		};
+		preventReload()
 	});
+
+	function preventReload() {
+		if (path.includes('/payment/register')) {
+			if (window) {
+				window.onbeforeunload = (e) => {
+					e.preventDefault();
+					if (
+						confirm('You may lose the participants added to the event. Do you want to continue? ')
+					) {
+						e.returnValue = true;
+					}
+					e.returnValue = false;
+				};
+			}
+		} else {
+			if (window) {
+				window.onbeforeunload = () => {}
+			}
+		}
+	}
 
 	function updateLoading(val: boolean) {
 		loading = val;
@@ -166,35 +188,34 @@
 	setContext('loading', updateLoading);
 	setContext('getData', getData);
 	setContext('whoami', whoami);
-	$: path = $page.url.pathname;
+	$: {
+		path = $page.url.pathname;
+		preventReload()
+	}
 </script>
 
-<Loading spinning={loading}/>
+<Loading spinning={loading} />
 
 {#if PopUpObj.isOn}
-	<PopUpBox bind:PopUpObj/>
+	<PopUpBox bind:PopUpObj />
 {/if}
 
 {#if path != '/'}
-	<Header title={title} links={headerLinks}/>
+	<Header {title} links={headerLinks} />
 {/if}
 
 <Background {path} />
- <!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 {#key data.url}
-<div
-class="main"
-in:fade={{duration: 400, delay: 400 }}
-out:fly={{ x: windowX, duration: 400 }}
->
+	<div class="main" in:fade={{ duration: 400, delay: 400 }} out:fly={{ x: windowX, duration: 400 }}>
 		<slot />
-</div>
+	</div>
 {/key}
 
 {#if path != '/' && path != '/home' && path.startsWith('events')}
-    <Footer title={title} links={footerLinks}/>
-    <BtpBtn/>
+	<Footer {title} links={footerLinks} />
+	<BtpBtn />
 {/if}
 
 <style>

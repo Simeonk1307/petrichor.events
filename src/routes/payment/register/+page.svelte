@@ -29,14 +29,7 @@
 			goto(`/login?to=${$page.url.pathname + $page.url.search}`);
 			return
 		}
-		window.onbeforeunload= (e) => {
-			console.log(e)
-			e.preventDefault()
-			if (confirm("You may lose the participants added to the event. Do you want to continue? ")) {
-				e.returnValue = true;
-			}
-			e.returnValue =  false;
-		}
+		
 		show = false;
 	})
 
@@ -44,7 +37,7 @@
 	const registerEvent = () => {
 		let verified = $user.user_data.email.endsWith('iitpkd.ac.in');
 		if (verified) {
-			for (const email in emails) {
+			for (const email of emails) {
 				if (!email.endsWith('iitpkd.ac.in')) {
 					verified = false
 					break
