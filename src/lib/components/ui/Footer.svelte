@@ -34,7 +34,7 @@
         box-sizing: border-box;
         padding-left: 2rem;
         z-index: 999;
-        width: 100vw;
+        width: 100vw !important;
         mix-blend-mode: hard-light;
         position: relative;
         height: 200px;

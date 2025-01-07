@@ -90,7 +90,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '/workshop',
+        url: '#',
         linkText: 'Workshop',
         childLinks: []
         ,
