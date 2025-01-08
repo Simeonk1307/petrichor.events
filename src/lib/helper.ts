@@ -97,7 +97,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '#',
+        url: '/schedule',
         linkText: 'Schedule',
         childLinks: []
         ,
