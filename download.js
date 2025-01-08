@@ -11,6 +11,8 @@ try {
     console.log(e.toString())
 }
 
+const skip_event = ["CF11"]
+
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
 const components_map = new Map()
@@ -550,7 +552,7 @@ if (process.env.get_events == "True") {
     
     async function fetchEvents(events_data) {
         for (const event of events_data) {
-            if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
+            if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test") || skip_event.includes(event.eventId)) {
                 continue
             }
             await fetch(`${backend_url}/internal/event/`, {
