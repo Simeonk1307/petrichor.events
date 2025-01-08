@@ -11,6 +11,8 @@ try {
     console.log(e.toString())
 }
 
+const skip_event = ["CF11"]
+
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
 const components_map = new Map()
@@ -388,34 +390,36 @@ async function compileasync(markdown) {
 
 }
 
-console.log("Getting images' name")
-const organizers_names = await fetch(`${backend_url}internal/images/info/`, {
-    method: 'POST',
-    headers: {
-        'Content-type': 'application/json',
-    },
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({
-        "password": process.env.pass
-    })
-}).then(res => res.json())
+if (process.env.get_images == "True") {
+
+    console.log("Getting images' name")
+    const organizers_names = await fetch(`${backend_url}internal/images/info/`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+        },
+        credentials: 'include',
+        mode: 'cors',
+        body: JSON.stringify({
+            "password": process.env.pass
+        })
+    }).then(res => res.json())
     .then(res => {
         return res.data
     })
 
-// console.log(organizers_names)
-const result_promises = []
-let i = 0;
-// request to backend in patch of 5
-let no_of_images = organizers_names.length
-while (i < no_of_images) {
-    let upto = Math.min(no_of_images, i + 5)
-
-    for (let j = i; j < upto; j ++) {
-        const name = organizers_names[j];
-
-        result_promises.push(
+    // console.log(organizers_names)
+    const result_promises = []
+    let i = 0;
+    // request to backend in patch of 5
+    let no_of_images = organizers_names.length
+    while (i < no_of_images) {
+        let upto = Math.min(no_of_images, i + 5)
+        
+        for (let j = i; j < upto; j ++) {
+            const name = organizers_names[j];
+            
+            result_promises.push(
             fetch(`${backend_url}internal/image/`, {
                 method: 'POST',
                 headers: {
@@ -457,25 +461,28 @@ while (i < no_of_images) {
         console.log(err.toString())
     })    
     i += 5
-
-
+    
+    
 }
 
 console.log("Got all images")
+}
 
+console.log(process.env.get_events)
+if (process.env.get_events == "True") {
 
-let events_data = await fetch(`${backend_url}/internal/events/all/`, {
-    method: 'POST',
-    headers: {
-        'Content-type': 'application/json',
-    },
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({
-        // "password": process.env.pass
-        "password": process.env.pass
-    })
-}).then(res => res.json())
+    let events_data = await fetch(`${backend_url}/internal/events/all/`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+        },
+        credentials: 'include',
+        mode: 'cors',
+        body: JSON.stringify({
+            // "password": process.env.pass
+            "password": process.env.pass
+        })
+    }).then(res => res.json())
     .then(async res => {
         console.log("Got all events")
         if (res.status == 200) {
@@ -487,73 +494,76 @@ let events_data = await fetch(`${backend_url}/internal/events/all/`, {
     }).catch(err => {
         console.log(err.toString())
     })
-const events_compiledmap = {}
-const events = {
-    'C': { "events": {} },
-    "T": { "events": {} },
-    "W": { "events": {} },
-    "I": { "events": {} }
-
-}
-
-let event_ids = [];
-
-function addEvent(event) {
-    event_ids.push(event.eventId)
-    const event_data = {
-        "name": event.name,
-        "id": event.eventId,
-        "image": event.image_url,
+    const events_compiledmap = {}
+    const events = {
+        'C': { "events": {} },
+        "T": { "events": {} },
+        "W": { "events": {} },
+        "I": { "events": {} }
+        
     }
-    events[event.eventId.at(0)]['events'][event.eventId] = event_data
-}
-
-function getTaggedEvents(tag) {
-    let tagged_events = [];
-    for (const event of events_data) {
-        if (event.tags[0] == tag || event.tags[1] == tag) {
-            tagged_events.push(event)
+    
+    let event_ids = [];
+    
+    function addEvent(event) {
+        event_ids.push(event.eventId)
+        const event_data = {
+            "name": event.name,
+            "id": event.eventId,
+            "image": event.image_url,
         }
+        events[event.eventId.at(0)]['events'][event.eventId] = event_data
     }
-    return tagged_events;
-}
-
-function mergeEvents(tagged_events) {
-    let tags = new Set();
-    let noTagEvents = [];
-    let mergedEvents = [];
-    for (const event of tagged_events) {
-        if (event.tags[1].length != 0) {
-            tags.add(event.tags[1])
-        } else {
-            noTagEvents.push(event);
+    
+    function getTaggedEvents(tag) {
+        let tagged_events = [];
+        for (const event of events_data) {
+            if (skip_event.includes(event.eventId)) {
+                continue
+            }
+            if (event.tags[0] == tag || event.tags[1] == tag) {
+                tagged_events.push(event)
+            }
         }
+        return tagged_events;
     }
-    for (const tag of tags) {
-        for (const event of getTaggedEvents(tag)) {
+    
+    function mergeEvents(tagged_events) {
+        let tags = new Set();
+        let noTagEvents = [];
+        let mergedEvents = [];
+        for (const event of tagged_events) {
+            if (event.tags[1].length != 0) {
+                tags.add(event.tags[1])
+            } else {
+                noTagEvents.push(event);
+            }
+        }
+        for (const tag of tags) {
+            for (const event of getTaggedEvents(tag)) {
+                mergedEvents.push(event)
+            }
+        }
+        for (const event of noTagEvents) {
             mergedEvents.push(event)
         }
+        return mergedEvents;
     }
-    for (const event of noTagEvents) {
-        mergedEvents.push(event)
-    }
-    return mergedEvents;
-}
-
-let online_events = mergeEvents(getTaggedEvents("online"));
-let offline_events = mergeEvents(getTaggedEvents("offline"));
-
-async function fetchEvents(events_data) {
-    for (const event of events_data) {
-        if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
-            continue
-        }
-        await fetch(`${backend_url}/internal/event/`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            credentials: 'include',
+    
+    let online_events = mergeEvents(getTaggedEvents("online"));
+    let offline_events = mergeEvents(getTaggedEvents("offline"));
+    
+    async function fetchEvents(events_data) {
+        for (const event of events_data) {
+            if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
+                continue
+            }
+            await fetch(`${backend_url}/internal/event/`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                credentials: 'include',
             mode: 'cors',
             body: JSON.stringify({
                 "id": event.eventId,
@@ -561,21 +571,24 @@ async function fetchEvents(events_data) {
                 "password": process.env.pass
             })
         }).then(res => res.json())
-            .then(async res => {
-                if (res.status == 200) {
-                    addEvent(res)
-                    // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
-                    const result = await compileasync(res.markdown)
-                    console.log(event.eventId)
-                    // events_compiledmap.set(event.eventId, result)
-                    events_compiledmap[event.eventId] = result
-                } else {
+        .then(async res => {
+            if (res.status == 200) {
+                addEvent(res)
+                if (res.name.startsWith("Digital Painting")) {
                     console.log(res)
                 }
-            })
-            .catch(err => {
-                console.log(err.toString())
-            })
+                // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
+                const result = await compileasync(res.markdown)
+                console.log(event.eventId)
+                // events_compiledmap.set(event.eventId, result)
+                events_compiledmap[event.eventId] = result
+            } else {
+                console.log(res)
+            }
+        })
+        .catch(err => {
+            console.log(err.toString())
+        })
     }
 }
 
@@ -590,3 +603,4 @@ fs.writeFileSync('./src/lib/markdown.js', `export const events_compiledmap=${JSO
 fs.writeFileSync('./src/lib/new_data.js', `export const events_data=${JSON.stringify(events, null, 2)}; 
 
 export const event_ids=${JSON.stringify(event_ids, null, 2)};`)
+}
