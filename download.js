@@ -518,6 +518,9 @@ if (process.env.get_events == "True") {
     function getTaggedEvents(tag) {
         let tagged_events = [];
         for (const event of events_data) {
+            if (skip_event.includes(event.eventId)) {
+                continue
+            }
             if (event.tags[0] == tag || event.tags[1] == tag) {
                 tagged_events.push(event)
             }
@@ -552,7 +555,7 @@ if (process.env.get_events == "True") {
     
     async function fetchEvents(events_data) {
         for (const event of events_data) {
-            if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test") || skip_event.includes(event.eventId)) {
+            if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
                 continue
             }
             await fetch(`${backend_url}/internal/event/`, {
@@ -571,6 +574,9 @@ if (process.env.get_events == "True") {
         .then(async res => {
             if (res.status == 200) {
                 addEvent(res)
+                if (res.name.startsWith("Digital Painting")) {
+                    console.log(res)
+                }
                 // let markdown = res.markdown.replaceAll("\"./", "\"$lib/mdsvex/")
                 const result = await compileasync(res.markdown)
                 console.log(event.eventId)
