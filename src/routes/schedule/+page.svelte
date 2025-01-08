@@ -1,6 +1,12 @@
 <script lang="ts">
 	import type { Schedule } from "$lib/types";
     import location_svg from "$lib/assets/location.svg"
+	import { onMount } from "svelte";
+	import { goto } from "$app/navigation";
+
+    onMount(() => {
+        goto('/home')
+    })
 
     let schedule: {[key : string] : Schedule} = {
         "18th January 2025": {

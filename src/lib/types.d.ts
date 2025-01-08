@@ -101,3 +101,11 @@ export type HeaderLink = {
     childLinks: List<Link>
     show: boolean
 }
+
+export type Schedule = {
+    [key: string] : {
+        event_name: string;
+        timing: string;
+        venue: string;   
+    } []
+}
