@@ -4,10 +4,11 @@ import img3 from '$lib/assets/Workshop/appdev.jpg'
 import img4 from '$lib/assets/Workshop/fusion_360.png'
 import img5 from '$lib/assets/Workshop/ml.png'
 import img6 from '$lib/assets/Workshop/Iot.png'
+import web from '$lib/assets/Workshop/web.png'
+import digital from '$lib/assets/Workshop/digital.png'
 import type { workshop } from '$lib/types'
 
-
-export let workshops:{[id: string]:workshop} = {
+let closed_workshop = {
     "WP01": {
         name:"PCB Design Workshop",
         "trainee":[], 
@@ -81,5 +82,31 @@ export let workshops:{[id: string]:workshop} = {
         "image":img6,
         "price":1199
     },
+}
+
+
+export let workshops:{[id: string]:workshop} = {
+    "WP04":{
+        "name": 'Digital Image Processing',
+        "description": 'Join us for a two-day workshop on image processing! Learn the basics of images, filters, and transformations through interactive sessions and hands-on activities. End the workshop with a fun treasure hunt, solving puzzles using what you’ve learned.',
+        "prerequisites": [],
+        "price": 1199,
+        "date": '18 & 19 Jan',
+        "venue": 'Sahyadri Campus',
+        "topics": ['Robotics'],
+        "trainee": ['Voxel'],
+        "image": digital
+    },
+    "WP05" : {
+        "name": 'The Web Workshop',
+        "description": 'Hello, Web Enthusiasts! Have you ever wondered what goes into building the websites and applications we use every day? Web development is the art of combining creativity and logic to craft dynamic, functional, and scalable digital solutions. In this workshop, you\'ll explore the full stack of web development, from designing interactive frontends to building robust backends, managing databases, and deploying projects to the web. But that\'s not all! You\'ll also get hands-on experience creating your own web project, bringing your ideas to life from start to finish.',
+        "prerequisites": ['HTML/CSS and JS (very basic)'],
+        "price": 1199,
+        "date": '18 & 19 Jan',
+        "venue": 'Sahyadri Campus',
+        "topics": ['Web Development', 'Frontend', 'Backend'],
+        "trainee": ['Devinc'],
+        "image": web
+    }
 
 }

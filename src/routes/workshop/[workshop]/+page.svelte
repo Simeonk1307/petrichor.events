@@ -3,9 +3,6 @@
 	import WorkShopComp from '../WorkShopComp.svelte';
 
 	export let data;
-	onMount(() => {
-		goto('/home')
-	})
 </script>
 
 <main>

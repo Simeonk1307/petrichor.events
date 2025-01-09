@@ -18,8 +18,6 @@ export const closed_workshops = [
     "WP01",
     "WP02",
     "WP03",
-    "WP04",
-    "WP05",
     "WP06",
 ]
 
@@ -90,7 +88,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '#',
+        url: '/workshop',
         linkText: 'Workshop',
         childLinks: []
         ,
