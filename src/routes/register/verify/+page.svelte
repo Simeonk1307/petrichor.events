@@ -26,7 +26,7 @@
 					loading(false);
 					displayPopUp(
 						'Alert',
-						result.data.err ? result.data.err : 'Unable to resolve the request. Please try again later',
+						result.data.err ? result.data.err : result.data.message ? result.data.message : 'Unable to resolve the request. Please try again later',
 						4000,
 						() => {}
 					);
