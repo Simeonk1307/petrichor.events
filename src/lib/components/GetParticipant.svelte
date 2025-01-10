@@ -13,7 +13,8 @@
 		VanillaTilt.init(event_card, {
 			max:5
 		})
-		for (let i = 0; i < event.minMember - 1 - emails.length; i++) {
+		let intial_length = emails.length
+		for (let i = 0; i < event.minMember - 1 - intial_length; i++) {
 			if (!event.isTeam) {
 				fee += event.fee
 			}
