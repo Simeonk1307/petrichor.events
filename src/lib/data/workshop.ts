@@ -93,7 +93,7 @@ export let workshops:{[id: string]:workshop} = {
         "prerequisites": [],
         "price": 1199,
         "date": '18 & 19 Jan',
-        "venue": 'Sahyadri Campus',
+        "venue": 'Nila Campus',
         "topics": ['Robotics'],
         "trainee": ['Voxel'],
         "image": digital
@@ -104,7 +104,7 @@ export let workshops:{[id: string]:workshop} = {
         "prerequisites": ['HTML/CSS and JS (very basic)', 'Laptop with VSCode and NodeJS installed'],
         "price": 1199,
         "date": '18 & 19 Jan',
-        "venue": 'Sahyadri Campus',
+        "venue": 'Nila Campus',
         "topics": ['Web Development', 'Frontend', 'Backend'],
         "trainee": ['Devinc'],
         "image": web
@@ -118,7 +118,7 @@ Join us for an exciting journey into the fascinating world of ethical hacking!',
         price: 1199,    
         image: ethical,
         date: '18 & 19 Jan',
-        venue: 'Sahyadri Campus',
+        venue: 'Nila Campus',
         topics: ["Hacking", 'Ethical Hacking', "Movies"],
         trainee: ['YACC']
     }
