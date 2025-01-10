@@ -10,6 +10,7 @@
 
   let lesserLength = Object.entries(workshops).length < 4
   const first = workshops.WP04
+  const second = workshops.WP05
 
 </script>
   
@@ -43,11 +44,8 @@
         <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
         {/each}
         <!-- {#if lesserLength}
-          <StackedBoxes workshop_name={second.name} img_url={second.image} workshop_id = {"WP05"}/>
-        {/if} -->
-        {#if lesserLength}
           <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP04"}/>
-        {/if}
+        {/if} -->
         </div>
       {/if}
     </div>
@@ -108,7 +106,7 @@
 		from{
       transform: translateX(0);
 		} to {
-			transform: translateX(-44%);
+			transform: translateX(-50%);
 		}
 	}
   button{
