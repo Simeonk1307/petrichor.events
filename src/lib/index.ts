@@ -20,6 +20,7 @@ const backend_url = 'https://petrichor-backend.vercel.app/'
 export const API = {
     login: backend_url + 'api/login/',
     register: backend_url + 'api/register/',
+    reverify: backend_url + 'api/login/reverify/',
     forgotpassword: backend_url + 'api/forget-password/',
     changepassword: backend_url + 'api/change-password/',
     events_apply_paid: backend_url + 'api/auth/events/apply/paid/',

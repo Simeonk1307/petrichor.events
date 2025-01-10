@@ -9,6 +9,7 @@
 	// export let form;
 	// console.log(form)
 	export let data;
+	let email: string;
 
 	const getData: Function = getContext('getData');
 	onMount(() => {
@@ -60,6 +61,11 @@
 					displayPopUp('Alert', rdata.message, 4000, afterMessage);
 				}
 			} else {
+				if(result.status == 511){
+					loading(false)
+					goto('/register/verify?email='+email);
+					return;
+				}
 				setTimeout(() => {
 					loading(false);
 					displayPopUp(
@@ -79,7 +85,7 @@
 		<h2>Login to <span id="Petrichor">petrichor</span>.events</h2>
 		<form action="?/login" method="POST" use:enhance={loginResult}>
 			<div>
-				<input type="email" name="email" id="email" placeholder="Email" required autocomplete="username" />
+				<input type="email" name="email" id="email" placeholder="Email" required autocomplete="username" bind:value={email}/>
 			</div>
 			<div>
 				<input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password" />

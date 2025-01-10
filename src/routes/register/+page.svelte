@@ -7,6 +7,7 @@
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
+	let email: string;
 
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
@@ -89,9 +90,8 @@
 				const data = result.data;
 				// console.log(data);
 				if (data.success) {
-					displayPopUp("Message",data.message ?? "Please check your email.",5000,()=>{
-						goto('/login');
-					})
+					goto('/register/verify?email='+email);
+					return;
 				} else {
 					displayPopUp('Alert', data.err, 4000, () => {});
 				}
@@ -222,7 +222,7 @@
 
 			<div class="input_box">
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email" placeholder="Email" required />
+				<input type="email" name="email" id="email" placeholder="Email" required bind:value={email}/>
 				{#if warn_email}
 					<p><strong>{warn_email}</strong></p>
 				{/if}
