@@ -168,7 +168,7 @@
 		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use  UPI ID: vinaykrishna348@okhdfcbank</p>
 	</div>
 	<div id="data">
-		<p style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem">Transaction Id</p>
+		<p style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem">Transaction Id (12-digits. See below for examples)</p>
 		<input
 			id="transId"
 			type="text"
