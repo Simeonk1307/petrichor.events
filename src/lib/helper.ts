@@ -18,7 +18,6 @@ export const closed_workshops = [
     "WP01",
     "WP02",
     "WP03",
-    "WP06",
 ]
 
 export const closed_events = []

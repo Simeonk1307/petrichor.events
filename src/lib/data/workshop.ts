@@ -5,6 +5,7 @@ import img4 from '$lib/assets/Workshop/fusion_360.png'
 import img5 from '$lib/assets/Workshop/ml.png'
 import img6 from '$lib/assets/Workshop/Iot.png'
 import web from '$lib/assets/Workshop/web.png'
+import ethical from '$lib/assets/Workshop/ethical.png'
 import digital from '$lib/assets/Workshop/digital.png'
 import type { workshop } from '$lib/types'
 
@@ -100,13 +101,26 @@ export let workshops:{[id: string]:workshop} = {
     "WP05" : {
         "name": 'The Web Workshop',
         "description": 'Hello, Web Enthusiasts! Have you ever wondered what goes into building the websites and applications we use every day? Web development is the art of combining creativity and logic to craft dynamic, functional, and scalable digital solutions. In this workshop, you\'ll explore the full stack of web development, from designing interactive frontends to building robust backends, managing databases, and deploying projects to the web. But that\'s not all! You\'ll also get hands-on experience creating your own web project, bringing your ideas to life from start to finish.',
-        "prerequisites": ['HTML/CSS and JS (very basic)'],
+        "prerequisites": ['HTML/CSS and JS (very basic)', 'Laptop with VSCode and NodeJS installed'],
         "price": 1199,
         "date": '18 & 19 Jan',
         "venue": 'Sahyadri Campus',
         "topics": ['Web Development', 'Frontend', 'Backend'],
         "trainee": ['Devinc'],
         "image": web
+    },
+    "WP06" : {
+        name: 'Ethical Hacking',
+        description: 'Hello, everyone! Have you ever watched a movie where a cool character hacks into systems and wondered, "How do they do that?" Well, you\'re in the right place to find out\!  \
+In this workshop, we’ll start with the basics of computer networking and then move on to setting up our very own hacking labs, including both a zombie machine and a target machine. We\'ll then go on to explore some world-renowned cyberattacks and gain hands-on experience in implementing them. \
+Join us for an exciting journey into the fascinating world of ethical hacking!',
+        prerequisites: ['Laptop with minimum of 4GB RAM and 10 GB of free space, a mobile with stable internet connection.'],
+        price: 1199,    
+        image: ethical,
+        date: '18 & 19 Jan',
+        venue: 'Sahyadri Campus',
+        topics: ["Hacking", 'Ethical Hacking', "Movies"],
+        trainee: ['YACC']
     }
 
 }

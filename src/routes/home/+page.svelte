@@ -234,7 +234,7 @@
 			// Set animation progress based on scroll position
 			let deltaX = e.deltaX;
 			let deltaY = e.deltaY;
-			console.log(deltaX, deltaY)
+			// console.log(deltaX, deltaY)
 			switching(deltaX, deltaY)
 
 		}
