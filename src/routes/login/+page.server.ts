@@ -50,7 +50,10 @@ export const actions = {
                 }else{
                     return fail(400,{...res,"err":res.message})
                 }
-            }else{
+            } else if(res.status == 511){
+                return fail(511,{...res,"err":res.message})
+            }
+            else{
                 return fail(400,{...res,"err":res.message})
             }
         })
