@@ -18,6 +18,9 @@
 	let verified: boolean;
 	let imgurl: string;
 	let qrcodeurl = `upi://pay?pa=zaifziad11@okicici&pn=******4972&am=${amount}&mc=0000&mode=02&purpose=00`;
+	if (id.startsWith("W")) {
+		qrcodeurl = `upi://pay?pa=pparv2515-1@okhdfcbank&pn=******0021&am=${amount}&mc=0000&mode=02&purpose=00`;
+	}
 
 	QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
 		imgurl = url;
@@ -165,7 +168,7 @@
 				/></svg
 			>
 		</div>
-		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: zaifziad11@okicici</p>
+		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: {(id.startsWith("W")) ? "pparv2515-1@okhdfcbank" : "zaifziad11@okicici"}</p>
 		<p>OR Pay to HDFC Bank A/C Details:
 		</p>
 		<p>Account Number: 05001460001487</p>
