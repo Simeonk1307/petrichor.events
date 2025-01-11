@@ -110,4 +110,10 @@
 		display: block;
 		margin: 0 auto;
 	}
+	@media (max-width: 600px) {
+		.goBack {
+			top: 9.5rem;
+			left: 0.8rem;
+		}
+	}
 </style>	
