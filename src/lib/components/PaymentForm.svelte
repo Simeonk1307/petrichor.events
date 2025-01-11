@@ -17,7 +17,7 @@
 	let CAcode: string = '';
 	let verified: boolean;
 	let imgurl: string;
-	let qrcodeurl = `upi://pay?pa=vinaykrishna348@okhdfcbank&pn=******6025&am=${amount}&mc=0000&mode=02&purpose=00`;
+	let qrcodeurl = `upi://pay?pa=zaifziad11@okicici&pn=******4972&am=${amount}&mc=0000&mode=02&purpose=00`;
 
 	QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
 		imgurl = url;
@@ -165,10 +165,15 @@
 				/></svg
 			>
 		</div>
-		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use  UPI ID: vinaykrishna348@okhdfcbank</p>
+		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: zaifziad11@okicici</p>
+		<p>OR Pay to HDFC Bank A/C Details:
+		</p>
+		<p>Account Number: 05001460001487</p>
+		<p>Account Holder Name: Vinay Krishna</p>
+		<p>IFSC Code: HDFC0000500</p>
 	</div>
 	<div id="data">
-		<p style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem">Transaction Id (12-digits. See below for examples)</p>
+		<p class="tr_label" style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem;text-wrap:break-word;overflow:break-word;">Transaction Id (12-digits. See below for examples)</p>
 		<input
 			id="transId"
 			type="text"
@@ -350,6 +355,16 @@
 		}
 		#submitButton {
 			width: 18rem;
+		}
+	}
+	.tr_label {
+		word-wrap: break-word;
+		overflow: hidden;
+	}
+
+	@media screen and (max-width: 600px) {
+		.tr_label {
+			width: 60%;
 		}
 	}
 </style>
