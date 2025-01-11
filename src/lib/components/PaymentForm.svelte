@@ -6,6 +6,7 @@
 	import { fail } from '@sveltejs/kit';
 	import QRCode from 'qrcode';
 	import { getContext, onMount } from 'svelte';
+	import parv_qr from "$lib/assets/parv_qr.jpg";
 
 	export let name: string;
 	export let id: string;
@@ -19,12 +20,15 @@
 	let imgurl: string;
 	let qrcodeurl = `upi://pay?pa=zaifziad11@okicici&pn=******4972&am=${amount}&mc=0000&mode=02&purpose=00`;
 	if (id.startsWith("W")) {
-		qrcodeurl = `upi://pay?pa=pparv2515-1@okhdfcbank&pn=******0021&am=${amount}&mc=0000&mode=02&purpose=00`;
+		// qrcodeurl = `upi://pay?pa=pparv2515-1@okhdfcbank&pn=Patel Parv&am=${amount}&mc=1234&mode=02&purpose=events&cu=INR&mam=${amount}`;
+		qrcodeurl = parv_qr
+		imgurl = parv_qr
+	} else {
+		QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
+			imgurl = url;
+		});
 	}
 
-	QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
-		imgurl = url;
-	});
 
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
