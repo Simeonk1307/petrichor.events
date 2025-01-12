@@ -244,7 +244,7 @@
 
 <style>
 	.closed {
-		background-color: rgba(62, 62, 62, 0.545);
+		background-color: rgba(42, 30, 30, 0.545) !important;
 		cursor: pointer;
 	}
 	.eventarea {

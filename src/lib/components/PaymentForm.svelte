@@ -18,16 +18,17 @@
 	let CAcode: string = '';
 	let verified: boolean;
 	let imgurl: string;
-	let qrcodeurl = `upi://pay?pa=zaifziad11@okicici&pn=******4972&am=${amount}&mc=0000&mode=02&purpose=00`;
-	if (id.startsWith("W")) {
-		// qrcodeurl = `upi://pay?pa=pparv2515-1@okhdfcbank&pn=Patel Parv&am=${amount}&mc=1234&mode=02&purpose=events&cu=INR&mam=${amount}`;
-		qrcodeurl = parv_qr
-		imgurl = parv_qr
-	} else {
-		QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
-			imgurl = url;
-		});
-	}
+	let qrcodeurl = `upi://pay?pa=zaifziad11@okicici&pn=******4972&am=149&mc=0000&mode=02&purpose=00`;
+	// if (id.startsWith("W")) {
+	// 	// qrcodeurl = `upi://pay?pa=pparv2515-1@okhdfcbank&pn=Patel Parv&am=${amount}&mc=1234&mode=02&purpose=events&cu=INR&mam=${amount}`;
+	// 	qrcodeurl = parv_qr
+	// 	imgurl = parv_qr
+	// } else {
+	// 	QRCode?.toDataURL(`${qrcodeurl}`, function (err: any, url: string) {
+	// 		imgurl = url;
+	// 	});
+	// }
+	imgurl = parv_qr
 
 
 	const loading: Function = getContext('loading');
@@ -172,7 +173,7 @@
 				/></svg
 			>
 		</div>
-		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: {(id.startsWith("W")) ? "pparv2515-1@okhdfcbank" : "zaifziad11@okicici"}</p>
+		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: pparv2515-1@okhdfcbank</p>
 		<p>OR Pay to HDFC Bank A/C Details:
 		</p>
 		<p>Account Number: 05001460001487</p>
