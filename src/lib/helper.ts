@@ -18,12 +18,13 @@ export const closed_workshops = [
     "WP01",
     "WP02",
     "WP03",
-    "WP04",
-    "WP05",
-    "WP06",
 ]
 
-export const closed_events = []
+export const closed_events = [
+    "TP06",
+    "TP07",
+    "TP04"
+]
 // export function getEventDataJS(eventID: string){
 //     const Tresult = technical.events.filter((e) => e.id == eventID)
 //     if (Tresult.length > 0){
@@ -90,14 +91,14 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '#',
+        url: '/workshop',
         linkText: 'Workshop',
         childLinks: []
         ,
         show: false
     },
     {
-        url: '/schedule',
+        url: '#',
         linkText: 'Schedule',
         childLinks: []
         ,

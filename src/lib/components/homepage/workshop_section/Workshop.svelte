@@ -9,7 +9,9 @@
 	import { footerLinks } from '$lib/helper';
 
   let lesserLength = Object.entries(workshops).length < 4
-  const first = workshops.WP01
+  const first = workshops.WP04
+  const second = workshops.WP05
+
 </script>
   
 
@@ -23,35 +25,37 @@
 <main>
   <h1 class="atmos" style="margin-top:100px;">Workshop</h1>
   <div class="container">
+    {#if Object.entries(workshops).length == 0}
     <div style="width: 100%;display:flex; justify-content:center; " draggable="false">
       <img height="200px" width="320px" src={done_n_dusted} draggable="false"/>
     </div>
-    <!-- <div class="workshop_scroll">
-      {#each Object.entries(workshops) as [id,workShop]}
-      <StackedBoxes workshop_name={`${workShop.name}(Done And Dusted)`} img_url={workShop.image} workshop_id = {id}/>
-    {/each}
-    {#if lesserLength}
-    <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
+    {:else}
+      <div class="workshop_scroll">
+        {#each Object.entries(workshops) as [id,workShop]}
+        <StackedBoxes workshop_name={`${workShop.name}`} img_url={workShop.image} workshop_id = {id}/>
+        {/each}
+        {#each Object.entries(workshops) as [id,workShop]}
+        <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
+        {/each}
+        {#each Object.entries(workshops) as [id,workShop]}
+        <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
+        {/each}
+        {#each Object.entries(workshops) as [id,workShop]}
+        <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
+        {/each}
+        <!-- {#if lesserLength}
+          <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP04"}/>
+        {/if} -->
+        </div>
+      {/if}
+    </div>
+    {#if Object.entries(workshops).length != 0}
+    <button on:click={()=> goto("/workshop")}>Workshops</button>
     {/if}
-    {#each Object.entries(workshops) as [id,workShop]}
-      <StackedBoxes workshop_name={workShop.name} img_url={workShop.image} workshop_id = {id}/>
-    {/each}
-    {#if lesserLength}
-    <StackedBoxes workshop_name={first.name} img_url={first.image} workshop_id = {"WP01"}/>
-    {/if}
-    </div> -->
-  </div>
-  <!-- <button on:click={()=> goto("/workshop")}>Workshops</button> -->
-  <Footer title="Petrichor" links={footerLinks} />
-</main>
+    <Footer title="Petrichor" links={footerLinks} />
+  </main>
   
 <style>
-  * {
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-  }
   main{
     display: flex;
     flex-direction: column;
@@ -78,6 +82,7 @@
   .workshop_scroll{
     display: flex;
     justify-content: flex-start;
+    cursor: pointer;
     animation: workshop 12s linear infinite;
   }
   .workshop_scroll:hover{

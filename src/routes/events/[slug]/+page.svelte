@@ -234,17 +234,17 @@
 	{srcdoc}
 	{height}
 	/>
-		<a id="register" class={registration_closed || registered ? "closed" : ""} href={registration_closed ? "#" : registered ? "#" : 
+		<a id="register" class={registration_closed || registered ? "closed" : ""} href={(registration_closed || registered) ? "#" : 
 		`${frontend_url}/payment/register?id=${currentEvent.id}`
 	}>{
-			registration_closed ? "Registration Closed" : registered ? "Registered" : "Register" 
+			registered ? "Registered" : registration_closed ? "Registration Closed" : "Register" 
 		}</a>
 	</div>
 </div>
 
 <style>
 	.closed {
-		background-color: rgba(62, 62, 62, 0.545);
+		background-color: rgba(42, 30, 30, 0.545) !important;
 		cursor: pointer;
 	}
 	.eventarea {

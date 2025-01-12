@@ -7,7 +7,6 @@
 	let left: number, right: number;
 
 	onMount(() => {
-		goto('/home')
 		VanillaTilt.init(document.querySelectorAll('.card'), {
 			max:10,
 			speed:10000
@@ -62,6 +61,7 @@
 	.hover-content {
 		position: absolute;
 		bottom: -100%;
+		width: 100%;
 		border-radius: 20px;
 		color: #fff;
 		display: flex;
@@ -69,7 +69,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		transition: bottom 0.5s ease;
+		transition: bottom 0.3s ease;
 		padding: 20px;
 		margin-top: 50px;
 		text-align: left;
@@ -98,7 +98,7 @@
 
 	.opi {
 		opacity: 0;
-		transition: opacity 0.7s 0.2s ease;
+		transition: opacity 0.2s ease;
 	}
 
 	.hover-content .icon {
@@ -164,7 +164,7 @@
 		width: 20rem;
 		cursor: pointer;
 		z-index: 12;
-		transition: all 0.5s ease-in-out;
+		transition: all 0.1s ease-in-out;
 	}
 	.main:hover .card:not(:hover) {
 		filter: blur(3px) grayscale(0.7);
@@ -192,7 +192,7 @@
 		height: 20rem;
 		aspect-ratio: 1;
 		clip-path: circle(100% at center);
-		transition: 1s ease-in-out;
+		transition: 0.1s ease-in-out;
 	}
 	.discover {
 		color: rgba(255, 255, 255, 1);
