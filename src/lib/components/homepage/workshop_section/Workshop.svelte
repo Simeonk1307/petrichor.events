@@ -23,8 +23,8 @@
 <main>
   <h1 class="atmos" style="margin-top:100px;">Workshop</h1>
   <div class="container">
-    <div style="width: 100%;display:flex; justify-content:center; ">
-      <img height="200px" width="320px" src={done_n_dusted} />
+    <div style="width: 100%;display:flex; justify-content:center; " draggable="false">
+      <img height="200px" width="320px" src={done_n_dusted} draggable="false"/>
     </div>
     <!-- <div class="workshop_scroll">
       {#each Object.entries(workshops) as [id,workShop]}
@@ -46,6 +46,12 @@
 </main>
   
 <style>
+  * {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+  }
   main{
     display: flex;
     flex-direction: column;
