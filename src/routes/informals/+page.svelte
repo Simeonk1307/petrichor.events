@@ -10,9 +10,9 @@
       });
     });
   
-    const informalDetails = () => {
-      alert('Coming Soon');
-    };
+    // const informalDetails = () => {
+    //   alert('Coming Soon');
+    // };
   </script>
   
   <style>
@@ -37,7 +37,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      width: 80%;
+      width: 100%;
       max-width: 1200px;
     }
   
@@ -76,7 +76,7 @@
     }
   
     .card:hover .image img {
-      filter: blur(5px) brightness(0.6);
+      filter: brightness(1.4);
     }
 
     .card:hover .image{
@@ -98,11 +98,6 @@
       text-wrap: nowrap; 
       transition: bottom 0.3s ease, opacity 0.3s ease;
     }
-  
-    .card:hover button {
-      bottom: 10px;
-      opacity: 1;
-    }
 
   </style>
   
@@ -115,7 +110,7 @@
             <img src={informal.image} alt={informal.name} />
           </div>
           <h2>{informal.name}</h2>
-          <button on:click={informalDetails}>Event Details</button>
+          <!-- <button on:click={informalDetails}>Event Details</button> -->
         </div>
       {/each}
     </div>

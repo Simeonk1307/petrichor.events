@@ -14,26 +14,30 @@
   </script>
   
   <style>
+    * {
+      box-sizing: border-box;
+    }
     .main {
-        overflow: hidden;
         /* z-index: 100; */
         background-position: center;
         background-clip: border-box;
         background-size: cover;
-        height: 100vh;
-        
+        max-width: 100vw;
+        position: absolute;
+        top: 0;
+        left: -20px;
     }
     .header {
-      margin-top: 150px;
+      margin-top: 90px;
       text-align: center;
       display: flex;
       font-size: xx-large;
       position: relative;
       font-weight: 900;
-      z-index: 100;
+      z-index: 10;
       justify-content: center;
       align-items: center;
-      padding: 30px 10px;
+      padding: 10px 20px;
     }
   
   
@@ -41,6 +45,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      z-index: 10;
+      position: relative;
       align-items: center;
       gap: 4rem;
       padding: 2rem;
@@ -101,21 +107,37 @@
         }
     
     }
+    @media (max-width: 400px) {
+      .main {
+        left: -10px;
+      }
+      .header {
+        padding: 10px 20px;
+        font-size: large;
+        width: 100%;
+      }
+      .photo-frame img{
+        width: 250px;
+        height: 250px;
+      }
+    }
     .price{
         position: absolute;
         z-index: 10;
         bottom: 4px;
         color: black;
         font-size: medium;
-        background-color: grey;
-        height: 18%;
-        width: 18%;
+        background-color: rgba(229, 203, 243, 0.711);
+        height: 22%;
+        width: 22%;
         border-radius: 50%;
         align-items: center;
         justify-content: center;
         font-weight: 900;
-    }
-    .aa{
+        padding: 5px;
+      }
+      .aa{
+      font-family: 'Courier New', Courier, monospace;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -127,7 +149,6 @@
     Buy Our Petrichor'25 merch at IIT Palakkad on 18th and 19th January 2025. 
    </div>
     <div class="gallery">
-        a=0;
         {#each images as image, i}
         <div class="photo-frame">
             <img src={image} alt="photo" />
