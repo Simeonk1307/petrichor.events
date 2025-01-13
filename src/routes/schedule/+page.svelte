@@ -39,7 +39,7 @@
 		console.log(day);
 		selected_day = day;
 		currentSchedule = schedule[selected_day];
-		selected_event_type = Object.keys(currentSchedule)[0];
+		selected_event_type = Object.keys(currentSchedule)[currIndex];
 		if (selected_event_type == undefined) {
 			selected_event_type = '';
 		}
@@ -47,6 +47,7 @@
 		if (events == undefined) {
 			events = [];
 		}
+		currIndex = currIndex;
 	};
 	const changeeventtype = (event_type) => {
 		selected_event_type = event_type;
@@ -78,6 +79,7 @@
 					{#each Object.keys(currentSchedule) as event_type, index}
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
+						<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 						<div
 							class="card {currIndex == index ? 'selected_card' : ''}"
 							on:click={() => {
