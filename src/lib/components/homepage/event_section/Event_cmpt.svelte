@@ -24,10 +24,10 @@
   
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="individualContainer" style="{top ? "top:40%;" :""} {left ? "left:25%;top:15%;" : ""} " on:click={handleClick}>
+  <div class="individualContainer" style="{top ? "top:40%;" :""} {left ? "left:20%;top:15%;" : ""} " on:click={handleClick}>
     <div class="inner">
-      <div class="image">
-        <img class="image1" alt="logo" src={img_url}>
+      <div class="image" draggable="false">
+        <img class="image1" alt="logo" src={img_url} draggable="false">
         <div class="content">
           <p class="heading">{event_name}</p>
         </div>
@@ -115,6 +115,15 @@
       }
     }
 
+    @media (max-height: 650px) {
+      .image1 {
+        height: 200px;
+        min-height: 200px;
+      }
+      .individualContainer {
+        height: 230px;
+      }
+    }
     
     </style>
   
