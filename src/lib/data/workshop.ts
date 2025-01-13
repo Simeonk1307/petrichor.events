@@ -114,7 +114,7 @@ export let workshops:{[id: string]:workshop} = {
         description: 'Hello, everyone! Have you ever watched a movie where a cool character hacks into systems and wondered, "How do they do that?" Well, you\'re in the right place to find out\!  \
 In this workshop, we’ll start with the basics of computer networking and then move on to setting up our very own hacking labs, including both a zombie machine and a target machine. We\'ll then go on to explore some world-renowned cyberattacks and gain hands-on experience in implementing them. \
 Join us for an exciting journey into the fascinating world of ethical hacking!',
-        prerequisites: ['Laptop with minimum of 4GB RAM and 10 GB of free space, a mobile with stable internet connection.'],
+        prerequisites: ['Laptop with minimum of 4GB RAM and 10 GB of free space, a mobile with stable internet connection.', 'Kali Linux installed: https://www.youtube.com/watch?v=gsZxuiU0uZ4 '],
         price: 1199,    
         image: ethical,
         date: '18 & 19 Jan',
