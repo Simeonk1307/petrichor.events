@@ -1,6 +1,6 @@
 // import {technical, workshops, cultural, informals} from '$lib/data'
 import type { HeaderLink, Link } from "./types";
-import { facebookSquare, twitterSquare, envelopeSquare, linkedinSquare, youtubeSquare,instagram } from 'svelte-awesome/icons'
+import { facebookSquare, twitterSquare, envelopeSquare, linkedinSquare, youtubeSquare, instagram } from 'svelte-awesome/icons'
 
 const mediumSquare = {
     'medium': {
@@ -23,7 +23,7 @@ export const closed_workshops = [
 export const closed_events = [
     "TP06",
     "TP07",
-    "TP04"
+    "TP04", "CP16", "CP06", "CP09", "CP05"
 ]
 // export function getEventDataJS(eventID: string){
 //     const Tresult = technical.events.filter((e) => e.id == eventID)
