@@ -1,55 +1,31 @@
 <script lang="ts">
-	import type { Schedule } from '$lib/types';
 	import location_svg from '$lib/assets/location.svg';
+	import cult from '$lib/assets/Cult&Tech/cult.jpg';
+	import tech from '$lib/assets/Cult&Tech/TechnicalWeb.jpg';
+	import books from '$lib/assets/Informals/books.jpg';
+	import {schedule} from "$lib/helper"
+	import workshops from "$lib/assets/Informals/workshop.jpg"
+	import informal from '$lib/assets/Cult&Tech/Informals.png';
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
-    import cult from '$lib/assets/Cult&Tech/cult.jpg'
-    import tech from '$lib/assets/Cult&Tech/TechnicalWeb.jpg'
-    import informal from '$lib/assets/Cult&Tech/Informals.png'
 
-	// onMount(() => {
-	//     goto('/home')
-	// })
-    const images = [cult, tech, informal];
+	export let pageWidth: number;
+	const images = [
+		cult,
+		tech,
+		workshops,
+		informal,
+		books,
+		'https://cdn.midjourney.com/f7b1ae0c-e49f-41b6-9515-cc0e0db964a1/0_1.webp'
+	];
 
-    let currIndex = 0;
+	let currIndex = 0;
+	onMount(() => {
+		window.onresize = (e) => {
+			pageWidth = window.innerWidth
+		}
+		pageWidth = window.innerWidth
+	})
 
-	let schedule: { [key: string]: Schedule } = {
-		'18th January 2025': {
-			Cultural: [
-				{
-					event_name: 'NAME',
-					timing: '8:00',
-					venue: 'Sahyadri'
-				},
-				{
-					event_name: 'NAME2',
-					timing: '8:00',
-					venue: 'Sahyadri'
-				},
-				{
-					event_name: 'NAME3',
-					timing: '8:00',
-					venue: 'Sahyadri'
-				},
-			],
-			Technical: [
-				{
-					event_name: 'NAME2',
-					timing: '8:00',
-					venue: 'Sahyadri'
-				}
-			],
-			Workshop: [
-				{
-					event_name: 'NAME3',
-					timing: '8:00',
-					venue: 'Sahyadri'
-				}
-			]
-		},
-		'19th January 2025': {}
-	};
 	let days = Object.keys(schedule);
 	let colors = ['#607D8B', '#8D6E63'];
 	let selected_day = days[0];
@@ -82,8 +58,8 @@
 </script>
 
 <main>
-    <!-- svelte-ignore a11y-img-redundant-alt -->
-    <img class="bg" src="{images[currIndex]}" alt="bg image" />
+	<!-- svelte-ignore a11y-img-redundant-alt -->
+	<img class="bg" src={images[currIndex]} alt="bg image" />
 	<div class="scd_holder">
 		<div class="nav_bar">
 			{#each days as day, i}
@@ -103,31 +79,46 @@
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
 						<div
-							class="card"
+							class="card {currIndex == index ? 'selected_card' : ''}"
 							on:click={() => {
 								changeeventtype(event_type);
-                                currIndex = index;
+								currIndex = index;
 							}}
-                            style="background-image: url('{images[index]}');"
+							on:mouseover= {() => {
+								changeeventtype(event_type);
+								currIndex = index;
+							}}
+							style="background-image: url('{images[index]}');"
 						>
 							<!-- {event_type} -->
-                            <p class="atmos">
-                                {event_type}
-                            </p>
+							<p class="atmos">
+								{event_type}
+							</p>
 						</div>
 					{/each}
 				</div>
 			</div>
 			<div class="schedule">
 				{#each events as event}
-					<div class="event">
-						<div class="timing">{event.timing}</div>
-						<div class="name">{event.event_name}</div>
-						<div class="venue">
-							<img src={location_svg} height="25px" width="25px" />
-							{event.venue}
+						<div class="event">
+							<div class="name">{event.event_name}</div>
+							{#if pageWidth <= 600}
+							<span>
+
+								<div class="timing">{event.timing}</div>
+								<div class="venue">
+									<img src={location_svg} height="25px" width="25px" />
+									{event.venue}
+								</div>
+							</span>
+							{:else}
+								<div class="timing">{event.timing}</div>
+								<div class="venue">
+									<img src={location_svg} height="25px" width="25px" />
+									{event.venue}
+								</div>
+							{/if}
 						</div>
-					</div>
 				{/each}
 			</div>
 		</div>
@@ -138,12 +129,17 @@
 	* {
 		box-sizing: border-box;
 	}
-    .name{
-        color: #efacfbfb;
-        font-weight: bolder;
-        font-size: larger;
-    }
-    .card {
+	.selected_card {
+		transform: scale(1.1);
+		filter: brightness(2);
+	}
+	.name {
+		color: #efacfbfb;
+		font-weight: bolder;
+		font-size: larger;
+		text-align: center;
+	}
+	.card {
 		width: 90%;
 		aspect-ratio: 2;
 		background-position: center;
@@ -152,8 +148,7 @@
 		cursor: pointer;
 		margin: 0.5em 0em;
 		border-radius: 0.4em;
-		transition: 200ms ease-in-out;
-		overflow: hidden;
+		transition: all 200ms ease-in-out;
 	}
 	.card::before {
 		background: rgb(0, 0, 0);
@@ -188,25 +183,24 @@
 		filter: blur(5px) brightness(50%);
 	}
 	.sidebar {
-        flex: 1;
-		scrollbar-width: none;  /* Firefox */
-		overflow-y: scroll;
-		height: 100vh;
+		flex: 1;
+		height: 100%;
 		/* padding-top: 80px; */
 		width: 100%;
 		background-color: #28282d98;
 		backdrop-filter: blur(40px);
-        background-position: center;
-        background-size: cover;
+		background-position: center;
+		background-size: cover;
+		overflow-y: scroll;
 	}
-	.sbcont{
+	.sbcont {
 		animation: scrollpc 1.5s ease-in-out;
 		animation-delay: 1s;
 		width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 1em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 1em;
 	}
 	button {
 		border: none;
@@ -215,31 +209,31 @@
 	main {
 		width: 100vw;
 		height: 100vh;
-        padding: 100px 0px;
-		position: relative;
 		overflow: hidden;
+		position: relative;
 	}
 	.schedule {
 		flex: 3;
 		height: 80vh;
 		/* background-color: rgb(224, 224, 224); */
-		overflow-y: scroll;
 		padding: 20px 0;
 		color: rgba(58, 14, 2, 0.81);
-        padding: 25px;
+		padding: 25px;
 	}
 	.venue {
 		display: flex;
 		align-items: center;
+		justify-content: end;
 		font-weight: bold;
-        color: #b3f4ecfb;
+		color: #b3f4ecfb;
 	}
 	.timing {
 		font-weight: bold;
-        color: #b9f8f1fb;
+		color: #b9f8f1fb;
 	}
 	.event {
-		display: flex;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 		width: 100%;
 		align-items: center;
 		padding: 20px;
@@ -273,11 +267,13 @@
 	.scd_holder {
 		display: flex;
 		width: 100%;
+		height: calc(100% - 80px);
+		top: 79px;
+		position: relative;
 		padding-inline: 20px;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-        overflow: hidden;
 	}
 	.nav_bar {
 		display: flex;
@@ -290,19 +286,42 @@
 	}
 	.schd {
 		min-height: 80vh;
+		flex: 4;
 		position: relative;
 		display: flex;
 		align-items: flex-start;
 		border: 1px solid gray;
+		overflow: hidden;
 		border-top: none;
-		height: auto;
 		width: 100%;
 		justify-content: flex-start;
 	}
 	.selected {
-        box-shadow: 0 0 20px 10px #50e2c3 inset;
+		box-shadow: 0 0 20px 10px #50e2c3 inset;
 	}
 	@media (max-width: 600px) {
+		.event {
+			display: flex;
+			flex-direction: column;
+			align-items: start;
+			padding: 10px 4px;
+			position: relative;
+		}
+		.name {
+			width: 100%;
+			text-align: end;
+			font-size: larger;
+		}
+		.event span {
+			display: flex;
+			width:  100%;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+		.timing,
+		.venue {
+			padding: 10px 0;
+		}
 		.nav_bar {
 			height: auto;
 			width: 100%;
@@ -317,24 +336,49 @@
 		.sidebar {
 			width: 100%;
 			height: auto;
-			flex-direction: row;
 			flex: none;
 			border: none;
-			overflow-y: unset;
+			overflow-y: hidden;
 			overflow-x: scroll;
 			/* overflow: scroll; */
 			padding: 0 !important;
-			height: 120px;
+			height: 170px;
 		}
-		.tag {
-			height: 100%;
-			width: 150px;
-			min-width: 150px;
-			border: 1px solid gray;
-			border-right: none;
+		.sbcont > * {
+			display: block !important;
+		}
+		.sbcont {
+			display: flex;
+			flex-direction: row;
+			width: unset;
+			animation-delay: 1s;
+		}
+
+		.card {
+			width: 12rem;
+			background-position: center;
+			background-size: cover;
+			position: relative;
+			cursor: pointer;
+			flex: 0 0 auto; /* Prevent cards from stretching to fill available space */
+			margin-right: 10px; /* Add some spacing between cards if needed */
+			border-radius: 1em;
+			overflow: hidden;
+			margin-top: 0.4em;
+		}
+		.card > p {
+			font-size: 17px;
 		}
 		.schedule {
 			width: 100%;
+			overflow-y: scroll;
+			height: unset;
+			padding: 0;
+		}
+		.scd_holder {
+			padding: 0 10px;
+			top: 98px;
+			height: calc(100% - 100px);
 		}
 	}
 </style>
