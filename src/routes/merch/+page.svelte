@@ -1,16 +1,47 @@
-<script>
+<script lang="ts">
     import backdrop from "$lib/assets/WebsiteBackdrop.png"
     import cap from "$lib/assets/merch_images/petrichor_cap.jpeg"
     import merch from "$lib/assets/merch_images/petrichor_merch.jpeg"
     import tshirt1 from "$lib/assets/merch_images/petrichor_tshirt.jpeg"
     import tshirt2 from "$lib/assets/merch_images/petrichor_tshirt2.jpeg"
+    import combo from "$lib/assets/merch_images/combo.jpg"
+    import botht from "$lib/assets/merch_images/both_tshirts.png"
+	import { onMount } from "svelte";
     const images = [
       cap,
       merch,
       tshirt1,
-      tshirt2,
+      tshirt2
     ];
-    const prices = [120,690,390,390];
+    let pageWidth: number= 1000;
+    let img: HTMLImageElement;
+    onMount(() => {
+      img.onmouseover =(e) => {
+        if (pageWidth < 700) {
+          return
+        }
+        img.src = botht
+      }
+      img.onmouseleave = (e) => {
+        if (pageWidth < 700) {
+          return
+        }
+        img.src = combo
+      }
+      window.onresize = () => {
+        pageWidth = window.innerWidth
+        cal()
+      }
+      pageWidth = window.innerWidth
+      cal()
+      function cal() {
+        if (pageWidth <= 600) {
+          img.src = combo
+        }
+      }
+    })
+
+    const prices = [120,690,390,390, 1099];
   </script>
   
   <style>
@@ -23,6 +54,7 @@
         background-clip: border-box;
         background-size: cover;
         max-width: 100vw;
+        min-height: 100vh;
         position: absolute;
         top: 0;
         left: -20px;
@@ -92,6 +124,28 @@
     .photo-frame:hover::after {
         transform: rotate(-10deg) scale(1.05);
     }
+    .combo::before {
+      background-position: center;
+      background-size: contain;
+    }
+    .combo::after {
+      background-position: center;
+      background-size: contain;
+    }
+    .combo:hover::before {
+      background-image: url('/src/lib/assets/merch_images/petrichor_merch.jpeg');
+      transform: translateX(-50%);
+    }
+    .combo:hover::after {
+      background-image: url('/src/lib/assets/merch_images/petrichor_cap.jpeg');
+      transform: translateX(50%);
+    }
+    .combo {
+      margin: 20px 0 ;
+    }
+    .combo img{
+      object-fit: fill;
+    }
     @media (pointer:coarse) {
         .photo-frame::before {
             transform: rotate(-5deg) scale(1.05);
@@ -157,7 +211,16 @@
             </div>
         </div>
         {/each}
-    </div>
+      </div>
+      <center>
+
+        <div class="photo-frame {(pageWidth>=700) ? "combo": ""}" style="margin: 40px 0;">
+          <img src={combo} bind:this={img} alt="photo" />
+          <div class="price">
+            <p class="aa">1099Rs</p>
+          </div>
+        </div>
+      </center>
    
 </div>
 
