@@ -106,7 +106,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '#',
+        url: '/merch',
         linkText: 'Merch',
         childLinks: []
         ,
