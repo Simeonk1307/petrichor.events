@@ -28,6 +28,11 @@ export interface workshop {
     // id: string
 }
 
+export interface informal {
+    name: string,
+    image: string,
+}
+
 export interface person{
     name: string,
     image: string,

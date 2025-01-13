@@ -8,13 +8,17 @@
     export let left;
     const dialogPopUp:Function = getContext('displayPopUp')
     function handleClick() {
+      // if (event_name.toLowerCase() == "informals") {
+      //   dialogPopUp(
+      //     "Message",
+      //     "Coming Soon",
+      //     5000,
+      //     () => {}
+      //   )
+      //   return
+      // }
       if (event_name.toLowerCase() == "informals") {
-        dialogPopUp(
-          "Message",
-          "Coming Soon",
-          5000,
-          () => {}
-        )
+        goto('/informals')
         return
       }
       goto('/events/' + event_name.toLowerCase())
