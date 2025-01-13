@@ -156,8 +156,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="imagediv" bind:this={img}>
-			<img src={hand} alt="" />
+		<div class="imagediv" bind:this={img} draggable="false">
+			<img src={hand} alt="" draggable="false" />
 		</div>
 	</div>
 
@@ -228,6 +228,7 @@
 	.imagediv {
 		flex: 1;
 		display: flex;
+		user-select: none;
 		z-index: 11;
 		align-items: center;
 		justify-content: center;
@@ -251,6 +252,7 @@
 	}
 	.imagediv img {
 		height: 85vh;
+		user-select: none;
 		width: 50vw;
 	}
 	.title {
@@ -278,6 +280,7 @@
 	.caption {
 		font-size: 20px;
 		font-weight: 100;
+		user-select: none;
 		color: white;
 		overflow: hidden;
 		text-wrap: wrap;

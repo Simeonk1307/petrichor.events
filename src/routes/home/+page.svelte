@@ -61,8 +61,9 @@
 	let elementMap: { [key: number]: HTMLElement } = {};
 	let screenWidth: number;
 	let screenHeight: number;
+	let mainDivclientX:number | null = null
+	let mainDivclientY: number | null = null
 	// let cursor: HTMLElement;
-	let scrolling  = false;
 
 	export let data;
 	const getData: Function = getContext('getData');
@@ -102,16 +103,79 @@
 			screenWidth = pageWidth;
 			screenHeight = window.innerHeight;
 		};
-		window.onscroll = (e) => {
-			let val = window.scrollY;
-			// console.log(val);
-			if (slideHero) {
-				slideHero(val);
+		setInterval(fixposition, 1000) // align screen every sec
+		let X=0, Y = 0;
+		let move = false, animating_move = false;
+		mainDiv.onmousedown = (e) => {
+			move = true
+			document.body.style.cursor = "grab";
+		}
+		mainDiv.onmouseup = (e) => {
+			move = false
+			document.body.style.cursor = "default";
+			fixposition()
+		}
+
+		mainDiv.onmousemove = (e) => {
+			if (move) {
+				let moveX = e.movementX
+				const boundingRect = mainDiv.getBoundingClientRect()
+				let moveY = e.movementY 
+				gsap.to(mainDiv, { duration: 0, x: boundingRect.x + moveX,y: boundingRect.y + moveY });
 			}
-			if (slideAbout) {
-				slideAbout(val);
+		}
+		mainDiv.onmouseleave = (e) => {
+			move = false
+			fixposition()
+			document.body.style.cursor = "default";
+		}
+		function fixposition(isTouch? : undefined | boolean) {
+			if (animating_move || move) {
+				return
 			}
-		};
+			animating_move = true
+			if (mainDiv == undefined){
+				return
+			}
+			const boundingRect = mainDiv.getBoundingClientRect()
+			let newX = 0, newY = 0;
+			let currX = -boundingRect.x
+			let currY = -boundingRect.y
+			let allowedX = Math.max(30,screenWidth / 4)
+			let allowedY = Math.max(30,screenHeight / 4)
+
+			if ((X == 0 && currX < 0 )|| (X == -screenWidth && currX < screenWidth - allowedX)) {
+				newX = 0
+			} else if (currX >= allowedX ) {
+				newX = -screenWidth
+			}
+
+			if ((Y == 0 && currY < 0 )|| (Y == -screenHeight && currY < screenHeight - allowedY)) {
+				newY = 0
+			} else if (currY >= allowedY ) {
+				newY = -screenHeight
+			}
+			X = newX
+			Y = newY
+			if (newX == 0 ) {
+				if (newY == 0) {
+					currentComponent = 1
+				} else {
+					currentComponent = 3
+				}
+			} else {
+				if (newY == 0) {
+					currentComponent = 2
+				} else {
+					currentComponent = 4
+				}
+			}
+			gsap.to(mainDiv, { duration: 0.7, x: newX,y: newY }).then((res) => {
+				animating_move = false;
+			}).catch ((e) => {
+				animating_move = false
+			});
+		}
 		access_token.set(data.accessToken);
 
 		screenWidth = window.innerWidth;
@@ -125,130 +189,28 @@
 			4: workshopDiv
 		};
 
-		for (let key = 1; key < 5; key ++) {
-			const ele = elementMap[key]
-			ele.onscroll = (e) => {
-				scrolling = true
-			}
-			ele.onscrollend = (e) => {
-				scrolling = false
-			}
-		}
 
-		let wheelTimeout: number;
-		// let max_expand = -3.5;
-
-		let dir = 0;
-		let startX = 0, startY = 0;
-
-		const switching = (deltaX: number, deltaY: number, isTouch?: boolean ) => {
-			if (scrolling || animating) {
-				return
-			}
-			if (deltaX < 0 ) {
-				widthLeft += -deltaX * 0.6;
-			} else {
-				widthRight += deltaX * 0.6;
-			}
-
-			if (deltaY < 0) {
-				heightUp += -deltaY * 0.6;
-			} else {
-				heightDown += deltaY * 0.6;
-			}
-			clearTimeout(wheelTimeout);
-			if (isTouch && (heightUp > 40 || heightDown > 40 || widthLeft > 40 || widthRight > 40 )) {
-				animate(isTouch)
-			}
-
-			// Set a timeout to detect the end of the scrolling
-			wheelTimeout = setTimeout(() => {
-				animate(isTouch)
-			}, 100);
-		};
-
-		function animate (isTouch?:boolean) {
-			if (!animating) {
-					let turnLeft = false;
-					let turnRight = false;
-					let turnUp = false;
-					let turnDown = false;
-					
-					if (heightDown > 40) {
-						turnDown = true;
-					}
-
-					
-					if (widthLeft > 40) {
-						turnLeft = true;
-					}
-					if (widthRight > 40) {
-						turnRight = true;
-					}
-					
-					if (heightUp > 40) {
-						turnUp = true;
-					}
-					// 1 : right
-					// 2: bottom- right
-					// 3: bottom
-					// 4: bottom-left
-					// 5: left
-					// 6: top-left
-					// 7: top
-					// 8: top-right
-					let minReq = 0
-					if (isTouch) {
-						minReq = 20
-					}
-					// console.log(isTouch, minReq, widthLeft, widthRight)
-					if (widthLeft > minReq && turnDown) {
-						dir = 4;
-					} else if (widthLeft > minReq && turnUp) {
-						dir = 6;
-					} else if (widthRight > minReq && turnUp) {
-						dir = 8;
-					} else if (widthRight > minReq && turnDown) {
-						dir = 2;
-					} else if (turnDown) {
-						dir = 3;
-					} else if (turnUp) {
-						dir = 7;
-					} else if (turnLeft) {
-						dir = 5;
-					} else if (turnRight) {
-						dir = 1;
-					} else {
-						dir = 0;
-					}
-					console.log(dir)
-					change(dir);
-				}
-				heightDown = 0;
-				heightUp = 0;
-				widthRight = 0;
-				widthLeft = 0;
-		}
-
-		mainDiv.onwheel = (e) => {
-			// Set animation progress based on scroll position
-			let deltaX = e.deltaX;
-			let deltaY = e.deltaY;
-			// console.log(deltaX, deltaY)
-			switching(deltaX, deltaY)
-
-		}
 		mainDiv.ontouchstart = (e) => {
 			const touch = e.touches[0]
-			startX = touch.clientX
-			startY = touch.clientY
+			mainDivclientX = touch.clientX
+			mainDivclientY = touch.clientY
+			move = true
 		}
 		mainDiv.ontouchmove = (e) => {
-			const touch = e.touches[0]
-			let deltaX = (startX - touch.clientX) * 0.1;
-			let deltaY = (startY - touch.clientY) * 0.1 ;
-			console.log(deltaX, deltaY)
-			switching(deltaX, deltaY, true)
+			if (move) {
+				const touch = e.touches[0]
+				let moveX = (mainDivclientX == null) ? 0 : touch.clientX - mainDivclientX
+				let moveY = (mainDivclientY == null) ? 0 : touch.clientY - mainDivclientY
+				const boundingRect = mainDiv.getBoundingClientRect()
+				mainDivclientX = touch.clientX
+				mainDivclientY = touch.clientY
+				// console.log(boundingRect)
+				gsap.to(mainDiv, { duration: 0, x: boundingRect.x + moveX,y: boundingRect.y + moveY });
+			}
+		}
+		mainDiv.ontouchend = (e) => {
+			move = false
+			fixposition(true)
 		}
 		if (data.goto != null ) {
 			change(reverse[currentComponent][Number.parseInt(data.goto)])
@@ -271,8 +233,8 @@
 		}
 		const nextElement = elementMap[nextId];
 		animating = true;
-		gsap.to(currentElement, { scale: 0.8, duration: 0.2 });
-		gsap.to(nextElement, { scale: 0.8, duration: 0.2, delay: 0.2 });
+		// gsap.to(currentElement, { scale: 0.8, duration: 0.2 });
+		// gsap.to(nextElement, { scale: 0.8, duration: 0.2, delay: 0.2 });
 		if (dir === 1) {
 			gsap.to(mainDiv, { duration: 1, x: `-${screenWidth}`, delay: 0.2 });
 		} else if (dir === 2) {
@@ -365,6 +327,12 @@
 {/if}
 
 <style>
+	* {
+		user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+	}
 
 .alertbar {
 		position: absolute;

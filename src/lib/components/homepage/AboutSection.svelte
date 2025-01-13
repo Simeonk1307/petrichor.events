@@ -32,8 +32,8 @@
 			Petrichor'25!
 		</div>
 	</div>
-	<div class="photo_holder" bind:this={img}>
-		<img src={photo} class="photo" alt=""/>
+	<div class="photo_holder" bind:this={img} draggable="false">
+		<img src={photo} class="photo" alt="" draggable="false"/>
 	</div>
 
 
