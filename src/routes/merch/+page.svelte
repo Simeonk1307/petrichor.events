@@ -10,7 +10,7 @@
       tshirt1,
       tshirt2,
     ];
-    const prices = [45,785,741,45];
+    const prices = [120,690,390,390];
   </script>
   
   <style>
