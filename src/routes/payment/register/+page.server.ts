@@ -33,6 +33,10 @@ export const actions = {
         if (CACode == ""){
             CACode = "null"
         }
+        let coupon_code = data.get("coupon_code")
+        if (coupon_code == ""){
+            coupon_code = "null"
+        }
         const transactionID = data.get("transactionID")
         const participants:string[] = JSON.parse(data.get('participants')) // since only 1 member registers at a time
         const eventId = data.get("eventId")
@@ -46,6 +50,7 @@ export const actions = {
                 "participants": participants,
                 "eventId": eventId,
                 CACode:CACode,
+                coupon: coupon_code
             },
             accessToken
         )
@@ -151,5 +156,15 @@ export const actions = {
                 })
             });
         return response
+    },
+    "verify_coupon_code": async ({request, cookies}) => {
+        const data = await request.formData();
+        const coupon_code = data.get('coupon_code');
+        const coupons = process.env.coupons?.split(',');
+        if(coupons?.includes(coupon_code)){
+            return {verified: true}
+        } else{
+            return fail(400,{status: false,"err":"Invalid Coupon Code."})
+        }
     }
 } satisfies Actions;

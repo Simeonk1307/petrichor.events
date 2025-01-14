@@ -6,7 +6,7 @@
 	import { fail } from '@sveltejs/kit';
 	import QRCode from 'qrcode';
 	import { getContext, onMount } from 'svelte';
-	import parv_qr from "$lib/assets/parv_qr.jpg";
+	import parv_qr from '$lib/assets/parv_qr.jpg';
 
 	export let name: string;
 	export let id: string;
@@ -16,7 +16,9 @@
 
 	let transactionID: string;
 	let CAcode: string = '';
+	let coupon_code: string = '';
 	let verified: boolean;
+	let coupon_verified: boolean;
 	let imgurl: string;
 	let qrcodeurl = `upi://pay?pa=zaifziad11@okicici&pn=******4972&am=149&mc=0000&mode=02&purpose=00`;
 	// if (id.startsWith("W")) {
@@ -28,8 +30,7 @@
 	// 		imgurl = url;
 	// 	});
 	// }
-	imgurl = parv_qr
-
+	imgurl = parv_qr;
 
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
@@ -47,17 +48,27 @@
 		}
 		return true;
 	}
+	function coupon_verify() {
+		if (coupon_code.length != 0 && !coupon_verified) {
+			return;
+		}
+		return true;
+	}
 
 	async function fetchData() {
-		const response = await POST(API.verifyCA, {
-			CACode: CAcode
-		}, undefined)
+		const response = await POST(
+			API.verifyCA,
+			{
+				CACode: CAcode
+			},
+			undefined
+		)
 			.then((res) => res.json())
 			.then((res) => {
 				if (res.status == 200) {
 					if (res.verified) {
 						// handle
-						return {"type":"success","data":res};
+						return { type: 'success', data: res };
 					} else {
 						return fail(400, { ...res, err: res.message });
 					}
@@ -86,8 +97,12 @@
 			if (data.verified) {
 				verified = true;
 				const verifyButton = document.getElementById('verify') as HTMLButtonElement;
+				const caInput = document.getElementById('CAcode') as HTMLInputElement;
 				if (verifyButton) {
 					verifyButton.disabled = true;
+				}
+				if(caInput){
+					caInput.disabled = true;
 				}
 			} else {
 				displayPopUp('Alert', data.err, 4000, () => {});
@@ -107,13 +122,23 @@
 	function submit(onsubmit: { [x: string]: any; cancel: () => void }) {
 		loading(true);
 		onsubmit.formData.set('CACode', CAcode);
+		onsubmit.formData.set('coupon_code', coupon_code);
 		onsubmit.formData.set('eventId', id);
-		onsubmit.formData.set("participants",JSON.stringify(participants))
+		onsubmit.formData.set('participants', JSON.stringify(participants));
 		if (!verify()) {
 			loading(false);
 			displayPopUp(
 				'Alert',
 				'Please verify the CACode first or remove it completely.',
+				5000,
+				() => {}
+			);
+			onsubmit.cancel();
+		} else if (!coupon_verify()) {
+			loading(false);
+			displayPopUp(
+				'Alert',
+				'Please verify the Coupon Code first or remove it completely.',
 				5000,
 				() => {}
 			);
@@ -151,7 +176,51 @@
 			}
 		};
 	}
+
+	function verify_coupon_code() {
+		loading(true);
+		// @ts-ignore
+		return async ({ result }) => {
+			loading(false);
+
+			if (result.type == 'success' && result.data) {
+				const data = result.data;
+				// console.log(data);
+				if (data.verified) {
+					coupon_verified = true;
+					const verifyButton = document.getElementById('coupon_verify') as HTMLButtonElement;
+					const couponInput = document.getElementById('coupon_code') as HTMLInputElement;
+					if (verifyButton) {
+						verifyButton.disabled = true;
+					}
+					if(couponInput){
+						couponInput.disabled = true;
+					}
+					amount = (amount*0.9);
+					amount = parseInt(amount.toFixed(0))
+				} else {
+					displayPopUp('Alert', data.err, 4000, () => {});
+				}
+			} else {
+				setTimeout(() => {
+					displayPopUp(
+						'Alert',
+						result.data.err ? result.data.err : 'Something went wrong',
+						4000,
+						() => {}
+					);
+				}, 100);
+			}
+		};
+	}
 </script>
+
+<form
+	id="coupon_form"
+	method="post"
+	action="?/verify_coupon_code"
+	use:enhance={verify_coupon_code}
+/>
 
 <form class="form" method="post" action="?/pay" use:enhance={submit}>
 	<div style="background-color: rgb(90, 14, 137,0.3);" class="payment">
@@ -173,15 +242,22 @@
 				/></svg
 			>
 		</div>
-		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: pparv2515-1@okhdfcbank</p>
-		<p>OR Pay to HDFC Bank A/C Details:
+		<p style="display: flex;text-align:center;padding-inline:10px;">
+			If the above QR code doesn't work, please use
 		</p>
+		<p>UPI ID: pparv2515-1@okhdfcbank</p>
+		<p>OR Pay to HDFC Bank A/C Details:</p>
 		<p>Account Number: 05001460001487</p>
 		<p>Account Holder Name: Vinay Krishna</p>
 		<p>IFSC Code: HDFC0000500</p>
 	</div>
 	<div id="data">
-		<p class="tr_label" style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem;text-wrap:break-word;overflow:break-word;">Transaction Id (12-digits. See below for examples)</p>
+		<p
+			class="tr_label"
+			style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem;text-wrap:break-word;overflow:break-word;"
+		>
+			Transaction Id (12-digits. See below for examples)
+		</p>
 		<input
 			id="transId"
 			type="text"
@@ -207,8 +283,24 @@
 				>{verified ? 'Verified' : 'Verify'}</button
 			>
 		</div>
+		<p style="color: #FCF3FF;margin-left:1rem;margin-bottom:0.5rem">Coupon Code</p>
+		<div class="code_verification">
+			<input
+				id="coupon_code"
+				type="text"
+				placeholder="Your Coupon Code(if any)"
+				maxlength="6"
+				name="coupon_code"
+				form="coupon_form"
+				style="margin-top:5px;background-color:black !important;border:black"
+				bind:value={coupon_code}
+			/>
+			<button id="coupon_verify" type="submit" form='coupon_form' style="cursor:pointer"
+				>{coupon_verified ? 'Verified' : 'Verify'}</button
+			>
+		</div>
 		<div id="submitButton">
-			<p id="warning"></p>
+			<p id="warning" />
 			<button id="submit" type="submit" style="cursor:pointer; display:block; margin-top:5px;"
 				>Register Now</button
 			>
@@ -291,10 +383,10 @@
 		color: #fcf3ff;
 		outline: none;
 	}
-	#verify:disabled {
+	#verify:disabled, #coupon_verify:disabled {
 		background-color: rgb(17, 184, 17);
 	}
-	#verify {
+	#verify, #coupon_verify {
 		background-color: rgb(184, 17, 17);
 		color: #fcf3ff;
 		border: none;
@@ -310,7 +402,7 @@
 		margin-left: 3rem;
 		border-radius: 20%/50%;
 	}
-	#CAcode {
+	#CAcode, #coupon_code {
 		width: 18rem;
 		height: 2.5rem;
 		padding-left: 0.5rem;
@@ -358,7 +450,7 @@
 		.code_verification {
 			width: 18rem;
 		}
-		#verify {
+		#verify, #coupon_verify {
 			margin-left: -1rem;
 		}
 		#submitButton {
