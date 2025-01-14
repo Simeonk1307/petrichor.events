@@ -37,9 +37,9 @@ export const schedule: { [key: string]: Schedule } = {
                 venue: 'S-308'
             },
             {
-                event_name: 'RoboWars: The Clash Of Titans',
+                event_name: 'DroneDash',
                 timing: '2:00PM - 5:00PM',
-                venue: 'Agora (Back)'
+                venue: 'Nila Ground'
             }
         ],
         Workshop: [
@@ -132,7 +132,7 @@ export const schedule: { [key: string]: Schedule } = {
             },
             {
                 event_name: 'Bridge Bonanza',
-                timing: '10:00AM - 1:00PM',
+                timing: '11:00AM - 2:00PM',
                 venue: 'Manogatha Quadrangle'
             },
             {
@@ -141,10 +141,10 @@ export const schedule: { [key: string]: Schedule } = {
                 venue: 'S-308'
             },
             {
-                event_name: 'DroneDash',
+                event_name: 'RoboWars: The Clash Of Titans',
                 timing: '2:00PM - 5:00PM',
-                venue: 'Nila Ground'
-            }
+                venue: 'Agora (Back)'
+            },
         ],
         Workshop: [
             {
