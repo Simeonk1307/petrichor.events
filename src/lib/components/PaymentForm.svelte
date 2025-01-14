@@ -7,6 +7,7 @@
 	import QRCode from 'qrcode';
 	import { getContext, onMount } from 'svelte';
 	import parv_qr from "$lib/assets/parv_qr.jpg";
+	import azim_qr from '$lib/assets/azim_qr_code.jpeg'
 
 	export let name: string;
 	export let id: string;
@@ -28,7 +29,7 @@
 	// 		imgurl = url;
 	// 	});
 	// }
-	imgurl = parv_qr
+	imgurl = azim_qr
 
 
 	const loading: Function = getContext('loading');
@@ -173,7 +174,7 @@
 				/></svg
 			>
 		</div>
-		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: pparv2515-1@okhdfcbank</p>
+		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: azimmahe@oksbi</p>
 		<p>OR Pay to HDFC Bank A/C Details:
 		</p>
 		<p>Account Number: 05001460001487</p>
