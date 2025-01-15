@@ -23,7 +23,7 @@ export const closed_workshops = [
 export const closed_events = [
     "TP06",
     "TP07",
-    "TP04", "CP16", "CP06", "CP09", "CP05"
+    "TP04", "CP16", "CP06", "CP09", "CP05", "CP14"
 ]
 // export function getEventDataJS(eventID: string){
 //     const Tresult = technical.events.filter((e) => e.id == eventID)
