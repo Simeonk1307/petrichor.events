@@ -51,6 +51,10 @@
 					loggedIn.set(true);
 					// console.log($user)
 					if (data.nextpg != null){
+						if (data.nextpg == "map") {
+							window.location.href = 'https://map.petrichor.events/'
+							return;
+						}
 						goto(data.nextpg);
 					} 
 					else {
