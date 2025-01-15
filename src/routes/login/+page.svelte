@@ -52,7 +52,7 @@
 					// console.log($user)
 					if (data.nextpg != null){
 						if (data.nextpg == "map") {
-							window.location.href = `https://map.petrichor.events/oauth?session_id=${rdata.token}}`
+							window.location.href = `https://map.petrichor.events/api/oauth?session_id=${rdata.token}}`
 							return;
 						}
 						goto(data.nextpg);
