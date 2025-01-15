@@ -534,10 +534,10 @@ if (process.env.get_events == "True") {
         let closedTagEvents = [];
         let mergedEvents = [];
         for (const event of tagged_events) {
-            if (event.tags[1].length != 0) {
-                tags.add(event.tags[1])
-            } else if (event.tags[1] == "closed"){
+            if (event.tags[1] == "closed"){
                 closedTagEvents.push(event)
+            } else if (event.tags[1].length != 0) {
+                tags.add(event.tags[1])
             } else {
                 noTagEvents.push(event);
             }
