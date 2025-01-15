@@ -531,10 +531,13 @@ if (process.env.get_events == "True") {
     function mergeEvents(tagged_events) {
         let tags = new Set();
         let noTagEvents = [];
+        let closedTagEvents = [];
         let mergedEvents = [];
         for (const event of tagged_events) {
             if (event.tags[1].length != 0) {
                 tags.add(event.tags[1])
+            } else if (event.tags[1] == "closed"){
+                closedTagEvents.push(event)
             } else {
                 noTagEvents.push(event);
             }
@@ -545,6 +548,9 @@ if (process.env.get_events == "True") {
             }
         }
         for (const event of noTagEvents) {
+            mergedEvents.push(event)
+        }
+        for (const event of closedTagEvents) {
             mergedEvents.push(event)
         }
         return mergedEvents;
