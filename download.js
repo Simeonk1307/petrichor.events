@@ -6,7 +6,7 @@ import path from "path"
 import dotenv from "dotenv";
 
 try {
-    dotenv.config() 
+    dotenv.config()
 } catch (e) {
     console.log(e.toString())
 }
@@ -534,7 +534,7 @@ if (process.env.get_events == "True") {
         let closedTagEvents = [];
         let mergedEvents = [];
         for (const event of tagged_events) {
-            if (event.tags[1] == "closed"){
+            if (event.tags[1].trim() == "closed"){
                 closedTagEvents.push(event)
             } else if (event.tags[1].length != 0) {
                 tags.add(event.tags[1])
@@ -550,15 +550,12 @@ if (process.env.get_events == "True") {
         for (const event of noTagEvents) {
             mergedEvents.push(event)
         }
-        for (const event of closedTagEvents) {
-            mergedEvents.push(event)
-        }
-        return mergedEvents;
+        return [mergedEvents, closedTagEvents];
     }
-    
-    let online_events = mergeEvents(getTaggedEvents("online"));
-    let offline_events = mergeEvents(getTaggedEvents("offline"));
-    
+    let [online_events, closed_online_events ] = mergeEvents(getTaggedEvents("online"));
+
+    let [ offline_events, closed_offline_events ] = mergeEvents(getTaggedEvents("offline"));
+
     async function fetchEvents(events_data) {
         for (const event of events_data) {
             if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
@@ -598,8 +595,10 @@ if (process.env.get_events == "True") {
     }
 }
 
-await fetchEvents(online_events);
-await fetchEvents(offline_events);
+    await fetchEvents(online_events);
+    await fetchEvents(offline_events);
+    await fetchEvents(closed_online_events);
+    await fetchEvents(closed_offline_events);
 
 // fetchEvents(events_data);
 
