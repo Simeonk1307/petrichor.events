@@ -127,7 +127,7 @@
 		margin: 0.2rem 0;
 	}
 	._blank {
-		height: 80px;
+		height: 100px;
 	}
 	.wname {
 		z-index: 2;

@@ -16,6 +16,9 @@
 		if (!$loggedIn) {
 			getData();
 		}
+		if ($loggedIn && data.accessToken && data.nextpg == "map") {
+			window.location.href = `https://map.petrichor.events/api/oauth?session_id=${data.accessToken}`
+		}
 		access_token.set(data.accessToken);
 	});
 

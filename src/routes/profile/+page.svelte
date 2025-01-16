@@ -195,7 +195,7 @@
 <style>
 	.main {
 		min-height: 110vh;
-		margin-top: 80px;
+		margin-top: 100px;
 		overflow-x: hidden;
 		display: flex;
 		flex-direction: row;

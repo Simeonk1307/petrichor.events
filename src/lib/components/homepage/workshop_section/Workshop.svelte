@@ -23,7 +23,7 @@
 </div>
 
 <main>
-  <h1 class="atmos" style="margin-top:100px;">Workshop</h1>
+  <h1 class="atmos" style="margin-top:120px;">Workshop</h1>
   <div class="container">
     {#if Object.entries(workshops).length == 0}
     <div style="width: 100%;display:flex; justify-content:center; " draggable="false">

@@ -74,7 +74,7 @@
 		height: 100vh;
 		display: flex;
 		align-items: center;
-		margin-top: 80px;
+		margin-top: 100px;
 		flex-direction: column;
 	}
 	.message{
