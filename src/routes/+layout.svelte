@@ -7,7 +7,7 @@
 	import { page } from '$app/stores';
 	import { POST, API, defaultUser } from '$lib/index.js';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores.js';
-	import { beforeNavigate } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
 
 	import { Header, Footer, BtpBtn } from '$lib/components/ui';
 	// Dummy data in this helper file
@@ -201,7 +201,7 @@
 
 {#if path != '/'}
 	<Header {title} links={headerLinks} />
-{/if}
+	{/if}
 
 <Background {path} />
 <!-- svelte-ignore a11y-click-events-have-key-events -->

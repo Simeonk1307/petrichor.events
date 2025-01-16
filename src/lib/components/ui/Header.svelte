@@ -99,56 +99,62 @@
 
 {#if links.length > 0}
 <header>
-    <a class="title atmos" href="/home" bind:this={titleDiv}></a>
-    <nav class="menu">
-        {#each links as link,ind}
-        <div>
-
-            <a class="links" href={link.url} aria-label={link.linkText} on:mouseenter={
-                () => {
-                    link.show = true
+    <div class="map_info">
+        We have also launched a map page for Petrichor'25. Have a look at the upcoming events here : 
+        <a href="/login?to=map">Maps</a>
+    </div>
+    <div class="actual_nav" style="width: 100%; height:100%;display:flex;">
+        <a class="title atmos" href="/home" bind:this={titleDiv}></a>
+        <nav class="menu">
+            {#each links as link,ind}
+            <div>
+                
+                <a class="links" href={link.url} aria-label={link.linkText} on:mouseenter={
+                    () => {
+                        link.show = true
                     }}
                 on:click = {() => {
                     if (link.linkText == "Workshop") {
                         // displayPopUp(
-						// "Message",
-						// `${link.linkText} Details will be released soon.`,
-						// 5000,
-						// ()=>{}
-                        // )
-                    } else if (link.url === "#") {
-                        displayPopUp(
-						"Message",
-						"Coming Soon",
-						5000,
-						()=>{}
-                        )
-                    }
-                }}
+                            // "Message",
+                            // `${link.linkText} Details will be released soon.`,
+                            // 5000,
+                            // ()=>{}
+                            // )
+                        } else if (link.url === "#") {
+                            displayPopUp(
+                                "Message",
+                                "Coming Soon",
+                                5000,
+                                ()=>{}
+                            )
+                        }
+                    }}
                 on:mouseleave = {() => {
                     setTimeout(()=>{
                         link.show = false
                     },3000)
                 }}
                 >{link.linkText}</a>
-            {#if link.show}
-            <div class="child_links" transition:fade>
-                {#each link.childLinks as otherLink }
-                <a href={otherLink.url} aria-label={otherLink.linkText}>{otherLink.linkText}</a>
-                {/each}
+                {#if link.show}
+                <div class="child_links" transition:fade>
+                    {#each link.childLinks as otherLink }
+                    <a href={otherLink.url} aria-label={otherLink.linkText}>{otherLink.linkText}</a>
+                    {/each}
+                </div>
+                {/if}
             </div>
-            {/if}
-        </div>
-        {/each}
-    </nav>
-    <a class="account" href={($invalidate || !$loggedIn) ? `/login/?to=${($page).url.pathname}` : '/profile'}>
-        <Icon data={userO} scale={1.5}/>
-    </a>
-    <button class="menu-icon" on:click={toggleMenu} aria-label="Toggle menu">
-        <Icon data={ellipsisV} scale={1.6}/>
-    </button>
+            {/each}
+        </nav>
+        <a class="account" href={($invalidate || !$loggedIn) ? `/login/?to=${($page).url.pathname}` : '/profile'}>
+            <Icon data={userO} scale={1.5}/>
+        </a>
+        <button class="menu-icon" on:click={toggleMenu} aria-label="Toggle menu">
+            <Icon data={ellipsisV} scale={1.6}/>
+        </button>
+    </div>
 </header>
-
+    
 <div class="popup-menu {showMenu ? 'show' : 'hide'}" style={`top: ${popupMenuPosition.top}px; right: ${popupMenuPosition.right}px;`}>
     <nav class="popup-nav">
         {#each links as link}
@@ -167,16 +173,28 @@
 {/if}
 
 <style>
+    .actual_nav {
+        padding: 0.8rem 0;
+    }
+    .map_info a {
+        color: aquamarine;
+    }
+    .map_info {
+        width:  100%;
+        background-color: rgba(3, 187, 119, 0.642);
+        padding: 0.5rem 0 ;
+        text-align: center;
+    }
     header {
         position: fixed;
         display: flex;
         justify-content: space-around;
         align-items: center;
+        flex-direction: column;
         width: 100vw;
         top: 0;
-        max-height: 70px;
+        max-height: 130px;
         z-index: 1000;
-        padding: 1.2rem 0;
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

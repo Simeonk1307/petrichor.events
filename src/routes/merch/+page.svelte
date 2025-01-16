@@ -60,7 +60,7 @@
         left: -20px;
     }
     .header {
-      margin-top: 90px;
+      margin-top: 130px;
       text-align: center;
       display: flex;
       font-size: xx-large;

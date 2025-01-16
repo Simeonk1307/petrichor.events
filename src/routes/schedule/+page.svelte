@@ -269,8 +269,8 @@
 	.scd_holder {
 		display: flex;
 		width: 100%;
-		height: calc(100% - 80px);
-		top: 79px;
+		height: calc(100% - 100px);
+		top: 100px;
 		position: relative;
 		padding-inline: 20px;
 		align-items: center;
@@ -333,6 +333,8 @@
 			width: 100%;
 		}
 		.schd {
+			
+			min-height: unset;
 			flex-direction: column-reverse;
 		}
 		.sidebar {
@@ -379,8 +381,8 @@
 		}
 		.scd_holder {
 			padding: 0 10px;
-			top: 98px;
-			height: calc(100% - 100px);
+			top: 100px;
+			height: calc(100% - 70px);
 		}
 	}
 </style>

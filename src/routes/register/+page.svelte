@@ -266,7 +266,7 @@
 		display: inline-block;
 	}
 	.blank {
-		height: 80px;
+		height: 100px;
 	}
 	.form {
 		margin-left: 7vw;

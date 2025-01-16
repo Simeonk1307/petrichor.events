@@ -167,7 +167,7 @@
 			@media (max-width:600px) {
 				.content {
                     z-index: 1;
-                    padding-top: 2em;
+                    padding-top: 5em;
                     margin: 0;
                     padding-left: 0;
                 }

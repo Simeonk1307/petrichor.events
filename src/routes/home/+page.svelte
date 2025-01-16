@@ -545,17 +545,17 @@ label :checked {
 	}
 
 	.top-middle {
-		top: 80px;
+		top: 100px;
 		left: 50%;
 		transform: rotateZ(-135deg);
 	}
 	.top-right {
-		top: 80px;
+		top: 100px;
 		right: 10px;
 		transform: rotateZ(-90deg);
 	}
 	.top-left {
-		top: 80px;
+		top: 100px;
 		left: 10px;
 		transform: rotateZ(180deg);
 	}
