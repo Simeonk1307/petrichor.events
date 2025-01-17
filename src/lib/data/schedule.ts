@@ -6,17 +6,17 @@ export const schedule: { [key: string]: Schedule } = {
         Cultural: [
             {
                 event_name: 'Voicestra',
-                timing: '9:00AM - 11:15AM',
-                venue: 'Agora'
-            },
-            {
-                event_name: 'Sound Clash',
-                timing: '11:30AM - 1:30PM & 2:00PM - 4:00PM',
+                timing: '9:30AM - 11:45AM',
                 venue: 'Agora'
             },
             {
                 event_name: 'Two of a Rhythm',
-                timing: '4:00PM - 5:30PM',
+                timing: '12:00PM - 1:00PM & 1:45PM - 3:00PM',
+                venue: 'Agora'
+            },
+            {
+                event_name: 'Stand Up',
+                timing: '3:00PM - 4:00PM',
                 venue: 'Agora'
             }
         ],
@@ -24,12 +24,7 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'RubikVerse',
                 timing: '10:00AM - 1:00PM',
-                venue: 'S-301'
-            },
-            {
-                event_name: 'The Kirchoff Code',
-                timing: '10:30AM - 12:30PM & 1:30PM - 4:30PM',
-                venue: 'Electronics Lab Nila'
+                venue: 'S-306'
             },
             {
                 event_name: 'Quizzanaire: School Quiz Edition',
@@ -45,17 +40,17 @@ export const schedule: { [key: string]: Schedule } = {
         Workshop: [
             {
                 event_name: 'Digital Image Processing',
-                timing: '10:00AM - 1:00PM, 2:00PM - 5:00PM',
+                timing: '9:00am - 12:00pm, 2:00PM - 5:00PM',
                 venue: 'Samgatha Classroom'
             },
             {
                 event_name: 'The Web Workshop',
-                timing: '10:00AM - 1:00PM, 2:00PM - 5:00PM',
+                timing: '9:00am - 12:00pm, 2:00PM - 5:00PM',
                 venue: 'Samgatha Classroom'
             },
             {
                 event_name: 'Ethical Hacking',
-                timing: '10:00AM - 1:00PM, 2:00PM - 5:00PM',
+                timing: '9:00am - 12:00pm, 2:00PM - 5:00PM',
                 venue: 'Samgatha Classroom'
             }
         ],
@@ -63,7 +58,7 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Body Zorbing',
                 timing: '10:00AM - 5:00PM',
-                venue: 'In Front of Manogata'
+                venue: 'To be Decided'
             },
             {
                 event_name: 'Target Shooting',
@@ -73,19 +68,19 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Car Console',
                 timing: '10:00AM - 5:00PM',
-                venue: 'At Entrance'
+                venue: 'Nila Entrance'
             },
             {
                 event_name: 'PS-5',
                 timing: '10:00AM - 5:00PM',
-                venue: 'At Entrance'
+                venue: 'Nila Entrance'
             }
         ],
         Bookfair: [
             {
                 event_name: 'Bookfair by IIT Palakkad Library',
                 timing: '10:00AM - 5:30PM',
-                venue: 'Samgatha 305'
+                venue: 'Samgatha 305( S - 305)'
             }
         ],
         Proshow: [
@@ -128,7 +123,7 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Labyrinth: The MazeXplorer',
                 timing: '10:00AM - 1:00PM',
-                venue: 'S-301'
+                venue: 'S-306'
             },
             {
                 event_name: 'Bridge Bonanza',
@@ -137,29 +132,29 @@ export const schedule: { [key: string]: Schedule } = {
             },
             {
                 event_name: 'Quizzanaire: General Quiz Edition',
-                timing: '2:00PM - 5:00PM',
+                timing: '11:30PM - 1:30PM',
                 venue: 'S-308'
             },
             {
                 event_name: 'RoboWars: The Clash Of Titans',
-                timing: '2:00PM - 5:00PM',
+                timing: '1:30PM - 5:00PM',
                 venue: 'Agora (Back)'
             },
         ],
         Workshop: [
             {
                 event_name: 'Digital Image Processing',
-                timing: '10:00AM - 1:00PM, 2:00PM - 5:00PM',
+                timing: '9:00AM - 12:00PM, 2:00PM - 5:00PM',
                 venue: 'Samgatha Classroom'
             },
             {
                 event_name: 'The Web Workshop',
-                timing: '10:00AM - 1:00PM, 2:00PM - 5:00PM',
+                timing: '9:00AM - 12:00PM, 2:00PM - 5:00PM',
                 venue: 'Samgatha Classroom'
             },
             {
                 event_name: 'Ethical Hacking',
-                timing: '10:00AM - 1:00PM, 2:00PM - 5:00PM',
+                timing: '9:00AM - 12:00PM, 2:00PM - 5:00PM',
                 venue: 'Samgatha Classroom'
             }
         ],
@@ -167,7 +162,7 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Body Zorbing',
                 timing: '10:00AM - 5:00PM',
-                venue: 'In Front of Manogata'
+                venue: 'To be Decided'
             },
             {
                 event_name: 'Target Shooting',
@@ -177,24 +172,24 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Car Console',
                 timing: '10:00AM - 5:00PM',
-                venue: 'At Entrance'
+                venue: 'Nila Entrance'
             },
             {
                 event_name: 'PS-5',
                 timing: '10:00AM - 5:00PM',
-                venue: 'At Entrance'
+                venue: 'Nila Entrance'
             }
         ],
         Bookfair: [
             {
                 event_name: 'Bookfair by IIT Palakkad Library',
                 timing: '10:00AM - 5:30PM',
-                venue: 'Samgatha 305'
+                venue: 'Samgatha 305 (S - 305)'
             }
         ],
         Proshow: [
             {
-                event_name: 'Proshow',
+                event_name: 'Dj Night',
                 timing: '6:00PM - 8:45PM',
                 venue: 'Nila Football Ground'
             }

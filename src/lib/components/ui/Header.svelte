@@ -285,7 +285,7 @@
         filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
         header {
             justify-content: left;
         }
