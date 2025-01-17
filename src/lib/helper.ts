@@ -110,6 +110,13 @@ export const headerLinks: Array<HeaderLink> = [
         childLinks: []
         ,
         show: false
+    },
+    {
+        url: '/sponsors',
+        linkText: 'Sponsors',
+        childLinks: []
+        ,
+        show: false
     }
 ]
 
