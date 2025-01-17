@@ -24,7 +24,7 @@
 	<Sponsor name="TechIn" img={Techin} title="Hackathon Partner" />
 	<Sponsor name="Dyson" img={Dyson} title="Sponsor" />
 	<Sponsor name="Jockey" img={Jockey} title="Sponsor" />
-	<Sponsor name="INGLO" img={INGLO} title="Event Curation Partner" />
+	<Sponsor name="INGLU" img={INGLO} title="Event Curation Partner" />
 	<Sponsor name="My Equation" img={ME} title="Event Partner" />
 </div>
 <!-- 
