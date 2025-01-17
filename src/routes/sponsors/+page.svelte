@@ -7,6 +7,8 @@
 	import TIME from "$lib/assets/Sponsors/TIME.png";
 	import INGLO from "$lib/assets/Sponsors/INGO.jpg";
 	import ME from "$lib/assets/Sponsors/ME.png";
+	import SBI from "$lib/assets/Sponsors/SBI.jpeg";
+	import Frame from "$lib/assets/Sponsors/Frame.jpg";
 	import Sponsor from './Sponsor.svelte';
 </script>
 
@@ -19,6 +21,7 @@
 </div>
 
 <div id="all">
+	<Sponsor name="State Bank of India" img={SBI} title="Associate Sponsor" />
 	<Sponsor name="KC Overseas" img={KCOverseas} title="Academic Partner" />
 	<Sponsor name="TIME" img={TIME} title="Academic Partner" />
 	<Sponsor name="TechIn" img={Techin} title="Hackathon Partner" />
@@ -26,6 +29,7 @@
 	<Sponsor name="Jockey" img={Jockey} title="Sponsor" />
 	<Sponsor name="INGLU" img={INGLO} title="Event Curation Partner" />
 	<Sponsor name="My Equation" img={ME} title="Event Partner" />
+	<Sponsor name="Himalayan Yeti" img={Frame} title="Grooming Partner" />
 </div>
 <!-- 
 <h2 id="heading2" class="atmos" style="color:rgb(216, 191, 238)">In Partnership with</h2>
