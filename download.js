@@ -11,7 +11,7 @@ try {
     console.log(e.toString())
 }
 
-const skip_event = ["CF11"]
+const skip_event = ["CF11", "CP14", "TP08"]
 
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
