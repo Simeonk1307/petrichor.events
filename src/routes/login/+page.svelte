@@ -12,10 +12,12 @@
 	let email: string;
 
 	const getData: Function = getContext('getData');
-	onMount(() => {
+	onMount(async () => {
+		loading(true)
 		if (!$loggedIn) {
-			getData();
+			await getData();
 		}
+		loading(false)
 		if ($loggedIn && data.accessToken && data.nextpg == "map") {
 			window.location.href = `https://map.petrichor.events/api/oauth?session_id=${data.accessToken}`
 		}

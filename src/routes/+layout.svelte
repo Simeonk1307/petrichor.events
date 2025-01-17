@@ -22,24 +22,35 @@
 	let PopUpObj = new PopUp('', '', false, null);
 
 	beforeNavigate(async () => {
-		const access_token = $access_token;
+		let access_token = $access_token;
+		if (access_token == null || access_token == "") {
+			access_token = data.access_token
+		}
 		if (access_token == null || !$loggedIn) {
 			invalidate.set(true);
 			sessionStorage.setItem('loggedIn', 'false');
 			sessionStorage.setItem('user', JSON.stringify(defaultUser));
 		}
-		if ($invalidate && $loggedIn) {
-			// if not loggedIn then no need to refesh
-			// console.log("Here")
+		if (($invalidate || !$loggedIn) && (access_token != null && access_token != "")) {
 			await whoami(access_token ?? 'a');
 		}
 	});
 
 	async function getData() {
-		const data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser);
-		user.set(JSON.parse(data));
-		access_token.set(sessionStorage.getItem('access'));
-		if (data == JSON.stringify(defaultUser) || data == '{}') {
+		const session_data = sessionStorage.getItem('user') ?? JSON.stringify(defaultUser);
+		user.set(JSON.parse(session_data));
+		loggedIn.set(Boolean(sessionStorage.getItem('loggedIn')) ?? false);
+		
+		let access_token_saved = sessionStorage.getItem('access');
+		if (access_token_saved == "" || access_token_saved == null) {
+			access_token_saved = data.access_token
+		}
+		access_token.set(access_token_saved);
+		if (($invalidate || !$loggedIn) && (access_token_saved != null && access_token_saved != "")) {
+			console.log("Drop")
+			await whoami(access_token_saved);	
+		}
+		if (session_data == JSON.stringify(defaultUser) || session_data == '{}') {
 			if ($access_token == null || $access_token == undefined || !$loggedIn) {
 				// user have not logged In no need for refreshing the data through whoami
 
@@ -48,9 +59,9 @@
 			} else {
 				// user may have logged in
 				// console.log("HH")
-				await whoami($access_token ?? 'a');
+				await whoami(access_token_saved);
 			}
-		} else {
+		} else { 
 			loggedIn.set(Boolean(sessionStorage.getItem('loggedIn')) ?? false);
 			invalidate.set(false);
 		}
