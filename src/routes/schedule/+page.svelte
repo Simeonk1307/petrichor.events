@@ -2,7 +2,7 @@
 	import location_svg from '$lib/assets/location.svg';
 	import cult from '$lib/assets/Cult&Tech/cult.jpg';
 	import tech from '$lib/assets/Cult&Tech/TechnicalWeb.jpg';
-	import books from '$lib/assets/Informals/books.jpg';
+	import books from '$lib/assets/Informals/books.webp';
 	import {schedule} from "$lib/data/schedule"
 	import workshops from "$lib/assets/Informals/workshop.jpg"
 	import informal from '$lib/assets/Cult&Tech/Informals.png';

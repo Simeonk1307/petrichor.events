@@ -58,7 +58,7 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Body Zorbing',
                 timing: '10:00AM - 5:00PM',
-                venue: 'To be Decided'
+                venue: 'Agora Back'
             },
             {
                 event_name: 'Target Shooting',
@@ -101,11 +101,6 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Face Painting',
                 timing: '11:00AM - 12:00PM',
-                venue: 'Infront of Tilang B'
-            },
-            {
-                event_name: 'Craft Event',
-                timing: '1:00PM - 2:00PM',
                 venue: 'Infront of Tilang B'
             },
             {
@@ -162,7 +157,7 @@ export const schedule: { [key: string]: Schedule } = {
             {
                 event_name: 'Body Zorbing',
                 timing: '10:00AM - 5:00PM',
-                venue: 'To be Decided'
+                venue: 'Agora Back'
             },
             {
                 event_name: 'Target Shooting',

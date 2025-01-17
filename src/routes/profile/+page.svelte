@@ -30,8 +30,10 @@
 	// const whoami:Function = getContext('whoami')
 	let pageWidth = 1000;
 	onMount(async () => {
+		// console.log($loggedIn)
+		loading(true)
 		if (!$loggedIn) {
-			getData();
+			await getData();
 			user_data = $user.user_data;
 			user_events = $user.user_events;
 			setProfileData();
@@ -42,6 +44,7 @@
 		};
 		access_token.set(data.accessToken);
 		// console.log($loggedIn + "i" + $invalidate)
+		loading(false)
 		if (!$loggedIn) {
 			goto('/login');
 		} else if ($invalidate) {
