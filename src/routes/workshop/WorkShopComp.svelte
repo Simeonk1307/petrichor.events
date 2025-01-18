@@ -15,7 +15,7 @@
 			// get the fees and number of particiants here.
 			// For workshop number of participants will be only 1 so
 			// we will skip the add participant page and directly send user to payment page
-			goto(`/payment/register?id=${id}`);
+			// goto(`/payment/register?id=${id}`);
 			// window.open("https://docs.google.com/forms/d/e/1FAIpQLSfjtgKgnDf_dX3QyrkisEODDw0z2MkRIXAtN28NyHiPEpD5Jg/viewform")
 		}
 
@@ -102,8 +102,14 @@
 				class="price_btn"
 				on:click={() => {
 					handleClick(id);
-				}}>Join for ₹ {workshop.price}</button
+				}}>Registrations Closed</button
 			>
+			<!-- <button
+				class="price_btn"
+				on:click={() => {
+					handleClick(id);
+				}}>Join for ₹ {workshop.price}</button
+			> -->
 		{/if}
 	</div>
 </div>
