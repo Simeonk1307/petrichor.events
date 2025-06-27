@@ -40,5 +40,8 @@
 		"svelte-awesome": "^3.3.1",
 		"svelte-qrcode": "^1.0.0",
 		"vanilla-tilt": "^1.8.1"
+	},
+	"engines": {
+	    "node": "20.x"
 	}
 }
