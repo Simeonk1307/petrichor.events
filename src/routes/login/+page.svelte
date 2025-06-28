@@ -1,257 +1,39 @@
-<script lang="ts">
-	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
-	import { getContext, onMount } from 'svelte';
-
-	/** @type {import('./$types').ActionData} */
-	// export let form;
-	// console.log(form)
-	export let data;
-	let email: string;
-
-	const getData: Function = getContext('getData');
-	onMount(async () => {
-		loading(true)
-		if (!$loggedIn) {
-			await getData();
-		}
-		loading(false)
-		if ($loggedIn && data.accessToken && data.nextpg == "map") {
-			window.location.href = `https://map.petrichor.events/api/oauth?session_id=${data.accessToken}`
-		}
-		access_token.set(data.accessToken);
-	});
-
-	const displayPopUp: Function = getContext('displayPopUp');
-	const loading: Function = getContext('loading');
-
-	function afterMessage() {
-		// console.log("her")
-		goto(`/login${$page.url.search}`);
-	}
-	const whoami: Function = getContext('whoami');
-
-	$: loginResult = () => {
-		loading(true);
-
-		// @ts-ignore
-		return async ({ result }) => {
-			// console.log(result)
-			if (result.type == 'success' && result.data) {
-				const rdata = result.data;
-				// console.log(rdata)
-				const whoami_res = (await whoami(rdata.token))
-				// console.log(whoami_res)
-				if (!whoami_res) {
-					loading(false)
-					displayPopUp('Alert', "Unable to log you in. Please retry after sometime", 4000, afterMessage);
-					return
-				}
-				if (rdata.success) {
-					// this will save all the data to session Storage
-					loading(false);
-					invalidate.set(false);
-					loggedIn.set(true);
-					// console.log($user)
-					if (data.nextpg != null){
-						if (data.nextpg == "map") {
-							window.location.href = `https://map.petrichor.events/api/oauth?session_id=${rdata.token}`
-							return;
-						}
-						goto(data.nextpg);
-					} 
-					else {
-						goto('/profile');
-					}
-				} else {
-					loading(false);
-					displayPopUp('Alert', rdata.message, 4000, afterMessage);
-				}
-			} else {
-				if(result.status == 511){
-					loading(false)
-					goto('/register/verify?email='+email);
-					return;
-				}
-				setTimeout(() => {
-					loading(false);
-					displayPopUp(
-						'Alert',
-						result.data.err ? result.data.err : 'Invalid Credentials',
-						4000,
-						afterMessage
-					);
-				}, 100);
-			}
-		};
-	};
+<script>
+    import './Login.css'
+    let username="";
+    let password="";
+    const onEnter = () => {
+        console.log("Hi", username, password);
+    }
 </script>
 
-<div class="form-container">
-	<div class="form">
-		<h2>Login to <span id="Petrichor">petrichor</span>.events</h2>
-		<form action="?/login" method="POST" use:enhance={loginResult}>
-			<div>
-				<input type="email" name="email" id="email" placeholder="Email" required autocomplete="username" bind:value={email}/>
-			</div>
-			<div>
-				<input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password" />
-			</div>
-			<div class="button_holder">
-				<div class="button_divs">
-					<button id="login">Login</button>
-				</div>
-				<div class="links">
-					<a id="register" href="/register">First Time? Register Here</a>
-					<a id="register" href="/forgotpassword">Forgot Password?</a>
-				</div>
-			</div>
-		</form>
-	</div>
-	<!-- <div class="image" /> -->
-</div>
+<main>
+    <div class="container">
+        <div class="login">
+            <h2><strong>Sign in to your account</strong></h2>
 
-<style>
-	* {
-		box-sizing: border-box !important;
-	}
-	.button_holder {
-		display: flex;
-		align-items: flex-start;
-		flex-direction: column;
-		justify-content: center;
-		gap: 20px;
-		/* margin: 20px 30px; */
-	}
-	.button_holder .links {
-		display: flex;
-		gap: 20px;
-		width: 100%;
-		/* align-items: center; */
-		/* justify-content: space-evenly; */
-	}
-	.button_holder .button_divs {
-		width: 55%;
-		display: flex;
-		margin-top: 10px;
-		/* justify-content: center; */
-	}
-	#login {
-		margin: 0;
-	}
-	#Petrichor {
-		color: #910cea;
-		font-weight: 600;
-	}
-	@media (max-width: 800px) {
-		.links {
-			flex-direction: column;
-			align-items: flex-start !important;
-		}
-		.button_divs {
-			justify-content: flex-start !important;
-		}
-	}
-	h2 {
-		font-size: 300%;
-		font-weight: normal;
-		margin-bottom: 10px;
-	}
-	input {
-		--px: 0.75em;
-		padding: var(--px);
-		padding-inline: calc(var(--px) * 2);
-		margin: 1.25% 0%;
-		font-size: 24px;
-		border-radius: 10rem;
-		width: 75%;
-		background-color: #25252543;
-		border: none;
-		color: white;
-		border: 1px solid white;
-	}
-	input:focus{
-		outline: transparent;
-	}
-	::placeholder {
-		color: white;
-	}
-	.form-container {
-		width: 100%;
-		height: 100vh;
-		display: flex;
-		align-items: center;
-		z-index: 11;
-		display: flex;
-		flex-wrap: wrap;
-		margin-left: 5%;
-	}
-	.form {
-		z-index: 2;
-		width: 50%;
-	}
-	#login {
-		font-size: 1.5rem;
-		border-radius: 10rem;
-		padding: 2% 7%;
-		background-color: rgb(255, 255, 255);
-		/* color: white; */
-		font-weight: bolder;
-		border: none;
-	}
-	#register {
-		color: mediumslateblue;
-		display: inline-block;
-	}
-	/* } */
-	@media (max-width: 650px) {
-		h2 {
-			font-size: 300%;
-			font-weight: normal;
-			margin-top: 20%;
-			margin-right: 10%;
-		}
-		input {
-			padding: 3%;
-			margin: 2% 0%;
-			font-size: 100%;
-			border-radius: 10px;
-			width: 80%;
-			background-color: #40413ebb;
-			border: none;
-			color: white;
-		}
-		::placeholder {
-			color: white;
-		}
-		.form-container {
-			width: 100%;
-			height: 100%;
-			min-height: 640px;
-			font-size: smaller;
-			display: flex;
-			margin: 0;
-			flex-wrap: wrap;
-			flex-direction: column;
-			justify-content: center;
-		}
-		.form {
-			width: 100%;
-		}
-		#login {
-			border-radius: 10rem;
-			padding: 10px 20px;
-			background-color: #232423;
-			color: white;
-			font-weight: bold;
-			border: none;
-		}
-		#register {
-			color: mediumslateblue;
-			display: inline-block;
-			/* margin: 2% 0 0 40%; */
-		}
-	}
-</style>
+            <label class="label"><p>Username</p>
+            	<input type="email" placeholder="name@company.com" bind:value={username} />
+			</label>
+
+            <label class="label"><p>Username</p>
+            	<input type="password" placeholder="••••••••" bind:value={password} />
+			</label>
+
+            <div class="options">
+                <label class="remember">
+                    <div class="check"><input type="checkbox" class="checkbox" /></div>
+                    Remember me
+                </label>
+                <a href="/" class="forgot">Forgot password?</a>
+            </div>
+			
+
+            <button class="login-btn" on:click={onEnter}>Sign in</button>
+
+            <p class="signup-text">
+                Don't have an account yet? <a href="/" class="signup-link">Sign up</a>
+            </p>
+        </div>
+    </div>
+</main>
