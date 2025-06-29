@@ -11,6 +11,7 @@
 	// console.log(form)
 	export let data;
 	let email: string;
+	let password: string;
 
 	const getData: Function = getContext('getData');
 	onMount(async () => {
