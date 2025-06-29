@@ -21,15 +21,13 @@
 		<div class="title2 atmos">About Us</div>
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<div class="caption2">
-			Petrichor- the annual techno-cultural fest of IIT Palakkad is back again, and better than
-			ever before. Also, yes, it's offline. We, the students of IIT Palakkad, conduct Petrichor
-			every year, and made sure last year's event was enthralling for all its participants. Now
-			the wait is over; with just the perfect mix of cultural and technical events, we plan on
-			making 
-			Petrichor'25 an unforgettable experience for you. Trust us when we say that you won't
-			miss out on anything. Check out our website as it has answers to all the questions that
-			you might have. Stay tuned and brace yourselves for the journey of a lifetime with
-			Petrichor'25!
+			Petrichor, the annual techno-cultural fest of IIT Palakkad, is back—and this time, it's bigger, bolder,
+			and more exciting than ever before. Named after the earthy fragrance that follows the first rain, Petrichor 
+			captures the essence of creativity and renewal. Every year, we—the students of IIT Palakkad—unite our passion 
+			and energy to bring this fest to life. Blending cutting-edge technical excellence with rich cultural expression, 
+			Petrichor offers a dynamic platform for students to showcase their ideas, talents, and skills. From immersive 
+			workshops to captivating events, Petrichor '26 promises an unforgettable experience for everyone who attends.
+			Join us in celebrating knowledge, creativity, and the thrill of discovery with Petrichor '26!
 		</div>
 	</div>
 	<div class="photo_holder" bind:this={img} draggable="false">
@@ -77,7 +75,7 @@
 		color: white;
 	}
 	.caption2 {
-		font-size: 15px;
+		font-size: 17px;
 		font-weight: 100;
 		color: white;
 		line-height: 1.5;
@@ -110,7 +108,7 @@
 		.caption2{
 			margin: 0;
 			padding: 5px 10px;
-			font-size: 13px;
+			font-size: 17px;
 			width: auto;
 			text-align: justify;
 		}
