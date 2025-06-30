@@ -5,7 +5,7 @@
 		english: 'PETRICHOR',
 		hindi: 'पेट्रीकोर',
 		tamil: 'பெட்ரிகோர்',
-		gujrati: 'પેટ્રિકોર',
+		gujarati: 'પેટ્રિકોર',
 		malayalam: 'പെട്രിക്കോർ',
 		bengali: 'পেট্রিকোর',
 		telugu: 'పెట్రికోర్',
@@ -103,7 +103,7 @@
 		window.location.href = '/home'
 	}, 800)
 }}>
-	<div style="all: unset;">{!clicked ? "EXPLORE" : "PETRICHOR 25"}</div>
+	<div style="all: unset;">{!clicked ? "EXPLORE" : "PETRICHOR 26"}</div>
 </div>
 
 <style>
