@@ -1,4 +1,5 @@
 <script lang="ts">
+	import './ChangePassword.css'
 	import { enhance } from "$app/forms";
 	import { goto } from "$app/navigation";
 	import { getContext } from "svelte";
@@ -56,137 +57,27 @@
 
 </script>
 
-<div class="form-container">
-	<!-- <div class="blank2" /> -->
-	<div class="form">
-		<h2>Change <span id="Petrichor">Password?</span></h2>
-		<form
-		action="?/change"
-		method="POST"
-		use:enhance={changeResult}
-	>
-		<div>
-			<input type="password" name="password" id="password" placeholder="Password" required />
-		</div>
-		<div>
-			<input type="password" name="confirm_pass" id="confirm_pass" placeholder="Confirm Password" required />
-		</div>
-		<div>
-			<button id="login">Submit</button>
-			<a id="register" href="/login">Go back To Login</a>
-		</div>
-	</form>
-	</div>
-	<!-- <div class="image" /> -->
-</div>
-<!-- <div class="blank" /> -->
+<main>
+  <div class="container">
+    <div class="login">
+      <h2><strong>Change Password</strong></h2>
+      <form method="POST" action="?/change" use:enhance={changeResult}>
+        <label class="label">New Password
+          <input type="password" name="password" placeholder="••••••••" bind:value={password} required autocomplete="new-password" />
+        </label>
 
-<style>
-	* {
-		box-sizing: border-box !important;
-	}
-	#login {
-		margin: 0;
-	}
-	h2 {
-		font-size: 300%;
-		font-weight: normal;
-		/* margin: 5% 5%; */
-		margin: 0;
-	}
-	input {
-		padding: 3%;
-		margin: 2% 0%;
-		font-size: 100%;
-		border-radius: 10px;
-		width: 55%;
-		background-color: #40413e;
-		border: none;
-		color: white;
-	}
-	::placeholder {
-		color: white;
-	}
-	#Petrichor {
-		color: #b58cd1;
-		font-weight: 600;
-	}
-	.form-container {
-		width: 100%;
-		height: 100vh;
-		display: flex;
-		align-items: center;
-		z-index: 11;
-		display: flex;
-		flex-wrap: wrap;
-		margin-left: 10%;
-	}
-	.form {
-		z-index: 2;
-		width: 50%;
-	}
-	#login {
-		font-size: 1.5rem;
-		border-radius: 10rem;
-		padding: 2% 7%;
-		background-color: #232423;
-		color: white;
-		font-weight: bold;
-		border: none;
-	}
-	#register {
-		color: mediumslateblue;
-		display: inline-block;
-	}
-	/* } */
-	@media (max-width: 650px) {
-		h2 {
-			font-size: 300%;
-			font-weight: normal;
-			margin-top: 20%;
-			margin-right: 10%;
-		}
-		input {
-			padding: 3%;
-			margin: 2% 0%;
-			font-size: 100%;
-			border-radius: 10px;
-			width: 80%;
-			background-color: #40413ebb;
-			border: none;
-			color: white;
-		}
-		::placeholder {
-			color: white;
-		}
-		#Petrichor {
-			color: #910cea;
-			font-weight: 600;
-		}
-		.form-container {
-			width: 100%;
-			height: 100%;
-			min-height: 640px;
-			display: flex;
-			flex-wrap: wrap;
-			flex-direction: column;
-			justify-content: center;
-		}
-		.form {
-			width: 100%;
-		}
-		#login {
-			border-radius: 10rem;
-			padding: 10px 20px;
-			background-color: #232423;
-			color: white;
-			font-weight: bold;
-			border: none;
-		}
-		#register {
-			color: mediumslateblue;
-			display: inline-block;
-			/* margin: 2% 0 0 40%; */
-		}
-	}
-</style>
+        <label class="label">Confirm Password
+          <input type="password" name="confirm_pass" placeholder="••••••••" bind:value={confirm_pass} required autocomplete="new-password" />
+        </label>
+
+        <div class="flex justify-center mt-6">
+          <button id="login" type="submit" class="login-btn">Reset Password</button>
+        </div>
+
+        <p class="signup-text">
+          <a href="/login" class="signup-link">Go back to Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</main>
