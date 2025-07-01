@@ -11,7 +11,9 @@ const frontendRoutes = [
 	'/forgotpassword',
 	'/ca/welcome',
 	'/ca/profile',
-	'/error'
+	'/error',
+	'/profile',
+	// '/events',
 ];
 
 
