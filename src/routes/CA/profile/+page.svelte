@@ -42,8 +42,8 @@ onMount(() => {
 });
 </script>
 
-<div
-  class="relative min-h-screen w-screen flex flex-col text-white bg-[linear-gradient(190deg,#01d6f4_0%,#039ff1_1.5%,#0575ba_4%,#074f88_8%,#04528e_13%,#005698_14%,#001423_18%,#000910_19%,#000000_100%)] overflow-y-auto">
+<div class="relative min-h-screen w-screen flex flex-col text-white bg-[...] overflow-hidden">
+
 
   <!-- Background Hands for Mobile/Tablet -->
   <div class="absolute inset-0 z-0 block lg:hidden opacity-25 pointer-events-none h-auto min-h-full">
@@ -158,6 +158,18 @@ onMount(() => {
     transform: translateY(20px);
     animation: fadeSlideIn 1.5s ease-out forwards;
   }
+  :global(body) {
+  /* Enable scroll by default on all devices */
+    overflow: auto;
+  }
+
+/* Disable scroll on large screens (desktop) only */
+  @media screen and (min-width: 1024px) {
+    :global(body) {
+      overflow: hidden;
+    }
+  }
+
   @keyframes fadeSlideIn {
     to {
       opacity: 1;
