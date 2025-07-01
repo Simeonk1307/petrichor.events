@@ -1,354 +1,454 @@
 <script lang="ts">
 // @ts-nocheck
-    import copy from "$lib/assets/copy.svg";
-    import tick from "$lib/assets/tick.svg";
-    import { goto } from '$app/navigation';
-    import Globe from '$lib/assets/svgs/globe.svg';
-    import hand from '$lib/assets/HomePage/hand.png';
-	import { user, invalidate, loggedIn, access_token } from '$lib/stores.js';
-	import { getContext,onMount } from 'svelte';
-    
-    export let data;
-    const getData:Function = getContext('getData')
-    let displayOn = false;
+// import Navbar from '$lib/components/Navbar.svelte';
+import { goto } from '$app/navigation';
+import { user, invalidate, loggedIn, access_token } from '$lib/stores.js';
+import { getContext, onMount } from 'svelte';
 
-    async function copyToClipBoard() {
-        await navigator.clipboard.writeText($user.user_data.CACode).then(() => {
-            // displayPopUp("Key Copied Successfully")
-            displayOn = true;
-            setTimeout(() => {
-                displayOn = false;
-            }, 1000);
-        });
+export let data;
+const getData: Function = getContext('getData');
+
+let displayOn = false;
+
+$: userData = $user;
+$: isLoggedIn = $loggedIn;
+$: isInvalidate = $invalidate;
+
+async function copyToClipBoard() {
+  if (userData?.user_data?.CACode) {
+    try {
+      await navigator.clipboard.writeText(userData.user_data.CACode);
+      displayOn = true;
+      setTimeout(() => {
+        displayOn = false;
+      }, 1000);
+    } catch {
+      alert("Failed to copy!");
     }
+  }
+}
 
-    onMount(()=>{
-        if (!$loggedIn){
-			getData()
-		}
-        access_token.set(data.accessToken)
-        if (!$loggedIn || $invalidate){
-            goto('/login?to=/CA/profile')
-        }
-    })
-    
-
+onMount(() => {
+  if (!isLoggedIn) {
+    getData();
+  }
+  access_token.set(data.accessToken);
+  if (!isLoggedIn || isInvalidate) {
+    goto('/login?to=/CA/profile');
+  }
+});
 </script>
-<main>
-<div class="container">
-    
- 
-    <div class="info">
-        <div class="content">
-            <div class="greeting">
-                <h1><p>Hii <span>{$user.user_data.username}!</span></p></h1>
-                <!-- <h1><p>Hii <span>{$user.user_data.username}!</span></p></h1> -->
-            </div> 
-            <div class="parent">
-                <div class="information">
-                    <div class="for_ca">
-                        <p class="title">Your CA Code</p>
-                        <div class="code">
-                            <p>{$user.user_data.CACode}</p>
-                            <button type="button" on:click={copyToClipBoard}>
-                                <img
-                                        src={displayOn ? tick : copy}
-                                        alt=""
-                                    />
-                            </button>
-                            <!-- <p>CA Code</p> -->
-                        </div>
-                    </div>
-                    <div class="for_reg">
-                        <p class="title">Total Registration</p>
-                        <div class="code">
-                            <p>{$user.user_data.registrations}</p>
-                            <!-- <p>Registrations</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="image">
-            <img class="image1" alt="logo" src={hand}>
-        </div>
-    </div>
-</div>
-<div class="strip_holder">
-    <div class="strip">
-        <div class="strip1">
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-            <div class="banner">&nbsp;PETRICHOR</div>
-        </div>
-        <div class="strip1">
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-            <div class="banner">&nbsp;PETRICHOR</div>
-        </div>
-        <div class="strip1">
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-            <div class="banner">&nbsp;PETRICHOR</div>
-        </div>
-        <div class="strip1">
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-            <div class="banner">&nbsp;PETRICHOR</div>
-        </div>
-        <div class="strip1">
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-            <div class="banner">&nbsp;PETRICHOR</div>
-        </div>
-        <div class="strip1">
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-            <div class="banner">&nbsp;PETRICHOR</div>
-        </div>
-    </div>
-</div>
 
-</main>
+<div class="root-container">
+
+  <!-- Background Hands for Mobile/Tablet -->
+  <div class="hands-background-mobile">
+    <img
+      src="src/lib/assets/images/hands.png"
+      alt="Hands Background"
+      class="hands-image"
+    />
+  </div>
+
+  <!-- <Navbar /> -->
+
+  <main class="main-content">
+    <div class="content-wrapper">
+
+      <div class="left-column">
+
+        <div class="logo-mobile">
+          <img
+            src="src/lib/assets/images/petrichor_logo.png"
+            alt="Logo"
+            class="logo-image animate-float glow flicker"
+          />
+        </div>
+
+        <div class="logo-desktop">
+          <img
+            src="src/lib/assets/images/petrichor_logo.png"
+            alt="Logo"
+            class="logo-image-desktop animate-float glow flicker"
+          />
+        </div>
+
+        <h1 class="greeting-header">
+          Hi, <span class="flicker-text username">{userData?.user_data?.username ?? 'Username'}</span>
+        </h1>
+
+        <p class="description-text">
+          <span class="highlighted-text">Petrichor '26</span> isn’t just a fest — it’s a <span class="italic-text">full-blown multiverse.</span> Hack till sunrise, dance till you drop, vibe like it’s the end of the world. Win glory, lose sleep, make stories you’ll forget to forget — or don’t. No rules. Just chaos.
+        </p>
+
+        <div class="ca-code-box">
+          <p class="ca-code-text">{userData?.user_data?.CACode ?? 'N/A'}</p>
+          <button type="button" on:click={copyToClipBoard} aria-label="Copy CA code" class="copy-button">
+            <img src={displayOn ? '/tick.svg' : '/copy.svg'} alt="copy icon" class="copy-icon" />
+          </button>
+        </div>
+
+        <div class="registration-box">
+          <p class="registration-label">Total Registrations</p>
+          <p class="registration-count">{userData?.user_data?.registrations ?? 0}</p>
+        </div>
+
+      </div>
+
+      <div class="right-column">
+        <img src="src/lib/assets/images/hands.png" alt="HandsIMG" class="hands-image-desktop" />
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer-strip">
+    <div class="scroll-container">
+      {#each [1, 2, 3, 4] as n}
+        <div class="scroll-item item-{n}">
+          <svg xmlns="http://www.w3.org/2000/svg" class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20"></path>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="scroll-text">PETRICHOR</span>
+        </div>
+      {/each}
+    </div>
+  </footer>
+</div>
 
 <style>
-    main {
-		height: 100vh;
-		display: flex;
-		flex-direction: column;
-		background: transparent;
-		background-color: transparent;
-		z-index: 11 !important;
-        /* border: 2px solid red; */
-        margin: 0;
-        padding: 0;
-		/* padding: 5em 0; */
-	}
-    .container{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        box-sizing: border-box;
-
-        width: 100vw;
-        flex: 3;
-        height: 80%;
-    }
-    
-    .greeting{
-        /* border: 1px solid orange; */
-        padding-left: 5vw;
-        font-weight: bold;
-        margin-bottom: 10%;
-    }
-    .greeting span{
-        color: rgb(9 170 9);
-    }
-    .info{
-        /* border: 1px solid yellowgreen; */
-        display: flex;
-        flex-direction: row;
-        height: 100%;
-        position: relative;
-    }
-    .content{
-
-        /* border: 2px solid rebeccapurple; */
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        /* align-items: center; */
-        justify-content: center;
-        
-    }
-    .content .information{
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .information{
-        display: flex;
-        flex-direction: column;
-        width: 90%;
-        align-items: center;
-        justify-content: center;
-        /* margin: 5% 5% 5% 5%; */
-        /* border: 2px solid rgb(165, 4, 44); */
-    }
-    .parent{
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-    .for_ca{
-        width: 80%; 
-        /* height: 111px; */ 
-        /* border: 2px solid yellow; */
-        /* font-size: 2rem; */
-        margin-bottom: 10%;
-    }
-    .code{
-        /* border: 1px solid orangered; */
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        letter-spacing: 2px;
-        padding: 0;
-        margin: 0;
-        border-radius: 10px;
-        background-color: #0320223d !important;
-        border: 2px white solid;
-    }
-    button{
-        border: none    ;
-        padding-right: 10px;
-    }
-    button:active{
-        border: none;
-    }
-    .code img {
-        height: 25px;
-        width: 25px;
-        cursor: pointer;
-        transition: all 1s ease-in-out;
-    }
-
-    .code p{
-        font-size: 30px;
-        margin: 2%;
-        color: white;
-        font-family: monospace;
-        /* background-color: #919191; */
-    }
-    .for_reg{
-        width: 80%;
-        /* border: 2px solid yellow; */
-    }
-    .image {
-    /* border: 2px solid orangered; */
-    height: 100%; 
-    width: 50%;   
+  /* Root container and background gradient */
+  .root-container {
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
     display: flex;
-    justify-content: center; 
-    align-items: center;    
-    overflow: hidden;      
-    }
-    .image img {
-        max-width: 100%;
-        max-height: 100%; 
-        object-fit: contain; 
-    }
-    .code{
-        display: flex;
-        color: black;
-        background-color: white;
-    }
+    flex-direction: column;
+    color: white;
+    background: linear-gradient(190deg, #01d6f4 0%, #039ff1 1.5%, #0575ba 4%, #074f88 8%, #04528e 13%, #005698 14%, #001423 18%, #000910 19%, #000000 100%);
+    overflow-y: auto;
+  }
 
-    .title{
-        font-size: 1rem;
-        letter-spacing: 1px;
-        /* border: 1px solid green; */
-        margin-bottom: 6px;
+  /* Mobile & tablet background hands */
+  .hands-background-mobile {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    opacity: 0.25;
+    pointer-events: none;
+    min-height: 100%;
+    height: auto;
+  }
+
+  .hands-background-mobile img.hands-image {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Main content styles */
+  .main-content {
+    position: relative;
+    z-index: 20;
+    flex: 1;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .content-wrapper {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
+  }
 
-    .strip_holder {
-		
-		flex: 2;
-
-		width: 100vw;
-		max-height: 35px;
-		align-items: center;
-		
-		overflow-x: hidden;
-		margin: 2rem 0;
-		border-top: 2px solid white;
-		border-bottom: 2px solid white;
-		padding: 12px 0 ;
-		opacity: 60%;
-	}
-	.strip{
-		display: flex;
-		align-items: center;
-		height: 100%;
-		/* Apply animation to this element */
-		-moz-animation: example1 5s linear infinite;
-		-webkit-animation: example1 5s linear infinite;
-		animation: example1 5s linear infinite;
-	}
-	.strip1 {
-		display: flex;
-		justify-content: center;
-		min-width: max(20%,150px);
-	}
-
-	.banner {
-		display: flex;
-		justify-content: center;
-	}
-    @media (max-width: 800px) {
-            .image {
-                display: none; /* Hide the image content */
-            }
-            .content{
-                width: 100%;
-            }
-            .information{
-                margin-top: 10px;
-            }
-            .greeting{
-                padding-left: 7vw;
-            }
-        }
-    @media (max-width: 376px) {
-        .for_ca{
-            width: 100%;
-        }
-        .for_reg{
-            width: 100%;
-        }
-        .code{
-            font-size: medium;
-        }
-        .title{
-            font-size: 0.8rem;
-        }
+  /* Left column */
+  .left-column {
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .left-column {
+      max-width: 50%;
+      margin-left: 4rem;
+      text-align: left;
+      align-items: flex-start;
     }
-    @media (min-width: 1025px) {
-        .greeting{
-            font-size: 1.4rem;
-        }
-    }
+  }
 
-    /* Move it (define the animation) */
-	@-moz-keyframes example1 {
-		0% {
-			-moz-transform: translateX(0%);
-		}
-		100% {
-			-moz-transform: translateX(min(-20%,-150px));
-		}
-	}
-	@-webkit-keyframes example1 {
-		0% {
-			-webkit-transform: translateX(0%);
-		}
-		100% {
-			-webkit-transform: translateX(min(-20%,-150px));
-		}
-	}
-	@keyframes example1 {
-		0% {
-			-moz-transform: translateX(0%); /* Firefox bug fix */
-			-webkit-transform: translateX(0%); /* Firefox bug fix */
-			transform: translateX(0%);
-		}
-		100% {
-			-moz-transform: translateX(min(-20%,-150px)); /* Firefox bug fix */
-			-webkit-transform: translateX(min(-20%,-150px)); /* Firefox bug fix */
-			transform: translateX(min(-20%,-150px));
-		}
-	}
+  /* Logo for mobile */
+  .logo-mobile {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .logo-mobile {
+      display: none;
+    }
+  }
+
+  /* Logo for desktop */
+  .logo-desktop {
+    display: none;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .logo-desktop {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+
+  /* Logo images */
+  .logo-image {
+    width: 300px;
+    height: auto;
+  }
+  .logo-image-desktop {
+    width: 250px;
+    height: auto;
+  }
+  @media (min-width: 1024px) {
+    .logo-image-desktop {
+      width: 300px;
+    }
+  }
+
+  /* Greeting header */
+  .greeting-header {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+  }
+  @media (min-width: 768px) {
+    .greeting-header {
+      font-size: 4.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .greeting-header {
+      font-size: 5.5rem;
+    }
+  }
+
+  .username {
+    font-weight: 600;
+    color: #3fdcff;
+    text-shadow: 0 0 1px #3fdcff, 0 0 6px #3fdcff;
+    animation: flicker 2s infinite;
+  }
+
+  /* Description paragraph */
+  .description-text {
+    color: #d1d5db; /* Tailwind gray-300 */
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 768px) {
+    .description-text {
+      font-size: 1.25rem;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .highlighted-text {
+    font-weight: 700;
+    color: #3fdcff;
+  }
+  .italic-text {
+    font-style: italic;
+    color: white;
+  }
+
+  /* CA Code box */
+  .ca-code-box {
+    margin-top: 2.5rem;
+    width: 80%;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    background-color: rgba(3, 32, 34, 0.24);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ca-code-text {
+    font-family: monospace;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    color: white;
+  }
+
+  .copy-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding-right: 0.5rem;
+  }
+  .copy-button:focus {
+    outline: none;
+  }
+
+  .copy-icon {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Total registrations box */
+  .registration-box {
+    margin-top: 1rem;
+    width: 80%;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    background-color: rgba(3, 32, 34, 0.24);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .registration-label {
+    font-size: 1.125rem;
+    letter-spacing: 0.05em;
+  }
+
+  .registration-count {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  /* Right column (desktop only image) */
+  .right-column {
+    max-width: 30%;
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .right-column {
+      display: block;
+    }
+  }
+
+  .hands-image-desktop {
+    width: 100%;
+    opacity: 1;
+    pointer-events: none;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Footer strip */
+  .footer-strip {
+    background-color: black;
+    color: white;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+  }
+
+  .scroll-container {
+    display: flex;
+    height: 2.5rem;
+    position: relative;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .scroll-item {
+    position: absolute;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    animation: loopLeftToRight 10s linear infinite;
+  }
+
+  .item-1 { animation-delay: 0s; }
+  .item-2 { animation-delay: -2.5s; }
+  .item-3 { animation-delay: -5s; }
+  .item-4 { animation-delay: -7.5s; }
+
+  .globe-icon {
+    height: 20px;
+    width: 24px;
+    stroke: #3b82f6; /* Tailwind blue-400 */
+    flex-shrink: 0;
+  }
+
+  .scroll-text {
+    margin-left: 0.5rem;
+    font-size: 1.125rem;
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .scroll-text {
+      display: inline;
+    }
+  }
+
+  /* Animations */
+
+  @keyframes flicker {
+    0% { opacity: 1; }
+    5% { opacity: 0.4; }
+    10% { opacity: 1; }
+    15% { opacity: 0.2; }
+    20% { opacity: 1; }
+    25% { opacity: 0.6; }
+    30% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+  }
+
+  @keyframes loopLeftToRight {
+    0%, 100% {
+      transform: translateX(-100%);
+    }
+    99.99% {
+      transform: translateX(100vw);
+    }
+  }
+
+  /* Glow effect */
+  .glow {
+    filter: drop-shadow(0 0 10px rgba(63, 220, 255, 0.4));
+  }
+
+  /* Flicker */
+  .flicker {
+    animation: flicker 1.8s infinite;
+  }
+
+  /* Float animation */
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
 
 </style>
