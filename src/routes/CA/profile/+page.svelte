@@ -4,7 +4,10 @@
 import { goto } from '$app/navigation';
 import { user, invalidate, loggedIn, access_token } from '$lib/stores.js';
 import { getContext, onMount } from 'svelte';
-
+import PetrichorLogo from "$lib/assets/petrichor_logo.png"
+import HandsIMG from "$lib/assets/HomePage/hands.png"
+import tick from "$lib/assets/tick.svg"
+import copy from "$lib/assets/copy.svg"
 export let data;
 const getData: Function = getContext('getData');
 
@@ -39,79 +42,82 @@ onMount(() => {
 });
 </script>
 
-<div class="root-container">
+<div
+  class="relative min-h-screen w-screen flex flex-col text-white bg-[linear-gradient(190deg,#01d6f4_0%,#039ff1_1.5%,#0575ba_4%,#074f88_8%,#04528e_13%,#005698_14%,#001423_18%,#000910_19%,#000000_100%)] overflow-y-auto">
 
   <!-- Background Hands for Mobile/Tablet -->
-  <div class="hands-background-mobile">
+  <div class="absolute inset-0 z-0 block lg:hidden opacity-25 pointer-events-none h-auto min-h-full">
     <img
-      src="src/lib/assets/images/hands.png"
+      src={HandsIMG}
       alt="Hands Background"
-      class="hands-image"
+      class="w-full min-h-full object-cover float-bg"
     />
   </div>
 
   <!-- <Navbar /> -->
 
-  <main class="main-content">
-    <div class="content-wrapper">
+  <main class="relative z-20 flex-1 px-6 py-10 flex flex-col justify-center">
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-10 mt-6 mb-6">
 
-      <div class="left-column">
+      <div class="max-w-full lg:max-w-[50%] lg:ml-16 text-center lg:text-left flex flex-col items-center lg:items-start">
 
-        <div class="logo-mobile">
+        <div class="md:hidden mb-6 flex justify-center">
           <img
-            src="src/lib/assets/images/petrichor_logo.png"
+            src={PetrichorLogo}
             alt="Logo"
-            class="logo-image animate-float glow flicker"
+            class="w-[300px] h-auto animate-float glow flicker"
           />
         </div>
 
-        <div class="logo-desktop">
+        <div class="hidden md:flex justify-center lg:justify-start mb-6 w-full">
           <img
-            src="src/lib/assets/images/petrichor_logo.png"
+            src={PetrichorLogo}
             alt="Logo"
-            class="logo-image-desktop animate-float glow flicker"
+            class="w-[250px] lg:w-[300px] h-auto animate-float glow flicker"
           />
         </div>
 
-        <h1 class="greeting-header">
-          Hi, <span class="flicker-text username">{userData?.user_data?.username ?? 'Username'}</span>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 font-[Playfair Display]">
+          Hi, <span class="flicker-text font-semibold">{userData?.user_data?.username ?? 'Username'}</span>
         </h1>
 
-        <p class="description-text">
-          <span class="highlighted-text">Petrichor '26</span> isn’t just a fest — it’s a <span class="italic-text">full-blown multiverse.</span> Hack till sunrise, dance till you drop, vibe like it’s the end of the world. Win glory, lose sleep, make stories you’ll forget to forget — or don’t. No rules. Just chaos.
+        <p class="fade-slide text-gray-300 text-base md:text-xl mb-8 px-4 md:px-0">
+          <span class="font-bold text-[#3fdcff]">Petrichor '26</span> isn’t just a fest — it’s a <span class="italic text-white">full-blown multiverse.</span> Hack till sunrise, dance till you drop, vibe like it’s the end of the world. Win glory, lose sleep, make stories you’ll forget to forget — or don’t. No rules. Just chaos.
         </p>
 
-        <div class="ca-code-box">
-          <p class="ca-code-text">{userData?.user_data?.CACode ?? 'N/A'}</p>
-          <button type="button" on:click={copyToClipBoard} aria-label="Copy CA code" class="copy-button">
-            <img src={displayOn ? '/tick.svg' : '/copy.svg'} alt="copy icon" class="copy-icon" />
+        <!-- CA Code Box -->
+        <div class="mt-10 w-[80%] border-2 border-white rounded-lg bg-[#0320223d] p-4 flex justify-between items-center">
+          <p class="text-2xl font-mono tracking-wider">{userData?.user_data?.CACode ?? 'N/A'}</p>
+          <button type="button" on:click={copyToClipBoard} aria-label="Copy CA code">
+            <img src={displayOn ? tick : copy } alt="copy icon" class="w-6 h-6 cursor-pointer transition-all duration-300" />
           </button>
         </div>
 
-        <div class="registration-box">
-          <p class="registration-label">Total Registrations</p>
-          <p class="registration-count">{userData?.user_data?.registrations ?? 0}</p>
+        <!-- Total Registrations Box -->
+        <div class="mt-4 w-[80%] border-2 border-white rounded-lg bg-[#0320223d] p-4 flex justify-between items-center">
+          <p class="text-lg tracking-wider">Total Registrations</p>
+          <p class="text-2xl font-bold">{userData?.user_data?.registrations ?? 0}</p>
         </div>
-
       </div>
 
-      <div class="right-column">
-        <img src="src/lib/assets/images/hands.png" alt="HandsIMG" class="hands-image-desktop" />
+      <!-- Right Side Image (Desktop Only) -->
+      <div class="max-w-[30%] hidden lg:block">
+        <img src={HandsIMG} alt="HandsIMG" class="w-full float-bg opacity-100 pointer-events-none" />
       </div>
-
     </div>
   </main>
 
-  <footer class="footer-strip">
-    <div class="scroll-container">
+  <!-- Footer Strip -->
+  <footer class="bg-black text-white border-t border-b border-white">
+    <div class="flex h-10 relative overflow-hidden w-full">
       {#each [1, 2, 3, 4] as n}
-        <div class="scroll-item item-{n}">
-          <svg xmlns="http://www.w3.org/2000/svg" class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <div class="scroll-item item-{n} flex items-center self-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M2 12h20"></path>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
           </svg>
-          <span class="scroll-text">PETRICHOR</span>
+          <span class="text-lg ml-2 hidden sm:inline">PETRICHOR</span>
         </div>
       {/each}
     </div>
@@ -119,298 +125,17 @@ onMount(() => {
 </div>
 
 <style>
-  /* Root container and background gradient */
-  .root-container {
-    position: relative;
-    min-height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    background: linear-gradient(190deg, #01d6f4 0%, #039ff1 1.5%, #0575ba 4%, #074f88 8%, #04528e 13%, #005698 14%, #001423 18%, #000910 19%, #000000 100%);
-    overflow-y: auto;
-  }
-
-  /* Mobile & tablet background hands */
-  .hands-background-mobile {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    display: block;
-    opacity: 0.25;
-    pointer-events: none;
-    min-height: 100%;
-    height: auto;
-  }
-
-  .hands-background-mobile img.hands-image {
-    width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    animation: float 4s ease-in-out infinite;
-  }
-
-  /* Main content styles */
-  .main-content {
-    position: relative;
-    z-index: 20;
-    flex: 1;
-    padding: 2.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    .content-wrapper {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
-
-  /* Left column */
-  .left-column {
-    max-width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  @media (min-width: 1024px) {
-    .left-column {
-      max-width: 50%;
-      margin-left: 4rem;
-      text-align: left;
-      align-items: flex-start;
-    }
-  }
-
-  /* Logo for mobile */
-  .logo-mobile {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .logo-mobile {
-      display: none;
-    }
-  }
-
-  /* Logo for desktop */
-  .logo-desktop {
-    display: none;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .logo-desktop {
-      display: flex;
-      justify-content: flex-start;
-    }
-  }
-
-  /* Logo images */
-  .logo-image {
-    width: 300px;
-    height: auto;
-  }
-  .logo-image-desktop {
-    width: 250px;
-    height: auto;
-  }
-  @media (min-width: 1024px) {
-    .logo-image-desktop {
-      width: 300px;
-    }
-  }
-
-  /* Greeting header */
-  .greeting-header {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    font-size: 3rem;
-  }
-  @media (min-width: 768px) {
-    .greeting-header {
-      font-size: 4.5rem;
-    }
-  }
-  @media (min-width: 1024px) {
-    .greeting-header {
-      font-size: 5.5rem;
-    }
-  }
-
-  .username {
-    font-weight: 600;
+  :global(.flicker-text) {
+    animation: flicker 2s infinite;
     color: #3fdcff;
     text-shadow: 0 0 1px #3fdcff, 0 0 6px #3fdcff;
-    animation: flicker 2s infinite;
   }
-
-  /* Description paragraph */
-  .description-text {
-    color: #d1d5db; /* Tailwind gray-300 */
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  :global(.glow) {
+    filter: drop-shadow(0 0 10px rgba(63, 220, 255, 0.4));
   }
-  @media (min-width: 768px) {
-    .description-text {
-      font-size: 1.25rem;
-      padding-left: 0;
-      padding-right: 0;
-    }
+  :global(.flicker) {
+    animation: flicker 1.8s infinite;
   }
-
-  .highlighted-text {
-    font-weight: 700;
-    color: #3fdcff;
-  }
-  .italic-text {
-    font-style: italic;
-    color: white;
-  }
-
-  /* CA Code box */
-  .ca-code-box {
-    margin-top: 2.5rem;
-    width: 80%;
-    border: 2px solid white;
-    border-radius: 0.5rem;
-    background-color: rgba(3, 32, 34, 0.24);
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .ca-code-text {
-    font-family: monospace;
-    font-size: 1.5rem;
-    letter-spacing: 0.15em;
-    color: white;
-  }
-
-  .copy-button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding-right: 0.5rem;
-  }
-  .copy-button:focus {
-    outline: none;
-  }
-
-  .copy-icon {
-    width: 24px;
-    height: 24px;
-    transition: all 0.3s ease-in-out;
-  }
-
-  /* Total registrations box */
-  .registration-box {
-    margin-top: 1rem;
-    width: 80%;
-    border: 2px solid white;
-    border-radius: 0.5rem;
-    background-color: rgba(3, 32, 34, 0.24);
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .registration-label {
-    font-size: 1.125rem;
-    letter-spacing: 0.05em;
-  }
-
-  .registration-count {
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
-
-  /* Right column (desktop only image) */
-  .right-column {
-    max-width: 30%;
-    display: none;
-  }
-  @media (min-width: 1024px) {
-    .right-column {
-      display: block;
-    }
-  }
-
-  .hands-image-desktop {
-    width: 100%;
-    opacity: 1;
-    pointer-events: none;
-    animation: float 4s ease-in-out infinite;
-  }
-
-  /* Footer strip */
-  .footer-strip {
-    background-color: black;
-    color: white;
-    border-top: 2px solid white;
-    border-bottom: 2px solid white;
-  }
-
-  .scroll-container {
-    display: flex;
-    height: 2.5rem;
-    position: relative;
-    overflow-x: hidden;
-    width: 100%;
-  }
-
-  .scroll-item {
-    position: absolute;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    animation: loopLeftToRight 10s linear infinite;
-  }
-
-  .item-1 { animation-delay: 0s; }
-  .item-2 { animation-delay: -2.5s; }
-  .item-3 { animation-delay: -5s; }
-  .item-4 { animation-delay: -7.5s; }
-
-  .globe-icon {
-    height: 20px;
-    width: 24px;
-    stroke: #3b82f6; /* Tailwind blue-400 */
-    flex-shrink: 0;
-  }
-
-  .scroll-text {
-    margin-left: 0.5rem;
-    font-size: 1.125rem;
-    display: none;
-  }
-  @media (min-width: 640px) {
-    .scroll-text {
-      display: inline;
-    }
-  }
-
-  /* Animations */
-
   @keyframes flicker {
     0% { opacity: 1; }
     5% { opacity: 0.4; }
@@ -421,12 +146,24 @@ onMount(() => {
     30% { opacity: 1; }
     100% { opacity: 1; }
   }
-
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-30px); }
   }
-
+  :global(.float-bg) {
+    animation: float 4s ease-in-out infinite;
+  }
+  :global(.fade-slide) {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideIn 1.5s ease-out forwards;
+  }
+  @keyframes fadeSlideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   @keyframes loopLeftToRight {
     0%, 100% {
       transform: translateX(-100%);
@@ -435,20 +172,13 @@ onMount(() => {
       transform: translateX(100vw);
     }
   }
-
-  /* Glow effect */
-  .glow {
-    filter: drop-shadow(0 0 10px rgba(63, 220, 255, 0.4));
+  .scroll-item {
+    position: absolute;
+    white-space: nowrap;
+    animation: loopLeftToRight 10s linear infinite;
   }
-
-  /* Flicker */
-  .flicker {
-    animation: flicker 1.8s infinite;
-  }
-
-  /* Float animation */
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
-  }
-
+  .item-1 { animation-delay: 0s; }
+  .item-2 { animation-delay: -2.5s; }
+  .item-3 { animation-delay: -5s; }
+  .item-4 { animation-delay: -7.5s; }
 </style>

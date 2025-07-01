@@ -9,5 +9,5 @@ export const user = writable<User>({
     ]
 })
 export const invalidate = writable(false);
-export const loggedIn = writable(true)
+export const loggedIn = writable(false)
 export const access_token = writable<string|null>(null)
