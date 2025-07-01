@@ -4,15 +4,15 @@ import type { Handle } from '@sveltejs/kit';
 const frontendRoutes = [
 	'/',
 	'/home',
-	'/workshop',
-	'/schedule',
-	'/merch',
-	'/sponsors',
 	'/aboutus',
-	'/caportal',
-	'/ca',
 	'/login',
+	'/register',
+	'/changepassword',
+	'/forgotpassword',
+	'/ca/welcome',
+	'/ca/profile'
 ];
+
 
 export const handle: Handle = ({ event, resolve }) => {
 
