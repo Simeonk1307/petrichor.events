@@ -1,4 +1,4 @@
-import type { Handle } from '@sveltejs/kit';
+import { error, type Handle } from '@sveltejs/kit';
 
 // INFO(gebriish): allowed routes go here
 const frontendRoutes = [
@@ -10,7 +10,8 @@ const frontendRoutes = [
 	'/changepassword',
 	'/forgotpassword',
 	'/ca/welcome',
-	'/ca/profile'
+	'/ca/profile',
+	'/error'
 ];
 
 
@@ -22,10 +23,10 @@ export const handle: Handle = ({ event, resolve }) => {
 		path === route || path.startsWith(route + '/')
 	);
 
-	if (!isAllowed) {
-		// TODO(gebriish): redirect to error.svelte
-		return new Response('Not Found', { status: 404 });
-	}
+  if (!isAllowed) {
+		const errorUrl = new URL("/error", event.url)
+		return Response.redirect(errorUrl, 302);
+  }
 
 	return resolve(event);
 };
