@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Globe from '$lib/assets/svgs/globe.svg';
+	import Globe from '$lib/assets/globe.svg';
 	import hand from '$lib/assets/HomePage/hand.png';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
