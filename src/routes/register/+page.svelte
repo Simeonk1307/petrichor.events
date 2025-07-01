@@ -1,368 +1,364 @@
+<svelte:head>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+</svelte:head>
+
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
-	import type { SubmitFunction } from '@sveltejs/kit';
-	import { getContext, onMount } from 'svelte';
-	import { fly } from 'svelte/transition';
+  import { enhance } from '$app/forms';
+  import { goto } from '$app/navigation';
+  import type { SubmitFunction } from '@sveltejs/kit';
+  import { getContext } from 'svelte';
 
-	/** @type {import('./$types').ActionData} */
-	export let form;
-	let email: string;
+  /** @type {import('./$types').ActionData} */
+  export let form;
 
-	const loading: Function = getContext('loading');
-	const displayPopUp: Function = getContext('displayPopUp');
+  let username = '';
+  let phone = '';
+  let email = '';
+  let password = '';
+  let instiVal = '';
 
-	function validate(form_vals: FormData) {
-		const username: string = (form_vals.get('username') as string | null) ?? '';
-		const email: string = (form_vals.get('email') as string | null) ?? '';
-		const phone: string = (form_vals.get('phone') as string | null) ?? '';
-		const password: string = (form_vals.get('password') as string | null) ?? '';
-		const institype: string = (form_vals.get('institype') as string | null) ?? '';
-		const instiName: string = (form_vals.get('college') as string | null) ?? '';
-		const gradYear = form_vals.get('gradyear');
-		const degree: string = (form_vals.get('stream') as string | null) ?? '';
-		let valid = false;
-		if (username.length > 25) {
-			warn_name = 'Must be less than 25 characters';
-		} else if (username.length == 0) {
-			warn_name = 'required';
-		} else if (email.length == 0) {
-			warn_email = 'required';
-		} else if (!/^\d+$/.test(phone)) {
-			warn_phone = 'Only numbers are allowed';
-		} else if (phone.length != 10) {
-			warn_phone = 'Must be only 10 character';
-		} else if (password.length < 8) {
-			warn_password = 'must be atleast 8 characters';
-		} else {
-			if (institype == '') {
-				warn_select = 'required';
-			} else if (institype != 'neither') {
-				// console.log(gradYear);
-				if (instiName == '') {
-					warn_init_name = 'required';
-				} else if (instiName.length > 100){
-					warn_init_name = 'Must be less than 100 characters';
-				} else if (gradYear?.valueOf() == '') {
-					warn_grade = 'required';
-				} else if (institype == 'college' && degree == '') {
-					warn_degree = 'required';
-				} else if (institype == 'college' && degree.length > 100){
-					warn_degree = 'Must be less than 50 characters';
-				} else {
-					valid = true;
-				}
-			} else {
-				valid = true;
-			}
-		}
-		console.log(valid)
-		return valid;
-	}
-	// @ts-ignore
-	function setAptFields(e) {
-		instiVal = e.target.value;
-	}
+  let warn_name = '';
+  let warn_email = '';
+  let warn_password = '';
+  let warn_init_name = '';
+  let warn_grade = '';
+  let warn_phone = '';
+  let warn_degree = '';
+  let warn_select = '';
 
-	let warn_name = '';
-	let warn_email = '';
-	let warn_password = '';
-	let warn_init_name = '';
-	let warn_grade = '';
-	let warn_phone = '';
-	let warn_degree = '';
-	let warn_select = '';
-	let instiVal = '';
+  const loading: Function = getContext('loading');
+  const displayPopUp: Function = getContext('displayPopUp');
 
-	$: registerResult = (onsubmit: { [x: string]: any; cancel: () => void }) => {
-		loading(true);
-		if (!validate(onsubmit.formData)) {
-			onsubmit.cancel();
-			console.log('Form cancelled');
-			loading(false);
-		}
+  function validate(form_vals: FormData) {
+    const u = (form_vals.get('username') as string) || '';
+    const e = (form_vals.get('email')    as string) || '';
+    const p = (form_vals.get('phone')    as string) || '';
+    const pw= (form_vals.get('password') as string) || '';
+    const it= (form_vals.get('institype')as string) || '';
+    const iname=(form_vals.get('college')as string) || '';
+    const gy=  form_vals.get('gradyear');
+    const deg=(form_vals.get('stream')   as string) || '';
+    let valid = false;
 
-		// @ts-ignore
-		return async ({ result }) => {
-			loading(false);
-			// console.log(result)
-			if (result.type == 'success' && result.data) {
-				const data = result.data;
-				// console.log(data);
-				if (data.success) {
-					goto('/register/verify?email='+email);
-					return;
-				} else {
-					displayPopUp('Alert', data.err, 4000, () => {});
-				}
-			} else {
-				setTimeout(() => {
-					displayPopUp(
-						'Alert',
-						result.data.err ? result.data.err : 'Invalid Credentials',
-						4000,
-						() => goto('/register')
-					);
-				}, 100);
-			}
-		};
-	};
+    warn_name = warn_email = warn_password =
+    warn_init_name = warn_grade = warn_phone =
+    warn_degree = warn_select = '';
 
-	function resetWarns() {
-		warn_name = '';
-		warn_email = '';
-		warn_password = '';
-		warn_init_name = '';
-		warn_grade = '';
-		warn_phone = '';
-		warn_degree = '';
-		warn_select = '';
-	}
+    if (u.length > 25) {
+      warn_name = 'Must be less than 25 characters';
+    } else if (!u.length) {
+      warn_name = 'required';
+    } else if (!e.length) {
+      warn_email = 'required';
+    } else if (!/^\d+$/.test(p)) {
+      warn_phone = 'Only numbers are allowed';
+    } else if (p.length !== 10) {
+      warn_phone = 'Must be only 10 characters';
+    } else if (pw.length < 8) {
+      warn_password = 'Must be at least 8 characters';
+    } else {
+      if (!it) {
+        warn_select = 'required';
+      } else if (it !== 'neither') {
+        if (!iname) {
+          warn_init_name = 'required';
+        } else if (iname.length > 100) {
+          warn_init_name = 'Must be less than 100 characters';
+        } else if (!gy) {
+          warn_grade = 'required';
+        } else if (it === 'college' && !deg) {
+          warn_degree = 'required';
+        } else if (it === 'college' && deg.length > 100) {
+          warn_degree = 'Must be less than 100 characters';
+        } else {
+          valid = true;
+        }
+      } else {
+        valid = true;
+      }
+    }
+
+    return valid;
+  }
+
+  function setAptFields(e: Event) {
+    instiVal = (e.target as HTMLSelectElement).value;
+  }
+
+  function resetWarns() {
+    warn_name = warn_email = warn_password =
+    warn_init_name = warn_grade = warn_phone =
+    warn_degree = warn_select = '';
+  }
+
+  $: registerResult = (onsubmit: { formData: FormData; cancel: () => void }) => {
+    loading(true);
+    if (!validate(onsubmit.formData)) {
+      onsubmit.cancel();
+      loading(false);
+      return;
+    }
+    return async ({ result }) => {
+      loading(false);
+      if (result.type === 'success' && result.data) {
+        if (result.data.success) {
+          goto('/register/verify?email=' + email);
+        } else {
+          displayPopUp('Alert', result.data.err, 4000, () => {});
+        }
+      } else {
+        displayPopUp(
+          'Alert',
+          result.data?.err ?? 'Invalid Credentials',
+          4000,
+          () => goto('/register')
+        );
+      }
+    };
+  };
+
+  function handleLogin(e: Event) {
+    e.preventDefault();
+    goto('/login');
+  }
 </script>
 
-<main>
-	<div class="form">
-		<div class="blank" />
-		<h2>Register on <span id="Petrichor">petrichor</span>.events</h2>
-		<form action="?/register" method="POST" use:enhance={registerResult} on:change={resetWarns}>
-			<div class="input_box">
-				<label for="username">Name</label>
-				<h6>Max len: 25</h6>
-				<input type="text" name="username" id="name" placeholder="Name" required maxlength="25" />
-				{#if warn_name}
-					<p><strong>{warn_name}</strong></p>
-				{/if}
-			</div>
-			<div class="input_box">
-				<label for="phone">Phone</label>
-				<input
-					type="tel"
-					name="phone"
-					id="phone-number"
-					placeholder="Phone No."
-					maxlength="10"
-					required
-				/>
-				{#if warn_phone}
-					<p><strong>{warn_phone}</strong></p>
-				{/if}
-			</div>
-			<div class="input_box">
-				<label for="institype">Institute</label>
-				<select name="institype" id="inst-type" on:change={setAptFields}>
-					<option value="">--Currently In--</option>
-					<option value="school">School</option>
-					<option value="college">College</option>
-					<option value="neither">None Of The Above</option>
-				</select>
-				{#if warn_select}
-					<p><strong>{warn_select}</strong></p>
-				{/if}
-			</div>
-			{#if instiVal == 'college'}
-				<div class="input_box" transition:fly={{ x: 100 }}>
-					<label for="college">Institute Name</label>
-					<h6>Max len: 100</h6>
-					<input type="text" name="college" id="college" placeholder="College name" maxlength="100" />
-					{#if warn_init_name}
-						<p><strong>{warn_init_name}</strong></p>
-					{/if}
-				</div>
-				<div class="input_box" transition:fly={{ x: 100 }}>
-					<label for="stream">Degree</label>
-					<h6>Max len: 100</h6>
-					<input type="text" name="stream" id="stream" placeholder="Degree enrolled in" maxlength="100"/>
-					{#if warn_degree}
-						<p><strong>{warn_degree}</strong></p>
-					{/if}
-				</div>
-
-				<div class="input_box" transition:fly={{ x: 100 }}>
-					<label for="gradyear">Year</label>
-					<select name="gradyear" class="hide" id="year-of-graduation">
-						<option value="">Year of Graduation</option>
-						<option value="2024">2024</option>
-						<option value="2025">2025</option>
-						<option value="2026">2026</option>
-						<option value="2027">2027</option>
-						<option value="2028">2028</option>
-						<option value="2029">2029</option>
-						<option value="2030">2030</option>
-					</select>
-					{#if warn_grade}
-						<p><strong>{warn_grade}</strong></p>
-					{/if}
-				</div>
-			{:else if instiVal == 'school'}
-				<div class="input_box" transition:fly={{ x: 100 }}>
-					<label for="college">Institute Name</label>
-					<h6>Max len: 100</h6>
-					<input type="text" name="college" id="college" placeholder="School Name" maxlength="100" />
-					{#if warn_init_name}
-						<p><strong>{warn_init_name}</strong></p>
-					{/if}
-				</div>
-				<div class="input_box" transition:fly={{ x: 100 }}>
-					<label for="gradyear">Grade</label>
-					<select name="gradyear" class="hide" id="year-of-graduation">
-						<option value="">Grade</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-					</select>
-					{#if warn_grade}
-						<p><strong>{warn_grade}</strong></p>
-					{/if}
-				</div>
-			{/if}
-
-			<div class="input_box">
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email" placeholder="Email" required bind:value={email}/>
-				{#if warn_email}
-					<p><strong>{warn_email}</strong></p>
-				{/if}
-			</div>
-
-			<div class="input_box">
-				<label for="password">Password</label>
-				<input type="password" id="password" name="password" placeholder="Password" required />
-				{#if warn_password}
-					<p><strong>{warn_password}</strong></p>
-				{/if}
-			</div>
-
-			<div class="button_holder">
-				<button id="register">Register</button>
-				<a id="login" href="/login">Login Instead</a>
-			</div>
-		</form>
-	</div>
-</main>
-
 <style>
-	* {
-		box-sizing: border-box !important;
-	}
-	main {
-		z-index: 11;
-		position: relative;
-		min-height: 100vh;
-		width: 100vw;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-	}
-	#Petrichor {
-		color: #910cea;
-		font-weight: 600;
-	}
-	#login {
-		color: mediumslateblue;
-		display: inline-block;
-	}
-	.blank {
-		height: 100px;
-	}
-	.form {
-		margin-left: 7vw;
-		display: flex;
-		width: 40vw;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-	form {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-	}
-	.form > h2 {
-		font-size: 40px;
-	}
-	.input_box {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
-		transition: all 1s ease;
-	}
-	select,
-	input {
-		--px: 0.6em;
-		padding: var(--px);
-		padding-inline: calc(var(--px) * 2);
-		margin: 1.25% 0%;
-		font-size: 24px;
-		border-radius: 10rem;
-		width: 100%;
-		background-color: #25252543;
-		border: none;
-		color: white;
-		border: 1px solid white;
-	}
-	input:focus{
-		outline: transparent;
-	}
-	::placeholder {
-		color: rgb(106, 105, 105);
-	}
-	label {
-		margin: 5px;
-	}
-	.input_box p {
-		width: 100%;
-		color: red;
-		margin: 0;
-		text-align: end;
-		padding-right: 5px;
-	}
-	.input_box {
-		position: relative;
-	}
-	.input_box  h6{
-		position: absolute;
-		font-family: var(--wfont);
-		z-index: 10;
-		top: 12px;
-		font-weight: 500;
-		margin: 0;
-		right: 10px;
-	}
-	button {
-		font-size: 1rem;
-		border-radius: 10rem;
-		padding: 2% 7%;
-		background-color: white;
-		font-weight: bold;
-		border: none;
-	}
-	.button_holder {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 20px;
-		margin: 20px 30px;
-		width: 100%;
-	}
-	@media (max-width: 720px) {
-		.form {
-			width: 100vw;
-			font-size: smaller;
-			margin: 0 7px;
-		}
-		.input_box {
-			font-size: smaller;
-		}
-		input {
-			height: 40px;
-		}
-	}
+  /* gradient background */
+  .page-bg {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(170deg, #01E8FA -5%, #000910 35%);
+  }
+
+  .page-heading {
+    position: absolute;
+    top: 7rem;
+    left: 3rem;
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 700;
+    z-index: 2;
+  }
+
+  /* container */
+  .form-box {
+    width: 36rem;
+    max-width: 90vw;
+    padding: 2.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    animation: fadeIn 0.5s ease-out;
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .input-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  input, select {
+    padding: 1rem;
+    background: #40413e;
+    border: none;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 1rem;
+  }
+  input::placeholder { color: #9ca3af; }
+
+  .warn {
+    color: #f88;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .btn-primary {
+    flex: 1;
+    padding: 1rem;
+    background: linear-gradient(99deg, #00121F, #06BAF1);
+    border: none;
+    border-radius: 1rem;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-link {
+    align-self: center;
+    color: #a78bfa;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .form-box { width: 90%; padding: 1.5rem; }
+  }
 </style>
+
+<div class="page-bg">
+  <h1 class="page-heading">Let's get started</h1>
+
+  <div class="form-box">
+    <form
+      action="?/register"
+      method="POST"
+      use:enhance={registerResult}
+      on:change={resetWarns}
+    >
+      <!-- name -->
+      <div class="input-group">
+        <label for="username">Name</label>
+        <input
+          type="text" name="username" id="username"
+          placeholder="Name" maxlength="25"
+          required bind:value={username}
+        />
+        {#if warn_name}
+          <div class="warn">{warn_name}</div>
+        {/if}
+      </div>
+
+      <!-- ph -->
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input
+          type="tel" name="phone" id="phone"
+          placeholder="Phone Number" maxlength="10"
+          required bind:value={phone}
+        />
+        {#if warn_phone}
+          <div class="warn">{warn_phone}</div>
+        {/if}
+      </div>
+
+      <!-- inst. selector -->
+      <div class="input-group">
+        <label for="institype">Institute</label>
+        <select
+          name="institype" id="institype"
+          on:change={setAptFields}
+          bind:value={instiVal}
+        >
+          <option value="">-- Currently In --</option>
+          <option value="school">School</option>
+          <option value="college">College</option>
+          <option value="neither">None</option>
+        </select>
+        {#if warn_select}
+          <div class="warn">{warn_select}</div>
+        {/if}
+      </div>
+
+      {#if instiVal === 'college'}
+        <div class="input-group">
+          <label for="college">College Name</label>
+          <input
+            type="text" name="college" id="college"
+            placeholder="College Name" maxlength="100" required
+          />
+          {#if warn_init_name}
+            <div class="warn">{warn_init_name}</div>
+          {/if}
+        </div>
+        <div class="input-group">
+          <label for="stream">Degree</label>
+          <input
+            type="text" name="stream" id="stream"
+            placeholder="Degree Enrolled In" maxlength="100" required
+          />
+          {#if warn_degree}
+            <div class="warn">{warn_degree}</div>
+          {/if}
+        </div>
+        <div class="input-group">
+          <label for="gradyear">Year of Graduation</label>
+          <select name="gradyear" id="gradyear" required>
+            <option value="">Select Year</option>
+            <option>2025</option><option>2026</option><option>2027</option>
+          </select>
+          {#if warn_grade}
+            <div class="warn">{warn_grade}</div>
+          {/if}
+        </div>
+      {:else if instiVal === 'school'}
+        <div class="input-group">
+          <label for="college">School Name</label>
+          <input
+            type="text" name="college" id="college"
+            placeholder="School Name" maxlength="100" required
+          />
+          {#if warn_init_name}
+            <div class="warn">{warn_init_name}</div>
+          {/if}
+        </div>
+        <div class="input-group">
+          <label for="gradyear">Grade</label>
+          <select name="gradyear" id="gradyear" required>
+            <option value="">Select Grade</option>
+            <option>6</option><option>7</option><option>8</option>
+          </select>
+          {#if warn_grade}
+            <div class="warn">{warn_grade}</div>
+          {/if}
+        </div>
+      {/if}
+
+      <!-- email -->
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input
+          type="email" name="email" id="email"
+          placeholder="Email ID" required bind:value={email}
+        />
+        {#if warn_email}
+          <div class="warn">{warn_email}</div>
+        {/if}
+      </div>
+
+      <!-- pwd -->
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input
+          type="password" name="password" id="password"
+          placeholder="Password" required bind:value={password}
+        />
+        {#if warn_password}
+          <div class="warn">{warn_password}</div>
+        {/if}
+      </div>
+
+      <!-- submit -->
+      <div class="buttons">
+        <button class="btn-primary" type="submit">Register</button>
+        <a href="/login" class="btn-link" on:click={handleLogin}>
+          Login Instead
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
