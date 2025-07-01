@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.css'
 	import Loading from '$lib/components/Loading.svelte';
 	import PopUpBox from '$lib/components/PopUpBox.svelte';
 	import { PopUp } from '$lib/PopUp';
