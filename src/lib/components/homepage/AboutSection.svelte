@@ -65,7 +65,7 @@
 	}
 	.photo{
 		position: relative;	
-		height: 65vh;
+		height: 75vh;
 		min-width: 50vw ;
 	}
 	.title2 {
