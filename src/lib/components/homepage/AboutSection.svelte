@@ -10,7 +10,6 @@
 </script>
 
 <div class="gradient-bg">
-
 	<div class="gradients-container extra">
 		<div class="g" id="g2-1" />
 	</div>

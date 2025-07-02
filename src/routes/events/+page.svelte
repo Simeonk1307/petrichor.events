@@ -96,7 +96,7 @@
 		width: 100vw;
 		min-width: 100vw;
 		min-height: 110vh;
-		top: 100px;
+		top: 130px;
 		overflow-y: scroll;
 		position: relative;
 		display: flex;

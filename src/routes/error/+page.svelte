@@ -1,3 +1,7 @@
+<script>
+    import Strip from "$lib/components/Strip.svelte";
+</script>
+
 <main>
     <div>
         <h1>Coming Soon!</h1>
@@ -12,11 +16,15 @@
         <h1>Coming Soon!</h1>
     </div>
 </main>
+
+<Strip />
+
+
 <style>
     main{
         display: grid;
         place-items: center;
-        height: 100vh;
+        height: 85vh;
         font-size: 30px;
     }
     h1{
