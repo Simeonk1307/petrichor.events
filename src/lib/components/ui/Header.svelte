@@ -100,8 +100,7 @@
 {#if links.length > 0}
 <header>
     <div class="map_info">
-        We have also launched a map page for Petrichor'25. Have a look at the upcoming events here : 
-        <a href="/login?to=map">Maps</a>
+        This is a website in progress, some features may not work as expected.
     </div>
     <div class="actual_nav" style="width: 100%; height:100%;display:flex;">
         <a class="title atmos" href="/home" bind:this={titleDiv}></a>
@@ -175,9 +174,6 @@
 <style>
     .actual_nav {
         padding: 0.8rem 0;
-    }
-    .map_info a {
-        color: aquamarine;
     }
     .map_info {
         width:  100%;

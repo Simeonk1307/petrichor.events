@@ -232,47 +232,8 @@
 		/* left: 27%; */
 		height: 100vh;
 	}
-	/*  */
-
-	/* Other Sections*/
-	#g2-1 {
-		background: radial-gradient(
-				circle at center,
-				rgba(var(--color4), 0.5) 0,
-				rgba(var(--color4), 0) 50%
-			)
-			no-repeat;
-		left: 15%;
-		height: 150vh;
-	}
-	#g3-1 {
-		background: radial-gradient(
-				farthest-corner at 75% 50%,
-				rgba(var(--color4), 0.5) 0,
-				rgba(var(--color4), 0) 50%
-			)
-			no-repeat;
-		width: 100vw;
-		top: 25%;
-		height: 100vw;
-	}
-	#g4-1 {
-		background: radial-gradient(
-				farthest-corner at 55% 50%,
-				rgba(var(--color4), 0.5) 0,
-				rgba(var(--color4), 0) 50%
-			)
-			no-repeat;
-		width: 100vw;
-		top: 50%;
-		height: 100vw;
-	}
-
+	
 	@media (max-width: 700px) {
-		#g2-1,
-		#g3-1 {
-			left: 0;
-		}
 		#g1-3 {
 			width: 100vh;
 			height: 100vh;

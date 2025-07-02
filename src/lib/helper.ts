@@ -117,6 +117,12 @@ export const headerLinks: Array<HeaderLink> = [
         childLinks: []
         ,
         show: false
+    },
+    {
+        url: '/login?to=map',
+        linkText: 'Maps',
+        childLinks: [],
+        show: false
     }
 ]
 

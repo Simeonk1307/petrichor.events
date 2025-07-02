@@ -27,7 +27,7 @@
   <div class="container">
     {#if Object.entries(workshops).length == 0}
     <div style="width: 100%;display:flex; justify-content:center; " draggable="false">
-      <img height="200px" width="320px" src={done_n_dusted} draggable="false"/>
+      <img height="200px" width="320px" src={done_n_dusted} alt="Coming Soon" draggable="false"/>
     </div>
     {:else}
       <div class="workshop_scroll">

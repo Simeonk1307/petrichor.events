@@ -14,6 +14,7 @@ const frontendRoutes = [
 	'/error',
 	'/profile',
 	// '/events',
+	'/contactus',
 ];
 
 
