@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { API, defaultUser, POST } from '$lib';
-	import Globe from '$lib/assets/svgs/globe.svg';
+	import Globe from '$lib/assets/globe.svg';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
 

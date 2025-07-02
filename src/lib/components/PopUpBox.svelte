@@ -1,8 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { PopUp } from "$lib/PopUp";
-    // import logo from "$lib/assets/logo.png"
-    import logo from "$lib/assets/logo.png"
+    import logo from "$lib/assets/petrichor_logo.png"
 
     let popUpDialog:HTMLDialogElement;
     export let PopUpObj:PopUp;
@@ -45,7 +44,7 @@
         <div class="popUpTitleBox">
             <div class="progressDiv" style="width: {width}%;"/>
             <!-- <img src={logo} alt="" height="50px" width=" 50px"/> -->
-             <img src={logo} alt="" height="70px"/>
+            <img src={logo} alt="" style="height: 150px; max-width: 100px; " />
             </div>
         <div class="restBox">
             <!-- <p>{title}</p> -->

@@ -30,6 +30,7 @@
 	"dependencies": {
 		"@phippsytech/svelte-qrious": "^0.0.3",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@tailwindcss/vite": "^4.1.11",
 		"@types/ws": "^8.5.8",
 		"dotenv": "^16.4.7",
 		"esbuild": "^0.24.2",
@@ -39,9 +40,10 @@
 		"save": "^2.9.0",
 		"svelte-awesome": "^3.3.1",
 		"svelte-qrcode": "^1.0.0",
+		"tailwindcss": "^4.1.11",
 		"vanilla-tilt": "^1.8.1"
 	},
 	"engines": {
-	    "node": "20.x"
+	    "node": ">=20.x"
 	}
 }

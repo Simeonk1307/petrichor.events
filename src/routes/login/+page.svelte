@@ -1,4 +1,5 @@
 <script lang="ts">
+	// import './Login.css'
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -10,6 +11,7 @@
 	// console.log(form)
 	export let data;
 	let email: string;
+	let password: string;
 
 	const getData: Function = getContext('getData');
 	onMount(async () => {
@@ -89,169 +91,208 @@
 	};
 </script>
 
-<div class="form-container">
-	<div class="form">
-		<h2>Login to <span id="Petrichor">petrichor</span>.events</h2>
-		<form action="?/login" method="POST" use:enhance={loginResult}>
-			<div>
-				<input type="email" name="email" id="email" placeholder="Email" required autocomplete="username" bind:value={email}/>
-			</div>
-			<div>
-				<input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password" />
-			</div>
-			<div class="button_holder">
-				<div class="button_divs">
-					<button id="login">Login</button>
-				</div>
-				<div class="links">
-					<a id="register" href="/register">First Time? Register Here</a>
-					<a id="register" href="/forgotpassword">Forgot Password?</a>
-				</div>
-			</div>
-		</form>
-	</div>
-	<!-- <div class="image" /> -->
-</div>
+
+<main>
+  <div class="container">
+    <div class="login">
+      <h2>Sign in to your account</h2>
+      <form method="POST" action="?/login" use:enhance={loginResult}>
+
+	<label class="label"><p>Email</p>
+		<input type="email" name="email" placeholder="name@company.com" bind:value={email} required autocomplete="username" />
+	</label>
+
+        <label class="label"><p>Password</p>
+		<input type="password" name="password" placeholder="••••••••" bind:value={password} required autocomplete="current-password" />
+	</label>
+        <div class="options">
+          <label class="remember">
+            <input type="checkbox" class="check" />
+            <span>Remember me</span>
+          </label>
+          <a href="/forgotpassword" class="forgot">Forgot password?</a>
+        </div>
+
+        <div class="flex justify-center">
+          <button id="login" type="submit" class="login-btn">Sign in</button>
+        </div>
+
+        <p class="signup-text">Don't have an account yet?
+          <a href="/register" class="signup-link">Sign up</a>
+        </p>
+
+      </form>
+    </div>
+  </div>
+</main>
 
 <style>
-	* {
-		box-sizing: border-box !important;
+	main {
+	  min-height: 100vh;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  background: radial-gradient(
+		80% 70% at 50% 0%,
+		#039FF1 0%,
+		#074F88 20%,
+		#005698 35%,
+		#001423 67%,
+		#000910 80%,
+		#000000 100%
+	  );
+	  background-repeat: no-repeat;
+	  background-color: #000;
 	}
-	.button_holder {
-		display: flex;
-		align-items: flex-start;
-		flex-direction: column;
-		justify-content: center;
-		gap: 20px;
-		/* margin: 20px 30px; */
+	
+	@keyframes flicker {
+	  0%, 100% {
+		box-shadow: 0 0 15px rgba(0, 191, 255, 0.3),
+					0 0 30px rgba(0, 191, 255, 0.2),
+					0 0 45px rgba(0, 191, 255, 0.1);
+	  }
+	  50% {
+		box-shadow: 0 0 10px rgba(0, 191, 255, 0.1),
+					0 0 20px rgba(0, 191, 255, 0.05),
+					0 0 30px rgba(0, 191, 255, 0.03);
+	  }
 	}
-	.button_holder .links {
-		display: flex;
-		gap: 20px;
-		width: 100%;
-		/* align-items: center; */
-		/* justify-content: space-evenly; */
+	
+	.container {
+	  width: 90%;
+	  max-width: 700px;
+	  min-height: 420px;
+	  border-radius: 1rem;
+	  background-color: transparent;
+	  border: 1px solid #06b6d4; /* border-cyan-600 */
+	  padding: 2.5rem;
+	  color: white;
+	  animation: flicker 2s infinite ease-in-out;
 	}
-	.button_holder .button_divs {
-		width: 55%;
-		display: flex;
-		margin-top: 10px;
-		/* justify-content: center; */
+	
+	@media (max-width: 1023px) {
+	  .container {
+		max-width: 600px;
+		min-height: 400px;
+		padding: 2.5rem;
+	  }
 	}
-	#login {
-		margin: 0;
+	
+	@media (max-width: 767px) {
+	  .container {
+		max-width: 500px;
+		min-height: 350px;
+		padding: 2rem;
+	  }
 	}
-	#Petrichor {
-		color: #910cea;
-		font-weight: 600;
+	
+	@media (max-width: 639px) {
+	  .container {
+		max-width: 400px;
+		padding: 1.5rem;
+	  }
 	}
-	@media (max-width: 800px) {
-		.links {
-			flex-direction: column;
-			align-items: flex-start !important;
-		}
-		.button_divs {
-			justify-content: flex-start !important;
-		}
+	
+	.login {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
 	}
-	h2 {
-		font-size: 300%;
-		font-weight: normal;
-		margin-bottom: 10px;
+	
+	.login h2 {
+	  font-size: 1.5rem;
+	  font-weight: 550;
+	  margin-bottom: 1rem;
+	  color: white;
+	  font-family: 'Inria Sans', sans-serif;
 	}
-	input {
-		--px: 0.75em;
-		padding: var(--px);
-		padding-inline: calc(var(--px) * 2);
-		margin: 1.25% 0%;
-		font-size: 24px;
-		border-radius: 10rem;
-		width: 75%;
-		background-color: #25252543;
-		border: none;
-		color: white;
-		border: 1px solid white;
+	
+	.label {
+	  display: block;
+	  font-size: 0.875rem;
+	  font-weight: 500;
+	  margin-bottom: 0.25rem;
+	  color: #d1d5db;
 	}
-	input:focus{
-		outline: transparent;
+	
+	.label p {
+	  margin-bottom: 0.5rem;
 	}
-	::placeholder {
-		color: white;
+	
+	.login input {
+	  width: 100%;
+	  margin-bottom: 1rem;
+	  padding: 0.5rem 1rem;
+	  border-radius: 0.375rem;
+	  border: 1px solid #4b5563;
+	  background-color: #334155;
+	  color: white;
+	  /* placeholder-color: #9ca3af; */
+	  outline: none;
 	}
-	.form-container {
-		width: 100%;
-		height: 100vh;
-		display: flex;
-		align-items: center;
-		z-index: 11;
-		display: flex;
-		flex-wrap: wrap;
-		margin-left: 5%;
+	
+	.login input:focus {
+	  box-shadow: 0 0 0 2px #3b82f6;
 	}
-	.form {
-		z-index: 2;
-		width: 50%;
+	
+	.options {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  margin-bottom: 1.5rem;
+	  font-size: 0.875rem;
 	}
-	#login {
-		font-size: 1.5rem;
-		border-radius: 10rem;
-		padding: 2% 7%;
-		background-color: rgb(255, 255, 255);
-		/* color: white; */
-		font-weight: bolder;
-		border: none;
+	
+	.remember {
+	  display: flex;
+	  align-items: center;
+	  gap: 0.5rem;
+	  color: #d1d5db;
 	}
-	#register {
-		color: mediumslateblue;
-		display: inline-block;
+	
+	.check {
+	  width: 20px;
+	  height: 20px;
+	  margin-right: 10px;
 	}
-	/* } */
-	@media (max-width: 650px) {
-		h2 {
-			font-size: 300%;
-			font-weight: normal;
-			margin-top: 20%;
-			margin-right: 10%;
-		}
-		input {
-			padding: 3%;
-			margin: 2% 0%;
-			font-size: 100%;
-			border-radius: 10px;
-			width: 80%;
-			background-color: #40413ebb;
-			border: none;
-			color: white;
-		}
-		::placeholder {
-			color: white;
-		}
-		.form-container {
-			width: 100%;
-			height: 100%;
-			min-height: 640px;
-			font-size: smaller;
-			display: flex;
-			margin: 0;
-			flex-wrap: wrap;
-			flex-direction: column;
-			justify-content: center;
-		}
-		.form {
-			width: 100%;
-		}
-		#login {
-			border-radius: 10rem;
-			padding: 10px 20px;
-			background-color: #232423;
-			color: white;
-			font-weight: bold;
-			border: none;
-		}
-		#register {
-			color: mediumslateblue;
-			display: inline-block;
-			/* margin: 2% 0 0 40%; */
-		}
+	
+	.forgot {
+	  color: #60a5fa;
+	  text-decoration: none;
 	}
-</style>
+	
+	.forgot:hover {
+	  text-decoration: underline;
+	}
+	
+	.login-btn {
+	  width: 200px;
+	  padding: 0.5rem 0;
+	  color: white;
+	  border-radius: 0.5rem;
+	  margin: 0 auto;
+	  display: block;
+	  background: linear-gradient(to right, #1e40af, #38bdf8);
+	  /* transition: background 0.3s ease; */
+	}
+	
+	.login-btn:hover {
+	  background: linear-gradient(to right, #1d4ed8, #0ea5e9);
+	}
+	
+	.signup-text {
+	  margin-top: 1rem;
+	  text-align: center;
+	  font-size: 0.875rem;
+	  color: #d1d5db;
+	}
+	
+	.signup-link {
+	  color: #60a5fa;
+	  text-decoration: none;
+	}
+	
+	.signup-link:hover {
+	  text-decoration: underline;
+	}
+</style>	

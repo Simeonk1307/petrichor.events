@@ -49,7 +49,7 @@
 		}
 		currIndex = currIndex;
 	};
-	const changeeventtype = (event_type) => {
+	const changeeventtype = (event_type: string) => {
 		selected_event_type = event_type;
 		events = currentSchedule[selected_event_type];
 		if (events == undefined) {
@@ -109,14 +109,14 @@
 
 								<div class="timing">{event.timing}</div>
 								<div class="venue">
-									<img src={location_svg} height="25px" width="25px" />
+									<img src={location_svg} height="25px" alt="location" width="25px" />
 									{event.venue}
 								</div>
 							</span>
 							{:else}
 								<div class="timing">{event.timing}</div>
 								<div class="venue">
-									<img src={location_svg} height="25px" width="25px" />
+									<img src={location_svg} height="25px" alt="location" width="25px" />
 									{event.venue}
 								</div>
 							{/if}
@@ -253,12 +253,6 @@
 		cursor: pointer;
 		transition: all 0.4s ease-in-out;
 		height: 100%;
-	}
-	.tag {
-		font-family: var(--pfont);
-		border-bottom: 1px solid gray;
-		width: 100%;
-		padding: 30px 10px;
 	}
 	.nav_item * {
 		font-family: var(--pfont);

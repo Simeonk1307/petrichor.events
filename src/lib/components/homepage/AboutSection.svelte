@@ -1,176 +1,203 @@
 <script lang="ts">
-	import photo from '$lib/assets/about.png';
-	import { onMount } from 'svelte';
+	import photo from '$lib/assets/about.jpg';
 
-	export let slidePhoto:Function;
-	let img:HTMLElement;
-	slidePhoto = (value:number) => {
-	}
+	export let slidePhoto: Function;
+	let img: HTMLElement;
 
+	slidePhoto = (value: number) => {
+		if (img) {
+			img.style.transform = `translateX(${value}px)`;
+		}
+	};
 </script>
 
-<div class="gradient-bg">
-
-	<div class="gradients-container extra">
-		<div class="g" id="g2-1" />
-	</div>
-</div>
-	
 <main>
-    <div class="second-block">
-		<div class="title2 atmos">About Us</div>
-		<!-- svelte-ignore a11y-missing-attribute -->
-		<div class="caption2">
-			Petrichor- the annual techno-cultural fest of IIT Palakkad is back again, and better than
-			ever before. Also, yes, it's offline. We, the students of IIT Palakkad, conduct Petrichor
-			every year, and made sure last year's event was enthralling for all its participants. Now
-			the wait is over; with just the perfect mix of cultural and technical events, we plan on
-			making 
-			Petrichor'25 an unforgettable experience for you. Trust us when we say that you won't
-			miss out on anything. Check out our website as it has answers to all the questions that
-			you might have. Stay tuned and brace yourselves for the journey of a lifetime with
-			Petrichor'25!
+	<div class="text-section">
+		<h1 class="title atmos">About Us</h1>
+		<div class="content-card">
+			<p>
+				<span class="highlight">Petrichor '26</span>, the annual techno-cultural fest of IIT Palakkad, is back—and this time, it's bigger, bolder,
+				and more exciting than ever before. Named after the earthy fragrance that follows the first rain, Petrichor
+				captures the essence of creativity and renewal.
+			</p>
+			<p>
+				Every year, we—the students of IIT Palakkad—unite our passion
+				and energy to bring this fest to life. Blending cutting-edge technical excellence with rich cultural expression,
+				Petrichor offers a dynamic platform for students to showcase their ideas, talents, and skills.
+			</p>
+			<p>
+				From immersive workshops to captivating events, <span class="highlight">Petrichor '26</span> promises an unforgettable experience for everyone who attends.
+				Join us in celebrating knowledge, creativity, and the thrill of discovery!
+			</p>
 		</div>
 	</div>
-	<div class="photo_holder" bind:this={img} draggable="false">
-		<img src={photo} class="photo" alt="" draggable="false"/>
+
+	<div class="image-section" bind:this={img}>
+		<img src={photo} alt="About Petrichor" class="image" />
 	</div>
-
-
 </main>
 
 <style>
-    main{
-        height: 100vh;
-        width: 100vw;
-		display: flex;
-		/* z-index: 11;	 */
+	/* ---------- BODY BACKGROUND WITH RADIAL GRADIENT ---------- */
+	:global(body) {
+		margin: 0;
+		background:
+			radial-gradient(
+				ellipse at top center,
+				rgba(var(--color4), 0.25) 0%,
+				transparent 60%
+			),
+			black;
+		min-height: 100vh;
+		font-family: var(--pfont, sans-serif);
+	}
+
+	/* ---------- MAIN LAYOUT ---------- */
+	main {
+		min-height: 100vh;
+		width: 100vw;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 		align-items: center;
-		overflow: hidden;
-		background-color: black;
-    }
-	main *{
+		gap: 4rem;
+		padding: 2rem;
+		box-sizing: border-box;
+		position: relative;
 		z-index: 2;
 	}
-	.second-block{
-		flex:1;
+
+	/* ---------- TEXT SECTION ---------- */
+	.text-section {
 		display: flex;
 		flex-direction: column;
-		margin-left: 3rem;
-		padding: 5px;
-		gap: 20vh;
-		min-width: 50%;
-	}
-	.photo_holder{
-		flex: 1;
-		position: relative;
-		margin: 50px;
-	}
-	.photo{
-		position: relative;	
-		height: 65vh;
-		min-width: 50vw ;
-	}
-	.title2 {
-		font-size: 4.5vw;
-		font-weight: 400;
+		gap: 2rem;
 		color: white;
 	}
-	.caption2 {
-		font-size: 15px;
-		font-weight: 100;
-		color: white;
-		line-height: 1.5;
+
+	.title {
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		font-weight: 600;
+		margin: 0;
+		text-align: left;
+	}
+
+	.content-card {
+		background:
+			radial-gradient(
+				ellipse at top,
+				rgba(var(--color4), 0.15) 0%,
+				transparent 70%
+			),
+			rgba(255, 255, 255, 0.05);
+		backdrop-filter: blur(10px);
+		border-color: rgb(2, 168, 168);
+		border-width: 1px;
+		border-radius: 16px;
+		padding: 2rem;
+	}
+
+	.content-card p {
+		font-size: 1.1rem;
+		font-weight: 300;
+		line-height: 1.7;
 		font-family: var(--pfont);
-		letter-spacing: 0.005cap;
-		padding: 10px 0;
-		padding-right: 30px;
+		letter-spacing: 0.005em;
+		color: rgba(255, 255, 255, 0.9);
+		text-align: justify;
+		margin-bottom: 1.5rem;
 	}
 
-	@media (max-width:900px){
-		main{
-			flex-direction: column;
-		}
-		.second-block{
-			display: flex;
-			align-items: center;
-			flex: 1;
-			width: 100%;
-			margin: 0;
-			gap: unset;
-			flex-wrap: wrap;
-			align-content: center;
-			justify-content: center;
-		}
-		.title2{
-			font-weight: bold;
-			font-size: 40px;
-			padding: 5px  8px;
-		}
-		.caption2{
-			margin: 0;
-			padding: 5px 10px;
-			font-size: 13px;
-			width: auto;
-			text-align: justify;
-		}
-		.photo_holder{
-			margin: 0;
-			flex: 1;
-		}
-		.photo{
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: unset;
-		}
-	}
-	@media (max-width:400px){
-		.title2{
-			font-size: 25px;
-		}
-		.caption2{
-			padding: 5px;
-			font-size: calc(13px - 0.5vw);
-		}
+	.content-card p:last-child {
+		margin-bottom: 0;
 	}
 
+	.highlight {
+		/* color: rgba(var(--color3), 1); */
+		font-weight: 1000;
+	}
 
-	/* Background */
-	.g {
-		position: absolute;
-		mix-blend-mode: var(--blending);
+	/* ---------- IMAGE SECTION ---------- */
+	.image-section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.image {
 		width: 100%;
-		height: 100%;
-		opacity: 1;
-	}
-	.gradient-bg {
-		width: 100vw;
-		height: 100%;
-		position: absolute;
-		overflow: hidden;
-		background: transparent;
-		top: 0;
-		left: 0;
+		max-width: 650px;
+		object-fit: cover;
+		height: auto;
+		border-radius: 12px;
+		border-width: 1px;
+		border-color: rgb(88, 88, 253);
+		/* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+		transition: transform 0.3s ease; */
 	}
 
-	.extra {
-		height: 150vh;
+	.image:hover {
+		transform: scale(1.02);
 	}
 
-	.gradients-container {
-		width: 100vw;
-		height: 100vh;
-		position: relative;
+	/* ---------- RESPONSIVE DESIGN ---------- */
+	@media (max-width: 1024px) {
+		main {
+			grid-template-columns: 1fr;
+			text-align: center;
+			gap: 3rem;
+		}
+
+		.text-section {
+			order: 2;
+			align-items: center;
+		}
+
+		.title {
+			text-align: center;
+		}
+
+		.content-card p {
+			text-align: left;
+		}
+
+		.image-section {
+			order: 1;
+		}
 	}
 
-	#g2-1 {
-		background: radial-gradient(
-				circle at center,
-				rgba(var(--color4), 0.5) 0,
-				rgba(var(--color4), 0) 50%
-			)
-			no-repeat;
-		height: 100vh;
+	@media (max-width: 768px) {
+		main {
+			padding: 1.5rem;
+		}
+
+		.content-card {
+			padding: 1.5rem;
+		}
+
+		.content-card p {
+			font-size: 1rem;
+		}
+
+		.image {
+			max-width: 90vw;
+		}
+	}
+
+	@media (max-width: 480px) {
+		main {
+			padding: 1rem;
+		}
+
+		.title {
+			font-size: 2rem;
+		}
+
+		.content-card {
+			padding: 1rem;
+		}
+
+		.content-card p {
+			font-size: 0.95rem;
+		}
 	}
 </style>

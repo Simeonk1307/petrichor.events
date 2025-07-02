@@ -1,6 +1,6 @@
 <script>
     
-    import Globe from '$lib/assets/svgs/globe.svg';
+    import Globe from '$lib/assets/globe.svg';
 </script>
 <div class="strip">
     <div class="strip1">
