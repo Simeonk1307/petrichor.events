@@ -1,12 +1,12 @@
 <script lang="ts">
-	import AboutSection from '$lib/components/homepage/AboutSection.svelte';
+	// import AboutSection from '$lib/components/homepage/AboutSection.svelte';
 	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
 	import Workshop from '$lib/components/homepage/workshop_section/Workshop.svelte';
 	import { access_token, loggedIn } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
 
 	let slideHero: Function;
-	let slideAbout: Function;
+	// let slideAbout: Function;
 	let visible = false;
 
 	export let data;
@@ -29,9 +29,7 @@
 			if (slideHero) {
 				slideHero(val);
 			}
-			if (slideAbout) {
-				slideAbout(val);
-			}
+
 		};
 		access_token.set(data.accessToken);
 	});
@@ -39,9 +37,7 @@
 
 <div class="maincontent {visible ? 'visible' : ''}">
 	<HeroSection bind:pageWidth bind:slide={slideHero} toAnimate={false} />
-	<div class="card about">
-		<AboutSection bind:slidePhoto={slideAbout} />
-	</div>
+
 	<div class="card event">
 		<div class="gradient-bg">
 			<div class="gradients-container extra">
@@ -68,7 +64,7 @@
 	.maincontent {
 		display: grid;
 		/* overflow: hidden; */
-		grid-template-columns: auto auto;
+		grid-template-columns: 1fr;
 	}
 	.card {
 		display: flex;
