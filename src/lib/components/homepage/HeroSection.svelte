@@ -21,7 +21,8 @@
 	}
 
 	function discover() {
-		change(3)
+		// change(3)
+		goto('/events');
 	}
 	let plang: string[] = [
 		'PETRICHOR',

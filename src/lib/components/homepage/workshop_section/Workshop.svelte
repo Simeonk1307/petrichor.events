@@ -5,6 +5,7 @@
   import done_n_dusted from "$lib/assets/done_n_dusted.png"
   import { workshops} from "$lib/data/workshop"
   import { Footer } from '$lib/components/ui';
+  import Strip from '$lib/components/Strip.svelte';
 	// Dummy data in this helper file
 	import { footerLinks } from '$lib/helper';
 
@@ -23,7 +24,7 @@
 </div>
 
 <main>
-  <h1 class="atmos" style="margin-top:120px;">Workshop</h1>
+  <h1 class="atmos">Workshop</h1>
   <div class="container">
     {#if Object.entries(workshops).length == 0}
     <div style="width: 100%;display:flex; justify-content:center; " draggable="false">
@@ -49,13 +50,17 @@
         </div>
       {/if}
     </div>
-    {#if Object.entries(workshops).length != 0}
+    <!-- {#if Object.entries(workshops).length != 0}
     <button on:click={()=> goto("/workshop")}>Workshops</button>
-    {/if}
+    {/if} -->
+    <Strip />
     <Footer title="Petrichor" links={footerLinks} />
   </main>
   
 <style>
+  .atmos{
+    margin-top: 50px;
+  }
   main{
     display: flex;
     flex-direction: column;
