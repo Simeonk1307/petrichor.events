@@ -132,17 +132,16 @@
 	  display: flex;
 	  justify-content: center;
 	  align-items: center;
-	  background: linear-gradient(
-		190deg,
+	  background: radial-gradient(
+		80% 70% at 50% 0%,
 		#039FF1 0%,
-		#074F88 9%,
-		#005698 20%,
-		#001423 32%,
-		#000910 50%,
+		#074F88 20%,
+		#005698 35%,
+		#001423 67%,
+		#000910 80%,
 		#000000 100%
 	  );
 	  background-repeat: no-repeat;
-	  background-position: top right;
 	  background-color: #000;
 	}
 	
