@@ -100,7 +100,7 @@
 {#if links.length > 0}
 <header>
     <div class="map_info">
-        This is a website in progress, some features may not work as expected.
+        ⚠️ This website is currently under development. Some features may not function as expected.
     </div>
     <div class="actual_nav" style="width: 100%; height:100%;display:flex;">
         <a class="title atmos" href="/home" bind:this={titleDiv}></a>
