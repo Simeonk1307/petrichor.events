@@ -146,17 +146,30 @@ onMount(() => {
     transform: translateY(20px);
     animation: fadeSlideIn 1.5s ease-out forwards;
   }
+<<<<<<< HEAD
+  :global(body) {
+  /* Enable scroll by default on all devices */
+    overflow: auto;
+  }
+
+/* Disable scroll on large screens (desktop) only */
+=======
   /* :global(body) {
 
     overflow: auto;
   }
 
 
+>>>>>>> 9701bf943d0a851f20ef6dacc6577bbc64e6c2c4
   @media screen and (min-width: 1024px) {
     :global(body) {
       overflow: hidden;
     }
+<<<<<<< HEAD
+  }
+=======
   } */
+>>>>>>> 9701bf943d0a851f20ef6dacc6577bbc64e6c2c4
 
   @keyframes fadeSlideIn {
     to {
