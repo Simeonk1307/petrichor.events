@@ -18,10 +18,10 @@
 		</div>
 	{:else if ['/login', '/register','/profile', '/forgotpassword'].includes(path) || path.includes('/changepassword/')}
 		<div class="gradients-container extra">
-			<div id="g1-3_l" class="g" />
+			<!-- <div id="g1-3_l" class="g" />
 			<div id="g1-2_l" class="g" />
 			<div id="g1-1_l" class="g" />
-			<div id="g1-7_l" class="g" />
+			<div id="g1-7_l" class="g" /> -->
 		</div>
 	{:else if path.startsWith('/CA')}
 		<div class="gradients-container extra">
