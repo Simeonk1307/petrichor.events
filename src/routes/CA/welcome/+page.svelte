@@ -174,14 +174,14 @@
 		</div>
 		<div class="infos">
 			<div class="content_box1">
-				<p>30k Prize Pool</p>
+				<p>25k Prize Pool</p>
 				<p>Earn more for each registration/participation you bring</p>
 			</div>
 			<div class="marketingbs">
 				<div class="card">
 					<h2>Benefits</h2>
 					<li>Win cash prizes from a pool of 30k if you are in the top 5 CAs</li>
-					<li>Earn ₹ 50 per extra registration above 5 (for workshops and tech summit)</li>
+					<!-- <li>Earn ₹ 50 per extra registration above 5 (for workshops and tech summit)</li> -->
 					<li>Win exciting goodies and pro-show tickets of Petrichor'25</li>
 					<li>
 						Earn certificate of merit issued by Petrichor, IIT Palakkad for your valiant efforts
