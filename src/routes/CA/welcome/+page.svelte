@@ -180,7 +180,7 @@
 			<div class="marketingbs">
 				<div class="card">
 					<h2>Benefits</h2>
-					<li>Win cash prizes from a pool of 30k if you are in the top 5 CAs</li>
+					<li>Win cash prizes from a pool of 25k if you are in the top 5 CAs</li>
 					<!-- <li>Earn ₹ 50 per extra registration above 5 (for workshops and tech summit)</li> -->
 					<li>Win exciting goodies and pro-show tickets of Petrichor'25</li>
 					<li>
