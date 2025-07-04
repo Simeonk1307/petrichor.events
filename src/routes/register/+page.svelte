@@ -356,15 +356,21 @@
             type="text" name="college" id="college"
             placeholder="School Name" maxlength="100" required
           />
-          {#if warn_init_name}
+          {#if warn_init_name}	
             <div class="warn">{warn_init_name}</div>
           {/if}
         </div>
         <div class="input-group">
           <label for="gradyear">Grade</label>
           <select name="gradyear" id="gradyear" required>
-            <option value="">Select Grade</option>
-            <option>6</option><option>7</option><option>8</option>
+            	<option value="">Select Grade</option>
+            	<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
           </select>
           {#if warn_grade}
             <div class="warn">{warn_grade}</div>
