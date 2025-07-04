@@ -332,8 +332,18 @@
         <div class="input-group">
           <label for="gradyear">Year of Graduation</label>
           <select name="gradyear" id="gradyear" required>
-            <option value="">Select Year</option>
-            <option>2025</option><option>2026</option><option>2027</option><option>2028</option>
+            	<option value="">Select Year</option>
+		<option>2020</option>
+		<option>2021</option>
+		<option>2022</option>
+		<option>2023</option>
+		<option>2024</option>
+            	<option>2025</option>
+		<option>2026</option>
+		<option>2027</option>
+		<option>2028</option>
+		<option>2029</option>
+		<option>2030</option>
           </select>
           {#if warn_grade}
             <div class="warn">{warn_grade}</div>
