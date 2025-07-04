@@ -152,9 +152,9 @@
     /* top: 7rem;
     left: 3rem; */
     font-family: 'Inria Sans', sans-serif;
-    font-size: 2.3rem;
+    font-size: 2.1rem;
     margin-bottom: 1rem;
-    /* text-align: center; */
+    /*text-align: center;*/
     color: white;
     font-weight: 700;
     /* z-index: 2; */
@@ -167,7 +167,7 @@
     padding: 2.5rem;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 2rem;
+    border-radius: 1rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
     font-family: 'Inter', sans-serif;
     color: #fff;
@@ -207,7 +207,7 @@
     padding: 1rem;
     background: #334155;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     color: #fff;
     font-size: 1rem;
   }
@@ -221,15 +221,16 @@
 
   .buttons {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
   }
   .btn-primary {
     flex: 1;
     padding: 1rem;
     background: linear-gradient(to right, #1e40af, #38bdf8);
     border: none;
-    border-radius: 0.7rem;
+    border-radius: 0.5rem;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
@@ -240,7 +241,7 @@
   
   .btn-link {
     align-self: center;
-    color: #60a5fa;
+    color: white;
     text-decoration: none;
     font-weight: 500;
   }
@@ -406,7 +407,7 @@
       <div class="buttons">
         <button class="btn-primary" type="submit">Register</button>
         <a href="/login" class="btn-link" on:click={handleLogin}>
-          Login Instead
+          Already have an account? <span class="text-blue-400">Sign In</span>
         </a>
       </div>
     </form>
