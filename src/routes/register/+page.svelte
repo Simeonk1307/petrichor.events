@@ -166,7 +166,7 @@
     max-width: 90vw;
     padding: 2.5rem;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid #06b6d4;
     border-radius: 1rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
     font-family: 'Inter', sans-serif;
