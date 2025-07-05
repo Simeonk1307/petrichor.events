@@ -105,11 +105,11 @@
 	</label>
 
     <label class="label"><p>Password</p>
-		<div class="relative w-full ">
+		<div class="w-full flex flex-row">
 			<input type={showPassword ? 'text' : 'password'} name="password" placeholder="••••••••" required autocomplete="current-password" class="w-full pr-10"  />
 			<button type="button" on:click={() => showPassword = !showPassword}>
 			{#if showPassword}
-				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute right-5 transform -translate-y-80/100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute right-5 -translate-y-80/100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
 						  d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5
 							 c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0
@@ -118,7 +118,7 @@
 						  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 				  </svg>
 			  {:else}
-				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute right-5 transform -translate-y-80/100 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute right-5 -translate-y-80/100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
 						d="M3 3l18 18M10.477 10.477A3 3 0 0 0 13.5 13.5M6.47 6.47C4.123 8.256
 						   2.735 10.426 2.037 12.32c-.07.207-.07.43 0 .638 1.39 4.17 5.325 7.18

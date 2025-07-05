@@ -34,7 +34,7 @@ main {
   @apply w-[90%] 
     max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px]
     sm:min-h-[350px] md:min-h-[400px] lg:min-h-[420px]
-    rounded-2xl bg-[#1e293b] border border-cyan-600 border-solid
+    rounded-2xl bg-transparent border border-cyan-600 border-solid
     p-6 sm:p-8 md:p-10 text-white mt-[60px]  ;
 
   animation: flicker 2s infinite ease-in-out;
