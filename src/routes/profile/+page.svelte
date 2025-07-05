@@ -115,13 +115,14 @@
 		<div class="CAButton">
 			{#if profileData.CACodePresent}
 				<button
+					class="gotoButton"
 					on:click={() => {
 						goto('/CA/profile');
 					}}>Go to CAProfile</button
 				>
 			{:else}
 				<button
-					class="purple"
+					class="applyButton"
 					on:click={() => {
 						goto('/CA/welcome');
 					}}>Apply For CA</button
@@ -202,13 +203,13 @@
 		overflow-x: hidden;
 		display: flex;
 		flex-direction: row;
-		/* background: radial-gradient(
-		80% 70% at 65% 30%,
-		#039FF1 0%,
-		#001423 47%,
-		#000910 70%,
-		#000000 100%
-	  ); */
+		background-image: radial-gradient(
+		125% 100% at 0% 0%,
+		rgba(3,159,241,1.0) 0%,
+		rgba(0,20,35,1.0) 47%,
+		rgba(0,9,16,1.0) 70%,
+		rgba(0,0,0,1.0) 100%
+	  )
 	}
 	.name-mail-cont {
 		width: 80%;
@@ -231,10 +232,15 @@
 		margin: 0;
 	}
 
-	.purple {
-		background: linear-gradient(45deg, rgb(182, 62, 182), rgb(59, 150, 219));
+	.applyButton {
+		background: linear-gradient(45deg, rgb(0, 77, 255), rgb(29, 47, 141 ));
 		font-weight: bold;
 		color: white;
+	}
+	.gotoButton {
+		background-color: rgb(0, 197, 255);
+		font-weight: bold;
+		color: black;
 	}
 	.name-mail-cont p {
 		font-size: smaller;
@@ -271,7 +277,6 @@
 	.CAButton button {
 		border: none;
 		padding: 5px 10px;
-		background-color: rgb(46, 182, 46);
 		border-radius: 20px;
 	}
 	.buttons {
