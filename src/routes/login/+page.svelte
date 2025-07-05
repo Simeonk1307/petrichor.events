@@ -1,17 +1,19 @@
 <script lang="ts">
-	// import './Login.css'
+	import './Login.css'
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
+	import { eye } from 'svelte-awesome/icons';
 
 	/** @type {import('./$types').ActionData} */
 	// export let form;
 	// console.log(form)
 	export let data;
 	let email: string;
-	let password: string;
+	let showPassword = false;
+
 
 	const getData: Function = getContext('getData');
 	onMount(async () => {
@@ -95,19 +97,44 @@
 <main>
   <div class="container">
     <div class="login">
-      <h2>Sign in to your account</h2>
+      <h2><strong>Sign in to your account</strong></h2>
       <form method="POST" action="?/login" use:enhance={loginResult}>
 
 	<label class="label"><p>Email</p>
 		<input type="email" name="email" placeholder="name@company.com" bind:value={email} required autocomplete="username" />
 	</label>
 
-        <label class="label"><p>Password</p>
-		<input type="password" name="password" placeholder="••••••••" bind:value={password} required autocomplete="current-password" />
+    <label class="label"><p>Password</p>
+		<div class="relative w-full ">
+			<input type={showPassword ? 'text' : 'password'} name="password" placeholder="••••••••" required autocomplete="current-password" class="w-full pr-10"  />
+			<button type="button" on:click={() => showPassword = !showPassword}>
+			{#if showPassword}
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute right-5 transform -translate-y-80/100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+						  d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5
+							 c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0
+							 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+						  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+				  </svg>
+			  {:else}
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute right-5 transform -translate-y-80/100 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+						d="M3 3l18 18M10.477 10.477A3 3 0 0 0 13.5 13.5M6.47 6.47C4.123 8.256
+						   2.735 10.426 2.037 12.32c-.07.207-.07.43 0 .638 1.39 4.17 5.325 7.18
+						   9.963 7.18 1.713 0 3.33-.44 4.747-1.21M17.53 17.53C19.877 15.744
+						   21.265 13.574 21.963 11.68c.07-.207.07-.43 0-.638-1.39-4.17-5.325-7.18-9.963-7.18-1.534
+						   0-2.982.35-4.287.978" />
+				</svg>
+			  {/if}
+			</button>
+		</div>
+		  
 	</label>
+	
         <div class="options">
           <label class="remember">
-            <input type="checkbox" class="check" />
+            <input type="checkbox" class="checkbox" />
             <span>Remember me</span>
           </label>
           <a href="/forgotpassword" class="forgot">Forgot password?</a>
@@ -125,174 +152,3 @@
     </div>
   </div>
 </main>
-
-<style>
-	main {
-	  min-height: 100vh;
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  background: radial-gradient(
-		80% 70% at 50% 0%,
-		#039FF1 0%,
-		#074F88 20%,
-		#005698 35%,
-		#001423 67%,
-		#000910 80%,
-		#000000 100%
-	  );
-	  background-repeat: no-repeat;
-	  background-color: #000;
-	}
-	
-	@keyframes flicker {
-	  0%, 100% {
-		box-shadow: 0 0 15px rgba(0, 191, 255, 0.3),
-					0 0 30px rgba(0, 191, 255, 0.2),
-					0 0 45px rgba(0, 191, 255, 0.1);
-	  }
-	  50% {
-		box-shadow: 0 0 10px rgba(0, 191, 255, 0.1),
-					0 0 20px rgba(0, 191, 255, 0.05),
-					0 0 30px rgba(0, 191, 255, 0.03);
-	  }
-	}
-	
-	.container {
-	  width: 90%;
-	  max-width: 700px;
-	  min-height: 420px;
-	  border-radius: 1rem;
-	  background-color: transparent;
-	  border: 1px solid #06b6d4; /* border-cyan-600 */
-	  padding: 2.5rem;
-	  color: white;
-	  animation: flicker 2s infinite ease-in-out;
-	}
-	
-	@media (max-width: 1023px) {
-	  .container {
-		max-width: 600px;
-		min-height: 400px;
-		padding: 2.5rem;
-	  }
-	}
-	
-	@media (max-width: 767px) {
-	  .container {
-		max-width: 500px;
-		min-height: 350px;
-		padding: 2rem;
-	  }
-	}
-	
-	@media (max-width: 639px) {
-	  .container {
-		max-width: 400px;
-		padding: 1.5rem;
-	  }
-	}
-	
-	.login {
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: center;
-	}
-	
-	.login h2 {
-	  font-size: 1.5rem;
-	  font-weight: 550;
-	  margin-bottom: 1rem;
-	  color: white;
-	  font-family: 'Inria Sans', sans-serif;
-	}
-	
-	.label {
-	  display: block;
-	  font-size: 0.875rem;
-	  font-weight: 500;
-	  margin-bottom: 0.25rem;
-	  color: #d1d5db;
-	}
-	
-	.label p {
-	  margin-bottom: 0.5rem;
-	}
-	
-	.login input {
-	  width: 100%;
-	  margin-bottom: 1rem;
-	  padding: 0.5rem 1rem;
-	  border-radius: 0.375rem;
-	  border: 1px solid #4b5563;
-	  background-color: #334155;
-	  color: white;
-	  /* placeholder-color: #9ca3af; */
-	  outline: none;
-	}
-	
-	.login input:focus {
-	  box-shadow: 0 0 0 2px #3b82f6;
-	}
-	
-	.options {
-	  display: flex;
-	  justify-content: space-between;
-	  align-items: center;
-	  margin-bottom: 1.5rem;
-	  font-size: 0.875rem;
-	}
-	
-	.remember {
-	  display: flex;
-	  align-items: center;
-	  gap: 0.5rem;
-	  color: #d1d5db;
-	}
-	
-	.check {
-	  width: 20px;
-	  height: 20px;
-	  margin-right: 10px;
-	}
-	
-	.forgot {
-	  color: #60a5fa;
-	  text-decoration: none;
-	}
-	
-	.forgot:hover {
-	  text-decoration: underline;
-	}
-	
-	.login-btn {
-	  width: 200px;
-	  padding: 0.5rem 0;
-	  color: white;
-	  border-radius: 0.5rem;
-	  margin: 0 auto;
-	  display: block;
-	  background: linear-gradient(to right, #1e40af, #38bdf8);
-	  /* transition: background 0.3s ease; */
-	}
-	
-	.login-btn:hover {
-	  background: linear-gradient(to right, #1d4ed8, #0ea5e9);
-	}
-	
-	.signup-text {
-	  margin-top: 1rem;
-	  text-align: center;
-	  font-size: 0.875rem;
-	  color: #d1d5db;
-	}
-	
-	.signup-link {
-	  color: #60a5fa;
-	  text-decoration: none;
-	}
-	
-	.signup-link:hover {
-	  text-decoration: underline;
-	}
-</style>	
