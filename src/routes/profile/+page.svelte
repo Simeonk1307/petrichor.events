@@ -170,7 +170,7 @@
 				<div class="eventHolder">
 					{#if eventDisplay}
 						{#if profileData.events.length == 0}
-							<div class="no-message-box">Not Registered in any event</div>
+							<div class="no-message-box">Not Registered in any Event</div>
 						{:else}
 							{#each profileData.events as event}
 								<EventCard {event} />
@@ -202,6 +202,13 @@
 		overflow-x: hidden;
 		display: flex;
 		flex-direction: row;
+		/* background: radial-gradient(
+		80% 70% at 65% 30%,
+		#039FF1 0%,
+		#001423 47%,
+		#000910 70%,
+		#000000 100%
+	  ); */
 	}
 	.name-mail-cont {
 		width: 80%;
@@ -254,6 +261,7 @@
 	.college h3,
 	.phone h3 {
 		font-size: 14px;
+		padding: 10px;
 	}
 	.college h2,
 	.phone h2 {
@@ -305,6 +313,13 @@
 		overflow-y: scroll !important;
 		max-height: 100%;
 		height: 100%;
+	}
+	.eventsBox h3 {
+		text-align: center;
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin: 0;
+		padding: 15px;
 	}
 	.logout {
 		position: absolute;
