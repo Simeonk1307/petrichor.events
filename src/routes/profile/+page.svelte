@@ -46,7 +46,7 @@
 		// console.log($loggedIn + "i" + $invalidate)
 		loading(false)
 		if (!$loggedIn) {
-			goto('/login');
+			// goto('/login');
 		} else if ($invalidate) {
 			location.reload(); // this will call before navigation which will in turn call whoami
 		} // no need to store data in session storage here, whoami is handling it
@@ -199,11 +199,10 @@
 <style>
 	.main {
 		min-height: 110vh;
-		margin-top: 100px;
 		overflow-x: hidden;
 		display: flex;
 		flex-direction: row;
-		background-image: radial-gradient(
+		background: radial-gradient(
 		125% 100% at 0% 0%,
 		rgba(3,159,241,1.0) 0%,
 		rgba(0,20,35,1.0) 47%,
@@ -249,7 +248,7 @@
 	}
 	.userData {
 		line-height: 15px;
-		margin-top: 3em;
+		margin-top: 145px;
 		margin-left: 2rem;
 		display: flex;
 		flex-direction: column;
@@ -259,6 +258,7 @@
 		flex: 1;
 	}
 	.container {
+		margin-top: 100px;
 		flex: 3;
 		display: flex;
 		min-height: 100%;
