@@ -1,19 +1,46 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
 	import photo from '$lib/assets/about.jpg';
 
-	export let slidePhoto: Function;
-	let img: HTMLElement;
+	let items = [photo, photo, photo, photo, photo, photo];
+	let current = 0;
+	const intervalTime = 3000;
+	let interval: NodeJS.Timeout;
 
-	slidePhoto = (value: number) => {
-		if (img) {
-			img.style.transform = `translateX(${value}px)`;
-		}
-	};
+	// AutoScroll logic
+	onMount(() => {
+		interval = setInterval(() => {
+			current = (current + 1) % items.length;
+		}, intervalTime);
+	});
+
+	onDestroy(() => clearInterval(interval));
+	// helper functions for class bindings
+	const leftIndex = () => (current - 1 + items.length) % items.length;
+	const rightIndex = () => (current + 1) % items.length;
 </script>
 
 <main>
+	<!-- /Carousel Section -->
+	<div class="carousel-wrapper">
+		<div class="carousel">
+			{#each items as img, i}
+				<div
+					class="carousel-item
+						{i === current ? 'selected' : ''}
+						{i === leftIndex() ? 'left' : ''}
+						{i === rightIndex() ? 'right' : ''}"
+				>
+					<img src={img} alt="carousel" />
+				</div>
+			{/each}
+		</div>
+	</div>
+	
 	<div class="text-section">
+		<!-- Heading -->
 		<h1 class="title atmos">About Us</h1>
+		<!-- Content -->
 		<div class="content-card">
 			<p>
 				<span class="highlight">Petrichor '26</span>, the annual techno-cultural fest of IIT Palakkad, is back—and this time, it's bigger, bolder,
@@ -30,10 +57,6 @@
 				Join us in celebrating knowledge, creativity, and the thrill of discovery!
 			</p>
 		</div>
-	</div>
-
-	<div class="image-section" bind:this={img}>
-		<img src={photo} alt="About Petrichor" class="image" />
 	</div>
 </main>
 
@@ -56,14 +79,69 @@
 	main {
 		min-height: 100vh;
 		width: 100vw;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
+		display: flex;
+		flex-direction: column;
 		align-items: center;
-		gap: 4rem;
 		padding: 2rem;
 		box-sizing: border-box;
 		position: relative;
 		z-index: 2;
+		margin-top: 100px;
+	}
+
+	/* ------------ CAROUSEL ----------- */
+	.carousel-wrapper {
+		position: relative;
+		width: 100%;
+		height: 350px;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.carousel {
+		position: relative;
+		width: 90rem;
+		height: 100%;
+	}
+
+	.carousel-item {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform-style: preserve-3d;
+		transition: transform 0.6s ease, opacity 0.6s ease;
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.7);
+	}
+
+	.carousel-item img {
+		max-height: 300px;
+		max-width: 100%;
+		border-radius: 12px;
+		object-fit: cover;
+		pointer-events: none;
+	}
+
+	.carousel-item.selected {
+		transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+		opacity: 1;
+		z-index: 3;
+	}
+
+	.carousel-item.left {
+		transform: translate(-150%, -50%) scale(0.7);
+		opacity: 0.7;
+		z-index: 2;
+		filter: blur(3px);
+	}
+
+	.carousel-item.right {
+		transform: translate(50%, -50%) scale(0.7);
+		opacity: 0.7;
+		z-index: 2;
+		filter: blur(3px);
 	}
 
 	/* ---------- TEXT SECTION ---------- */
@@ -75,10 +153,11 @@
 	}
 
 	.title {
-		font-size: clamp(2.5rem, 5vw, 4rem);
+		font-size: clamp(3rem, 4.5vw, 4rem);
 		font-weight: 600;
 		margin: 0;
-		text-align: left;
+		margin-top: 1.5rem;
+		text-align: center;
 	}
 
 	.content-card {
@@ -94,6 +173,8 @@
 		border-width: 1px;
 		border-radius: 16px;
 		padding: 2rem;
+		margin: 70px;
+		margin-top: 0;
 	}
 
 	.content-card p {
@@ -116,29 +197,6 @@
 		font-weight: 1000;
 	}
 
-	/* ---------- IMAGE SECTION ---------- */
-	.image-section {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.image {
-		width: 100%;
-		max-width: 650px;
-		object-fit: cover;
-		height: auto;
-		border-radius: 12px;
-		border-width: 1px;
-		border-color: rgb(88, 88, 253);
-		/* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-		transition: transform 0.3s ease; */
-	}
-
-	.image:hover {
-		transform: scale(1.02);
-	}
-
 	/* ---------- RESPONSIVE DESIGN ---------- */
 	@media (max-width: 1024px) {
 		main {
@@ -154,14 +212,15 @@
 
 		.title {
 			text-align: center;
+			margin-top: -1rem;
 		}
 
 		.content-card p {
 			text-align: left;
 		}
 
-		.image-section {
-			order: 1;
+		.carousel-wrapper {
+			height: 18rem;
 		}
 	}
 
@@ -176,10 +235,10 @@
 
 		.content-card p {
 			font-size: 1rem;
+			width: 23rem;
 		}
-
-		.image {
-			max-width: 90vw;
+		.title {
+			margin-top: -1.8rem;
 		}
 	}
 
@@ -189,6 +248,7 @@
 		}
 
 		.title {
+			margin-top: -3.5rem;
 			font-size: 2rem;
 		}
 
