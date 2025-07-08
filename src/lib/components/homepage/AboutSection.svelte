@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import photo from '$lib/assets/about.jpg';
+	// Import other photos here
 
+	// List of photos to be included in the carousel, in the order they appear.
 	let items = [photo, photo, photo, photo, photo, photo, photo];
 	let current = 0;
 	let container: HTMLDivElement;
