@@ -1,12 +1,9 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import photo from '$lib/assets/about.jpg';
-	// Import other photos here
 
-	// List of photos to be included in the carousel, in the order they appear.
-	let items = [photo, photo, photo, photo, photo, photo, photo];
+	let items = [photo, photo, photo, photo, photo, photo];
 	let current = 0;
-	let container: HTMLDivElement;
 	const intervalTime = 3000;
 	let interval: NodeJS.Timeout;
 
@@ -18,17 +15,15 @@
 	});
 
 	onDestroy(() => clearInterval(interval));
-
 	// helper functions for class bindings
 	const leftIndex = () => (current - 1 + items.length) % items.length;
 	const rightIndex = () => (current + 1) % items.length;
 </script>
 
-
 <main>
 	<!-- /Carousel Section -->
 	<div class="carousel-wrapper">
-		<div class="carousel-3d" bind:this={container}>
+		<div class="carousel">
 			{#each items as img, i}
 				<div
 					class="carousel-item
@@ -41,7 +36,6 @@
 			{/each}
 		</div>
 	</div>
-
 	
 	<div class="text-section">
 		<!-- Heading -->
@@ -106,11 +100,10 @@
 		align-items: center;
 	}
 
-	.carousel-3d {
+	.carousel {
 		position: relative;
 		width: 90rem;
 		height: 100%;
-		perspective: 1000px;
 	}
 
 	.carousel-item {
@@ -138,19 +131,18 @@
 	}
 
 	.carousel-item.left {
-		transform: translate(-150%, -50%) scale(0.9) rotateY(60deg);
-		opacity: 0.4;
+		transform: translate(-150%, -50%) scale(0.7);
+		opacity: 0.7;
 		z-index: 2;
 		filter: blur(3px);
 	}
 
 	.carousel-item.right {
-		transform: translate(50%, -50%) scale(0.9) rotateY(300deg);
-		opacity: 0.4;
+		transform: translate(50%, -50%) scale(0.7);
+		opacity: 0.7;
 		z-index: 2;
 		filter: blur(3px);
 	}
-
 
 	/* ---------- TEXT SECTION ---------- */
 	.text-section {
@@ -161,7 +153,7 @@
 	}
 
 	.title {
-		font-size: clamp(2rem, 4vw, 3.5rem);
+		font-size: clamp(3rem, 4.5vw, 4rem);
 		font-weight: 600;
 		margin: 0;
 		margin-top: 1.5rem;
@@ -219,13 +211,14 @@
 		}
 
 		.title {
-			margin-top: -1rem;
 			text-align: center;
+			margin-top: -1rem;
 		}
 
 		.content-card p {
 			text-align: left;
 		}
+
 		.carousel-wrapper {
 			height: 18rem;
 		}
@@ -235,16 +228,17 @@
 		main {
 			padding: 1.5rem;
 		}
-		.title {
-			margin-top: -1.8rem;
-		}
+
 		.content-card {
 			padding: 1.5rem;
-			width: 23rem;
 		}
 
 		.content-card p {
 			font-size: 1rem;
+			width: 23rem;
+		}
+		.title {
+			margin-top: -1.8rem;
 		}
 	}
 
