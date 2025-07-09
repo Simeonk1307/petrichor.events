@@ -213,6 +213,17 @@
   }
   input::placeholder { color: #9ca3af; }
 
+  #institype {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 2rem;                 
+    background-image: url('../../lib/assets/down_tri.png');
+    background-repeat: no-repeat;
+    background-position: right 1.5rem center;
+    background-size: 1.3rem 1.3rem; 
+  }
+
   .warn {
     color: #f88;
     font-size: 0.9rem;
@@ -246,9 +257,23 @@
     font-weight: 500;
   }
 
+  /*
   .btn-link:hover {
     text-decoration: underline;
   }
+  */
+
+  .signin-text {
+	  margin-top: 1rem;
+	  text-align: center;
+	  font-size: 0.875rem;
+	  color: #d1d5db;
+	}
+
+  .text-blue-400:hover {
+    text-decoration: underline;
+  }
+
 
   @media (max-width: 768px) {
     .form-box { width: 90%; padding: 1.5rem; }
@@ -406,9 +431,15 @@
       <!-- submit -->
       <div class="buttons">
         <button class="btn-primary" type="submit">Register</button>
+        <!-- <p> Already have an account? </p>
         <a href="/login" class="btn-link" on:click={handleLogin}>
-          Already have an account? <span class="text-blue-400">Sign In</span>
-        </a>
+           <span class="text-blue-400">Sign In</span>
+        </a> -->
+        <p class="signin-text">Already have an account? 
+          <a href="/login" class="btn-link" on:click={handleLogin}>
+            <span class="text-blue-400">Sign In</span>
+          </a>
+        </p>
       </div>
     </form>
   </div>
