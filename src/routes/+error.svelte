@@ -1,15 +1,8 @@
 <main>
     <div>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
-        <h1>Coming Soon!</h1>
+        {#each Array(12) as _}
+            <h1>Something went wrong!</h1>
+        {/each} 
     </div>
 </main>
 <style>
@@ -40,4 +33,4 @@
             left: -31rem;
         }
     }
-</style>
+</style>  

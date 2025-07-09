@@ -205,7 +205,7 @@
     <div class="gallery">
         {#each images as image, i}
         <div class="photo-frame">
-            <img src={image} alt="photo" />
+            <img src={image} alt="merches" />
             <div class="price">
                 <p class="aa">{prices[i]}Rs</p>
             </div>
@@ -215,7 +215,7 @@
       <center>
 
         <div class="photo-frame {(pageWidth>=700) ? "combo": ""}" style="margin: 40px 0;">
-          <img src={combo} bind:this={img} alt="photo" />
+          <img src={combo} bind:this={img} alt="merches" />
           <div class="price">
             <p class="aa">1099Rs</p>
           </div>

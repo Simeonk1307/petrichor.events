@@ -42,5 +42,8 @@
 		"svelte-qrcode": "^1.0.0",
 		"tailwindcss": "^4.1.11",
 		"vanilla-tilt": "^1.8.1"
+	},
+	"engines": {
+	    "node": "20.x"
 	}
 }

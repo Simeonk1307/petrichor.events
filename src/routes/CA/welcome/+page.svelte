@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { API, defaultUser, POST } from '$lib';
-	import Globe from '$lib/assets/svgs/globe.svg';
+	import Globe from '$lib/assets/globe.svg';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
 
@@ -174,14 +174,14 @@
 		</div>
 		<div class="infos">
 			<div class="content_box1">
-				<p>30k Prize Pool</p>
+				<p>25k Prize Pool</p>
 				<p>Earn more for each registration/participation you bring</p>
 			</div>
 			<div class="marketingbs">
 				<div class="card">
 					<h2>Benefits</h2>
-					<li>Win cash prizes from a pool of 30k if you are in the top 5 CAs</li>
-					<li>Earn ₹ 50 per extra registration above 5 (for workshops and tech summit)</li>
+					<li>Win cash prizes from a pool of 25k if you are in the top 5 CAs</li>
+					<!-- <li>Earn ₹ 50 per extra registration above 5 (for workshops and tech summit)</li> -->
 					<li>Win exciting goodies and pro-show tickets of Petrichor'25</li>
 					<li>
 						Earn certificate of merit issued by Petrichor, IIT Palakkad for your valiant efforts

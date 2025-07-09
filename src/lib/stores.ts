@@ -8,6 +8,6 @@ export const user = writable<User>({
     "user_events":[
     ]
 })
-export const invalidate = writable(false);
-export const loggedIn = writable(false)
-export const access_token = writable<string|null>(null)
+export const invalidate = writable<boolean>(false);
+export const loggedIn = writable<boolean>(false);
+export const access_token = writable<string|null>(null);

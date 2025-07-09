@@ -5,6 +5,7 @@
   import done_n_dusted from "$lib/assets/done_n_dusted.png"
   import { workshops} from "$lib/data/workshop"
   import { Footer } from '$lib/components/ui';
+  import Strip from '$lib/components/Strip.svelte';
 	// Dummy data in this helper file
 	import { footerLinks } from '$lib/helper';
 
@@ -23,12 +24,23 @@
 </div>
 
 <main>
-  <h1 class="atmos" style="margin-top:120px;">Workshop</h1>
+  <h1 class="atmos">Workshops</h1>
   <div class="container">
-    {#if Object.entries(workshops).length == 0}
-    <div style="width: 100%;display:flex; justify-content:center; " draggable="false">
-      <img height="200px" width="320px" src={done_n_dusted} draggable="false"/>
-    </div>
+    {#if Object.entries(workshops).length != -1} 
+    <!-- CHANGE IT LATER ON THIS IS ONLY FOR NOW SO THAT WE GET COMING SOON -->
+    <!-- <div style="width: 100%;display:flex; justify-content:center; " draggable="false"> -->
+      <div class="workshop_scroll">
+        {#each Array(12) as _, i}
+          <img
+            height="200px"
+            width="320px"
+            src={done_n_dusted}
+            alt="Coming Soon"
+            draggable="false"
+          />
+        {/each}
+      </div>
+  
     {:else}
       <div class="workshop_scroll">
         {#each Object.entries(workshops) as [id,workShop]}
@@ -49,13 +61,17 @@
         </div>
       {/if}
     </div>
-    {#if Object.entries(workshops).length != 0}
+    <!-- {#if Object.entries(workshops).length != 0}
     <button on:click={()=> goto("/workshop")}>Workshops</button>
-    {/if}
+    {/if} -->
+    <Strip />
     <Footer title="Petrichor" links={footerLinks} />
   </main>
   
 <style>
+  .atmos{
+    margin-top: 50px;
+  }
   main{
     display: flex;
     flex-direction: column;
@@ -109,7 +125,7 @@
 			transform: translateX(-50%);
 		}
 	}
-  button{
+  /* button{
     width: 150px;
     background-color: transparent;
     border-radius: 2.5em;
@@ -122,7 +138,7 @@
 		text-align: center;
     margin: 1em 0;
 		font-weight: 100;
-  }
+  } */
 
 </style>
   

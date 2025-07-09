@@ -75,7 +75,7 @@ export const footerLinks: Array<Link> = [
 
 export const headerLinks: Array<HeaderLink> = [
     {
-        url: '/home?to=2',
+        url: '/aboutus',
         linkText: 'About Us',
         childLinks: [{
             url: "/contactUs",
@@ -84,7 +84,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '/home?to=3',
+        url: '/events',
         linkText: 'Event',
         childLinks: []
         ,
@@ -116,6 +116,12 @@ export const headerLinks: Array<HeaderLink> = [
         linkText: 'Sponsors',
         childLinks: []
         ,
+        show: false
+    },
+    {
+        url: '/map',
+        linkText: 'Maps',
+        childLinks: [],
         show: false
     }
 ]

@@ -1,8 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { PopUp } from "$lib/PopUp";
-    // import logo from "$lib/assets/logo.png"
-    import logo from "$lib/assets/logo.png"
+    import logo from "$lib/assets/petrichor_logo.png"
 
     let popUpDialog:HTMLDialogElement;
     export let PopUpObj:PopUp;

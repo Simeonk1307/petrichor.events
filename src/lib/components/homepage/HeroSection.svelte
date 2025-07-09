@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Globe from '$lib/assets/svgs/globe.svg';
+	import Globe from '$lib/assets/globe.svg';
 	import hand from '$lib/assets/HomePage/hand.png';
+	import Strip from '../Strip.svelte';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 
@@ -20,12 +21,13 @@
 	}
 
 	function discover() {
-		change(3)
+		// change(3)
+		goto('/events');
 	}
 	let plang: string[] = [
 		'PETRICHOR',
 		'पेट्रीकोर',
-		'பெட்ரிகோர்',
+		// 'பெட்ரிகோர்',
 		'પેટ્રિકોર',
 		'പെട്രിക്കോർ',
 		'পেট্রিকোর',
@@ -114,7 +116,7 @@
 				<div class="caption">
 					Experience the Magic of Petrichor<br />
 					Celebrate culture, creativity, and camaraderie at IITPKD's iconic fest.<br/>
-					<strong>Join Us on <span style="color: #00e3ff;">18th</span> and <span style="color: #00e3ff;">19th</span> January at IIT Palakkad to experience the festivities.</strong>
+					<strong><span style="color: #00e3ff;">Join Us</span> on <span style="color: #00e3ff;">27th</span> and <span style="color: #00e3ff;">28th</span> of September at IIT Palakkad to experience the festivities.</strong>
 				</div>
 				<div class="buton_area">
 					<button type="button" class="ca_portal" on:click={ca_portal}
@@ -161,40 +163,7 @@
 		</div>
 	</div>
 
-	<div class="strip_holder" bind:this={strip}>
-		<div class="strip">
-			<div class="strip1">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-				<div class="banner">&nbsp;PETRICHOR</div>
-			</div>
-			<div class="strip1">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-				<div class="banner">&nbsp;PETRICHOR</div>
-			</div>
-			<div class="strip1">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-				<div class="banner">&nbsp;PETRICHOR</div>
-			</div>
-			<div class="strip1">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-				<div class="banner">&nbsp;PETRICHOR</div>
-			</div>
-			<div class="strip1">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-				<div class="banner">&nbsp;PETRICHOR</div>
-			</div>
-			<div class="strip1">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-				<div class="banner">&nbsp;PETRICHOR</div>
-			</div>
-		</div>
-	</div>
+	<Strip />
 </main>
 
 <style>
@@ -306,43 +275,8 @@
 		text-align: center;
 		font-weight: 100;
 	}
-	.strip_holder {
-		flex: 2;
-
-		width: 100vw;
-		max-height: 35px;
-		align-items: center;
-
-		overflow-x: hidden;
-		margin: 2rem 0;
-		border-top: 2px solid white;
-		border-bottom: 2px solid white;
-		padding: 5px 0;
-		opacity: 60%;
-		overflow-y: visible !important;
-		position: relative;
-	}
-	.strip {
-		overflow: visible !important;
-		display: flex;
-		align-items: center;
-		height: 100%;
-		/* Apply animation to this element */
-		-moz-animation: example1 5s linear infinite;
-		-webkit-animation: example1 5s linear infinite;
-		animation: example1 5s linear infinite;
-	}
-	.strip1 {
-		display: flex;
-		justify-content: center;
-		overflow-y: visible !important;
-		min-width: max(20%, 150px);
-	}
-
-	.banner {
-		display: flex;
-		justify-content: center;
-	}
+	
+	
 	/* Move it (define the animation) */
 	@-moz-keyframes example1 {
 		0% {
@@ -385,10 +319,6 @@
 		}
 		.first-block {
 			flex: 7;
-		}
-		.strip_holder {
-			padding: 8px 0;
-			margin: 1em 0;
 		}
 	}
 
