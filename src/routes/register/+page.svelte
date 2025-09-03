@@ -136,13 +136,15 @@
   justify-content: flex-start; 
   overflow-y: auto; 
 	  background: radial-gradient(
-		80% 70% at 50% 0%,
-		#039FF1 0%,
-		#074F88 20%,
-		#005698 35%,
-		#001423 67%,
-		#000910 80%,
-		#000000 100%
+		  80% 20% at 50% 100%,
+	  #C0F8FC 0%,
+	  #8BECF8 1%,
+	  #53B1C0 7.5%,
+	  #3790A4 15%,
+	  #288193 30%,
+	  #04202C 62.5%,
+	  #021114 75%,
+	  #000708 100%
 	  );  padding-top: 10rem; 
   box-sizing: border-box;
 }
@@ -166,7 +168,7 @@
     max-width: 90vw;
     padding: 2.5rem;
     background: transparent;
-    border: 1px solid #06b6d4;
+    border: 1px solid #b5ebfa;
     border-radius: 1rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
     font-family: 'Inter', sans-serif;
@@ -198,6 +200,7 @@
     margin-bottom: 1.25rem;
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
   }
   label {
     margin-bottom: 0.5rem;
@@ -205,13 +208,24 @@
   }
   input, select {
     padding: 1rem;
-    background: #334155;
-    border: none;
-    border-radius: 0.5rem;
+    background: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 2rem;
     color: #fff;
     font-size: 1rem;
   }
   input::placeholder { color: #9ca3af; }
+
+  #institype {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 2rem;                 
+    background-image: url('../../lib/assets/down_tri.png');
+    background-repeat: no-repeat;
+    background-position: right 1.5rem center;
+    background-size: 1.3rem 1.3rem; 
+  }
 
   .warn {
     color: #f88;
@@ -228,15 +242,17 @@
   .btn-primary {
     flex: 1;
     padding: 1rem;
-    background: linear-gradient(to right, #1e40af, #38bdf8);
-    border: none;
-    border-radius: 0.5rem;
+    margin-top: 2rem;
+    background: transparent;
+    border: solid 1px #fff;
+    border-radius: 2rem;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
   }
   .btn-primary:hover {
-	  background: linear-gradient(to right, #1d4ed8, #0ea5e9);
+	  background: linear-gradient(to right, #8becf8, #53b1c0);
+    color: #000;
 	}
   
   .btn-link {
@@ -246,9 +262,23 @@
     font-weight: 500;
   }
 
+  /*
   .btn-link:hover {
     text-decoration: underline;
   }
+  */
+
+  .signin-text {
+	  margin-top: 1rem;
+	  text-align: center;
+	  font-size: 0.875rem;
+	  color: #d1d5db;
+	}
+
+  .text-blue-400:hover {
+    text-decoration: underline;
+  }
+
 
   @media (max-width: 768px) {
     .form-box { width: 90%; padding: 1.5rem; }
@@ -406,9 +436,15 @@
       <!-- submit -->
       <div class="buttons">
         <button class="btn-primary" type="submit">Register</button>
+        <!-- <p> Already have an account? </p>
         <a href="/login" class="btn-link" on:click={handleLogin}>
-          Already have an account? <span class="text-blue-400">Sign In</span>
-        </a>
+           <span class="text-blue-400">Sign In</span>
+        </a> -->
+        <p class="signin-text">Already have an account? 
+          <a href="/login" class="btn-link" on:click={handleLogin}>
+            <span class="text-blue-400">Sign In</span>
+          </a>
+        </p>
       </div>
     </form>
   </div>

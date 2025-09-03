@@ -3,18 +3,12 @@
 </script>
 
 <div class="gradient-bg">
-	{#if path == '/workshop' || path == '/newWorkshop'}
+	{#if path.startsWith('/workshop') || path == '/newWorkshop'}
 		<div class="gradients-container extra">
 			<div id="g1-3" class="g" />
-			<div id="g1-2" class="g" />
+			<!-- <div id="g1-2" class="g" />
 			<div id="g1-1" class="g" />
-			<div id="g1-7" class="g" />
-		</div>
-		<div class="gradients-container extra">
-			<div id="g1-3" class="g" />
-			<div id="g1-2" class="g" />
-			<div id="g1-1" class="g" />
-			<div id="g1-7" class="g" />
+			<div id="g1-7" class="g" /> -->
 		</div>
 	{:else if ['/login', '/register','/profile', '/forgotpassword'].includes(path) || path.includes('/changepassword/')}
 		<div class="gradients-container extra">
@@ -131,15 +125,20 @@
 	}
 	#g1-3 {
 		background: radial-gradient(
-				circle,
-				rgba(var(--color3), 0.8) 0%,
-				rgba(var(--color3), 0) 55%
-			)
-			no-repeat;
+			30% 120% at 100% 50%, 
+			rgba(192, 248, 252, 0.8) 0%, 
+			rgba(139, 236, 248, 0.8) 14.42%, 
+			rgba(83, 177, 192, 0.8) 27.88%, 
+			rgba(55, 144, 164, 0.8) 38.94%, 
+			rgba(40, 129, 147, 0.8) 48.08%, 
+			rgba(4, 32, 44, 0.5) 78.85%, 
+			rgba(2, 17, 20, 0.5) 88.94%, 
+			rgba(0, 7, 8, 0.5) 97.12%
+		);
+		background-repeat: no-repeat;
+		background-color: #000;
 		width: 100vw;
-		top: 10%;
-		left: -30%;
-		height: calc(max(100vh,100vw));
+		height: 100vh;
 	}
 	#g1-7 {
 		background: radial-gradient(

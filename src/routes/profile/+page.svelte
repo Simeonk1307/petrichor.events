@@ -46,7 +46,7 @@
 		// console.log($loggedIn + "i" + $invalidate)
 		loading(false)
 		if (!$loggedIn) {
-			goto('/login');
+			// goto('/login');
 		} else if ($invalidate) {
 			location.reload(); // this will call before navigation which will in turn call whoami
 		} // no need to store data in session storage here, whoami is handling it
@@ -115,13 +115,14 @@
 		<div class="CAButton">
 			{#if profileData.CACodePresent}
 				<button
+					class="gotoButton"
 					on:click={() => {
 						goto('/CA/profile');
 					}}>Go to CAProfile</button
 				>
 			{:else}
 				<button
-					class="purple"
+					class="applyButton"
 					on:click={() => {
 						goto('/CA/welcome');
 					}}>Apply For CA</button
@@ -170,7 +171,7 @@
 				<div class="eventHolder">
 					{#if eventDisplay}
 						{#if profileData.events.length == 0}
-							<div class="no-message-box">Not Registered in any event</div>
+							<div class="no-message-box">Not Registered in any Event</div>
 						{:else}
 							{#each profileData.events as event}
 								<EventCard {event} />
@@ -198,10 +199,16 @@
 <style>
 	.main {
 		min-height: 110vh;
-		margin-top: 100px;
 		overflow-x: hidden;
 		display: flex;
 		flex-direction: row;
+		background: radial-gradient(
+		125% 100% at 0% 0%,
+		rgba(3,159,241,1.0) 0%,
+		rgba(0,20,35,1.0) 47%,
+		rgba(0,9,16,1.0) 70%,
+		rgba(0,0,0,1.0) 100%
+	  )
 	}
 	.name-mail-cont {
 		width: 80%;
@@ -224,10 +231,15 @@
 		margin: 0;
 	}
 
-	.purple {
-		background: linear-gradient(45deg, rgb(182, 62, 182), rgb(59, 150, 219));
+	.applyButton {
+		background: linear-gradient(45deg, rgb(0, 77, 255), rgb(29, 47, 141 ));
 		font-weight: bold;
 		color: white;
+	}
+	.gotoButton {
+		background-color: rgb(0, 197, 255);
+		font-weight: bold;
+		color: black;
 	}
 	.name-mail-cont p {
 		font-size: smaller;
@@ -236,7 +248,7 @@
 	}
 	.userData {
 		line-height: 15px;
-		margin-top: 3em;
+		margin-top: 145px;
 		margin-left: 2rem;
 		display: flex;
 		flex-direction: column;
@@ -246,6 +258,7 @@
 		flex: 1;
 	}
 	.container {
+		margin-top: 100px;
 		flex: 3;
 		display: flex;
 		min-height: 100%;
@@ -254,6 +267,7 @@
 	.college h3,
 	.phone h3 {
 		font-size: 14px;
+		padding: 10px;
 	}
 	.college h2,
 	.phone h2 {
@@ -263,7 +277,6 @@
 	.CAButton button {
 		border: none;
 		padding: 5px 10px;
-		background-color: rgb(46, 182, 46);
 		border-radius: 20px;
 	}
 	.buttons {
@@ -305,6 +318,13 @@
 		overflow-y: scroll !important;
 		max-height: 100%;
 		height: 100%;
+	}
+	.eventsBox h3 {
+		text-align: center;
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin: 0;
+		padding: 15px;
 	}
 	.logout {
 		position: absolute;
