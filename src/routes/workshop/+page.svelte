@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import location from '$lib/assets/location.svg';
 	import VanillaTilt from 'vanilla-tilt';
+	import WorkShopComp from './WorkShopComp.svelte';
 	let left: number, right: number;
 
 	onMount(() => {

@@ -69,13 +69,13 @@
 			{/each}
 		</div>
 		<p>
-			Happening on <strong style="color:cyan">{workshop.date}</strong> <br />at
-			<strong style="color:lightgreen">{workshop.venue}</strong>
+			Happening on <strong style="color:white; font-weight: bolder">{workshop.date}</strong> <br />at
+			<strong style="color:white; font-weight: bolder">{workshop.venue}</strong>
 		</p>
 
 		<p class="content desc">{workshop.description}</p>
 		{#if workshop.prerequisites.length > 0}
-			<p style="color: orange; text-align: unset">
+			<p style="color: white; font-weight: bolder">
 				Prerequisites:
 				{#each workshop.prerequisites as spk, i}
 					<span
@@ -145,6 +145,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		text-align: center;
 		flex-direction: column;
 		font-size: calc(15px + 0.3vw);
 	}
@@ -163,6 +164,8 @@
 		flex: 1;
 		width: min(50%,400px);
 		/* height: 100%; */
+		padding: 2rem;
+		border-radius: 4rem;
 	}
 
 	.desc {
@@ -176,22 +179,24 @@
 		color: white;
 		width: 100%;
 		font-weight: 700;
-		background: linear-gradient(99.74deg, #06dbac, #bd00ff);
-		border-radius: 15px;
-		border: none;
+		background: transparent;
+		border-radius: 2rem;
+		border: 1px solid white;
 		text-wrap: nowrap;
 	}
 	.chip {
 		padding: 0.2em;
 		padding-inline: 1em;
-		background-color: rgb(83, 83, 215);
+		background-color: transparent;
 		margin-right: 1em;
 		border-radius: 1em;
+		border: 1px solid white;
 		margin-bottom: 0.7em;
 	}
 	.chips {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 	}
 	.workshop_specific {
 		display: flex;
@@ -204,22 +209,21 @@
 		/* border: #bd00ff solid; */
 		gap:15px;
 		/* transition: all ease-in-out 0.1s; */
-		background-color: #000000f6;
+		background-color: transparent;
 		overflow: hidden;
 		cursor: pointer;
 		position: relative;
 		/* transition: all 1s ease-in-out; */
 		color: white;
-		border: 2px solid rgb(105, 9, 183);
-		box-shadow: 0 0 10px rgb(245, 76, 245);
+		border: 1px solid #b5ebfa;
+		border-radius: 4rem;
+		box-shadow: 0 0 10px #b5ebfa;
 	}
 
 	.imageHolder img {
 		width: 100%;
-		margin-right: 20px; 
-		padding-top: 10px;
 		object-fit: cover;
-		border-radius: 16px;
+		border-radius: 2rem;
 		color: white;
 		object-position: center;
 	}
