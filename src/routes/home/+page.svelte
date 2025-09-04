@@ -2,9 +2,10 @@
     import HeroSection from '$lib/components/homepage/HeroSection.svelte';
     import AboutSection from '$lib/components/homepage/AboutSection.svelte';
     import EventSection from '$lib/components/homepage/event_section/EventSection.svelte';
-	import TeamSection from '$lib/components/homepage/team_section/TeamSection.svelte';
+    import Footer from '$lib/components/ui/Footer.svelte';
     import { access_token, loggedIn } from '$lib/stores';
     import { getContext, onMount } from 'svelte';
+	import { footerLinks } from '$lib/helper.js';
 
     export let data;
     const getData: Function = getContext('getData');
@@ -26,13 +27,10 @@
         <AboutSection />
     </section>
 
-    <section id="events">
+    <section id="events-and-footer">
         <EventSection />
+        <Footer title = 'Petrichor 26' links={footerLinks}/>
     </section>
-
-    <section id="team">
-		<TeamSection />
-	</section>
 </div>
 
 <style>
@@ -43,32 +41,30 @@
         -webkit-user-select: none;
     }
 
-    /* 1. Make the main container a scroll-snap container */
     .maincontent {
-        height: 100vh; /* Must be the height of the viewport */
-        overflow-y: scroll; /* Enable scrolling on this element */
-        scroll-snap-type: y mandatory; /* Snap on the Y-axis, and it's mandatory */
+        height: 100vh;
+        overflow-y: scroll; 
+        scroll-snap-type: y mandatory; 
     }
 
-    /* 2. Define each section as a snap point */
     .maincontent > section {
-        /* Sizing: Each section is a full-screen slide */
         height: 100vh;
         width: 100%;
 
-        /* Snapping Behavior */
-        scroll-snap-align: start; /* Snap the top of the section to the top of the container */
+        scroll-snap-align: start; 
 
-        /* Centering Content (Highly Recommended) */
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative; /* Needed for absolute positioning of children like the gradient */
-        overflow: hidden; /* Hide anything that overflows the slide */
+        position: relative;
+        overflow: hidden; 
     }
 
-	#team {
-		height: auto; /* Allows the section to be the height of its content */
-		align-items: flex-start; /* Aligns the content to the top instead of center */
-	}
+    #events-and-footer {
+        height: auto; 
+        align-items: top;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow-y: auto;
+    }
 </style>

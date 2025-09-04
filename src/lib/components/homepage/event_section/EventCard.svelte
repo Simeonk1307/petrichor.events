@@ -14,7 +14,7 @@
     <!-- The swirl image goes here. Using a placeholder for now. -->
     <img src={imageUrl} alt="Abstract swirl graphic for {eventName}" class="card-image" />
   </div>
-  <p class="card-title">{eventName}</p>
+  <p class="card-title">{eventName}</p> 
 </div>
 
 <style>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let path: string;
 </script>
-
+{#if path != '/team'}
 <div class="gradient-bg">
 	{#if path.startsWith('/workshop') || path == '/newWorkshop'}
 		<div class="gradients-container extra">
@@ -32,6 +32,7 @@
 		</div>
 	{/if}
 </div>
+{/if}
 
 <style>
 	.g {

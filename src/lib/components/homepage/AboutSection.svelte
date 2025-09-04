@@ -25,12 +25,11 @@
     // helper functions for class bindings
     const leftIndex = () => (current - 1 + items.length) % items.length;
     const rightIndex = () => (current + 1) % items.length;
-    // Add this new helper function
     const farRightIndex = () => (current + 2 + items.length) % items.length;
 </script>
 
 <main>
-	<div class="carousel-wrapper">
+	<!-- <div class="carousel-wrapper">
 		<div class="carousel">
 			{#each items as img, i}
 				<div
@@ -44,7 +43,7 @@
 				</div>
 			{/each}
 		</div>
-	</div>
+	</div> -->
 	<div class="first-block">
 		<div class="content" bind:this={content}>
 			<div class="title">
@@ -87,9 +86,9 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start; /* Changed from 'center' */
-	padding-top: 170px; /* Add padding to push content down */
-	gap: 2rem; /* Optional: Sets a minimum gap */
+	justify-content: flex-start;
+	padding-top: 170px;
+	gap: 2rem; 
   }
 
   /* ------------ CAROUSEL ----------- */
@@ -120,11 +119,9 @@
 		transform: translate(-250%, -50%) scale(0.5);
 	}
 
-	/* This is the new "hidden-right" state. Items entering from the right will animate from here. */
 	.carousel-item.far-right {
 		transform: translate(150%, -50%) scale(0.7);
 		z-index: 2;
-		/* transition: none prevents hidden items from sliding across the screen */
 		transition: none;
 	}
 
@@ -135,7 +132,6 @@
 		filter: blur(4px);
 	}
 
-	/* Your .left and .selected styles remain the same */
 	.carousel-item.left {
 		transform: translate(-150%, -50%) scale(0.7);
 		opacity: 0.6;
@@ -192,11 +188,11 @@
   }
 
   .heading::after {
-	content: ''; /* REQUIRED to make the pseudo-element render */
-	display: block; /* Allows the element to have a width */
-	width: 55%; /* Or any width you prefer */
-	margin: 0.05rem auto 0; /* Centers the line and adds space */
-	border-bottom: 2px solid #00e3ff; /* Creates the underline */
+	content: ''; 
+	display: block; 
+	width: 55%; 
+	margin: 0.05rem auto 0; 
+	border-bottom: 2px solid #00e3ff; 
   }
 
   .caption {
@@ -216,8 +212,8 @@
 
   .imagediv img {
     max-width: 650px;
-    filter: drop-shadow(0 0 60px rgba(41, 41, 41, 0.8)) /* More intense, slightly less opaque */
-            drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); /* Wider, very soft, and more transparent layer */
+    filter: drop-shadow(0 0 60px rgba(41, 41, 41, 0.8)) 
+            drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); 
   }
 
   /* Responsive */
