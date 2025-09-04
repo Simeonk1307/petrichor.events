@@ -5,6 +5,8 @@
 	import { page } from '$app/stores';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 
 	/** @type {import('./$types').ActionData} */
 	// export let form;
@@ -34,6 +36,13 @@
 		goto(`/login${$page.url.search}`);
 	}
 	const whoami: Function = getContext('whoami');
+
+	function buttonAnimation() {
+		button.animate(
+			[{ background: 'red' }],
+			{ duration: 200, direction: 'alternate', iterations: 2 },
+		)
+	}
 
 	$: loginResult = () => {
 		loading(true);
@@ -95,16 +104,16 @@
 <main>
   <div class="container">
     <div class="login">
-      <h2>Sign in to your account</h2>
+      <h2>Log In</h2>
       <form method="POST" action="?/login" use:enhance={loginResult}>
 
-	<label class="label"><p>Email</p>
-		<input type="email" name="email" placeholder="name@company.com" bind:value={email} required autocomplete="username" />
-	</label>
+		<label class="label" for="email"><!-- <p>Email</p> -->
+			<input type="email" name="email" placeholder="Username" bind:value={email} required autocomplete="username" />
+		</label>
 
-        <label class="label"><p>Password</p>
-		<input type="password" name="password" placeholder="••••••••" bind:value={password} required autocomplete="current-password" />
-	</label>
+        <label class="label" for="password"><!-- <p>Password</p> -->
+			<input type="password" name="password" placeholder="Password" bind:value={password} required autocomplete="current-password" />
+		</label>
         <div class="options">
           <label class="remember">
             <input type="checkbox" class="check" />
@@ -114,7 +123,7 @@
         </div>
 
         <div class="flex justify-center">
-          <button id="login" type="submit" class="login-btn">Sign in</button>
+          <button id="login" type="submit" class="login-btn" on:click={buttonAnimation}>LOGIN</button>
         </div>
 
         <p class="signup-text">Don't have an account yet?
@@ -133,13 +142,15 @@
 	  justify-content: center;
 	  align-items: center;
 	  background: radial-gradient(
-		80% 70% at 50% 0%,
-		#039FF1 0%,
-		#074F88 20%,
-		#005698 35%,
-		#001423 67%,
-		#000910 80%,
-		#000000 100%
+		80% 30% at 50% 100%,
+		#C0F8FC 0%,
+		#8BECF8 1%,
+		#53B1C0 7.5%,
+		#3790A4 15%,
+		#288193 30%,
+		#04202C 62.5%,
+		#021114 75%,
+		#000708 100%
 	  );
 	  background-repeat: no-repeat;
 	  background-color: #000;
@@ -164,7 +175,7 @@
 	  min-height: 420px;
 	  border-radius: 1rem;
 	  background-color: transparent;
-	  border: 1px solid #06b6d4; /* border-cyan-600 */
+	  border: 1px solid #b5ebfa; /* border-cyan-600 */
 	  padding: 2.5rem;
 	  color: white;
 	  animation: flicker 2s infinite ease-in-out;
@@ -200,11 +211,14 @@
 	}
 	
 	.login h2 {
-	  font-size: 1.5rem;
-	  font-weight: 550;
-	  margin-bottom: 1rem;
-	  color: white;
-	  font-family: 'Inria Sans', sans-serif;
+		text-align: center;
+		font-size: 3rem;
+		font-weight: 550;
+		margin-bottom: 1rem;
+		color: white;
+		font-family: 'Inria Sans', sans-serif;
+		padding-top: 1rem;
+		padding-bottom: 2rem;
 	}
 	
 	.label {
@@ -212,7 +226,7 @@
 	  font-size: 0.875rem;
 	  font-weight: 500;
 	  margin-bottom: 0.25rem;
-	  color: #d1d5db;
+	  color: white;
 	}
 	
 	.label p {
@@ -222,15 +236,42 @@
 	.login input {
 	  width: 100%;
 	  margin-bottom: 1rem;
-	  padding: 0.5rem 1rem;
-	  border-radius: 0.375rem;
-	  border: 1px solid #4b5563;
-	  background-color: #334155;
+	  padding: 1rem 1rem;
+	  border-radius: 1rem;
+	  border: 1px solid #ffffff;
+	  background-color: transparent;
+	  text-align: center;
 	  color: white;
-	  /* placeholder-color: #9ca3af; */
+	  /* placeholder-color: white; */
 	  outline: none;
 	}
 	
+	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    	color: white;
+		text-align: center;
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color: white;
+		opacity: 1;
+		text-align: center;
+	}
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color: white;
+		opacity: 1;
+		text-align: center;
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color: white;
+		text-align: center;
+	}
+	::-ms-input-placeholder { /* Microsoft Edge */
+		color: white;
+		text-align: center;
+	}
+	::placeholder { /* Most modern browsers support this now. */
+		color: white;
+		text-align: center;
+	}
 	.login input:focus {
 	  box-shadow: 0 0 0 2px #3b82f6;
 	}
@@ -245,11 +286,22 @@
 	
 	.remember {
 	  display: flex;
+	  flex-direction: row;
 	  align-items: center;
+	  justify-content: center;
 	  gap: 0.5rem;
+	  text-align: center;
 	  color: #d1d5db;
 	}
-	
+	input {
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+	span {
+		margin-top: 0.25em;
+		margin-bottom: 0.25em;
+	  	white-space: nowrap;
+	}
 	.check {
 	  width: 20px;
 	  height: 20px;
@@ -257,7 +309,7 @@
 	}
 	
 	.forgot {
-	  color: #60a5fa;
+	  color: #ffffff;
 	  text-decoration: none;
 	}
 	
@@ -272,12 +324,20 @@
 	  border-radius: 0.5rem;
 	  margin: 0 auto;
 	  display: block;
-	  background: linear-gradient(to right, #1e40af, #38bdf8);
+	  background: transparent;
+	  border: 1px solid white;
+	  border-radius: 9999px;
 	  /* transition: background 0.3s ease; */
 	}
 	
 	.login-btn:hover {
-	  background: linear-gradient(to right, #1d4ed8, #0ea5e9);
+	  background: linear-gradient(to right, #8becf8, #53b1c0);
+	  color: black;
+	}
+	
+	.login-btn:active {
+	  width: 195px;
+	  font-size: 0.9rem;
 	}
 	
 	.signup-text {

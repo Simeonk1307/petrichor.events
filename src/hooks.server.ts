@@ -12,14 +12,14 @@ const frontendRoutes = [
 	'/forgotpassword',
 	'/ca/welcome',
 	'/ca/profile',
-	'/comingsoon',
+	'/comingsoon',	
+	'/workshop',
 	'/profile',
 	'/team'
 ];
 const UnderConstructionRoutes = [
 	'/contactus',
 	'/events',
-	'/workshop',
 	'/schedule',
 	'/merch',
 	'/sponsors',

@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import location from '$lib/assets/location.svg';
 	import VanillaTilt from 'vanilla-tilt';
+	import WorkShopComp from './WorkShopComp.svelte';
 	let left: number, right: number;
 
 	onMount(() => {
@@ -52,6 +53,9 @@
 				<div class="imageHolder {id}">
 					<img src={workshop.image} alt={workshop.name} />
 				</div>
+				<!-- <div class="imageDescHolder {id}">
+					<img src={workshop.imageDesc} alt={workshop.name} />
+				</div> -->
 			</div>
 		{/each}
 	</div>
@@ -69,7 +73,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		transition: bottom 0.3s ease;
+		/* transition: bottom 0.3s ease; */
 		padding: 20px;
 		margin-top: 50px;
 		text-align: left;
@@ -182,12 +186,25 @@
 	}
 	.card:hover .imageHolder {
 		filter: brightness(0.8);
+		/* display: none; */
 	}
 	.imageHolder {
 		height: 20rem;
 		position: absolute;
 		z-index: 10;
 	}
+
+	/* .card:hover .imageDescHolder {
+		filter: brightness(0.8);
+		display: block;
+	}
+	.imageDescHolder {
+		height: 20rem;
+		position: absolute;
+		z-index: 10;
+		display: none;
+	} */
+	
 	img {
 		height: 20rem;
 		aspect-ratio: 1;

@@ -109,6 +109,7 @@
 		height: 100%;
 	}
 
+	/* This is now the "hidden-left" state. Items exiting left will animate to here. */
 	.carousel-item {
 		position: absolute;
 		top: 50%;

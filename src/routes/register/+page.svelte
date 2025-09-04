@@ -136,13 +136,15 @@
   justify-content: flex-start; 
   overflow-y: auto; 
 	  background: radial-gradient(
-		80% 70% at 50% 0%,
-		#039FF1 0%,
-		#074F88 20%,
-		#005698 35%,
-		#001423 67%,
-		#000910 80%,
-		#000000 100%
+		  80% 20% at 50% 100%,
+	  #C0F8FC 0%,
+	  #8BECF8 1%,
+	  #53B1C0 7.5%,
+	  #3790A4 15%,
+	  #288193 30%,
+	  #04202C 62.5%,
+	  #021114 75%,
+	  #000708 100%
 	  );  padding-top: 10rem; 
   box-sizing: border-box;
 }
@@ -166,7 +168,7 @@
     max-width: 90vw;
     padding: 2.5rem;
     background: transparent;
-    border: 1px solid #06b6d4;
+    border: 1px solid #b5ebfa;
     border-radius: 1rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
     font-family: 'Inter', sans-serif;
@@ -198,6 +200,7 @@
     margin-bottom: 1.25rem;
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
   }
   label {
     margin-bottom: 0.5rem;
@@ -205,9 +208,9 @@
   }
   input, select {
     padding: 1rem;
-    background: #334155;
-    border: none;
-    border-radius: 0.5rem;
+    background: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 1rem;
     color: #fff;
     font-size: 1rem;
   }
@@ -237,17 +240,26 @@
     margin-top: 2.5rem;
   }
   .btn-primary {
+    align-self: center;
+	  width: 100%;
     flex: 1;
     padding: 1rem;
-    background: linear-gradient(to right, #1e40af, #38bdf8);
-    border: none;
-    border-radius: 0.5rem;
+    margin-top: 2rem;
+    background: transparent;
+    border: solid 1px #fff;
+    border-radius: 2rem;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
   }
   .btn-primary:hover {
-	  background: linear-gradient(to right, #1d4ed8, #0ea5e9);
+	  background: linear-gradient(to right, #8becf8, #53b1c0);
+    color: #000;
+	}
+	
+	.btn-primary:active {
+	  width: 98%;
+	  font-size: 0.9rem;
 	}
   
   .btn-link {
@@ -430,7 +442,7 @@
 
       <!-- submit -->
       <div class="buttons">
-        <button class="btn-primary" type="submit">Register</button>
+        <button class="btn-primary" type="submit">REGISTER</button>
         <!-- <p> Already have an account? </p>
         <a href="/login" class="btn-link" on:click={handleLogin}>
            <span class="text-blue-400">Sign In</span>
