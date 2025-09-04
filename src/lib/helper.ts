@@ -15,9 +15,9 @@ const mediumSquare = {
 };
 
 export const closed_workshops = [
-    "WP01",
-    "WP02",
-    "WP03",
+    // "WP01",
+    // "WP02",
+    // "WP03",
 ]
 
 export const closed_events = [
