@@ -89,7 +89,7 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '/home/#events',
+        url: '/home/#events-and-footer',
         linkText: 'Events',
         childLinks: []
         ,
