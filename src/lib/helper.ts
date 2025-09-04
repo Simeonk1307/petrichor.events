@@ -77,10 +77,8 @@ export const headerLinks: Array<HeaderLink> = [
     {
         url: '/home/#about',
         linkText: 'About Us',
-        childLinks: [{
-            url: "/contactUs",
-            linkText: "Contact Us"
-        }],
+        childLinks: []
+        ,
         show: false
     },
     {
@@ -97,7 +95,6 @@ export const headerLinks: Array<HeaderLink> = [
         ,
         show: false
     },
-
     {
         url: '/schedule',
         linkText: 'Schedule',
@@ -108,6 +105,13 @@ export const headerLinks: Array<HeaderLink> = [
     {
         url: '/merch',
         linkText: 'Merch',
+        childLinks: []
+        ,
+        show: false
+    },
+    {
+        url: '/team',
+        linkText: 'Our Team',
         childLinks: []
         ,
         show: false

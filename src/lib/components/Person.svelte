@@ -36,13 +36,13 @@
     }
 
     .person-card:hover {
-        transform: translateY(-8px); /* A more noticeable lift */
-        border-color: #00e3ff; /* Cyan border on hover */
+        transform: translateY(-8px); 
+        border-color: #00e3ff;
         box-shadow: 0 0 15px rgba(0, 227, 255, 0.4), 0 0 25px rgba(0, 227, 255, 0.2); /* Cyan glow effect */
     }
 
     .image-container {
-        aspect-ratio: 1 / 1; /* Make it a square for a clean look */
+        aspect-ratio: 1 / 1; 
         overflow: hidden;
     }
 
