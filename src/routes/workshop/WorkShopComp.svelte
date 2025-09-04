@@ -12,11 +12,11 @@
 			if (closed_workshops.includes(id)) {
 				return
 			}
-			// get the fees and number of particiants here.
+			// get the fees and number of participants here.
 			// For workshop number of participants will be only 1 so
 			// we will skip the add participant page and directly send user to payment page
-			goto(`/payment/register?id=${id}`);
-			window.open("https://docs.google.com/forms/d/e/1FAIpQLSfjtgKgnDf_dX3QyrkisEODDw0z2MkRIXAtN28NyHiPEpD5Jg/viewform")
+			// goto(`/payment/register?id=${id}`);
+			window.open("https://docs.google.com/forms/d/e/1FAIpQLSdV_IPsTZldqIYSX7Pc6Bz5Iuj989hqmWz8tOEVuur2ivR_eQ/viewform")
 		}
 
 	let WorkShopDiv:HTMLElement;

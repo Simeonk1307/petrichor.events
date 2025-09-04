@@ -5,6 +5,8 @@
 	import { page } from '$app/stores';
 	import { access_token, invalidate, loggedIn, user } from '$lib/stores';
 	import { getContext, onMount } from 'svelte';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 
 	/** @type {import('./$types').ActionData} */
 	// export let form;
@@ -34,6 +36,13 @@
 		goto(`/login${$page.url.search}`);
 	}
 	const whoami: Function = getContext('whoami');
+
+	function buttonAnimation() {
+		button.animate(
+			[{ background: 'red' }],
+			{ duration: 200, direction: 'alternate', iterations: 2 },
+		)
+	}
 
 	$: loginResult = () => {
 		loading(true);
@@ -98,11 +107,11 @@
       <h2>Log In</h2>
       <form method="POST" action="?/login" use:enhance={loginResult}>
 
-		<label class="label"><!-- <p>Email</p> -->
+		<label class="label" for="email"><!-- <p>Email</p> -->
 			<input type="email" name="email" placeholder="Username" bind:value={email} required autocomplete="username" />
 		</label>
 
-        <label class="label"><!-- <p>Password</p> -->
+        <label class="label" for="password"><!-- <p>Password</p> -->
 			<input type="password" name="password" placeholder="Password" bind:value={password} required autocomplete="current-password" />
 		</label>
         <div class="options">
@@ -114,7 +123,7 @@
         </div>
 
         <div class="flex justify-center">
-          <button id="login" type="submit" class="login-btn">LOGIN</button>
+          <button id="login" type="submit" class="login-btn" on:click={buttonAnimation}>LOGIN</button>
         </div>
 
         <p class="signup-text">Don't have an account yet?
@@ -203,7 +212,7 @@
 	
 	.login h2 {
 		text-align: center;
-		font-size: 5rem;
+		font-size: 3rem;
 		font-weight: 550;
 		margin-bottom: 1rem;
 		color: white;
@@ -228,7 +237,7 @@
 	  width: 100%;
 	  margin-bottom: 1rem;
 	  padding: 1rem 1rem;
-	  border-radius: 2rem;
+	  border-radius: 1rem;
 	  border: 1px solid #ffffff;
 	  background-color: transparent;
 	  text-align: center;
@@ -277,11 +286,22 @@
 	
 	.remember {
 	  display: flex;
+	  flex-direction: row;
 	  align-items: center;
+	  justify-content: center;
 	  gap: 0.5rem;
+	  text-align: center;
 	  color: #d1d5db;
 	}
-	
+	input {
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+	span {
+		margin-top: 0.25em;
+		margin-bottom: 0.25em;
+	  	white-space: nowrap;
+	}
 	.check {
 	  width: 20px;
 	  height: 20px;
@@ -313,6 +333,11 @@
 	.login-btn:hover {
 	  background: linear-gradient(to right, #8becf8, #53b1c0);
 	  color: black;
+	}
+	
+	.login-btn:active {
+	  width: 195px;
+	  font-size: 0.9rem;
 	}
 	
 	.signup-text {

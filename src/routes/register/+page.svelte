@@ -210,7 +210,7 @@
     padding: 1rem;
     background: transparent;
     border: 1px solid #ffffff;
-    border-radius: 2rem;
+    border-radius: 1rem;
     color: #fff;
     font-size: 1rem;
   }
@@ -240,6 +240,8 @@
     margin-top: 2.5rem;
   }
   .btn-primary {
+    align-self: center;
+	  width: 100%;
     flex: 1;
     padding: 1rem;
     margin-top: 2rem;
@@ -253,6 +255,11 @@
   .btn-primary:hover {
 	  background: linear-gradient(to right, #8becf8, #53b1c0);
     color: #000;
+	}
+	
+	.btn-primary:active {
+	  width: 98%;
+	  font-size: 0.9rem;
 	}
   
   .btn-link {
@@ -435,7 +442,7 @@
 
       <!-- submit -->
       <div class="buttons">
-        <button class="btn-primary" type="submit">Register</button>
+        <button class="btn-primary" type="submit">REGISTER</button>
         <!-- <p> Already have an account? </p>
         <a href="/login" class="btn-link" on:click={handleLogin}>
            <span class="text-blue-400">Sign In</span>
