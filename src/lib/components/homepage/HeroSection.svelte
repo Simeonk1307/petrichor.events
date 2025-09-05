@@ -176,24 +176,53 @@
   }
 
   /* Responsive */
-  @media (max-width: 900px) {
-    .first-block {
-      flex-direction: column;
-      text-align: center;
-      padding: 3rem 2rem;
-    }
+   @media (max-width: 900px) {
+      .first-block {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin-top: 0;      /* MODIFIED: Removed large margin */
+        padding: 4rem 1.5rem;
+        background-color: transparent;
+        position: relative; /* ADDED: This is the crucial fix for positioning context */
+      }
 
-    .content {
-      max-width: 90%;
-    }
-    
-    .button_area {
-      justify-content: center;
-    }
+      .content {
+        max-width: 100%;
+        min-width: unset;
+        position: relative;
+        z-index: 1; /* This correctly lifts the text forward */
+      }
 
-    .imagediv img {
-      max-width: 280px;
-      margin-top: 2rem;
+      .imagediv {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.25;
+      }
+
+      .imagediv img {
+        max-width: 500px;
+        margin-top: 0; /* MODIFIED: Removed unnecessary margin */
+
+      }
+
+      .heading {
+        font-size: 3.2rem;
+      }
+
+      .subheading {
+        font-size: 1.3rem;
+      }
+
+      .caption {
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+      
+      .button_area {
+        justify-content: center;
+      }
     }
-  }
 </style>
