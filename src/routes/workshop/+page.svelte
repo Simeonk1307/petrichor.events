@@ -168,6 +168,7 @@
 		width: 20rem;
 		cursor: pointer;
 		z-index: 12;
+		border-radius: 10%;
 		transition: all 0.1s ease-in-out;
 	}
 	.main:hover .card:not(:hover) {
@@ -178,7 +179,7 @@
 		filter: none;
 	}
 	.card:hover {
-		border-radius: 20%;
+		border-radius: 5%;
 	}
 
 	.card:hover .hover-content {
