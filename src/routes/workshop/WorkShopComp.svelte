@@ -174,6 +174,7 @@
 		width: 100%;
 		font-family: var(--wfont);
 		font-weight: lighter;
+		white-space: pre-wrap;
 	}
 	.price_btn {
 		color: white;
