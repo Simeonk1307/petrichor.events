@@ -107,12 +107,12 @@
       <h2>Log In</h2>
       <form method="POST" action="?/login" use:enhance={loginResult}>
 
-		<label class="label" for="email"><!-- <p>Email</p> -->
-			<input type="email" name="email" placeholder="Username" bind:value={email} required autocomplete="username" />
+		<label class="label" for="email"><p>Email</p>
+			<input type="email" name="email" placeholder="name@company.com" bind:value={email} required autocomplete="username" />
 		</label>
 
-        <label class="label" for="password"><!-- <p>Password</p> -->
-			<input type="password" name="password" placeholder="Password" bind:value={password} required autocomplete="current-password" />
+        <label class="label" for="password"><p>Password</p>
+			<input type="password" name="password" placeholder="••••••••" bind:value={password} required autocomplete="current-password" />
 		</label>
         <div class="options">
           <label class="remember">
@@ -170,7 +170,7 @@
 	}
 	
 	.container {
-	  width: 90%;
+	  width: 60%;
 	  max-width: 700px;
 	  min-height: 420px;
 	  border-radius: 1rem;
@@ -181,6 +181,12 @@
 	  animation: flicker 2s infinite ease-in-out;
 	}
 	
+	@media (max-width: 600px) {
+	  .options {
+		flex-direction: column;
+	  }
+	}
+
 	@media (max-width: 1023px) {
 	  .container {
 		max-width: 600px;
@@ -230,7 +236,7 @@
 	}
 	
 	.label p {
-	  margin-bottom: 0.5rem;
+	  margin-bottom: -0.25rem;
 	}
 	
 	.login input {
@@ -240,38 +246,38 @@
 	  border-radius: 1rem;
 	  border: 1px solid #ffffff;
 	  background-color: transparent;
-	  text-align: center;
+	  /* text-align: center; */
 	  color: white;
 	  /* placeholder-color: white; */
 	  outline: none;
 	}
 	
-	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	/* ::-webkit-input-placeholder { WebKit, Blink, Edge
     	color: white;
 		text-align: center;
 	}
-	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	:-moz-placeholder { Mozilla Firefox 4 to 18
 		color: white;
 		opacity: 1;
 		text-align: center;
 	}
-	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	::-moz-placeholder { Mozilla Firefox 19+
 		color: white;
 		opacity: 1;
 		text-align: center;
 	}
-	:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	:-ms-input-placeholder { Internet Explorer 10-11
 		color: white;
 		text-align: center;
 	}
-	::-ms-input-placeholder { /* Microsoft Edge */
+	::-ms-input-placeholder { Microsoft Edge
 		color: white;
 		text-align: center;
 	}
-	::placeholder { /* Most modern browsers support this now. */
+	::placeholder { Most modern browsers support this now.
 		color: white;
 		text-align: center;
-	}
+	} */
 	.login input:focus {
 	  box-shadow: 0 0 0 2px #3b82f6;
 	}
