@@ -20,6 +20,19 @@
 		margin-bottom: 20px;
 		color: white;
 		position: relative;
+		background: radial-gradient(
+			30% 80% at 110% 50%, 
+			rgba(192, 248, 252, 0.8) 0%, 
+			rgba(139, 236, 248, 0.8) 14.42%, 
+			rgba(83, 177, 192, 0.8) 27.88%, 
+			rgba(55, 144, 164, 0.8) 38.94%, 
+			rgba(40, 129, 147, 0.8) 48.08%, 
+			rgba(4, 32, 44, 0.5) 78.85%, 
+			rgba(2, 17, 20, 0.5) 88.94%, 
+			rgba(0, 7, 8, 0.5) 97.12%
+		);
+		background-repeat: no-repeat;
+		background-color: #000;
 	}
 	input {
 		display: none;
