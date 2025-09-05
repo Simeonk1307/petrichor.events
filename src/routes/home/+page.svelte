@@ -1,86 +1,70 @@
 <script lang="ts">
-	// import AboutSection from '$lib/components/homepage/AboutSection.svelte';
-	import HeroSection from '$lib/components/homepage/HeroSection.svelte';
-	import Workshop from '$lib/components/homepage/workshop_section/Workshop.svelte';
-	import { access_token, loggedIn } from '$lib/stores';
-	import { getContext, onMount } from 'svelte';
+    import HeroSection from '$lib/components/homepage/HeroSection.svelte';
+    import AboutSection from '$lib/components/homepage/AboutSection.svelte';
+    import EventSection from '$lib/components/homepage/event_section/EventSection.svelte';
+    import Footer from '$lib/components/ui/Footer.svelte';
+    import { access_token, loggedIn } from '$lib/stores';
+    import { getContext, onMount } from 'svelte';
+	import { footerLinks } from '$lib/helper.js';
 
-	let slideHero: Function;
-	// let slideAbout: Function;
-	let visible = false;
-
-	export let data;
-	const getData: Function = getContext('getData');
-	let pageWidth = 0;
-	onMount(() => {
-		setTimeout(() => {
-			visible = true;
-		}, 10);
-		if (!$loggedIn) {
-			getData();
-		}
-		pageWidth = window.innerWidth;
-		window.onresize = () => {
-			pageWidth = window.innerWidth;
-		};
-		window.onscroll = (e) => {
-			let val = window.scrollY;
-			// console.log(val)
-			if (slideHero) {
-				slideHero(val);
-			}
-
-		};
-		access_token.set(data.accessToken);
-	});
+    export let data;
+    const getData: Function = getContext('getData');
+    
+    onMount(() => {
+        if (!$loggedIn) {
+            getData();
+        }
+        access_token.set(data.accessToken);
+    });
 </script>
 
-<div class="maincontent {visible ? 'visible' : ''}">
-	<HeroSection bind:pageWidth bind:slide={slideHero} toAnimate={false} />
+<div class="maincontent">
+    <section id="hero">
+        <HeroSection />
+    </section>
+    
+    <section id="about">
+        <AboutSection />
+    </section>
 
-	<div class="card event">
-		<div class="gradient-bg">
-			<div class="gradients-container extra">
-				<div class="g" id="g3-1" />
-			</div>
-			<div class="gradients-container extra">
-				<div class="g" id="g4-1" />
-			</div>
-		</div>
-		<!-- <Event bind:pageWidth /> -->
-		<Workshop />
-	</div>
+    <section id="events-and-footer">
+        <EventSection />
+        <Footer title = 'Petrichor 26' links={footerLinks}/>
+    </section>
 </div>
 
 <style>
-	* {
-		user-select: none;
-		-ms-user-select: none;
-		-moz-user-select: none;
-		-webkit-user-select: none;
-	}
+    * {
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
 
-	
-	.maincontent {
-		display: grid;
-		/* overflow: hidden; */
-		grid-template-columns: 1fr;
-	}
-	.card {
-		display: flex;
-		justify-content: center;
-		overflow: auto;
-		align-items: center;
-		width: 100vw;
-		top: 0;
-		z-index: 20;
-		position: relative;
-		height: 100vh;
-	}
-	.visible {
-		opacity: 100% !important;
-	}
-	.event {
-		overflow: auto;
-	}
+    .maincontent {
+        height: 100vh;
+        overflow-y: scroll; 
+        scroll-snap-type: y mandatory; 
+    }
+
+    .maincontent > section {
+        height: 100vh;
+        width: 100%;
+
+        scroll-snap-align: start; 
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden; 
+    }
+
+    #events-and-footer {
+        height: auto; 
+        align-items: top;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow-y: auto;
+    }
 </style>

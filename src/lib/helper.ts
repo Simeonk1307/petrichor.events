@@ -75,17 +75,8 @@ export const footerLinks: Array<Link> = [
 
 export const headerLinks: Array<HeaderLink> = [
     {
-        url: '/aboutus',
+        url: '/home/#about',
         linkText: 'About Us',
-        childLinks: [{
-            url: "/contactUs",
-            linkText: "Contact Us"
-        }],
-        show: false
-    },
-    {
-        url: '/events',
-        linkText: 'Event',
         childLinks: []
         ,
         show: false
@@ -93,6 +84,13 @@ export const headerLinks: Array<HeaderLink> = [
     {
         url: '/workshop',
         linkText: 'Workshop',
+        childLinks: []
+        ,
+        show: false
+    },
+    {
+        url: '/home/#events-and-footer',
+        linkText: 'Events',
         childLinks: []
         ,
         show: false
@@ -107,6 +105,13 @@ export const headerLinks: Array<HeaderLink> = [
     {
         url: '/merch',
         linkText: 'Merch',
+        childLinks: []
+        ,
+        show: false
+    },
+    {
+        url: '/team',
+        linkText: 'Our Team',
         childLinks: []
         ,
         show: false

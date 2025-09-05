@@ -15,6 +15,7 @@ const frontendRoutes = [
 	'/comingsoon',	
 	'/workshop',
 	'/profile',
+	'/team'
 ];
 const UnderConstructionRoutes = [
 	'/contactus',
