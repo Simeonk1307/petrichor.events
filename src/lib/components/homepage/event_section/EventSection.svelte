@@ -15,7 +15,7 @@
   ];
   const rightEvents = [
 		{
-			id: 'tcomingsoon',
+			id: 'comingsoon',
 			title: 'Informals',
 		},
 		{
@@ -77,6 +77,7 @@
     text-transform: uppercase;
     margin-bottom: 60px;
     padding-left: 0.5em; 
+    margin-top: 2.5rem;
   }
 
   .events-grid {

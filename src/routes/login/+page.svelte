@@ -104,7 +104,7 @@
 <main>
   <div class="container">
     <div class="login">
-      <h2>Log In</h2>
+      <h1>Log in to your account!</h1>
       <form method="POST" action="?/login" use:enhance={loginResult}>
 
 		<label class="label" for="email"><p>Email</p>
@@ -191,32 +191,41 @@
 	  .container {
 		width: 80%;
 		/* height: 400px; */
-		padding: 2.5rem;
+		padding: 1.5rem;
 	  }
-	
-		.login h2 {
-		font-size: 2rem;
-		font-weight: 450;
-		}
 	}
 	
 	.login {
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 	
-	.login h2 {
-		text-align: center;
-		font-size: 3rem;
-		font-weight: 550;
-		margin-bottom: 1rem;
-		color: white;
-		font-family: 'Inria Sans', sans-serif;
+	.login h1 {
+		text-align: left;
+    	font-family: 'Inria Sans', sans-serif;
+		font-size: 2.1rem;
+		font-weight: 700;
 		padding-top: 1rem;
 		padding-bottom: 2rem;
+		color: white;	
 	}
-	
+
+	@media (max-width: 900px) {
+		.login h1 {
+			margin-top: -1.5rem;
+			font-size: 1.8rem;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.login h1 {
+			margin-top: -1.5rem;
+			font-size: 1.6rem;
+		}
+	}
+
+
 	.label {
 		display: block;
     	font-weight: 600;
