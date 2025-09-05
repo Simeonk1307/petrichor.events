@@ -216,6 +216,13 @@
             drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); 
   }
 
+	@keyframes glowPulse {
+		0% { filter: drop-shadow(0 0 0px rgba(0, 227, 255, 0.6))
+					drop-shadow(0 0 30px rgba(0, 227, 255, 0.4)); }
+		100% { filter: drop-shadow(0 0 25px rgba(0, 227, 255, 0.9))
+						drop-shadow(0 0 60px rgba(0, 227, 255, 0.6)); }
+	}
+
   /* Responsive */
   @media (max-width: 1150px) {
 	.first-block {
@@ -246,7 +253,7 @@
     .first-block {
 		flex-direction: column;
 		text-align: center;
-		margin-top: 0;
+		margin-top: -6rem;
 		padding: 4rem 1.5rem;
 		background-color: transparent;
 		min-width: unset;
@@ -275,7 +282,7 @@
       font-size: 1.05rem; /* Changed font size */
       line-height: 1.7;
 	  max-width: 90%;
-	  margin-left: 2rem;
+	  margin-left: 1.5rem;
     }
 
 	.imagediv {
@@ -283,16 +290,18 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 0.25;
+        opacity: 0.5;
       }
 
     .imagediv img {
-      max-width: 450px; /* Changed image size */
+      min-width: 500px; /* Changed image size */
       margin-top: 2rem;
+	  animation: glowPulse 1s ease-in-out infinite alternate;
+	  opacity: 0.5;
     }
   }
 
-  @media (max-width: 380px) {
+  @media (max-width: 440px) {
 	.first-block {
 		/* Further reduce padding for the smallest screens */
 		margin-top: -5rem;
