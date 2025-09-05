@@ -5,7 +5,7 @@
 
   const leftEvents = [
 		{
-			id: 'comingsoon',
+			id: 'workshop',
 			title: 'pre-fest-workshops',
 		},
 		{

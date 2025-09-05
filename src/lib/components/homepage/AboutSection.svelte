@@ -217,6 +217,31 @@
   }
 
   /* Responsive */
+  @media (max-width: 1150px) {
+	.first-block {
+		gap: 1.5rem; 
+	}
+
+	.first-block {
+		min-width: unset;
+	}
+
+	.content {
+		min-width: unset;
+	}
+
+	.heading {
+		font-size: 3rem;
+	}
+
+	.caption {
+		font-size: 1.1rem;
+	}
+
+	.imagediv img {
+		max-width: 350px;
+	}
+}
   @media (max-width: 900px) {
     .first-block {
 		flex-direction: column;
@@ -267,5 +292,40 @@
     }
   }
 
+  @media (max-width: 380px) {
+	.first-block {
+		/* Further reduce padding for the smallest screens */
+		margin-top: -5rem;
+		padding: 3rem 1rem;
+	}
 
+	.heading {
+		/* Decrease heading size */
+		font-size: 2.5rem;
+	}
+
+	.subheading {
+		/* Decrease subheading size */
+		font-size: 1.1rem;
+	}
+
+	.caption {
+		/* Adjust caption for readability and remove fixed margin */
+		font-size: 0.95rem;
+		line-height: 1.6;
+		margin-left: 1.1rem;
+	}
+
+	.button {
+		/* Make buttons smaller if they exist */
+		padding: 0.7rem 1.5rem;
+		font-size: 0.9rem;
+	}
+	
+	.imagediv img {
+		/* Ensure the background image is not too large and remove margin */
+		max-width: 300px;
+		margin-top: 0;
+	}
+	}
 </style>

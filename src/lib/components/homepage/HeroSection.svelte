@@ -164,18 +164,41 @@
     display: flex;
     justify-content: center;
     align-items: center;
-	margin: 0;
-	padding: 0;
-	width: max-content;
-  }
+    margin: 0;
+    padding: 0;
+    width: max-content;
+    }
 
-  .imagediv img {
-    max-width: 830px;
-    filter: drop-shadow(0 0 60px rgba(41, 41, 41, 0.8)) /* More intense, slightly less opaque */
-            drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); /* Wider, very soft, and more transparent layer */
-  }
+    .imagediv img {
+      max-width: 830px;
+      filter: drop-shadow(0 0 60px rgba(41, 41, 41, 0.8)) /* More intense, slightly less opaque */
+              drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); /* Wider, very soft, and more transparent layer */
+    }
 
-  /* Responsive */
+    /* Responsive */
+    @media (max-width: 1150px) {
+      .first-block {
+        /* MODIFIED: Reduce the gap between content and image */
+        gap: 1.5rem; 
+      }
+
+      .heading {
+        font-size: 3.8rem;
+      }
+
+      .subheading {
+        font-size: 1.4rem;
+      }
+
+      .caption {
+        font-size: 1.1rem;
+      }
+
+      .imagediv img {
+        max-width: 350px;
+      }
+    }
+
    @media (max-width: 900px) {
       .first-block {
         flex-direction: column;
@@ -225,4 +248,38 @@
         justify-content: center;
       }
     }
+
+    @media (max-width: 380px) {
+  .first-block {
+    /* Further reduce padding for very small screens */
+    padding: 3rem 1rem;
+  }
+
+  .heading {
+    /* Decrease heading size */
+    font-size: 2.5rem;
+  }
+
+  .subheading {
+    /* Decrease subheading size */
+    font-size: 1.1rem;
+  }
+
+  .caption {
+    /* Decrease caption size for better readability */
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  button {
+    /* Make the button slightly smaller */
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .imagediv img {
+    /* Ensure the background image is not too large */
+    max-width: 300px;
+  }
+}
 </style>
