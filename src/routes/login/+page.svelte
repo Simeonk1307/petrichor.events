@@ -171,7 +171,7 @@
 	
 	.container {
 	  width: 60%;
-	  max-width: 700px;
+	  max-width: 720px;
 	  min-height: 420px;
 	  border-radius: 1rem;
 	  background-color: transparent;
@@ -187,27 +187,17 @@
 	  }
 	}
 
-	@media (max-width: 1023px) {
+	@media (max-width: 900px) {
 	  .container {
-		max-width: 600px;
-		min-height: 400px;
+		width: 80%;
+		/* height: 400px; */
 		padding: 2.5rem;
 	  }
-	}
 	
-	@media (max-width: 767px) {
-	  .container {
-		max-width: 500px;
-		min-height: 350px;
-		padding: 2rem;
-	  }
-	}
-	
-	@media (max-width: 639px) {
-	  .container {
-		max-width: 400px;
-		padding: 1.5rem;
-	  }
+		.login h2 {
+		font-size: 2rem;
+		font-weight: 450;
+		}
 	}
 	
 	.login {
@@ -228,15 +218,14 @@
 	}
 	
 	.label {
-	  display: block;
-	  font-size: 0.875rem;
-	  font-weight: 500;
-	  margin-bottom: 0.25rem;
-	  color: white;
+		display: block;
+    	font-weight: 600;
+		margin-bottom: 0.25rem;
+		color: white;
 	}
 	
 	.label p {
-	  margin-bottom: -0.25rem;
+	  margin-bottom: -0.5rem;
 	}
 	
 	.login input {
@@ -324,16 +313,17 @@
 	}
 	
 	.login-btn {
-	  width: 200px;
-	  padding: 0.5rem 0;
-	  color: white;
-	  border-radius: 0.5rem;
-	  margin: 0 auto;
-	  display: block;
-	  background: transparent;
-	  border: 1px solid white;
-	  border-radius: 9999px;
-	  /* transition: background 0.3s ease; */
+		width: 200px;
+		padding: 0.5rem 0;
+		color: white;
+		border-radius: 0.5rem;
+		margin: 0 auto;
+		display: block;
+    	font-weight: 600;
+		background: transparent;
+		border: 1px solid white;
+		border-radius: 9999px;
+		/* transition: background 0.3s ease; */
 	}
 	
 	.login-btn:hover {
