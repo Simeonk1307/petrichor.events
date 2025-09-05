@@ -145,6 +145,19 @@
 	main {
 		z-index: 3;
 		position: relative;
+		background: radial-gradient(
+			30% 80% at 110% 50%, 
+			rgba(192, 248, 252, 0.8) 0%, 
+			rgba(139, 236, 248, 0.8) 14.42%, 
+			rgba(83, 177, 192, 0.8) 27.88%, 
+			rgba(55, 144, 164, 0.8) 38.94%, 
+			rgba(40, 129, 147, 0.8) 48.08%, 
+			rgba(4, 32, 44, 0.5) 78.85%, 
+			rgba(2, 17, 20, 0.5) 88.94%, 
+			rgba(0, 7, 8, 0.5) 97.12%
+		);
+		background-repeat: no-repeat;
+		background-color: #000;
 	}
 	.main {
 		display: flex;
@@ -172,7 +185,7 @@
 		transition: all 0.1s ease-in-out;
 	}
 	.main:hover .card:not(:hover) {
-		filter: blur(3px) grayscale(0.7);
+		/* filter: blur(3px) grayscale(0.7); */
 		scale: 1;
 	}
 	.main:not(:has(.card:hover)) .card {
@@ -221,7 +234,7 @@
 	.discover > h1 {
 		font-size: 50px;
 		font-family: var(--sfont);
-		margin-bottom: -1rem;
+		margin-bottom: 0rem;
 	}
 	@media (max-width: 1000px) {
 		.discover h1 {
