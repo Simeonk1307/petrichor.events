@@ -25,16 +25,16 @@
 
     height = window.innerHeight;
 
-    img.onmousemove = (e) => {
-      const moveX = ((e.clientX - middle[0]) / 45) | 0;
-      const moveY = ((e.clientY - middle[1]) / 45) | 0;
-      if (Math.abs(moveY) >= 35) return;
-      img.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
-    };
+    // img.onmousemove = (e) => {
+    //   const moveX = ((e.clientX - middle[0]) / 45) | 0;
+    //   const moveY = ((e.clientY - middle[1]) / 45) | 0;
+    //   if (Math.abs(moveY) >= 35) return;
+    //   img.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
+    // };
 
-    img.onmouseleave = () => {
-      img.style.transform = `translateX(0px) translateY(0px)`;
-    };
+    // img.onmouseleave = () => {
+    //   img.style.transform = `translateX(0px) translateY(0px)`;
+    // };
   });
 </script>
 
@@ -175,6 +175,13 @@
               drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); /* Wider, very soft, and more transparent layer */
     }
 
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 0px rgba(0, 227, 255, 0.6))
+                    drop-shadow(0 0 30px rgba(0, 227, 255, 0.4)); }
+      100% { filter: drop-shadow(0 0 25px rgba(0, 227, 255, 0.9))
+                      drop-shadow(0 0 60px rgba(0, 227, 255, 0.6)); }
+    }
+
     /* Responsive */
     @media (max-width: 1150px) {
       .first-block {
@@ -222,13 +229,17 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 0.25;
+        opacity: 0.5;
       }
 
       .imagediv img {
         max-width: 500px;
         margin-top: 0; /* MODIFIED: Removed unnecessary margin */
-
+        /* filter: drop-shadow(0 0 20px rgba(0, 227, 255, 0.7))
+            drop-shadow(0 0 40px rgba(0, 227, 255, 0.5))
+            drop-shadow(0 0 80px rgba(0, 227, 255, 0.3)); */
+        animation: glowPulse 1s ease-in-out infinite alternate;
+        opacity: 0.6;
       }
 
       .heading {
@@ -249,7 +260,7 @@
       }
     }
 
-    @media (max-width: 380px) {
+    @media (max-width: 440px) {
   .first-block {
     /* Further reduce padding for very small screens */
     padding: 3rem 1rem;
@@ -279,7 +290,7 @@
 
   .imagediv img {
     /* Ensure the background image is not too large */
-    max-width: 300px;
+    max-width: 480px;
   }
 }
 </style>
