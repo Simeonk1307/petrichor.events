@@ -76,12 +76,10 @@
 </main>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-
   main {
     background: #000;
     color: #e6e6e6;
-    font-family: "Italiana", serif; /* <-- FONT CHANGED HERE */
+    font-family: serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -152,7 +150,7 @@
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.3s ease;
-    font-family: "Italiana", serif; /* Ensure button inherits the font */
+    font-family: serif;
   }
 
   button:hover {
@@ -171,8 +169,8 @@
 
     .imagediv img {
       max-width: 830px;
-      filter: drop-shadow(0 0 60px rgba(41, 41, 41, 0.8)) /* More intense, slightly less opaque */
-              drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); /* Wider, very soft, and more transparent layer */
+      filter: drop-shadow(0 0 60px rgba(41, 41, 41, 0.8))
+              drop-shadow(0 0 100px rgba(0, 0, 0, 0.3)); 
     }
 
     @keyframes glowPulse {
@@ -183,10 +181,10 @@
     }
 
     /* Responsive */
-    @media (max-width: 1150px) {
+    @media (max-width: 1350px) {
       .first-block {
-        /* MODIFIED: Reduce the gap between content and image */
         gap: 1.5rem; 
+        margin-top: -3rem;
       }
 
       .heading {
@@ -211,17 +209,17 @@
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        margin-top: 0;      /* MODIFIED: Removed large margin */
+        margin-top: 0;   
         padding: 4rem 1.5rem;
         background-color: transparent;
-        position: relative; /* ADDED: This is the crucial fix for positioning context */
+        position: relative; 
       }
 
       .content {
         max-width: 100%;
         min-width: unset;
         position: relative;
-        z-index: 1; /* This correctly lifts the text forward */
+        z-index: 1;
       }
 
       .imagediv {
@@ -234,12 +232,9 @@
 
       .imagediv img {
         max-width: 500px;
-        margin-top: 0; /* MODIFIED: Removed unnecessary margin */
-        /* filter: drop-shadow(0 0 20px rgba(0, 227, 255, 0.7))
-            drop-shadow(0 0 40px rgba(0, 227, 255, 0.5))
-            drop-shadow(0 0 80px rgba(0, 227, 255, 0.3)); */
+        margin-top: 0; 
         animation: glowPulse 1s ease-in-out infinite alternate;
-        opacity: 0.6;
+        opacity: 0.5;
       }
 
       .heading {
@@ -262,34 +257,28 @@
 
     @media (max-width: 440px) {
   .first-block {
-    /* Further reduce padding for very small screens */
     padding: 3rem 1rem;
   }
 
   .heading {
-    /* Decrease heading size */
     font-size: 2.5rem;
   }
 
   .subheading {
-    /* Decrease subheading size */
     font-size: 1.1rem;
   }
 
   .caption {
-    /* Decrease caption size for better readability */
     font-size: 0.95rem;
     line-height: 1.6;
   }
 
   button {
-    /* Make the button slightly smaller */
     padding: 0.7rem 1.5rem;
     font-size: 0.9rem;
   }
 
   .imagediv img {
-    /* Ensure the background image is not too large */
     max-width: 480px;
   }
 }

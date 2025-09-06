@@ -11,6 +11,7 @@
 
 <style>
     .maincontent {
-        padding: 2rem 1rem; /* Adjust padding as needed */
+        padding: 2rem 1rem;
+        overflow-x: hidden;
     }
 </style>

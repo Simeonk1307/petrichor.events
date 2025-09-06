@@ -148,14 +148,16 @@
 </main>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+    /* :root {
+        overflow-x: hidden;
+    } */
 
     .team-page {
-        font-family: 'Italiana', serif;
+        font-family: serif;
         background-color: #000;
         color: #e6e6e6;
         padding: 5rem 2rem;
-        min-height: 100vh; /* Add this line */
+        min-height: 100vh;
     }
 
     .page-header {
@@ -211,11 +213,11 @@
 
     @media (max-width: 768px) {
         .main-heading {
-            font-size: 3rem;
+            font-size: 2.2rem;
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.7rem;
         }
 
         .team-page {

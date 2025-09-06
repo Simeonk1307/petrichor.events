@@ -77,12 +77,10 @@
 	</div>
 </main>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-
   main {
 	background: #000;
 	color: #e6e6e6;
-	font-family: "Italiana", serif;
+	font-family: serif;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -109,7 +107,6 @@
 		height: 100%;
 	}
 
-	/* This is now the "hidden-left" state. Items exiting left will animate to here. */
 	.carousel-item {
 		position: absolute;
 		top: 50%;
@@ -224,13 +221,11 @@
 	}
 
   /* Responsive */
-  @media (max-width: 1150px) {
+  @media (max-width: 1350px) {
 	.first-block {
 		gap: 1.5rem; 
-	}
-
-	.first-block {
 		min-width: unset;
+		margin-top: -15rem;
 	}
 
 	.content {
@@ -261,7 +256,7 @@
 	}
 
     .content {
-      max-width: 100%; /* Changed width */
+      max-width: 100%; 
       min-width: unset;
 	  display: flex;
 	  flex-direction: column;
@@ -271,15 +266,15 @@
     }
 
     .heading {
-      font-size: 3.2rem; /* Changed font size */
+      font-size: 3.2rem; 
     }
 
     .subheading {
-      font-size: 1.3rem; /* Changed font size */
+      font-size: 1.3rem; 
     }
 
     .caption {
-      font-size: 1.05rem; /* Changed font size */
+      font-size: 1.05rem; 
       line-height: 1.7;
 	  max-width: 90%;
 	  margin-left: 1.5rem;
@@ -294,7 +289,7 @@
       }
 
     .imagediv img {
-      min-width: 500px; /* Changed image size */
+      min-width: 500px;
       margin-top: 2rem;
 	  animation: glowPulse 1s ease-in-out infinite alternate;
 	  opacity: 0.5;
@@ -303,36 +298,30 @@
 
   @media (max-width: 440px) {
 	.first-block {
-		/* Further reduce padding for the smallest screens */
-		margin-top: -5rem;
+		margin-top: -8rem;
 		padding: 3rem 1rem;
 	}
 
 	.heading {
-		/* Decrease heading size */
 		font-size: 2.5rem;
 	}
 
 	.subheading {
-		/* Decrease subheading size */
 		font-size: 1.1rem;
 	}
 
 	.caption {
-		/* Adjust caption for readability and remove fixed margin */
 		font-size: 0.95rem;
 		line-height: 1.6;
 		margin-left: 1.1rem;
 	}
 
 	.button {
-		/* Make buttons smaller if they exist */
 		padding: 0.7rem 1.5rem;
 		font-size: 0.9rem;
 	}
 	
 	.imagediv img {
-		/* Ensure the background image is not too large and remove margin */
 		max-width: 300px;
 		margin-top: 0;
 	}
