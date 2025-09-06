@@ -24,11 +24,11 @@
     @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 
     .person-card {
-        font-family: 'Italiana', serif;
+        font-family: serif;
         width: 100%;
         max-width: 280px;
-        background-color: #0a0a0a; /* Slightly off-black */
-        border: 1px solid #222; /* Dark border for definition */
+        background-color: #0a0a0a; 
+        border: 1px solid #222;
         border-radius: 12px;
         overflow: hidden;
         transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -38,7 +38,7 @@
     .person-card:hover {
         transform: translateY(-8px); 
         border-color: #00e3ff;
-        box-shadow: 0 0 15px rgba(0, 227, 255, 0.4), 0 0 25px rgba(0, 227, 255, 0.2); /* Cyan glow effect */
+        box-shadow: 0 0 15px rgba(0, 227, 255, 0.4), 0 0 25px rgba(0, 227, 255, 0.2); 
     }
 
     .image-container {
@@ -54,7 +54,7 @@
     }
 
     .person-card:hover .person-image {
-        transform: scale(1.05); /* Subtle zoom on hover */
+        transform: scale(1.05); 
     }
 
     .info-container {
@@ -70,7 +70,7 @@
     }
 
     .person-name {
-        font-size: 1.5rem; /* Larger name */
+        font-size: 1.5rem; 
         font-weight: 400;
         color: #ffffff;
         letter-spacing: 0.5px;
@@ -79,7 +79,7 @@
 
     .person-role {
         font-size: 1rem;
-        color: #bdbdbd; /* Light gray for the role */
+        color: #bdbdbd; 
         margin: 0.25rem 0 0 0;
     }
 

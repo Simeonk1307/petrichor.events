@@ -1,12 +1,11 @@
 <script lang="ts">
-  // 1. Import the reusable component
   import EventCard from '$lib/components/homepage/event_section/EventCard.svelte';
   import circles from '$lib/assets/HomePage/circles.jpg';
 
   const leftEvents = [
 		{
 			id: 'workshop',
-			title: 'pre-fest-workshops',
+			title: 'Pre-fest-Workshops',
 		},
 		{
 			id: 'comingsoon',
@@ -47,10 +46,8 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap');
-
   .events-page-background {
-    background-color: #050505;
+    background-color: #000;
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -58,7 +55,7 @@
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    font-family: 'Exo 2', sans-serif;
+    font-family: serif;
   }
 
   .events-container {
@@ -71,13 +68,20 @@
 
   .main-title {
     color: #e0e0e0;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 500;
-    letter-spacing: 0.5em; 
     text-transform: uppercase;
     margin-bottom: 60px;
     padding-left: 0.5em; 
     margin-top: 2.5rem;
+  }
+
+  .main-title::after {
+	content: ''; 
+	display: block; 
+	width: 55%; 
+	margin: 0.05rem auto 0; 
+	border-bottom: 2px solid #00e3ff; 
   }
 
   .events-grid {
@@ -107,7 +111,7 @@
       margin-top: 0; 
     }
     .main-title {
-        font-size: 1.8rem;
+        font-size: 2.3rem;
         margin-bottom: 40px;
     }
   }
