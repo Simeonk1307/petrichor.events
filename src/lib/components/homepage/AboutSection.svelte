@@ -221,13 +221,11 @@
 	}
 
   /* Responsive */
-  @media (max-width: 1150px) {
+  @media (max-width: 1350px) {
 	.first-block {
 		gap: 1.5rem; 
-	}
-
-	.first-block {
 		min-width: unset;
+		margin-top: -15rem;
 	}
 
 	.content {

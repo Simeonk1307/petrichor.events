@@ -181,9 +181,10 @@
     }
 
     /* Responsive */
-    @media (max-width: 1150px) {
+    @media (max-width: 1350px) {
       .first-block {
         gap: 1.5rem; 
+        margin-top: -3rem;
       }
 
       .heading {
