@@ -165,7 +165,7 @@
 		width: min(50%,400px);
 		/* height: 100%; */
 		padding: 2rem;
-		border-radius: 4rem;
+		border-radius: 1rem;
 	}
 
 	.desc {
@@ -199,6 +199,19 @@
 		flex-wrap: wrap;
 		justify-content: center;
 	}
+
+	@keyframes flicker {
+	  0%, 100% {
+		box-shadow: 0 0 15px rgba(0, 191, 255, 0.3),
+					0 0 30px rgba(0, 191, 255, 0.2),
+					0 0 45px rgba(0, 191, 255, 0.1);
+	  }
+	  50% {
+		box-shadow: 0 0 10px rgba(0, 191, 255, 0.1),
+					0 0 20px rgba(0, 191, 255, 0.05),
+					0 0 30px rgba(0, 191, 255, 0.03);
+	  }
+	}
 	.workshop_specific {
 		display: flex;
 		align-items: center;
@@ -215,13 +228,13 @@
 		color: white;
 		border: 1px solid #b5ebfa;
 		border-radius: 2rem;
-		box-shadow: 0 0 10px #b5ebfa;
+		animation: flicker 2s infinite ease-in-out;
 	}
 
 	.imageHolder img {
 		width: 100%;
 		object-fit: cover;
-		border-radius: 2rem;
+		border-radius: 1rem;
 		color: white;
 		object-position: center;
 	}
@@ -245,10 +258,12 @@
 			width: max(290px,60vw);
 			min-height: unset;
 			height: fit-content;
+			border-radius: 1rem;
 		}
 		.imageHolder {
 			width: 100%;
 			height: unset;
+			border-radius: 0.5rem;
 		}
 		.imageHolder img{
 			height: unset;
