@@ -36,7 +36,7 @@
 						<div class="date">{`₹${workshop.price}`}</div>
 					</span>
 					{#if workshop.prerequisites.length > 0}
-						<p class="opi" style="color: orange; text-align: left;">
+						<p class="opi" style="color: #9999ff; text-align: left;">
 							Prerequisites:<br/>
 							{#each workshop.prerequisites as spk, i}
 								<li>
@@ -47,7 +47,7 @@
 					{/if}
 					<div class="icon opi">
 						<img src={location} alt="Location icon" style="height:30px !important;" width="30px" />
-						<span class="venue">{workshop.venue}</span>
+						<span class="venue" style="color: #66ffff;">{workshop.venue}</span>
 					</div>
 				</div>
 				<div class="imageHolder {id}">
