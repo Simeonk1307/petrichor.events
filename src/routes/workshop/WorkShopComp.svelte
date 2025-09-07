@@ -185,6 +185,12 @@
 		border: 1px solid white;
 		text-wrap: nowrap;
 	}
+
+	.price_btn:hover {
+		color: black;
+		background: #aaaaaa;
+	}
+
 	.chip {
 		padding: 0.2em;
 		padding-inline: 1em;
