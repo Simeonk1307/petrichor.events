@@ -203,35 +203,131 @@
 		height: 120vh;
 		left: 0%;
 	}
-	/*  */
-	/* CAPage */
+	/* CA Portal */
+	#g1-4,
+	#g1-5,
 	#g1-6 {
-		background: radial-gradient(circle, rgba(var(--color7), 0.6) 0, rgba(var(--color7), 0) 50%)
-			no-repeat;
-		width: 90vh;
-		height: 90vh;
-		left: 60%;
-		top: -40%;
+		position: absolute;
+		pointer-events: none;
+		z-index: 0; /* behind content */
+		border-radius: 50%;
+		filter: blur(60px);
 	}
-	#g1-5 {
-		background: radial-gradient(
-				farthest-corner at 70% 0,
-				rgba(var(--color3), 0.8) 0%,
-				rgba(var(--color3), 0) 40%
-			)
-			no-repeat;
-	}
+
 	#g1-4 {
+		width: 800px;
+		height: 800px;
+		top: 20%;
+		right: 10%;
 		background: radial-gradient(
-				farthest-corner at 70% 15%,
-				rgba(var(--color5), 0.8) 0%,
-				rgba(var(--color5), 0) 60%
-			)
-			no-repeat;
-		width: 100vw;
-		/* left: 27%; */
-		height: 100vh;
+			circle,
+			rgba(0, 227, 255, 0.08) 0%,
+			rgba(0, 227, 255, 0.03) 40%,
+			rgba(0, 0, 0, 0) 70%
+		);
 	}
+
+	#g1-5 {
+		width: 600px;
+		height: 600px;
+		top: 30%;
+		right: 20%;
+		background: radial-gradient(
+			circle,
+			rgba(63, 220, 255, 0.12) 0%,
+			rgba(63, 220, 255, 0.06) 35%,
+			rgba(0, 0, 0, 0) 65%
+		);
+	}
+
+	#g1-6 {
+		width: 400px;
+		height: 400px;
+		top: 15%;
+		right: 25%;
+		background: radial-gradient(
+			circle,
+			rgba(63, 220, 255, 0.25) 0%,
+			rgba(63, 220, 255, 0.10) 30%,
+			rgba(0, 0, 0, 0) 60%
+		);
+	}
+
+	@media (max-width: 1200px) {
+		#g1-4 {
+			width: 600px;
+			height: 600px;
+			top: 10%;
+			right: 5%;
+		}
+		
+		#g1-5 {
+			width: 450px;
+			height: 450px;
+			top: 20%;
+			right: 15%;
+		}
+		
+		#g1-6 {
+			width: 300px;
+			height: 300px;
+			top: 10%;
+			right: 20%;
+		}
+	}
+
+	@media (max-width: 900px) {
+		#g1-4 {
+			width: 400px;
+			height: 400px;
+			top: 5%;
+			right: -10%;
+		}
+		
+		#g1-5 {
+			width: 300px;
+			height: 300px;
+			top: 15%;
+			right: 0%;
+		}
+		
+		#g1-6 {
+			width: 200px;
+			height: 200px;
+			top: 8%;
+			right: 10%;
+		}
+	}
+
+	@media (max-width: 600px) {
+		#g1-4,
+		#g1-5,
+		#g1-6 {
+			opacity: 0.5;
+		}
+		
+		#g1-4 {
+			width: 300px;
+			height: 300px;
+			top: 0%;
+			right: -20%;
+		}
+		
+		#g1-5 {
+			width: 200px;
+			height: 200px;
+			top: 10%;
+			right: -5%;
+		}
+		
+		#g1-6 {
+			width: 150px;
+			height: 150px;
+			top: 5%;
+			right: 5%;
+		}
+	}
+
 	
 	@media (max-width: 700px) {
 		#g1-3 {

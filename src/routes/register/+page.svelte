@@ -133,7 +133,7 @@
   display: flex;
   flex-direction: column; 
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: center; 
   overflow-y: auto; 
 	  background: radial-gradient(
 		  80% 20% at 50% 100%,
@@ -155,7 +155,7 @@
     left: 3rem; */
     font-family: 'Inria Sans', sans-serif;
     font-size: 2.1rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     /*text-align: center;*/
     color: white;
     font-weight: 700;
