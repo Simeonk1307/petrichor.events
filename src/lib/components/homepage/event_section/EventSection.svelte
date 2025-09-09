@@ -1,27 +1,35 @@
 <script lang="ts">
   import EventCard from '$lib/components/homepage/event_section/EventCard.svelte';
-  import circles from '$lib/assets/HomePage/circles.jpg';
+  import cultural from '$lib/assets/HomePage/cultural.png';
+  import technical from '$lib/assets/HomePage/technical.png'; // Assuming you have this image
+  import informals from '$lib/assets/HomePage/informal.png'; // Assuming you have this image
+  import workshop from '$lib/assets/HomePage/prefest.png'; // Assuming you have this image
+
 
   const leftEvents = [
-		{
-			id: 'workshop',
-			title: 'Pre-fest-Workshops',
-		},
-		{
-			id: 'comingsoon',
-			title: 'Technical',
-		}
+    {
+      id: 'workshop',
+      title: 'Pre-fest-Workshops',
+      imageUrl: workshop
+    },
+    {
+      id: 'comingsoon',
+      title: 'Technical',
+      imageUrl: technical
+    }
   ];
   const rightEvents = [
-		{
-			id: 'comingsoon',
-			title: 'Informals',
-		},
-		{
-			id: 'comingsoon',
-			title: 'Culturals',
-		}
-	];
+    {
+      id: 'comingsoon',
+      title: 'Informals',
+      imageUrl: informals
+    },
+    {
+      id: 'comingsoon',
+      title: 'Culturals',
+      imageUrl: cultural
+    }
+  ];
 </script>
 
 <div class="events-page-background">
@@ -29,21 +37,20 @@
     <h1 class="main-title">EVENTS</h1>
 
     <div class="events-grid">
-      <!-- Left Column -->
       <div class="column">
         {#each leftEvents as event}
-          <a href='/{event.id}'><EventCard eventName={event.title} imageUrl={circles} /></a>
+          <a href='/{event.id}'><EventCard eventName={event.title} imageUrl={event.imageUrl} /></a>
         {/each}
       </div>
-      <!-- Right Column -->
       <div class="column right-column">
         {#each rightEvents as event}
-          <a href='/{event.id}'><EventCard eventName={event.title} imageUrl={circles} /></a>
+          <a href='/{event.id}'><EventCard eventName={event.title} imageUrl={event.imageUrl} /></a>
         {/each}
       </div>
     </div>
   </div>
 </div>
+
 
 <style>
   .events-page-background {
