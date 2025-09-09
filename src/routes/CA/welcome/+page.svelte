@@ -105,24 +105,17 @@
 </script>
 
 <main class="{visible ? '' : 'hidden'}">
-  <!-- BACKGROUND GLOWS -->
-  <div id="g1-4"></div>
-  <div id="g1-5"></div>
-  <div id="g1-6"></div>
-
-  <div class="first-block">
-    <!-- Hand Image -->
-    <div class="imagediv" draggable="false">
+  <div class="hero">
+    <!-- Left Image -->
+    <div class="imagediv">
       <img src={hand} alt="Glowing hand with flower" draggable="false" />
     </div>
 
+    <!-- Right Content -->
     <div class="content">
-      <div class="title">
-        <span class="heading">CA PORTAL</span>
-      </div>
-
-      <div class="caption">
-        Petrichor - the annual techno cultural fest of IIT Palakkad is back again, 
+      <h1 class="heading">CA PORTAL</h1>
+      <p class="caption">
+        Petrichor – the annual techno cultural fest of IIT Palakkad is back again, 
         and better than ever before. Also, yes, it's offline. We, the students of IIT 
         Palakkad, conduct Petrichor every year, and made sure last year's event was 
         enthralling for all its participants. Now the wait is over; with just the perfect 
@@ -131,7 +124,7 @@
         on anything. Check out our website as it has answers to all the questions that 
         you might have. Stay tuned and brace yourselves for the journey of a lifetime 
         with Petrichor'24!
-      </div>
+      </p>
 
       <div class="button_area">
         <button type="button" on:click={handleClick} bind:this={CAbutton}>
@@ -141,54 +134,69 @@
     </div>
   </div>
 </main>
-
 <style>
-  main {
-    position: relative;
-    color: #e6e6e6;
-    font-family: serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-  }
 
-  .first-block {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10%;
-    gap: 3rem;
-    flex: 1;
-  }
+main {
+  position: relative;
+  color: #e6e6e6;
+  font-family: serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;   
+  justify-content: center; 
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-  .content {
-    max-width: 600px;
-    text-align: center;
-  }
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;  
+  justify-content: center; 
+  gap: 4rem;
+  max-width: 1200px;
+  width: 100%;
+}
 
-  .title {
-    margin-bottom: 2rem;
-  }
+.imagediv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .heading {
-    font-size: 3.5rem;
-    font-weight: 400;
-    color: #fff;
-  }
+.imagediv img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 50px rgba(0, 227, 255, 0.6));
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
 
-  .caption {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #bdbdbd;
-  }
+.content {
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
 
-  .button_area {
-    margin-top: 2.5rem;
-  }
+.heading {
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.caption {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #bdbdbd;
+  margin-bottom: 2.5rem;
+}
+
+.button_area {
+  margin-top: 1rem;
+  text-align: center; /* centers the button */
+}
 
   button {
 		padding: 0.5rem 4.4rem;
@@ -241,31 +249,59 @@
 		box-shadow: 0 0 0 3px rgba(0, 227, 255, 0.4);
 	}
 
+/* --- Responsive Adjustments --- */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .content {
+    text-align: center;
+    margin: 0 auto;
+  }
 
   .imagediv img {
-    max-width: 700px;
-    filter: drop-shadow(0 0 50px rgba(0, 227, 255, 0.6));
+    max-width: 70vw;
+    opacity: 0.85;
   }
 
-
-  @media (max-width: 900px) {
-    .first-block {
-      flex-direction: column-reverse;
-      text-align: center;
-      padding: 3rem 1.5rem;
-    }
-
-    .imagediv img {
-      max-width: 500px;
-      opacity: 0.6;
-    }
-
-    .heading {
-      font-size: 2.8rem;
-    }
-
-    .caption {
-      font-size: 1rem;
-    }
+  .heading {
+    font-size: 2.6rem;
   }
+
+  .caption {
+    font-size: 1rem;
+  }
+}
+
+/* Very small devices or tight aspect ratios */
+@media (max-aspect-ratio: 4/5) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .imagediv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+  }
+
+  .imagediv img {
+    max-width: 90vw;
+    opacity: 0.2; /* dim the background image */
+    filter: drop-shadow(0 0 30px rgba(0, 227, 255, 0.3));
+  }
+
+  .content {
+    text-align: center;
+    z-index: 3; /* keep text above dimmed image */
+  }
+}
 </style>
