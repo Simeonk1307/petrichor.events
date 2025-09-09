@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ardino from '$lib/assets/HomePage/ardino.jpg';
-	import technical from '$lib/assets/HomePage/technical.jpeg';
+	import technical from '$lib/assets/HomePage/technical.png';
 	import cultural from '$lib/assets/HomePage/cultural.png';
 	import StackedBoxes from '../../lib/components/homepage/event_section/EventSection.svelte';
 	import { onMount } from 'svelte';
