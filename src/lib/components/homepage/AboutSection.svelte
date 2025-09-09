@@ -90,7 +90,7 @@
   }
 
   /* ------------ CAROUSEL ----------- */
-    .carousel-wrapper {
+    /* .carousel-wrapper {
         position: relative;
         width: 100%;
         height: 300px;
@@ -148,11 +148,11 @@
         border-radius: 12px;
         object-fit: cover;
         pointer-events: none;
-    }
+    } */
 
   .first-block {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0 10%;
     gap: 3rem;
@@ -269,10 +269,6 @@
       font-size: 3.2rem; 
     }
 
-    .subheading {
-      font-size: 1.3rem; 
-    }
-
     .caption {
       font-size: 1.05rem; 
       line-height: 1.7;
@@ -306,19 +302,10 @@
 		font-size: 2.5rem;
 	}
 
-	.subheading {
-		font-size: 1.1rem;
-	}
-
 	.caption {
 		font-size: 0.95rem;
 		line-height: 1.6;
 		margin-left: 1.1rem;
-	}
-
-	.button {
-		padding: 0.7rem 1.5rem;
-		font-size: 0.9rem;
 	}
 	
 	.imagediv img {
