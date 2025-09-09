@@ -15,7 +15,7 @@
     width: 350px;
     height: 220px;
     background-color: #0d0d0d;
-    border: 1.5px solid #00e3ff;
+    border: 1.5px solid #4c929c;
     border-radius: 35px;
     padding: 15px;
     box-sizing: border-box;
