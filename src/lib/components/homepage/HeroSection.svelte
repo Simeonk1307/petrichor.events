@@ -91,17 +91,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 10%;
-    gap: 3rem;
+    gap: 0.5rem;
     flex: 1;
   }
 
   .content {
     min-width: 650px;
-	display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-	align-items: center;
-	text-align: center;
+	  align-items: center;
+	  text-align: center;
+    margin-left: 4rem;
   }
 
   .title {
@@ -165,6 +166,7 @@
     margin: 0;
     padding: 0;
     width: max-content;
+    margin-right: 12rem;
     }
 
     .imagediv img {
@@ -209,10 +211,8 @@
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        margin-top: 0;   
+        margin: 0;
         padding: 4rem 1.5rem;
-        background-color: transparent;
-        position: relative; 
       }
 
       .content {
@@ -220,6 +220,7 @@
         min-width: unset;
         position: relative;
         z-index: 1;
+        margin: 0 auto;
       }
 
       .imagediv {

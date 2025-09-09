@@ -106,12 +106,10 @@
 
 <main class="{visible ? '' : 'hidden'}">
   <div class="hero">
-    <!-- Left Image -->
     <div class="imagediv">
       <img src={hand} alt="Glowing hand with flower" draggable="false" />
     </div>
 
-    <!-- Right Content -->
     <div class="content">
       <h1 class="heading">CA PORTAL</h1>
       <p class="caption">
@@ -134,8 +132,8 @@
     </div>
   </div>
 </main>
-<style>
 
+<style>
 main {
   position: relative;
   color: #e6e6e6;
@@ -195,63 +193,62 @@ main {
 
 .button_area {
   margin-top: 1rem;
-  text-align: center; /* centers the button */
+  text-align: center; 
 }
 
-  button {
-		padding: 0.5rem 4.4rem;
-		border-radius: 50px;
-		border: 1px solid #00e3ff;
-		background: transparent;
-		color: #e6e6e6;
-		font-size: 1rem;
-		cursor: pointer;
-		transition: all 0.25s ease;
-		font-family: serif;
-		position: relative;
-		overflow: hidden;
-	}
+button {
+  padding: 0.5rem 4.4rem;
+  border-radius: 50px;
+  border: 1px solid #00e3ff;
+  background: transparent;
+  color: #e6e6e6;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: serif;
+  position: relative;
+  overflow: hidden;
+}
 
-	button::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 200%;
-		height: 100%;
-		background: linear-gradient(
-			120deg,
-			transparent,
-			rgba(0, 227, 255, 0.3),
-			transparent
-		);
-		transition: all 0.4s ease;
-	}
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(0, 227, 255, 0.3),
+    transparent
+  );
+  transition: all 0.4s ease;
+}
 
-	button:hover::before {
-		left: 100%;
-	}
+button:hover::before {
+  left: 100%;
+}
 
-	button:hover {
-		background: #00e3ff;
-		color: #000;
-		transform: scale(1.05);
-		box-shadow: 0 0 20px rgba(0, 227, 255, 0.6);
-	}
+button:hover {
+  background: #00e3ff;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 227, 255, 0.6);
+}
 
-	button:active {
-		transform: scale(0.96);
-		box-shadow: 0 0 10px rgba(0, 227, 255, 0.8);
-	}
+button:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 10px rgba(0, 227, 255, 0.8);
+}
 
-	button:focus {
-		outline: none;
-		box-shadow: 0 0 0 3px rgba(0, 227, 255, 0.4);
-	}
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 227, 255, 0.4);
+}
 
 /* --- Responsive Adjustments --- */
 
-/* Tablet */
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -278,7 +275,6 @@ main {
   }
 }
 
-/* Very small devices or tight aspect ratios */
 @media (max-aspect-ratio: 4/5) {
   .hero {
     grid-template-columns: 1fr;
@@ -295,13 +291,13 @@ main {
 
   .imagediv img {
     max-width: 90vw;
-    opacity: 0.2; /* dim the background image */
+    opacity: 0.2;
     filter: drop-shadow(0 0 30px rgba(0, 227, 255, 0.3));
   }
 
   .content {
     text-align: center;
-    z-index: 3; /* keep text above dimmed image */
+    z-index: 3;
   }
 }
 </style>
