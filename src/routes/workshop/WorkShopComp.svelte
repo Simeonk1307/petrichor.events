@@ -16,7 +16,8 @@
 			// For workshop number of participants will be only 1 so
 			// we will skip the add participant page and directly send user to payment page
 			// goto(`/payment/register?id=${id}`);
-			window.open("https://docs.google.com/forms/d/e/1FAIpQLSdV_IPsTZldqIYSX7Pc6Bz5Iuj989hqmWz8tOEVuur2ivR_eQ/viewform")
+			// window.open("https://docs.google.com/forms/d/e/1FAIpQLSdV_IPsTZldqIYSX7Pc6Bz5Iuj989hqmWz8tOEVuur2ivR_eQ/viewform")
+			window.open('https://neurobots.in/hackathon')
 		}
 
 	let WorkShopDiv:HTMLElement;
@@ -170,9 +171,9 @@
 
 	.desc {
 		color: white;
-		font-size: 15px;
+		font-size: 20px;
 		width: 100%;
-		font-family: var(--wfont);
+		/* font-family: var(--wfont); */
 		font-weight: lighter;
 		white-space: pre-wrap;
 	}
