@@ -15,14 +15,15 @@ const frontendRoutes = [
 	'/comingsoon',	
 	'/workshop',
 	'/profile',
-	'/team'
+	'/team',
+	'/sponsors',
 ];
 const UnderConstructionRoutes = [
 	'/contactus',
 	'/events',
 	'/schedule',
 	'/merch',
-	'/sponsors',
+	// '/sponsors',
 	'/map'
 ];
 

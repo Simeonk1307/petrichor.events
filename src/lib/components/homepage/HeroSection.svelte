@@ -72,7 +72,7 @@
     </div>
   </div>
 
-  <!-- <Strip /> -->
+  <Strip />
 </main>
 
 <style>

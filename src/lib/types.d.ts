@@ -25,7 +25,7 @@ export interface workshop {
     venue: string,
     prerequisites: string[],
     image: string,
-    imageDesc: string,
+    // imageDesc: string,
     // id: string
 }
 
