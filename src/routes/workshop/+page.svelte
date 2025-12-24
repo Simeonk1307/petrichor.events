@@ -5,18 +5,67 @@
 	import location from '$lib/assets/location.svg';
 	import VanillaTilt from 'vanilla-tilt';
 	import WorkShopComp from './WorkShopComp.svelte';
+	import hackpost from '$lib/assets/MainWorkshops/neurobot/NeurobotHackathon.png';
 	let left: number, right: number;
 
 	onMount(() => {
 		VanillaTilt.init(document.querySelectorAll('.card'), {
-			max:10,
-			speed:10000
+			max: 10,
+			speed: 10000
 		});
 	});
 </script>
 
 <main>
+	<!-- Workshops Intro Section -->
 	<div class="_blank" />
+	<div class="discover atmos">
+		<h1>Neurobots Championship</h1>
+		<p>Workshop & Hackathon</p>
+		<!-- <h3>Learn new skills from IIT experts</h3> -->
+	</div>
+	<section class="workshop-intro">
+		<div class="intro-poster">
+			<img src={hackpost} alt="Workshops Poster" />
+		</div>
+
+		<div class="intro-text">
+			<!-- <h2>Neurobots Hackathon</h2> -->
+			<p>
+				Neurobots is a national-level innovation platform that brings together student innovators
+				from across India to learn, build, and compete in future-ready technologies. Designed beyond
+				a traditional hackathon, Neurobots combines hands-on workshops and an intense hackathon
+				experience, guided by expert mentors and industry professionals.
+			</p>
+			<p>
+				Participants will work on real-world problem statements in domains such as Robotics, Drones,
+				Artificial Intelligence, Agentic AI, Automation, and Smart Systems, with evaluation based on
+				innovation, technical depth, feasibility, and impact. Whether you’re a beginner with a bold
+				idea or an experienced builder, Neurobots offers a level playing field to showcase your
+				skills on a national stage.
+			</p>
+			<!-- <p class="tagline">Learn • Build • Innovate</p> -->
+		</div>
+	</section>
+
+	<!-- <div class="_blank" /> -->
+	<!-- <div class="discover atmos">
+		<h1>Discover Workshops</h1>
+		<h3>Learn new skills from IIT experts</h3>
+	</div> -->
+	<!-- <section class="promo-banner">
+		<h2>
+			Use code
+			<span class="promo-code">PETR120E4E</span> for registration.
+		</h2>
+	</section> -->
+
+	<section class="promo-strip">
+		<span class="promo-text">
+			Use the promocode <b class="promo-code">PETR120E4E</b> during registration
+		</span>
+	</section>
+
 	<div class="discover atmos">
 		<h1>Discover Workshops</h1>
 		<h3>Learn new skills from IIT experts</h3>
@@ -37,10 +86,10 @@
 					</span>
 					{#if workshop.prerequisites.length > 0}
 						<p class="opi" style="color: #9999ff; text-align: left;">
-							Prerequisites:<br/>
+							Prerequisites:<br />
 							{#each workshop.prerequisites as spk, i}
 								<li>
-									{(spk.length > 70) ? `${spk.substring(0,70)}...` : spk}
+									{spk.length > 70 ? `${spk.substring(0, 70)}...` : spk}
 								</li>
 							{/each}
 						</p>
@@ -146,14 +195,14 @@
 		z-index: 3;
 		position: relative;
 		background: radial-gradient(
-			30% 80% at 110% 50%, 
-			rgba(192, 248, 252, 0.8) 0%, 
-			rgba(139, 236, 248, 0.8) 14.42%, 
-			rgba(83, 177, 192, 0.8) 27.88%, 
-			rgba(55, 144, 164, 0.8) 38.94%, 
-			rgba(40, 129, 147, 0.8) 48.08%, 
-			rgba(4, 32, 44, 0.5) 78.85%, 
-			rgba(2, 17, 20, 0.5) 88.94%, 
+			30% 80% at 110% 50%,
+			rgba(192, 248, 252, 0.8) 0%,
+			rgba(139, 236, 248, 0.8) 14.42%,
+			rgba(83, 177, 192, 0.8) 27.88%,
+			rgba(55, 144, 164, 0.8) 38.94%,
+			rgba(40, 129, 147, 0.8) 48.08%,
+			rgba(4, 32, 44, 0.5) 78.85%,
+			rgba(2, 17, 20, 0.5) 88.94%,
 			rgba(0, 7, 8, 0.5) 97.12%
 		);
 		background-repeat: no-repeat;
@@ -218,7 +267,7 @@
 		z-index: 10;
 		display: none;
 	} */
-	
+
 	img {
 		height: 20rem;
 		aspect-ratio: 1;
@@ -236,6 +285,149 @@
 		font-family: var(--sfont);
 		margin-bottom: 0rem;
 	}
+
+	.workshop-intro {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 3.5rem;
+		padding: 3rem 2rem;
+		max-width: 1200px;
+		margin: 0 auto 3rem auto;
+		color: white;
+	}
+
+	.intro-poster {
+		flex: 1;
+		max-width: 520px;
+		transform: scale(1.04);
+		border-radius: 18px;
+		overflow: hidden;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+	}
+
+	.intro-poster img {
+		height: auto !important;
+		width: 100%;
+		aspect-ratio: auto !important;
+		clip-path: none !important;
+		object-fit: contain;
+	}
+
+	.intro-text {
+		flex: 1;
+	}
+
+	.intro-text h2 {
+		font-size: 2.3rem;
+		margin-bottom: 1rem;
+		font-family: var(--sfont);
+	}
+
+	.intro-text p {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: rgba(255, 255, 255, 0.85);
+		margin-bottom: 0.9rem;
+	}
+
+	.intro-text .tagline {
+		margin-top: 1rem;
+		font-weight: bold;
+		color: #66ffff;
+		letter-spacing: 0.05em;
+	}
+
+	/* Mobile */
+	@media (max-width: 900px) {
+		.workshop-intro {
+			flex-direction: column;
+			text-align: center;
+		}
+
+		.intro-poster {
+			max-width: 300px;
+		}
+	}
+
+	.promo-strip {
+		width: 100%;
+		padding: 1.0rem 1rem;
+		margin: 3rem 0 4rem 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		background: linear-gradient(
+			90deg,
+			rgba(102, 255, 255, 0.15),
+			rgba(153, 102, 255, 0.15),
+			rgba(102, 255, 255, 0.15)
+		);
+
+		border-top: 1px solid rgba(102, 255, 255, 0.4);
+		border-bottom: 1px solid rgba(102, 255, 255, 0.4);
+
+		z-index: 4;
+	}
+
+	.promo-text {
+		color: white;
+		font-size: 1.5rem;
+		text-align: center;
+		letter-spacing: 0.03em;
+	}
+
+	.promo-code {
+		font-weight: 800;
+		letter-spacing: 0.10em;
+		text-transform: uppercase;
+
+		/* Soft highlight via color, not background */
+		color: #7ffcff;
+
+		/* Subtle emphasis */
+		text-shadow: 0 0 6px rgba(127, 252, 255, 0.35), 0 0 14px rgba(127, 252, 255, 0.15);
+
+		font-size: 1.15em;
+		white-space: nowrap;
+	}
+
+	/* .promo-code {
+		display: inline-block;
+		margin: 0 0.4rem;
+		padding: 0.25rem 0.9rem;
+
+		background: rgba(102, 255, 255, 0.18);
+		color: #bfffff;
+
+		border-radius: 10px;
+		font-weight: 600;
+		font-size: 1.15em;
+
+		border: 1px solid rgba(102, 255, 255, 0.45);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 0 6px rgba(102, 255, 255, 0.15);
+
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+
+		transition: all 0.2s ease;
+	} */
+
+	/* .promo-code {
+		display: inline-block;
+		margin: 0 0.4rem;
+		padding: 0.25rem 0.9rem;
+
+		background-color: #66ffff;
+		color: black;
+		border-radius: 8px;
+		font-weight: 700;
+
+		box-shadow: 0 0 18px rgba(102, 255, 255, 0.6);
+	} */
+
 	@media (max-width: 1000px) {
 		.discover h1 {
 			font-size: 1.8rem;
@@ -264,7 +456,7 @@
 			padding: 0;
 			text-align: center;
 			display: flex;
-			align-items: center	;
+			align-items: center;
 			justify-content: center;
 			width: 65px;
 			height: 65px;
