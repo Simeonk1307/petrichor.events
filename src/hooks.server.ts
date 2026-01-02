@@ -17,13 +17,14 @@ const frontendRoutes = [
 	'/profile',
 	'/team',
 	'/sponsors',
+	'/events/technical',
+	// '/events/informal',
+	'/events/cultural',
 ];
 const UnderConstructionRoutes = [
 	'/contactus',
-	'/events',
 	'/schedule',
 	'/merch',
-	// '/sponsors',
 	'/map'
 ];
 

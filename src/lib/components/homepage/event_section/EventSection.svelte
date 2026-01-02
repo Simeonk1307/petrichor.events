@@ -13,7 +13,7 @@
       imageUrl: workshop
     },
     {
-      id: 'comingsoon',
+      id: 'events/technical',
       title: 'Technical',
       imageUrl: technical
     }
@@ -25,7 +25,7 @@
       imageUrl: informals
     },
     {
-      id: 'comingsoon',
+      id: 'events/cultural',
       title: 'Culturals',
       imageUrl: cultural
     }
@@ -39,12 +39,12 @@
     <div class="events-grid">
       <div class="column">
         {#each leftEvents as event}
-          <a href='/{event.id}'><EventCard eventName={event.title} imageUrl={event.imageUrl} /></a>
+          <a href={`/${event.id}`}><EventCard eventName={event.title} imageUrl={event.imageUrl} /></a>
         {/each}
       </div>
       <div class="column right-column">
         {#each rightEvents as event}
-          <a href='/{event.id}'><EventCard eventName={event.title} imageUrl={event.imageUrl} /></a>
+          <a href={`/${event.id}`}><EventCard eventName={event.title} imageUrl={event.imageUrl} /></a>
         {/each}
       </div>
     </div>
