@@ -9,7 +9,7 @@
   const leftEvents = [
     {
       id: 'workshop',
-      title: 'Pre-fest-Workshops',
+      title: 'Workshops',
       imageUrl: workshop
     },
     {

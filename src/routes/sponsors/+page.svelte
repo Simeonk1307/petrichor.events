@@ -10,16 +10,18 @@
 	import SBI from "$lib/assets/Sponsors/SBI.jpeg";
 	import Frame from "$lib/assets/Sponsors/Frame.jpg";
 	import Neurobots from "$lib/assets/Sponsors/Neurobots.jpeg";
+	import IITiansNetwork from "$lib/assets/Sponsors/IITiansNetwork.png"
 	import Sponsor from './Sponsor.svelte';
 </script>
 
 <h1 id="heading1">
-	<span class="atmos" style="color:blueviolet">PETRICHOR'26</span> IS SPONSORED BY
+	<span class="atmos" style="color:blueviolet">PETRICHOR'26</span><br> IS SPONSORED BY
 </h1>
 
 <div class="main">
 	<!-- <Sponsor name="GAIL" img={GAIL} title="Co-Title Sponsor" /> -->
 	<Sponsor name="Neurobots" img={Neurobots} title="Knowledge & Title Sponsor"/>
+	<Sponsor name="IITians Network" img={IITiansNetwork} title="Community Partner"/>
 </div>
 
 <!-- <div id="all">
