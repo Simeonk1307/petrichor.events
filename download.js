@@ -13,8 +13,8 @@ try {
 
 const skip_event = ["CF11", "CP14", "TP08"]
 
-// NOTE: Get year from environment variable
-const YEAR = process.env.YEAR || "2026"
+// NOTE: chnage it every year to fetch events of that year
+const YEAR = "2026"
 
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
