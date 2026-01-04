@@ -561,15 +561,18 @@ if (process.env.get_events == "True") {
 
     async function fetchEvents(events_data) {
         for (const event of events_data) {
+            
             if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
                 continue
             }
 
             // NOTE: Skip events that do not end with the specified YEAR also should we apply it for tagging and merging also?
-            if (!(event.name.toLowerCase().endsWith(`${YEAR}`))){
-                console.log(`Skipping event that does not end with ${YEAR}: ` + event.name)
-                continue
+            if (!(event.eventId.toLowerCase().endsWith(`${YEAR}`))){
+                console.log(`Skipping event that does not end with ${YEAR}: ${event.eventId} ${event.name}`);
+                continue;
             }
+            console.log("Fetching event: " + event.eventId + " " + event.name)
+            
             await fetch(`${backend_url}/internal/event/`, {
                 method: 'POST',
                 headers: {
