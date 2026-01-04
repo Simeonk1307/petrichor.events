@@ -14,7 +14,7 @@
 	let currentEvent = events[data.eventID];
 	let registered = false;
 	// let registration_closed = false;
-	let registration_closed = true;
+	let registration_closed = false;
 	onMount(() => {
 		bg.style.backgroundImage = `url("${currentEvent.image}")`;
 		registeredEvents = []
@@ -42,11 +42,11 @@
 		} else {
 			registered = false;
 		}
-		// if (closed_events.includes(event.id)) {
-		// 	registration_closed = true
-		// } else {
-		// 	registration_closed = false;	
-		// }
+		if (closed_events.includes(event.id)) {
+			registration_closed = true
+		} else {
+			registration_closed = false;	
+		}
 	};
 
 	
