@@ -7,9 +7,14 @@
 
 
   const leftEvents = [
+    // {
+    //   id: 'workshop',
+    //   title: 'Workshops',
+    //   imageUrl: workshop
+    // },
     {
-      id: 'workshop',
-      title: 'Workshops',
+      id: 'hackathon',
+      title: 'Hackathon',
       imageUrl: workshop
     },
     {
