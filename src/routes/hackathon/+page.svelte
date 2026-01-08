@@ -111,23 +111,42 @@
 			</div>
 		{/each}
 	</div>
+
+	<div class="_blank" />
+	<div class="discover atmos">
+		<h1>IPTIF Hackathon</h1>
+	</div>
+	<div class="workshop-intro">
+		<p class="intro-text" style="text-align: center; font-size: large">
+			IIT Palakkad Technology IHub Foundation (IPTIF) is a Section 8 company established by IIT
+			Palakkad that fosters innovation in advanced technologies, AI, and cyber-physical systems.
+			Supported by the Department of Science and Technology, IPTIF works closely with academia,
+			industry, and startups to translate research into impactful, real-world solutions.
+		</p>
+	</div>
+
 	<section class="workshop-intro">
 		<div class="intro-poster">
 			<img src={petrhackpostdark} alt="IPTIF Hackathon Poster" />
 		</div>
 
 		<div class="intro-text">
-			<!-- <h2>Neurobots Hackathon</h2> -->
+			<h3><strong>Problem Statement:</strong></h3>
 			<p>
-				Kerala's STP generate nitrogen-rich biosolids. Your goal: Design an AI/ML decision system to
-				optimize their transport and application to farmland.
+				Kerala’s Sewage Treatment Plants (STPs) generate large quantities of nitrogen-rich biosolids
+				with agricultural potential. Design an AI/ML-based decision system to optimize their
+				transport and application to farmlands, balancing crop nutrient demand with monsoon rainfall
+				patterns to prevent environmental pollution while maximizing soil health and carbon credit
+				potential.
 			</p>
-			<p>
-				The Catch: You must balance crop demand against monsoon rains to prevent pollution and
-				maximize carbon credits.
-			</p>
-			<button class="price_btn" on:click={()=>window.open("https://unstop.com/o/4Q2kLGY?utm_medium=Share&utm_source=logged_out_user&utm_campaign=Online_coding_challenge","_blank")}>Register for free</button>
-			<!-- <p class="tagline">Learn • Build • Innovate</p> -->
+			<button
+				class="price_btn"
+				on:click={() =>
+					window.open(
+						'https://unstop.com/o/4Q2kLGY?utm_medium=Share&utm_source=logged_out_user&utm_campaign=Online_coding_challenge',
+						'_blank'
+					)}>Register for free</button
+			>
 		</div>
 	</section>
 </main>
@@ -325,7 +344,13 @@
 		transform: scale(1.04);
 		border-radius: 18px;
 		overflow: hidden;
+		/* align-items: center; */
 		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+	}
+
+	.intro-text button {
+		text-align: center;
+		margin: 0 auto;
 	}
 
 	.intro-poster img {
