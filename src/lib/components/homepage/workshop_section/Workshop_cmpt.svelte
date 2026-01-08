@@ -5,7 +5,9 @@
   export let img_url;
 
   function handleClick(){
-    window.location.href = (`/workshop/?id=${workshop_id}`)
+    // window.location.href = (`/workshop/?id=${workshop_id}`)
+      window.location.href = (`/hackathon/?id=${workshop_id}`)
+
   }
 </script>
 

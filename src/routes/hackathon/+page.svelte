@@ -76,7 +76,8 @@
 				class="card {id} tilt-card"
 				role="button"
 				on:mousedown={() => {
-					goto(`/workshop/${id}`);
+					// goto(`/workshop/${id}`);
+					goto(`/hackathon/${id}`);
 				}}
 				tabindex="0"
 			>
