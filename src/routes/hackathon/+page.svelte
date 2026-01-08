@@ -6,6 +6,8 @@
 	import VanillaTilt from 'vanilla-tilt';
 	import WorkShopComp from './WorkShopComp.svelte';
 	import hackpost from '$lib/assets/MainWorkshops/neurobot/NeurobotHackathon.png';
+	import petrhackpostdark from '$lib/assets/MainWorkshops/hackathon_dark.png';
+	import petrhackpostlight from '$lib/assets/MainWorkshops/hackathon_light.png';
 	let left: number, right: number;
 
 	onMount(() => {
@@ -109,6 +111,25 @@
 			</div>
 		{/each}
 	</div>
+	<section class="workshop-intro">
+		<div class="intro-poster">
+			<img src={petrhackpostdark} alt="IPTIF Hackathon Poster" />
+		</div>
+
+		<div class="intro-text">
+			<!-- <h2>Neurobots Hackathon</h2> -->
+			<p>
+				Kerala's STP generate nitrogen-rich biosolids. Your goal: Design an AI/ML decision system to
+				optimize their transport and application to farmland.
+			</p>
+			<p>
+				The Catch: You must balance crop demand against monsoon rains to prevent pollution and
+				maximize carbon credits.
+			</p>
+			<button class="price_btn" on:click={()=>window.open("https://unstop.com/o/4Q2kLGY?utm_medium=Share&utm_source=logged_out_user&utm_campaign=Online_coding_challenge","_blank")}>Register for free</button>
+			<!-- <p class="tagline">Learn • Build • Innovate</p> -->
+		</div>
+	</section>
 </main>
 
 <style>
@@ -353,7 +374,7 @@
 
 	.promo-strip {
 		width: 100%;
-		padding: 1.0rem 1rem;
+		padding: 1rem 1rem;
 		margin: 3rem 0 4rem 0;
 
 		display: flex;
@@ -382,7 +403,7 @@
 
 	.promo-code {
 		font-weight: 800;
-		letter-spacing: 0.10em;
+		letter-spacing: 0.1em;
 		text-transform: uppercase;
 
 		/* Soft highlight via color, not background */
@@ -428,6 +449,38 @@
 
 		box-shadow: 0 0 18px rgba(102, 255, 255, 0.6);
 	} */
+
+	button {
+		width: 150px;
+		/* background-color: transparent; */
+		border-radius: 2.5em;
+		padding: 0.8em 1em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: solid gray 1px;
+		color: rgb(255, 254, 254);
+		z-index: 200;
+		text-align: center;
+		margin: 1em 0;
+		font-weight: 600;
+		overflow: hidden;
+		font-size: large;
+	}
+
+	.price_btn {
+		color: white;
+		/* width: 100%; */
+		font-weight: 700;
+		background: transparent;
+		border-radius: 2rem;
+		border: 1px solid white;
+		text-wrap: nowrap;
+	}
+	.price_btn:hover {
+		color: black;
+		background: #aaaaaa;
+	}
 
 	@media (max-width: 1000px) {
 		.discover h1 {
