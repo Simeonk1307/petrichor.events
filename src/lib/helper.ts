@@ -81,9 +81,16 @@ export const headerLinks: Array<HeaderLink> = [
         ,
         show: false
     },
+    // {
+    //     url: '/workshop',
+    //     linkText: 'Workshop',
+    //     childLinks: []
+    //     ,
+    //     show: false
+    // },
     {
-        url: '/workshop',
-        linkText: 'Workshop',
+        url: '/hackathon',
+        linkText: 'Hackathon',
         childLinks: []
         ,
         show: false

@@ -12,7 +12,8 @@ import cultural from '$lib/assets/HomePage/cultural.png';
 		"T": "events/technical",
 		"C": "events/cultural",
 		"I": "events/informals",
-		"W": "workshop/"
+		// "W": "workshop/"
+		"H": "hackathon/"
 	}
 </script>
 
