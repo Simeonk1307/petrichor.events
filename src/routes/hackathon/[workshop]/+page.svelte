@@ -1,8 +1,7 @@
 <script lang="ts">
 	import WorkShopComp from '../WorkShopComp.svelte';
 
-	export let data;
-</script>
+	export let data;../../workshop/[workshop]/$types.js</script>
 
 <main>
 	<div class="blank" />
