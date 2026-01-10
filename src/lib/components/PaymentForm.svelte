@@ -32,7 +32,7 @@
 	// 		imgurl = url;
 	// 	});
 	// }
-	imgurl = prisha_qr;
+	imgurl = id.startsWith("T") ? shravani_qr : keerthana_qr;
 
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
