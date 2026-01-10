@@ -9,6 +9,8 @@
 	import parv_qr from "$lib/assets/parv_qr.jpg";
 	import azim_qr from '$lib/assets/azim_qr_code.jpeg';
 	import prisha_qr from '$lib/assets/prisha_qr.jpeg';
+	import keerthana_qr from '$lib/assets/keerthana_qr.jpeg';
+	import shravani_qr from '$lib/assets/shravani_qr.jpeg';
 
 	export let name: string;
 	export let id: string;
@@ -32,7 +34,7 @@
 	// 		imgurl = url;
 	// 	});
 	// }
-	imgurl = prisha_qr;
+	imgurl = id.startsWith("T") ? shravani_qr : keerthana_qr;
 
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
