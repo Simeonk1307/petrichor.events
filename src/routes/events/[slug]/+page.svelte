@@ -50,8 +50,6 @@
 		} else {
 			registration_closed = false;	
 		}
-
-		if ()
 	};
 
 	
