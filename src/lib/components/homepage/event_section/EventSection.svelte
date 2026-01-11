@@ -25,7 +25,7 @@
   ];
   const rightEvents = [
     {
-      id: 'comingsoon',
+      id: 'events/informals',
       title: 'Informals',
       imageUrl: informals
     },
