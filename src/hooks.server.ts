@@ -1,7 +1,7 @@
 import { error, type Handle } from '@sveltejs/kit';
 
 const UnderConstructionRoutes = [
-	'/contactUs',
+	// '/contactUs',
 	'/schedule',
 	'/merch',
 	'/map'
