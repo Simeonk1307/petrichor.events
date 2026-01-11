@@ -15,6 +15,7 @@
 	let registered = false;
 	// let registration_closed = false;
 	let registration_closed = false;
+	let registration_disabled = false;
 	onMount(() => {
 		bg.style.backgroundImage = `url("${currentEvent.image}")`;
 		registeredEvents = []
@@ -30,6 +31,8 @@
 		bg.style.backgroundImage = `url("${event.image}")`;
 		currentEvent = events[event.id]	
 		const code = (events_compiledmap[event.id])
+		registration_disabled = event.id.startsWith("I");
+
 		setTimeout(() => {
 			if (iframe.contentWindow){
 				iframe.contentWindow.scrollTo({ top: 0, behavior: 'smooth' });
@@ -47,6 +50,8 @@
 		} else {
 			registration_closed = false;	
 		}
+
+		if ()
 	};
 
 	
@@ -235,11 +240,13 @@
 	{srcdoc}
 	{height}
 	/>
-		<a id="register" class={registration_closed || registered ? "closed" : ""} href={(registration_closed || registered) ? "#" : 
-		`${frontend_url}/payment/register?id=${currentEvent.id}`
-	}>{
-			registered ? "Registered" : registration_closed ? "Registration Closed" : "Register" 
-		}</a>
+		{#if !registration_disabled}
+				<a id="register" class={registration_closed || registered ? "closed" : ""} href={(registration_closed || registered) ? "#" : 
+				`${frontend_url}/payment/register?id=${currentEvent.id}`
+			}>{
+					registered ? "Registered" : registration_closed ? "Registration Closed" : "Register" 
+				}</a>
+		{/if}
 	</div>
 </div>
 
