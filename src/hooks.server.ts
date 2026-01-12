@@ -1,51 +1,31 @@
 import { error, type Handle } from '@sveltejs/kit';
 
-// INFO(gebriish): allowed routes go here
-const frontendRoutes = [
-	'/',
-	'/home',
-	'/aboutus',
-	// '/contactus',
-	'/login',
-	'/register',
-	'/changepassword',
-	'/forgotpassword',
-	'/ca/welcome',
-	'/ca/profile',
-	'/comingsoon',	
-	'/workshop',
-	'/profile',
-	'/team'
-];
 const UnderConstructionRoutes = [
-	'/contactus',
-	'/events',
+	// '/contactUs',
 	'/schedule',
 	'/merch',
-	'/sponsors',
 	'/map'
 ];
 
-
-export const handle: Handle = ({ event, resolve }) => {
-
+export const handle: Handle = async ({ event, resolve }) => {
 	const path = event.url.pathname.toLowerCase();
 
-	const isAllowed = frontendRoutes.some(route =>
-		path === route || path.startsWith(route + '/')
-	);
+	// Let SvelteKit resolve first
+	const response = await resolve(event);
+
+	// If SvelteKit already found an error → THROW it
+	if (response.status >= 400) {
+		throw error(response.status, response.statusText || 'Request failed');
+	}
+
+	// Custom errors for valid routes
 	const isUnderConstruction = UnderConstructionRoutes.some(route =>
 		path === route || path.startsWith(route + '/')
 	);
 
-	if (isAllowed) {
-			return resolve(event);
-	}
-  
 	if (isUnderConstruction) {
-			const errorUrl = new URL("/comingsoon", event.url)
-			return Response.redirect(errorUrl, 302);
+		throw error(503, 'This page is under construction');
 	}
 
-	throw error(404, 'Page not found');
+	return response;
 };

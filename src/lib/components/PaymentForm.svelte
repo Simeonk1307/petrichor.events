@@ -6,8 +6,12 @@
 	import { fail } from '@sveltejs/kit';
 	import QRCode from 'qrcode';
 	import { getContext, onMount } from 'svelte';
-	import parv_qr from "$lib/assets/parv_qr.jpg";
-	import azim_qr from '$lib/assets/azim_qr_code.jpeg'
+	import parv_qr from '$lib/assets/parv_qr.jpg';
+	import azim_qr from '$lib/assets/azim_qr_code.jpeg';
+	import prisha_qr from '$lib/assets/prisha_qr.jpeg';
+	import keerthana_qr from '$lib/assets/keerthana_qr.jpeg';
+	import shravani_qr from '$lib/assets/shravani_qr.jpeg';
+	import dev_qr from '$lib/assets/dev_qr.jpeg';
 
 	export let name: string;
 	export let id: string;
@@ -31,8 +35,24 @@
 	// 		imgurl = url;
 	// 	});
 	// }
-	imgurl = azim_qr
 
+	imgurl = id.startsWith('T') ? dev_qr : keerthana_qr;
+
+	let bankDetails = id.startsWith('T')
+		? {
+				upiId: 'devmittal9705@oksbi',
+				holder: 'SHRAVANI DEVANAND MUDKANNA',
+				accountNo: '43743442300',
+				ifsc: 'SBIN0064849',
+				branch: 'IIT PALAKKAD'
+		  }
+		: {
+				upiId: 'keerthanakandarpi@okicici',
+				holder: 'MUHAMED RIZWAN MEHABOOB',
+				accountNo: '42584102441',
+				ifsc: 'SBIN0071069',
+				branch: ''
+		  };
 
 	const loading: Function = getContext('loading');
 	const displayPopUp: Function = getContext('displayPopUp');
@@ -103,7 +123,7 @@
 				if (verifyButton) {
 					verifyButton.disabled = true;
 				}
-				if(caInput){
+				if (caInput) {
 					caInput.disabled = true;
 				}
 			} else {
@@ -195,11 +215,11 @@
 					if (verifyButton) {
 						verifyButton.disabled = true;
 					}
-					if(couponInput){
+					if (couponInput) {
 						couponInput.disabled = true;
 					}
-					amount = (amount*0.9);
-					amount = parseInt(amount.toFixed(0))
+					amount = amount * 0.9;
+					amount = parseInt(amount.toFixed(0));
 				} else {
 					displayPopUp('Alert', data.err, 4000, () => {});
 				}
@@ -244,14 +264,15 @@
 				/></svg
 			>
 		</div>
-		<p style="display: flex;text-align:center;padding-inline:10px;">If the above QR code doesn't work, please use</p><p> UPI ID: azimmahe@oksbi</p>
-		<p>OR Pay to HDFC Bank A/C Details:
+		<p style="display: flex;text-align:center;padding-inline:10px;">
+			If the above QR code doesn't work, please use
 		</p>
-		<p>UPI ID: pparv2515-1@okhdfcbank</p>
+		<p>UPI ID: {bankDetails.upiId}</p>
 		<p>OR Pay to HDFC Bank A/C Details:</p>
-		<p>Account Number: 05001460001487</p>
-		<p>Account Holder Name: Vinay Krishna</p>
-		<p>IFSC Code: HDFC0000500</p>
+		<p>Account Holder: {bankDetails.holder}</p>
+		<p>Account Number: {bankDetails.accountNo}</p>
+		<p>IFSC Code: {bankDetails.ifsc}</p>
+		<p>Branch: {bankDetails.branch}</p>
 	</div>
 	<div id="data">
 		<p
@@ -297,7 +318,7 @@
 				style="margin-top:5px;background-color:black !important;border:black"
 				bind:value={coupon_code}
 			/>
-			<button id="coupon_verify" type="submit" form='coupon_form' style="cursor:pointer"
+			<button id="coupon_verify" type="submit" form="coupon_form" style="cursor:pointer"
 				>{coupon_verified ? 'Verified' : 'Verify'}</button
 			>
 		</div>
@@ -385,10 +406,12 @@
 		color: #fcf3ff;
 		outline: none;
 	}
-	#verify:disabled, #coupon_verify:disabled {
+	#verify:disabled,
+	#coupon_verify:disabled {
 		background-color: rgb(17, 184, 17);
 	}
-	#verify, #coupon_verify {
+	#verify,
+	#coupon_verify {
 		background-color: rgb(184, 17, 17);
 		color: #fcf3ff;
 		border: none;
@@ -404,7 +427,8 @@
 		margin-left: 3rem;
 		border-radius: 20%/50%;
 	}
-	#CAcode, #coupon_code {
+	#CAcode,
+	#coupon_code {
 		width: 18rem;
 		height: 2.5rem;
 		padding-left: 0.5rem;
@@ -452,7 +476,8 @@
 		.code_verification {
 			width: 18rem;
 		}
-		#verify, #coupon_verify {
+		#verify,
+		#coupon_verify {
 			margin-left: -1rem;
 		}
 		#submitButton {

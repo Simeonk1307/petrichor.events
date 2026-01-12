@@ -21,7 +21,6 @@
 		college: any;
 		graduation: any;
 		events: any;
-		nightEvents: any;
 		CACodePresent: boolean;
 	};
 	setProfileData();
@@ -60,8 +59,7 @@
 			college: user_data?.institute ?? 'College',
 			graduation: user_data?.gradYear ?? 'Grad',
 			CACodePresent: user_data.CACode != '',
-			events: user_events,
-			nightEvents: []
+			events: user_events
 		};
 		// console.log(profileData.events);
 	}
@@ -132,33 +130,11 @@
 	</div>
 	{#if pageWidth <= 900}
 		<div class="events">
-			<div class="buttons">
-				<button
-					class="display urEvent {eventDisplay ? 'active' : ''}"
-					on:click={() => {
-						eventDisplay = true;
-					}}>Your Events</button
-				>
-				<button
-					class="display musicNight {!eventDisplay ? 'active' : ''}"
-					on:click={() => {
-						eventDisplay = false;
-					}}>Musical Night</button
-				>
-			</div>
 			<div class="eventHolder">
-				{#if eventDisplay}
-					{#if profileData.events.length == 0}
-						<div class="no-message-box">Not Registered in any event</div>
-					{:else}
-						{#each profileData.events as event}
-							<EventCard {event} />
-						{/each}
-					{/if}
-				{:else if profileData.nightEvents.length == 0}
-					<div class="no-message-box">Nothing to Show Here</div>
+				{#if profileData.events.length == 0}
+					<div class="no-message-box">Not Registered in any event</div>
 				{:else}
-					{#each profileData.nightEvents as event}
+					{#each profileData.events as event}
 						<EventCard {event} />
 					{/each}
 				{/if}
@@ -167,26 +143,12 @@
 	{:else}
 		<div class="container">
 			<div class="eventsBox">
-				<h3>Events</h3>
+				<h3>Your Events</h3>
 				<div class="eventHolder">
-					{#if eventDisplay}
-						{#if profileData.events.length == 0}
-							<div class="no-message-box">Not Registered in any Event</div>
-						{:else}
-							{#each profileData.events as event}
-								<EventCard {event} />
-							{/each}
-						{/if}
-					{/if}
-				</div>
-			</div>
-			<div class="eventsBox">
-				<h3>Musical Night</h3>
-				<div class="eventHolder">
-					{#if profileData.nightEvents.length == 0}
-						<div class="no-message-box">Nothing to Show Here</div>
+					{#if profileData.events.length == 0}
+						<div class="no-message-box">Not Registered in any Event</div>
 					{:else}
-						{#each profileData.nightEvents as event}
+						{#each profileData.events as event}
 							<EventCard {event} />
 						{/each}
 					{/if}

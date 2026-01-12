@@ -9,18 +9,22 @@
 	import ME from "$lib/assets/Sponsors/ME.png";
 	import SBI from "$lib/assets/Sponsors/SBI.jpeg";
 	import Frame from "$lib/assets/Sponsors/Frame.jpg";
+	import Neurobots from "$lib/assets/Sponsors/Neurobots.jpeg";
+	import IITiansNetwork from "$lib/assets/Sponsors/IITiansNetwork.png"
 	import Sponsor from './Sponsor.svelte';
 </script>
 
 <h1 id="heading1">
-	<span class="atmos" style="color:blueviolet">PETRICHOR'25</span> IS SPONSORED BY
+	<span class="atmos" style="color:blueviolet">PETRICHOR'26</span><br> IS SPONSORED BY
 </h1>
 
 <div class="main">
-	<Sponsor name="GAIL" img={GAIL} title="Co-Title Sponsor" />
+	<!-- <Sponsor name="GAIL" img={GAIL} title="Co-Title Sponsor" /> -->
+	<Sponsor name="Neurobots" img={Neurobots} title="Knowledge & Title Sponsor"/>
+	<Sponsor name="IITians Network" img={IITiansNetwork} title="Community Partner"/>
 </div>
 
-<div id="all">
+<!-- <div id="all">
 	<Sponsor name="State Bank of India" img={SBI} title="Associate Sponsor" />
 	<Sponsor name="KC Overseas" img={KCOverseas} title="Academic Partner" />
 	<Sponsor name="TIME" img={TIME} title="Academic Partner" />
@@ -30,7 +34,9 @@
 	<Sponsor name="INGLU" img={INGLO} title="Event Curation Partner" />
 	<Sponsor name="My Equation" img={ME} title="Event Partner" />
 	<Sponsor name="Himalayan Yeti" img={Frame} title="Grooming Partner" />
-</div>
+</div> -->
+
+
 <!-- 
 <h2 id="heading2" class="atmos" style="color:rgb(216, 191, 238)">In Partnership with</h2>
 

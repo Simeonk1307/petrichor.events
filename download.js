@@ -13,6 +13,9 @@ try {
 
 const skip_event = ["CF11", "CP14", "TP08"]
 
+// NOTE: chnage it every year to fetch events of that year
+const YEAR = "2026"
+
 const CDN_URL = "https://cdn.jsdelivr.net/npm";
 
 const components_map = new Map()
@@ -558,9 +561,18 @@ if (process.env.get_events == "True") {
 
     async function fetchEvents(events_data) {
         for (const event of events_data) {
+            
             if (event.name.toLowerCase().startsWith("tutorial") || event.name.toLowerCase().startsWith("test")) {
                 continue
             }
+
+            // NOTE: Skip events that do not end with the specified YEAR also should we apply it for tagging and merging also?
+            if (!(event.eventId.toLowerCase().endsWith(`${YEAR}`))){
+                console.log(`Skipping event that does not end with ${YEAR}: ${event.eventId} ${event.name}`);
+                continue;
+            }
+            console.log("Fetching event: " + event.eventId + " " + event.name)
+            
             await fetch(`${backend_url}/internal/event/`, {
                 method: 'POST',
                 headers: {

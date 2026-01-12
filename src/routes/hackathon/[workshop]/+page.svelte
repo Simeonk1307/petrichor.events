@@ -2,7 +2,7 @@
 	import WorkShopComp from '../WorkShopComp.svelte';
 
 	export let data;
-</script>
+	// ../../workshop/[workshop]/$types.js</script>
 
 <main>
 	<div class="blank" />
