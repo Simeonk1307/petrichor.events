@@ -1,15 +1,15 @@
 <script lang="ts">
     import backdrop from "$lib/assets/WebsiteBackdrop.png"
-    import cap from "$lib/assets/merch_images/petrichor_cap.jpeg"
-    import merch from "$lib/assets/merch_images/petrichor_merch.jpeg"
-    import tshirt1 from "$lib/assets/merch_images/petrichor_tshirt.jpeg"
-    import tshirt2 from "$lib/assets/merch_images/petrichor_tshirt2.jpeg"
+    import cap from "$lib/assets/merch_images/Cap.png"
+    import hoodie from "$lib/assets/merch_images/Hoodie.png"
+    import tshirt1 from "$lib/assets/merch_images/White TShirt.png"
+    import tshirt2 from "$lib/assets/merch_images/Black TShirt.png"
     import combo from "$lib/assets/merch_images/combo.jpg"
     import botht from "$lib/assets/merch_images/both_tshirts.png"
 	import { onMount } from "svelte";
     const images = [
       cap,
-      merch,
+      hoodie,
       tshirt1,
       tshirt2
     ];
@@ -55,9 +55,7 @@
         background-size: cover;
         max-width: 100vw;
         min-height: 100vh;
-        position: absolute;
-        top: 0;
-        left: -20px;
+        position: center;
     }
     .header {
       margin-top: 130px;
@@ -103,7 +101,7 @@
     }
   
     .photo-frame img {
-      width: 300px;
+      /* width: 300px; */
       height: 300px;
       object-fit: cover;
     }
@@ -133,12 +131,12 @@
       background-size: contain;
     }
     .combo:hover::before {
-      background-image: url('/src/lib/assets/merch_images/petrichor_merch.jpeg');
-      transform: translateX(-50%);
+      background-image: url('/src/lib/assets/merch_images/Hoodie.png');
+      transform: translateX(-75%);
     }
     .combo:hover::after {
-      background-image: url('/src/lib/assets/merch_images/petrichor_cap.jpeg');
-      transform: translateX(50%);
+      background-image: url('/src/lib/assets/merch_images/Cap.png');
+      transform: translateX(75%);
     }
     .combo {
       margin: 20px 0 ;
@@ -162,9 +160,9 @@
     
     }
     @media (max-width: 400px) {
-      .main {
+      /* .main {
         left: -10px;
-      }
+      } */
       .header {
         padding: 10px 20px;
         font-size: large;
@@ -172,7 +170,7 @@
       }
       .photo-frame img{
         width: 250px;
-        height: 250px;
+        /* height: 250px; */
       }
     }
     .price{
@@ -195,12 +193,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 10px;
     }
   </style>
   
 <div class="main" style="background-image: url({backdrop});">
    <div class="header">
-    Buy Our Petrichor'25 merch at IIT Palakkad on 18th and 19th January 2025. 
+    Buy Our Petrichor'26 merch at IIT Palakkad on 17th and 18th January 2026. 
    </div>
     <div class="gallery">
         {#each images as image, i}
@@ -214,7 +213,7 @@
       </div>
       <center>
 
-        <div class="photo-frame {(pageWidth>=700) ? "combo": ""}" style="margin: 40px 0;">
+        <div class="photo-frame {(pageWidth>=700) ? "combo": ""}" style="margin: 40px 0; width: 300px">
           <img src={combo} bind:this={img} alt="merches" />
           <div class="price">
             <p class="aa">1099Rs</p>

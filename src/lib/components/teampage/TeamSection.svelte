@@ -1,6 +1,25 @@
 <script lang="ts">
     import PersonCard from '$lib/components/Person.svelte';
     import placeholder from '$lib/assets/CoreTeam/placeholder.png';
+    import Emmanuel from '$lib/assets/CoreTeam/Emmanuel_Johnson_Assistant_Fest_Coordinator.jpg';
+    import Aaron from '$lib/assets/CoreTeam/Aaron-Assistant Fest Coordinator.jpg';
+    import Dev from '$lib/assets/CoreTeam/Technical_Head_Dev_Mittal.jpg';
+    import Shravani from '$lib/assets/CoreTeam/Technical _Head Shravani Devanand Mudkanna.jpg';
+    import Abhijith from '$lib/assets/CoreTeam/Abhijith_HospitalityHead.jpg';
+    import Karan from '$lib/assets/CoreTeam/Media_Head_Karan.jpg';
+    import Ashvand from '$lib/assets/CoreTeam/Media_Head_Ashvand.jpg';
+    import Simeon from '$lib/assets/CoreTeam/webdev-head-simeon.jpg';
+    import Aditya from '$lib/assets/CoreTeam/Informals_Head_Aditya.jpg';
+    import Jeeva from '$lib/assets/CoreTeam/Pro-show and Guest lecture head Jeeva Jayaprakash_.jpg';
+    import Nimesh from '$lib/assets/CoreTeam/Marketing_head_Nimesh_Garg.jpg';
+    import Mathew from '$lib/assets/CoreTeam/Mathew_Marketing_Head.jpg';
+    import Prisha from '$lib/assets/CoreTeam/Prisha_Finance_Head.jpg';
+    import Akshat from '$lib/assets/CoreTeam/Cultural Head_Akshat.jpg';
+    import Keerthana from '$lib/assets/CoreTeam/Keerthana - Cultural head.jpg';
+    import Mandar from '$lib/assets/CoreTeam/Mandar Patil Hackathon and Tech Summit Head.jpg';
+    import Hemanth from '$lib/assets/CoreTeam/Hemanth_Kashyap_Gundamaraju_Workshop_Head.jpg';
+    import Tarun from '$lib/assets/CoreTeam/Social media head _ Tarun.jpg';
+    import Jatin from '$lib/assets/CoreTeam/Jatin - Decoration Head.jpg';
 
     type Person = {
         name: string;
@@ -23,15 +42,15 @@
         {
             title: 'Assistant Coordinators',
             members: [
-                { name: 'Emmanuel Johnson' }, // add an img property linking to each persons pfp.
-                { name: 'Aaron C Abraham' }
+                { name: 'Emmanuel Johnson', img: Emmanuel},
+                { name: 'Aaron C Abraham', img: Aaron}
             ]
         },
         {
             title: 'Technical Heads',
             members: [
-                { name: 'Dev Mittal'},
-                { name: 'Mudkanna Shravani Devanand' }
+                { name: 'Dev Mittal', img: Dev },
+                { name: 'Shravani Devanand Mudkanna', img: Shravani }
             ]
         },
         {
@@ -44,72 +63,72 @@
         {
             title: 'Hospitality Heads',
             members: [
-                { name: 'Abhijith Sureshbabu' },
-                { name: 'Muhamed Rizwan Mehaboob' }
+                { name: 'Abhijith Sureshbabu', img: Abhijith },
+                { name: 'Rizwan Muhamed Mehaboob' }
             ]
         },
         {
             title: 'Media and Publicity Heads',
             members: [
-                { name: 'Karan Pareth Sreekumar' },
-                { name: 'Ashvand Sathyajith M' }
+                { name: 'Karan Pareth Sreekumar', img: Karan },
+                { name: 'Ashvand Sathyajith M', img: Ashvand }
             ]
         },
         {
             title: 'Web Dev Head',
             members: [
-                { name: 'Simeon K' }
+                { name: 'Simeon K', img: Simeon}
             ]
         },
         {
             title: 'Informals Head',
             members: [
-                { name: 'Aditya Anand Mishra' }
+                { name: 'Aditya Anand Mishra', img: Aditya}
             ]
         },
         {
             title: 'Pro Show Head',
             members: [
-                { name: 'Jeeva Jayaprakash' }
+                { name: 'Jeeva Jayaprakash', img: Jeeva }
             ]
         },
         {
             title: 'Sponsorship Heads',
             members: [
-                { name: 'Nimesh Garg' },
-                { name: 'Mathew Joy Poothokaren' },
+                { name: 'Nimesh Garg', img: Nimesh },
+                { name: 'Mathew Joy Poothokaren', img: Mathew },
                 { name: 'Parthiv P' }
             ]
         },
         {
             title: 'Finance Head',
             members: [
-                { name: 'Italiya Prisha' }
+                { name: 'Prisha Italiya', img: Prisha }
             ]
         },
         {
             title: 'Cultural Heads',
             members: [
-                { name: 'Akshat Nair' },
-                { name: 'Kandarpi Keerthana' }
+                { name: 'Akshat Nair', img: Akshat },
+                { name: 'Keerthana Kandarpi', img: Keerthana }
             ]
         },
         {
             title: 'Hackathon & Tech Summit Head',
             members: [
-                { name: 'Mandar Ashish Patil' }
+                { name: 'Mandar Ashish Patil', img: Mandar }
             ]
         },
         {
             title: 'Workshop Head',
             members: [
-                { name: 'Gundamaraju Hemanth Kashyap' }
+                { name: 'Gundamaraju Hemanth Kashyap', img: Hemanth }
             ]
         },
         {
             title: 'Social Media Head',
             members: [
-                { name: 'Surisetti Tarun' }
+                { name: 'Surisetti Tarun', img: Tarun }
             ]
         },
         {
@@ -121,7 +140,7 @@
         {
             title: 'Decoration Head',
             members: [
-                { name: 'Jatin Vimal' }
+                { name: 'Jatin Vimal', img: Jatin }
             ]
         },
     ];

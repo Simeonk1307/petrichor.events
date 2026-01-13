@@ -2,7 +2,7 @@
 import type { Schedule } from '$lib/types';
 
 export const schedule: { [key: string]: Schedule } = {
-    '18th January 2025': {
+    '17th January 2026': {
         Cultural: [
             {
                 event_name: 'Voicestra',
@@ -22,19 +22,39 @@ export const schedule: { [key: string]: Schedule } = {
         ],
         Technical: [
             {
-                event_name: 'RubikVerse',
-                timing: '10:00AM - 1:00PM',
-                venue: 'S-306'
+                event_name: 'Source Code',
+                timing: '9:00AM - 12:00PM',
+                venue: 'Nila CS Lab'
             },
             {
-                event_name: 'Quizzanaire: School Quiz Edition',
-                timing: '11:30AM - 1:30PM',
-                venue: 'S-308'
-            },
-            {
-                event_name: 'DroneDash',
+                event_name: 'Worst UI/UX',
                 timing: '2:00PM - 5:00PM',
+                venue: 'S-301'
+            },
+            {
+                event_name: 'Reverse Engineering',
+                timing: '9:00AM - 12:30PM',
+                venue: 'Nila Electronics Lab'
+            },
+            {
+                event_name: 'Line Follower',
+                timing: '2:00PM - 4:00PM',
+                venue: 'S-302'
+            },
+            {
+                event_name: 'Shake It Off',
+                timing: '3:00PM - 5:30PM',
+                venue: 'Manogatha'
+            },
+            {
+                event_name: 'Drone Dash',
+                timing: '2:00PM - 4:30PM',
                 venue: 'Nila Ground'
+            },
+            {
+                event_name: 'Robo Wars',
+                timing: '2:00PM - 6:00PM',
+                venue: 'Backside of Agora'
             }
         ],
         Workshop: [
@@ -91,7 +111,7 @@ export const schedule: { [key: string]: Schedule } = {
             }
         ]
     },
-    '19th January 2025': {
+    '18th January 2026': {
         Cultural: [
             {
                 event_name: 'Step Sync Surge',
