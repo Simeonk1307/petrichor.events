@@ -131,8 +131,8 @@ export const headerLinks: Array<HeaderLink> = [
         show: false
     },
     {
-        url: '/map',
-        linkText: 'Maps',
+        url: '/contactUs',
+        linkText: 'Contact Us',
         childLinks: [],
         show: false
     }

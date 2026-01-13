@@ -2,9 +2,7 @@ import { error, type Handle } from '@sveltejs/kit';
 
 const UnderConstructionRoutes = [
 	// '/contactUs',
-	'/schedule',
-	'/merch',
-	'/map'
+	'/schedule'
 ];
 
 export const handle: Handle = async ({ event, resolve }) => {
