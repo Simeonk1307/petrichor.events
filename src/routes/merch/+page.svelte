@@ -4,8 +4,8 @@
     import hoodie from "$lib/assets/merch_images/Hoodie.png"
     import tshirt1 from "$lib/assets/merch_images/White TShirt.png"
     import tshirt2 from "$lib/assets/merch_images/Black TShirt.png"
-    import combo from "$lib/assets/merch_images/combo.jpg"
-    import botht from "$lib/assets/merch_images/both_tshirts.png"
+    import combo from "$lib/assets/merch_images/Combo.png"
+    import botht from "$lib/assets/merch_images/Both TShirts.png"
 	import { onMount } from "svelte";
     const images = [
       cap,
@@ -103,7 +103,7 @@
     .photo-frame img {
       /* width: 300px; */
       height: 300px;
-      object-fit: cover;
+      object-fit: fill;
     }
     .photo-frame:before, .photo-frame::after {
         content: "";
@@ -132,14 +132,16 @@
     }
     .combo:hover::before {
       background-image: url('/src/lib/assets/merch_images/Hoodie.png');
-      transform: translateX(-75%);
+      transform: translateX(-50%);
     }
     .combo:hover::after {
       background-image: url('/src/lib/assets/merch_images/Cap.png');
-      transform: translateX(75%);
+      transform: translateX(50%);
     }
     .combo {
       margin: 20px 0 ;
+      height: 300px;
+      width: 300px;
     }
     .combo img{
       object-fit: fill;
@@ -168,9 +170,14 @@
         font-size: large;
         width: 100%;
       }
-      .photo-frame img{
-        width: 250px;
+      .photo-frame{
+        width: 80vw;
         /* height: 250px; */
+        padding: 10px;
+      }
+      .combo{
+        height: 200px;
+        width: 200px;
       }
     }
     .price{
@@ -195,6 +202,7 @@
         justify-content: center;
         padding: 10px;
     }
+
   </style>
   
 <div class="main" style="background-image: url({backdrop});">
@@ -213,7 +221,7 @@
       </div>
       <center>
 
-        <div class="photo-frame {(pageWidth>=700) ? "combo": ""}" style="margin: 40px 0; width: 300px">
+        <div class="photo-frame {(pageWidth>=700) ? "combo": ""}" style="margin: 40px 0;">
           <img src={combo} bind:this={img} alt="merches" />
           <div class="price">
             <p class="aa">1099Rs</p>
