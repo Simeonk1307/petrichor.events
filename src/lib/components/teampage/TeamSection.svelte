@@ -1,11 +1,13 @@
 <script lang="ts">
     import PersonCard from '$lib/components/Person.svelte';
     import placeholder from '$lib/assets/CoreTeam/placeholder.png';
+    import Parv from '$lib/assets/CoreTeam/Fest_Coordinator_Parv_Patel.jpg';
     import Emmanuel from '$lib/assets/CoreTeam/Emmanuel_Johnson_Assistant_Fest_Coordinator.jpg';
     import Aaron from '$lib/assets/CoreTeam/Aaron-Assistant Fest Coordinator.jpg';
     import Dev from '$lib/assets/CoreTeam/Technical_Head_Dev_Mittal.jpg';
     import Shravani from '$lib/assets/CoreTeam/Technical _Head Shravani Devanand Mudkanna.jpg';
     import Abhijith from '$lib/assets/CoreTeam/Abhijith_HospitalityHead.jpg';
+    import Rizwan from '$lib/assets/CoreTeam/Hospitality-Head-Rizwan.jpg';
     import Karan from '$lib/assets/CoreTeam/Media_Head_Karan.jpg';
     import Ashvand from '$lib/assets/CoreTeam/Media_Head_Ashvand.jpg';
     import Simeon from '$lib/assets/CoreTeam/webdev-head-simeon.jpg';
@@ -19,6 +21,7 @@
     import Mandar from '$lib/assets/CoreTeam/Mandar Patil Hackathon and Tech Summit Head.jpg';
     import Hemanth from '$lib/assets/CoreTeam/Hemanth_Kashyap_Gundamaraju_Workshop_Head.jpg';
     import Tarun from '$lib/assets/CoreTeam/Social media head _ Tarun.jpg';
+    import Bavitej from '$lib/assets/CoreTeam/Cinematography head-bavi.jpg';
     import Jatin from '$lib/assets/CoreTeam/Jatin - Decoration Head.jpg';
 
     type Person = {
@@ -36,7 +39,7 @@
         {
             title: 'Fest Coordinator',
             members: [
-                {name : 'Parv Patel'}
+                {name : 'Parv Patel', img: Parv}
             ]
         },
         {
@@ -64,7 +67,7 @@
             title: 'Hospitality Heads',
             members: [
                 { name: 'Abhijith Sureshbabu', img: Abhijith },
-                { name: 'Rizwan Muhamed Mehaboob' }
+                { name: 'Rizwan Muhamed Mehaboob', img: Rizwan }
             ]
         },
         {
@@ -134,7 +137,7 @@
         {
             title: 'Cinematography Head',
             members: [
-                { name: 'Ethalapaka Bavitej' }
+                { name: 'Ethalapaka Bavitej', img: Bavitej }
             ]
         },
         {
