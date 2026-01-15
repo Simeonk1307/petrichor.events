@@ -108,6 +108,8 @@
 				href="https://forms.gle/7WDJMbCwVXSMAWcV9"
 				style="text-decoration: underline;">Link</a
 			>
+            <br />
+             Issues has been fixed on website you may start registration 
 		</div>
 		<div class="actual_nav" style="width: 100%; height:100%;display:flex;">
 			<a class="title atmos" href="/home" bind:this={titleDiv} />
