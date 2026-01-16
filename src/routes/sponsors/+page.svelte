@@ -11,6 +11,7 @@
 	import Frame from "$lib/assets/Sponsors/Frame.jpg";
 	import Neurobots from "$lib/assets/Sponsors/Neurobots.jpeg";
 	import IITiansNetwork from "$lib/assets/Sponsors/IITiansNetwork.png"
+	import Feelfirst from "$lib/assets/Sponsors/feelfirst.png"
 	import Sponsor from './Sponsor.svelte';
 </script>
 
@@ -22,6 +23,7 @@
 	<!-- <Sponsor name="GAIL" img={GAIL} title="Co-Title Sponsor" /> -->
 	<Sponsor name="Neurobots" img={Neurobots} title="Knowledge & Title Sponsor"/>
 	<Sponsor name="IITians Network" img={IITiansNetwork} title="Community Partner"/>
+	<Sponsor name="FeelFirst Publishing" img={Feelfirst} title="Silver Sponsor"/>
 </div>
 
 <!-- <div id="all">
