@@ -136,24 +136,39 @@ export const schedule: { [key: string]: Schedule } = {
         ],
         Technical: [
             {
-                event_name: 'Labyrinth: The MazeXplorer',
-                timing: '10:00AM - 1:00PM',
-                venue: 'S-306'
+                event_name: 'AlgoZen',
+                timing: '9:00AM - 12:00PM',
+                venue: 'S-302'
             },
             {
-                event_name: 'Bridge Bonanza',
-                timing: '11:00AM - 2:00PM',
-                venue: 'Manogatha Quadrangle'
+                event_name: 'World Guessor',
+                timing: '9:00AM - 10:30AM',
+                venue: 'Nila CS Lab'
             },
             {
-                event_name: 'Quizzanaire: General Quiz Edition',
-                timing: '11:30PM - 1:30PM',
-                venue: 'S-308'
+                event_name: 'CADvCAD',
+                timing: '10:45AM - 12:30PM',
+                venue: 'Nila CC Lab'
             },
             {
-                event_name: 'RoboWars: The Clash Of Titans',
-                timing: '1:30PM - 5:00PM',
-                venue: 'Agora (Back)'
+                event_name: 'Robo Soccer',
+                timing: '10:00AM - 1:30PM',
+                venue: 'Agora Right Foyer'
+            },
+            {
+                event_name: 'CODEWARS',
+                timing: '2:00PM - 5:00PM',
+                venue: 'Nila CS Lab'
+            },
+            {
+                event_name: 'CSS Battles',
+                timing: '2:00PM - 4:00PM',
+                venue: 'S-302'
+            },
+            {
+                event_name: 'Riptide',
+                timing: '3:00PM - 5:00PM',
+                venue: 'Agora Backside'
             },
         ],
         Workshop: [
