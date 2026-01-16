@@ -27,11 +27,6 @@ export const schedule: { [key: string]: Schedule } = {
                 venue: 'Nila CS Lab'
             },
             {
-                event_name: 'Worst UI/UX',
-                timing: '2:00PM - 5:00PM',
-                venue: 'S-301'
-            },
-            {
                 event_name: 'Reverse Engineering',
                 timing: '9:00AM - 12:30PM',
                 venue: 'Nila Electronics Lab'
@@ -45,11 +40,6 @@ export const schedule: { [key: string]: Schedule } = {
                 event_name: 'Shake It Off',
                 timing: '3:00PM - 5:30PM',
                 venue: 'Manogatha'
-            },
-            {
-                event_name: 'Drone Dash',
-                timing: '2:00PM - 4:30PM',
-                venue: 'Nila Ground'
             },
             {
                 event_name: 'Robo Wars',
@@ -159,11 +149,6 @@ export const schedule: { [key: string]: Schedule } = {
                 event_name: 'CODEWARS',
                 timing: '2:00PM - 5:00PM',
                 venue: 'Nila CS Lab'
-            },
-            {
-                event_name: 'CSS Battles',
-                timing: '2:00PM - 4:00PM',
-                venue: 'S-302'
             },
             {
                 event_name: 'Riptide',
