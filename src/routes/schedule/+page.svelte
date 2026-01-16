@@ -12,8 +12,8 @@
 	const images = [
 		cult,
 		tech,
-		workshops,
-		informal,
+		// workshops,
+		// informal,
 		books,
 		'https://cdn.midjourney.com/f7b1ae0c-e49f-41b6-9515-cc0e0db964a1/0_1.webp'
 	];
