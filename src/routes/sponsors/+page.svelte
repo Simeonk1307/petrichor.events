@@ -12,7 +12,12 @@
 	import Neurobots from "$lib/assets/Sponsors/Neurobots.jpeg";
 	import IITiansNetwork from "$lib/assets/Sponsors/IITiansNetwork.png"
 	import Feelfirst from "$lib/assets/Sponsors/feelfirst.png"
-	import Sponsor from './Sponsor.svelte';
+	import RoyalEnfield from "$lib/assets/Sponsors/RoyalEnfield.jpeg"
+	import MYOP from "$lib/assets/Sponsors/MYOP.jpeg"
+	import Dreamotel from "$lib/assets/Sponsors/Dreamotel.jpeg"
+	import DKMS from "$lib/assets/Sponsors/DKMS.jpeg"
+
+import Sponsor from './Sponsor.svelte';
 </script>
 
 <h1 id="heading1">
@@ -23,7 +28,12 @@
 	<!-- <Sponsor name="GAIL" img={GAIL} title="Co-Title Sponsor" /> -->
 	<Sponsor name="Neurobots" img={Neurobots} title="Knowledge & Title Sponsor"/>
 	<Sponsor name="IITians Network" img={IITiansNetwork} title="Community Partner"/>
-	<Sponsor name="FeelFirst Publishing LLP" img={Feelfirst} title="Silver Sponsor"/>
+	<Sponsor name="FeelFirst Publishing" img={Feelfirst} title="Silver Sponsor"/>
+	<Sponsor name="" img={MYOP} title="Gift Partner"/>
+	<Sponsor name="" img={Dreamotel} title="Food Partner"/>
+	<Sponsor name="" img={DKMS} title="Social Initiative Partner"/>
+	<Sponsor name="" img={RoyalEnfield} title="Automobile Partner"/>
+
 </div>
 
 <!-- <div id="all">
