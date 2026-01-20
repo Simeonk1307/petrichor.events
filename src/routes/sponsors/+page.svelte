@@ -1,39 +1,40 @@
 <script lang="ts">
-	import GAIL from "$lib/assets/Sponsors/GAIL.jpg";
-	import Dyson from "$lib/assets/Sponsors/Dyson_logo.png";
-	import Jockey from "$lib/assets/Sponsors/Jockey-Logo.png";
-	import KCOverseas from "$lib/assets/Sponsors/KCOverseas.jpg";
-	import Techin from "$lib/assets/Sponsors/Techin.jpg";
-	import TIME from "$lib/assets/Sponsors/TIME.png";
-	import INGLO from "$lib/assets/Sponsors/INGO.jpg";
-	import ME from "$lib/assets/Sponsors/ME.png";
-	import SBI from "$lib/assets/Sponsors/SBI.jpeg";
-	import Frame from "$lib/assets/Sponsors/Frame.jpg";
-	import Neurobots from "$lib/assets/Sponsors/Neurobots.jpeg";
-	import IITiansNetwork from "$lib/assets/Sponsors/IITiansNetwork.png"
-	import Feelfirst from "$lib/assets/Sponsors/feelfirst.png"
-	import RoyalEnfield from "$lib/assets/Sponsors/RoyalEnfield.jpeg"
-	import MYOP from "$lib/assets/Sponsors/MYOP.jpeg"
-	import Dreamotel from "$lib/assets/Sponsors/Dreamotel.jpeg"
-	import DKMS from "$lib/assets/Sponsors/DKMS.jpeg"
+	import GAIL from '$lib/assets/Sponsors/GAIL.jpg';
+	import Dyson from '$lib/assets/Sponsors/Dyson_logo.png';
+	import Jockey from '$lib/assets/Sponsors/Jockey-Logo.png';
+	import KCOverseas from '$lib/assets/Sponsors/KCOverseas.jpg';
+	import Techin from '$lib/assets/Sponsors/Techin.jpg';
+	import TIME from '$lib/assets/Sponsors/TIME.png';
+	import INGLO from '$lib/assets/Sponsors/INGO.jpg';
+	import ME from '$lib/assets/Sponsors/ME.png';
+	import SBI from '$lib/assets/Sponsors/SBI.jpeg';
+	import Frame from '$lib/assets/Sponsors/Frame.jpg';
+	import Neurobots from '$lib/assets/Sponsors/Neurobots.jpeg';
+	import IITiansNetwork from '$lib/assets/Sponsors/IITiansNetwork.png';
+	import Feelfirst from '$lib/assets/Sponsors/feelfirst.png';
+	import RoyalEnfield from '$lib/assets/Sponsors/RoyalEnfield.jpeg';
+	import MYOP from '$lib/assets/Sponsors/MYOP.jpeg';
+	import Dreamotel from '$lib/assets/Sponsors/Dreamotel.jpeg';
+	import DKMS from '$lib/assets/Sponsors/DKMS.jpeg';
 
-import Sponsor from './Sponsor.svelte';
+	import Sponsor from './Sponsor.svelte';
 </script>
 
 <h1 id="heading1">
-	<span class="atmos" style="color:blueviolet">PETRICHOR'26</span><br> IS SPONSORED BY
+	<span class="atmos" style="color:blueviolet">PETRICHOR'26</span><br /> IS SPONSORED BY
 </h1>
 
 <div class="main">
-	<!-- <Sponsor name="GAIL" img={GAIL} title="Co-Title Sponsor" /> -->
-	<Sponsor name="Neurobots" img={Neurobots} title="Knowledge & Title Sponsor"/>
-	<Sponsor name="IITians Network" img={IITiansNetwork} title="Community Partner"/>
-	<Sponsor name="FeelFirst Publishing" img={Feelfirst} title="Silver Sponsor"/>
-	<Sponsor name="" img={MYOP} title="Gift Partner"/>
-	<Sponsor name="" img={Dreamotel} title="Food Partner"/>
-	<Sponsor name="" img={DKMS} title="Social Initiative Partner"/>
-	<Sponsor name="" img={RoyalEnfield} title="Automobile Partner"/>
-
+	<div id="all">
+		<!-- <Sponsor name="GAIL" img={GAIL} title="Co-Title Sponsor" /> -->
+		<Sponsor name="" img={Neurobots} title="Knowledge & Title Sponsor" />
+		<Sponsor name="" img={IITiansNetwork} title="Community Partner" />
+		<Sponsor name="" img={Feelfirst} title="Silver Sponsor" />
+		<Sponsor name="" img={MYOP} title="Gift Partner" />
+		<Sponsor name="" img={Dreamotel} title="Food Partner" />
+		<Sponsor name="" img={DKMS} title="Social Initiative Partner" />
+		<Sponsor name="" img={RoyalEnfield} title="Automobile Partner" />
+	</div>
 </div>
 
 <!-- <div id="all">
@@ -47,7 +48,6 @@ import Sponsor from './Sponsor.svelte';
 	<Sponsor name="My Equation" img={ME} title="Event Partner" />
 	<Sponsor name="Himalayan Yeti" img={Frame} title="Grooming Partner" />
 </div> -->
-
 
 <!-- 
 <h2 id="heading2" class="atmos" style="color:rgb(216, 191, 238)">In Partnership with</h2>
@@ -70,7 +70,7 @@ import Sponsor from './Sponsor.svelte';
 		box-sizing: border-box;
 		margin: 0.2rem 0rem;
 	}
-	#all{
+	#all {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10rem;
